@@ -166,7 +166,7 @@ td, th, a, div {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  
   gap: 18px;
   margin-bottom: 22px;
 }
@@ -319,11 +319,7 @@ button:hover,
   align-items: center;
 }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
-}
+
 
 .cards-list {
   display: grid;
@@ -779,9 +775,7 @@ body.dark .app-version-mini {
     flex-direction: column;
   }
 
-  .cards-grid {
-    grid-template-columns: 1fr;
-  }
+  
 
   .table-actions {
     flex-direction: column;
@@ -1860,8 +1854,8 @@ body.dashboard-clean .operational-strip,body.dashboard-clean #dashboardResumoInt
 body.dashboard-clean .panel.is-dashboard-removed{display:none!important;}
 .app-menu-toggle{display:none;position:fixed;top:calc(12px + env(safe-area-inset-top));left:12px;z-index:5002;width:48px;height:48px;border-radius:17px!important;border:1px solid var(--brinka-line)!important;color:#fff!important;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.07))!important;box-shadow:0 16px 40px rgba(0,0,0,.30)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);font-size:22px;font-weight:950;}
 .app-sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:2999;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}.app-sidebar-overlay.show{display:block!important;}
-@media(max-width:1024px){.app-menu-toggle{display:grid!important;place-items:center!important}.sidebar{width:min(310px,86vw)!important;transform:translateX(-110%)!important;left:0!important;top:0!important;padding-top:calc(76px + env(safe-area-inset-top))!important}.sidebar.app-open{transform:translateX(0)!important}.main{margin-left:0!important;width:100%!important;padding:calc(78px + env(safe-area-inset-top)) 16px calc(34px + env(safe-area-inset-bottom))!important}.topbar,.premium-topbar{padding:18px!important}.topbar-status{flex-wrap:wrap!important;justify-content:flex-start!important}.stats-grid,.form-grid,.cards-grid,.dashboard-grid{grid-template-columns:1fr 1fr!important}}
-@media(max-width:680px){.main{padding-left:12px!important;padding-right:12px!important}.topbar,.premium-topbar{border-radius:24px!important}.stats-grid,.form-grid,.cards-grid,.dashboard-grid{grid-template-columns:1fr!important}.stat-card,.panel,.stock-card,.history-card,.pc-card,.dashboard-card,.card,.box,.user-card{padding:16px!important;border-radius:22px!important}.topbar h1,.main h1{font-size:30px!important}.subtitle{font-size:14px!important}.table-wrap{overflow:auto!important}}
+@media(max-width:1024px){.app-menu-toggle{display:grid!important;place-items:center!important}.sidebar{width:min(310px,86vw)!important;transform:translateX(-110%)!important;left:0!important;top:0!important;padding-top:calc(76px + env(safe-area-inset-top))!important}.sidebar.app-open{transform:translateX(0)!important}.main{margin-left:0!important;width:100%!important;padding:calc(78px + env(safe-area-inset-top)) 16px calc(34px + env(safe-area-inset-bottom))!important}.topbar,.premium-topbar{padding:18px!important}.topbar-status{flex-wrap:wrap!important;justify-content:flex-start!important}.stats-grid,.form-grid,.cards-grid,}
+@media(max-width:680px){.main{padding-left:12px!important;padding-right:12px!important}.topbar,.premium-topbar{border-radius:24px!important}.stats-grid,.form-grid,.cards-grid,.stat-card,.panel,.stock-card,.history-card,.pc-card,.dashboard-card,.card,.box,.user-card{padding:16px!important;border-radius:22px!important}.topbar h1,.main h1{font-size:30px!important}.subtitle{font-size:14px!important}.table-wrap{overflow:auto!important}}
 
 /* === COR ORIGINAL APP BRAGA RESTAURADA - FIX FINAL === */
 :root{
@@ -2868,7 +2862,7 @@ body.app-light .page-hero {
 
 .stats-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, minmax(180px, 1fr)) !important;
+   !important;
   gap: 18px !important;
 }
 
@@ -3152,9 +3146,7 @@ body.app-light .entity-card {
 
   .stats-grid,
   .form-grid,
-  .cards-grid {
-    grid-template-columns: 1fr !important;
-  }
+  
 
   .page-hero {
     padding: 20px !important;
