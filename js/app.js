@@ -13,12 +13,10 @@ const firebaseConfig = {
 if(typeof firebase !== "undefined"){
 
   if(!firebase.apps.length){
-    firebase.initializeApp(firebaseConfig);
-}
+    firebase.initializeApp(firebaseConfig );
   }
 
-  const db = firebase.firestore();
-}
+  const db = firebase.firestore( );
 
   window.db = db;
 
@@ -38,22 +36,18 @@ const BACKUP_KEYS_APP_BRAGA = {
 function saveBackupAppBraga(key, data) {
 
   try {
-    localStorage.setItem(key, JSON.stringify(data || []));
-}
+    localStorage.setItem(key, JSON.stringify(data || []) );
   } catch (e) {
-    console.error("Erro backup local:", e);
-}
+    console.error("Erro backup local:", e );
   }
 }
 
 function loadBackupAppBraga(key) {
   try {
-    const raw = localStorage.getItem(key);
-}
+    const raw = localStorage.getItem(key );
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
-    console.error("Erro a ler backup local:", e);
-}
+    console.error("Erro a ler backup local:", e );
     return [];
   }
 }
@@ -64,20 +58,17 @@ function showBackupBadge() {
       node.dataset.backupShown = "1";
       node.innerHTML = `${node.textContent} <span class="backup-badge">Backup local</span>`;
     }
-  });
-}
+  } );
 }
 
 function hideBackupBadge() {
   document.querySelectorAll(".version-pill").forEach(node => {
     if (node.dataset.backupShown === "1") {
       node.dataset.backupShown = "";
-      node.textContent = node.textContent.replace(" Backup local", "").trim();
-}
+      node.textContent = node.textContent.replace(" Backup local", "").trim( );
       if (typeof APP_BRAGA_VERSION !== "undefined") node.textContent = APP_BRAGA_VERSION;
     }
-  });
-}
+  } );
 }
 
 let stockGlobal = [];
@@ -86,44 +77,36 @@ let pcsGlobal = [];
 let manutencoesGlobal = [];
 
 function el(id) {
-  return document.getElementById(id);
-}
+  return document.getElementById(id );
 }
 
 function setText(id, value) {
-  const node = el(id);
-}
+  const node = el(id );
   if (node) node.innerText = value;
 }
 
 function normalizarTexto(valor) {
-  return String(valor || "").toLowerCase().trim();
-}
+  return String(valor || "").toLowerCase().trim( );
 }
 
 function mostrarMensagem(texto, tipo = "sucesso") {
-  let toast = el("toast");
-}
+  let toast = el("toast" );
 
   if (!toast) {
-    toast = document.createElement("div");
-}
+    toast = document.createElement("div" );
     toast.id = "toast";
     toast.className = "toast-app";
-    document.body.appendChild(toast);
-}
+    document.body.appendChild(toast );
   }
 
   toast.className = `toast-app ${tipo}`;
   toast.innerText = texto;
   toast.style.display = "block";
 
-  clearTimeout(toast._t);
-}
+  clearTimeout(toast._t );
   toast._t = setTimeout(() => {
     toast.style.display = "none";
-  }, 2200);
-}
+  }, 2200 );
 }
 
 /* =========================
@@ -167,47 +150,35 @@ const USERS_STORAGE_KEY = 'appbraga_users_custom_v1';
 function prepararRefsUsers() {
   window.usersData.forEach((u, i) => {
     if (!u.idDoc && !u._ref) u._ref = `local-user-${i}`;
-  });
-}
+  } );
 }
 
 function guardarUsersLocal() {
   try {
-    const serializavel = window.usersData.map(u => ({ ...u }));
-}
-    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(serializavel));
-}
+    const serializavel = window.usersData.map(u => ({ ...u }) );
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(serializavel) );
   } catch (e) {
-    console.warn('Nao foi possivel guardar users no localStorage.', e);
-}
+    console.warn('Nao foi possivel guardar users no localStorage.', e );
   }
 }
 
 function carregarUsersLocal() {
   try {
-    const raw = localStorage.getItem(USERS_STORAGE_KEY);
-}
+    const raw = localStorage.getItem(USERS_STORAGE_KEY );
     if (!raw) {
-      prepararRefsUsers();
-}
+      prepararRefsUsers( );
       return;
     }
-    const parsed = JSON.parse(raw);
-}
+    const parsed = JSON.parse(raw );
     if (!Array.isArray(parsed) || !parsed.length) {
-      prepararRefsUsers();
-}
+      prepararRefsUsers( );
       return;
     }
-    window.usersData.splice(0, window.usersData.length, ...parsed);
-}
-    prepararRefsUsers();
-}
+    window.usersData.splice(0, window.usersData.length, ...parsed );
+    prepararRefsUsers( );
   } catch (e) {
-    console.warn('Nao foi possivel carregar users do localStorage.', e);
-}
-    prepararRefsUsers();
-}
+    console.warn('Nao foi possivel carregar users do localStorage.', e );
+    prepararRefsUsers( );
   }
 }
 
@@ -216,8 +187,7 @@ function carregarUsersLocal() {
    IMPRESSORAS / MANUTENÇÃO
 ========================= */
 function obterEstadoImpressora(ip) {
-  const relacionados = manutencoesGlobal.filter(m => m.ip === ip);
-}
+  const relacionados = manutencoesGlobal.filter(m => m.ip === ip );
   if (!relacionados.length) return "OK";
   return relacionados[0].estado || "OK";
 }
@@ -230,13 +200,11 @@ function badgeEstado(estado) {
 }
 
 function abrirIP(ip) {
-  window.open(`http://${ip}`, "_blank");
-}
+  window.open(`http://${ip}`, "_blank" );
 }
 
 function abrirManutencaoDireta(item) {
-  localStorage.setItem("manutencaoPreenchida", JSON.stringify(item));
-}
+  localStorage.setItem("manutencaoPreenchida", JSON.stringify(item) );
   window.location.href = "manutencao-impressoras.html";
 }
 
@@ -252,11 +220,9 @@ function sincronizarCamposImpressora() {
   const ip = el("manutencaoIP")?.value || "";
 
   if (serie) {
-    const item = impressorasData.find(i => i.serie === serie);
-}
+    const item = impressorasData.find(i => i.serie === serie );
     if (item) {
-      if (el("manutencaoModelo")) el("manutencaoModelo").value = mapModeloManutencao(item.modelo);
-}
+      if (el("manutencaoModelo")) el("manutencaoModelo").value = mapModeloManutencao(item.modelo );
       if (el("manutencaoArmazem")) el("manutencaoArmazem").value = item.armazem;
       if (el("manutencaoLocalizacao")) el("manutencaoLocalizacao").value = item.localizacao;
       if (el("manutencaoIP")) el("manutencaoIP").value = item.ip;
@@ -265,11 +231,9 @@ function sincronizarCamposImpressora() {
   }
 
   if (ip) {
-    const item = impressorasData.find(i => i.ip === ip);
-}
+    const item = impressorasData.find(i => i.ip === ip );
     if (item) {
-      if (el("manutencaoModelo")) el("manutencaoModelo").value = mapModeloManutencao(item.modelo);
-}
+      if (el("manutencaoModelo")) el("manutencaoModelo").value = mapModeloManutencao(item.modelo );
       if (el("manutencaoArmazem")) el("manutencaoArmazem").value = item.armazem;
       if (el("manutencaoLocalizacao")) el("manutencaoLocalizacao").value = item.localizacao;
       if (el("manutencaoSerie")) el("manutencaoSerie").value = item.serie;
@@ -278,8 +242,7 @@ function sincronizarCamposImpressora() {
 }
 
 function preencherLocaisManutencao() {
-  const selectLoc = el("manutencaoLocalizacao");
-}
+  const selectLoc = el("manutencaoLocalizacao" );
   if (selectLoc) {
     selectLoc.innerHTML = `
       <option value="">Selecionar localização</option>
@@ -287,8 +250,7 @@ function preencherLocaisManutencao() {
     `;
   }
 
-  const selectIP = el("manutencaoIP");
-}
+  const selectIP = el("manutencaoIP" );
   if (selectIP) {
     selectIP.innerHTML = `
       <option value="">Selecionar IP</option>
@@ -300,8 +262,7 @@ function preencherLocaisManutencao() {
     `;
   }
 
-  const selectSerie = el("manutencaoSerie");
-}
+  const selectSerie = el("manutencaoSerie" );
   if (selectSerie) {
     selectSerie.innerHTML = `
       <option value="">Selecionar nº série</option>
@@ -313,27 +274,22 @@ function preencherLocaisManutencao() {
 }
 
 function preencherFormularioManutencao() {
-  const dados = localStorage.getItem("manutencaoPreenchida");
-}
+  const dados = localStorage.getItem("manutencaoPreenchida" );
   if (!dados) return;
 
   try {
-    const item = JSON.parse(dados);
-}
+    const item = JSON.parse(dados );
 
-    if (el("manutencaoModelo")) el("manutencaoModelo").value = mapModeloManutencao(item.modelo);
-}
+    if (el("manutencaoModelo")) el("manutencaoModelo").value = mapModeloManutencao(item.modelo );
     if (el("manutencaoSerie")) el("manutencaoSerie").value = item.serie || "";
     if (el("manutencaoArmazem")) el("manutencaoArmazem").value = item.armazem || "";
     if (el("manutencaoLocalizacao")) el("manutencaoLocalizacao").value = item.localizacao || "";
     if (el("manutencaoIP")) el("manutencaoIP").value = item.ip || "";
     if (el("manutencaoEstado")) el("manutencaoEstado").value = "Pendente";
 
-    localStorage.removeItem("manutencaoPreenchida");
-}
+    localStorage.removeItem("manutencaoPreenchida" );
   } catch (e) {
-    console.error(e);
-}
+    console.error(e );
   }
 }
 
@@ -351,31 +307,21 @@ function limparFormularioManutencao() {
 }
 
 async function gerarID() {
-  const ref = db.collection("config").doc("contador");
-}
+  const ref = db.collection("config").doc("contador" );
   return db.runTransaction(async t => {
-    const doc = await t.get(ref);
-}
+    const doc = await t.get(ref );
     const n = doc.exists ? ({ firebaseId: doc.id, ...doc.data() }).valor + 1 : 1;
-    t.set(ref, { valor: n });
-}
-    return "TON-" + String(n).padStart(4, "0");
-}
-  });
-}
+    t.set(ref, { valor: n } );
+    return "TON-" + String(n).padStart(4, "0" );
+  } );
 }
 
 async function disponivel() {
-  const equipamento = el("equipamento");
-}
-  const localizacao = el("localizacao");
-}
-  const cor = el("cor");
-}
-  const data = el("data");
-}
-  const lote = el("lote");
-}
+  const equipamento = el("equipamento" );
+  const localizacao = el("localizacao" );
+  const cor = el("cor" );
+  const data = el("data" );
+  const lote = el("lote" );
 
   if (!equipamento || !cor) return;
 
@@ -386,14 +332,12 @@ async function disponivel() {
   const loteValue = lote ? lote.value : "";
 
   if (!eq || !corValue) {
-    mostrarMensagem("Preenche o equipamento e a cor.", "erro");
-}
+    mostrarMensagem("Preenche o equipamento e a cor.", "erro" );
     return;
   }
 
   try {
-    const id = await gerarID();
-}
+    const id = await gerarID( );
 
     await db.collection("stock").add({
       idInterno: id,
@@ -404,8 +348,7 @@ async function disponivel() {
       dataFolha: (el("dataFolha") && el("dataFolha").value) || "Sem Data da Folha",
       lote: loteValue || "",
       created: new Date()
-    });
-}
+    } );
 
     equipamento.value = "";
     if (localizacao) localizacao.value = "";
@@ -414,213 +357,128 @@ async function disponivel() {
     if (el("dataFolha")) el("dataFolha").value = "";
     if (lote) lote.value = "";
 
-    mostrarMensagem("Toner adicionado com sucesso.");
-}
+    mostrarMensagem("Toner adicionado com sucesso." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao adicionar toner.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao adicionar toner.", "erro" );
   }
 }
 
 db.collection("stock").orderBy("created", "desc").onSnapshot(snap => {
   stockGlobal = [];
-  setText("countStock", snap.size);
-}
+  setText("countStock", snap.size );
 
   snap.forEach(doc => {
-    const t = ({ firebaseId: doc.id, ...doc.data() });
-}
+    const t = ({ firebaseId: doc.id, ...doc.data() } );
     t.idDoc = doc.id;
-    stockGlobal.push(t);
-}
-  });
-}
+    stockGlobal.push(t );
+  } );
 
-  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.stock, stockGlobal);
-}
-  hideBackupBadge();
-}
-  renderDashboardCards(stockGlobal);
-}
-  renderStockCards(stockGlobal);
-}
-  renderStockMinimoPainel();
-}
-  renderAlertasInteligentes();
-}
-  renderDashboardResumoInteligente();
-}
-  renderAlertasInteligentes();
-}
-  renderModoGestorExtremo();
-}
+  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.stock, stockGlobal );
+  hideBackupBadge( );
+  renderDashboardCards(stockGlobal );
+  renderStockCards(stockGlobal );
+  renderStockMinimoPainel( );
+  renderAlertasInteligentes( );
+  renderDashboardResumoInteligente( );
+  renderAlertasInteligentes( );
+  renderModoGestorExtremo( );
 }, error => {
-  console.error(error);
-}
-  stockGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.stock);
-}
-  setText("countStock", stockGlobal.length);
-}
-  showBackupBadge();
-}
-  renderDashboardCards(stockGlobal);
-}
-  renderStockCards(stockGlobal);
-}
-  renderStockMinimoPainel();
-}
-  renderAlertasInteligentes();
-}
-  renderDashboardResumoInteligente();
-}
-  renderAlertasInteligentes();
-}
-  renderModoGestorExtremo();
-}
-});
-}
+  console.error(error );
+  stockGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.stock );
+  setText("countStock", stockGlobal.length );
+  showBackupBadge( );
+  renderDashboardCards(stockGlobal );
+  renderStockCards(stockGlobal );
+  renderStockMinimoPainel( );
+  renderAlertasInteligentes( );
+  renderDashboardResumoInteligente( );
+  renderAlertasInteligentes( );
+  renderModoGestorExtremo( );
+} );
 
 db.collection("historico").orderBy("created", "desc").onSnapshot(snap => {
   historicoGlobal = [];
-  setText("countUsados", snap.size);
-}
+  setText("countUsados", snap.size );
 
   snap.forEach(doc => {
-    const t = ({ firebaseId: doc.id, ...doc.data() });
-}
+    const t = ({ firebaseId: doc.id, ...doc.data() } );
     t.idDoc = doc.id;
-    historicoGlobal.push(t);
-}
-  });
-}
+    historicoGlobal.push(t );
+  } );
 
-  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.historico, historicoGlobal);
-}
-  hideBackupBadge();
-}
-  renderHistoricoCards(historicoGlobal);
-}
-  renderAlertasInteligentes();
-}
-  renderModoGestorExtremo();
-}
-  renderDashboardResumoInteligente();
-}
-  renderAlertasInteligentes();
-}
-  renderModoGestorExtremo();
-}
+  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.historico, historicoGlobal );
+  hideBackupBadge( );
+  renderHistoricoCards(historicoGlobal );
+  renderAlertasInteligentes( );
+  renderModoGestorExtremo( );
+  renderDashboardResumoInteligente( );
+  renderAlertasInteligentes( );
+  renderModoGestorExtremo( );
 }, error => {
-  console.error(error);
-}
-  historicoGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.historico);
-}
-  setText("countUsados", historicoGlobal.length);
-}
-  showBackupBadge();
-}
-  renderHistoricoCards(historicoGlobal);
-}
-  renderAlertasInteligentes();
-}
-  renderModoGestorExtremo();
-}
-  renderDashboardResumoInteligente();
-}
-  renderAlertasInteligentes();
-}
-  renderModoGestorExtremo();
-}
-});
-}
+  console.error(error );
+  historicoGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.historico );
+  setText("countUsados", historicoGlobal.length );
+  showBackupBadge( );
+  renderHistoricoCards(historicoGlobal );
+  renderAlertasInteligentes( );
+  renderModoGestorExtremo( );
+  renderDashboardResumoInteligente( );
+  renderAlertasInteligentes( );
+  renderModoGestorExtremo( );
+} );
 
 db.collection("pcs").orderBy("created", "desc").onSnapshot(snap => {
   pcsGlobal = [];
-  setText("countPCs", snap.size);
-}
+  setText("countPCs", snap.size );
 
   snap.forEach(doc => {
-    const d = ({ firebaseId: doc.id, ...doc.data() });
-}
+    const d = ({ firebaseId: doc.id, ...doc.data() } );
     d.idDoc = doc.id;
-    pcsGlobal.push(d);
-}
-  });
-}
+    pcsGlobal.push(d );
+  } );
 
-  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.pcs, pcsGlobal);
-}
-  hideBackupBadge();
-}
-  renderPCCards(pcsGlobal);
-}
-  renderModoGestorExtremo();
-}
+  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.pcs, pcsGlobal );
+  hideBackupBadge( );
+  renderPCCards(pcsGlobal );
+  renderModoGestorExtremo( );
 }, error => {
-  console.error(error);
-}
-  pcsGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.pcs);
-}
-  setText("countPCs", pcsGlobal.length);
-}
-  showBackupBadge();
-}
-  renderPCCards(pcsGlobal);
-}
-  renderModoGestorExtremo();
-}
-});
-}
+  console.error(error );
+  pcsGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.pcs );
+  setText("countPCs", pcsGlobal.length );
+  showBackupBadge( );
+  renderPCCards(pcsGlobal );
+  renderModoGestorExtremo( );
+} );
 
 db.collection("manutencoes").orderBy("created", "desc").onSnapshot(snap => {
   manutencoesGlobal = [];
 
   snap.forEach(doc => {
-    const item = ({ firebaseId: doc.id, ...doc.data() });
-}
+    const item = ({ firebaseId: doc.id, ...doc.data() } );
     item.idDoc = doc.id;
-    manutencoesGlobal.push(item);
-}
-  });
-}
+    manutencoesGlobal.push(item );
+  } );
 
-  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.manutencoes, manutencoesGlobal);
-}
-  hideBackupBadge();
-}
-  atualizarContadoresManutencao();
-}
-  renderManutencoes(manutencoesGlobal);
-}
-  renderImpressoras();
-}
+  saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.manutencoes, manutencoesGlobal );
+  hideBackupBadge( );
+  atualizarContadoresManutencao( );
+  renderManutencoes(manutencoesGlobal );
+  renderImpressoras( );
 }, error => {
-  console.error(error);
-}
-  manutencoesGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.manutencoes);
-}
-  showBackupBadge();
-}
-  atualizarContadoresManutencao();
-}
-  renderManutencoes(manutencoesGlobal);
-}
-  renderImpressoras();
-}
-});
-}
+  console.error(error );
+  manutencoesGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.manutencoes );
+  showBackupBadge( );
+  atualizarContadoresManutencao( );
+  renderManutencoes(manutencoesGlobal );
+  renderImpressoras( );
+} );
 
 function atualizarContadoresManutencao() {
-  setText("countManutTotal", manutencoesGlobal.length);
-}
-  setText("countManutPendentes", manutencoesGlobal.filter(i => i.estado === "Pendente").length);
-}
-  setText("countManutReparacao", manutencoesGlobal.filter(i => i.estado === "Em reparação").length);
-}
-  setText("countManutResolvidos", manutencoesGlobal.filter(i => i.estado === "Resolvido").length);
-}
+  setText("countManutTotal", manutencoesGlobal.length );
+  setText("countManutPendentes", manutencoesGlobal.filter(i => i.estado === "Pendente").length );
+  setText("countManutReparacao", manutencoesGlobal.filter(i => i.estado === "Em reparação").length );
+  setText("countManutResolvidos", manutencoesGlobal.filter(i => i.estado === "Resolvido").length );
 }
 
 
@@ -633,23 +491,19 @@ function getCriticalityBucketsAppBraga() {
     const info = tonerInfoState[item.ip] || null;
     const colors = Array.isArray(info?.colors) ? info.colors : [];
     const monoPercent = typeof info?.percent === "number" ? info.percent : null;
-    const allPercents = colors.map(c => c.percent).filter(v => typeof v === "number");
-}
-    if (!allPercents.length && monoPercent !== null) allPercents.push(monoPercent);
-}
+    const allPercents = colors.map(c => c.percent).filter(v => typeof v === "number" );
+    if (!allPercents.length && monoPercent !== null) allPercents.push(monoPercent );
 
     if (!allPercents.length) {
       normal++;
       return;
     }
 
-    const minValue = Math.min(...allPercents);
-}
+    const minValue = Math.min(...allPercents );
     if (minValue < 10) critical++;
     else if (minValue <= 25) warning++;
     else normal++;
-  });
-}
+  } );
 
   return { critical, warning, normal };
 }
@@ -657,15 +511,12 @@ function getCriticalityBucketsAppBraga() {
 function getTopLocalizacoesHistorico(limit = 3) {
   const counts = {};
   historicoGlobal.forEach(item => {
-    const key = String(item.localizacao || "Sem Localização");
-}
+    const key = String(item.localizacao || "Sem Localização" );
     counts[key] = (counts[key] || 0) + 1;
-  });
-}
+  } );
   return Object.entries(counts)
     .sort((a,b) => b[1] - a[1])
-    .slice(0, limit);
-}
+    .slice(0, limit );
 }
 
 function getUltimosMovimentos(limit = 3) {
@@ -675,21 +526,16 @@ function getUltimosMovimentos(limit = 3) {
       const bd = b.created && b.created.seconds ? b.created.seconds : 0;
       return bd - ad;
     })
-    .slice(0, limit);
-}
+    .slice(0, limit );
 }
 
 function renderDashboardResumoInteligente() {
-  const host = el("dashboardResumoInteligente");
-}
+  const host = el("dashboardResumoInteligente" );
   if (!host) return;
 
-  const buckets = getCriticalityBucketsAppBraga();
-}
-  const topLocs = getTopLocalizacoesHistorico(4);
-}
-  const ultimos = getUltimosMovimentos(4);
-}
+  const buckets = getCriticalityBucketsAppBraga( );
+  const topLocs = getTopLocalizacoesHistorico(4 );
+  const ultimos = getUltimosMovimentos(4 );
 
   const critLabel = buckets.critical > 0 ? "Ação imediata" : "Sem críticos";
   const warnLabel = buckets.warning > 0 ? "Vigiar" : "Sem avisos";
@@ -718,20 +564,17 @@ function renderDashboardResumoInteligente() {
 }
 
 function renderDashboardCards(items) {
-  const lista = el("listaDashboardStock");
-}
+  const lista = el("listaDashboardStock" );
   if (!lista) return;
 
-  const searchTxt = normalizarTexto(el("searchDashboard")?.value || "");
-}
+  const searchTxt = normalizarTexto(el("searchDashboard")?.value || "" );
 
   const criticas = impressorasData.map(item => {
     const info = tonerInfoState[item.ip] || null;
     const colors = Array.isArray(info?.colors) ? info.colors : [];
     const residue = info?.residue || null;
 
-    const criticalColors = colors.filter(c => typeof c.percent === "number" && c.percent <= 25);
-}
+    const criticalColors = colors.filter(c => typeof c.percent === "number" && c.percent <= 25 );
     const monoPercent = typeof info?.percent === "number" ? info.percent : null;
     const monoCritical = colors.length === 0 && monoPercent !== null && monoPercent <= 25;
 
@@ -747,12 +590,9 @@ function renderDashboardCards(items) {
       entry.item.armazem,
       ...(entry.criticalColors || []).map(c => c.label),
       entry.monoCritical ? "Preto" : ""
-    ].join(" ");
-}
-    return normalizarTexto(haystack).includes(searchTxt);
-}
-  });
-}
+    ].join(" " );
+    return normalizarTexto(haystack).includes(searchTxt );
+  } );
 
   if (!criticas.length) {
     lista.innerHTML = `<div class="panel empty-state"><h3>Sem impressoras críticas</h3><p>As impressoras com toner a 25% ou menos vão aparecer aqui automaticamente.</p></div>`;
@@ -762,8 +602,7 @@ function renderDashboardCards(items) {
   lista.innerHTML = criticas.map(({ item, info, criticalColors, monoCritical, residue }) => {
     const supplyHtml = criticalColors.length
       ? criticalColors.map(c => gerarHTMLBarraToner(c.percent, c.label, c.key)).join("")
-      : (monoCritical ? gerarHTMLBarraToner(info.percent, "Preto", "black") : "");
-}
+      : (monoCritical ? gerarHTMLBarraToner(info.percent, "Preto", "black") : "" );
 
     const residueHtml = residue ? gerarHTMLBarraToner(residue.percent, residue.label || "Resíduo", "waste") : "";
 
@@ -776,13 +615,11 @@ function renderDashboardCards(items) {
         <div class="printer-toners-grid" style="margin-top:10px;">${supplyHtml}${residueHtml}</div>
       </div>
     `;
-  }).join("");
-}
+  }).join("" );
 }
 
 function renderStockCards(items) {
-  const lista = el("listaStock");
-}
+  const lista = el("listaStock" );
   if (!lista) return;
 
   if (!items.length) {
@@ -805,13 +642,11 @@ function renderStockCards(items) {
         <button class="small-btn btn-delete" onclick="apagarStockItem('${t.idDoc}')">Apagar</button>
       </div>
     </div>
-  `).join("");
-}
+  `).join("" );
 }
 
 function renderHistoricoCards(items) {
-  const lista = el("listaHistorico");
-}
+  const lista = el("listaHistorico" );
   if (!lista) return;
 
   if (!items.length) {
@@ -833,73 +668,55 @@ function renderHistoricoCards(items) {
         <button class="small-btn btn-delete" onclick="apagar('${t.idDoc}')">Apagar</button>
       </div>
     </div>
-  `).join("");
-}
+  `).join("" );
 }
 
 async function usar(id) {
   try {
-    const ref = db.collection("stock").doc(id);
-}
-    const snap = await ref.get();
-}
+    const ref = db.collection("stock").doc(id );
+    const snap = await ref.get( );
 
     if (!snap.exists) {
-      mostrarMensagem("Toner não encontrado.", "erro");
-}
+      mostrarMensagem("Toner não encontrado.", "erro" );
       return;
     }
 
     await db.collection("historico").add({
       ...snap.data(),
       created: new Date()
-    });
-}
+    } );
 
-    await ref.delete();
-}
-    mostrarMensagem("Toner movido para histórico.");
-}
+    await ref.delete( );
+    mostrarMensagem("Toner movido para histórico." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao mover para histórico.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao mover para histórico.", "erro" );
   }
 }
 
 async function apagar(id) {
   try {
-    await db.collection("historico").doc(id).delete();
-}
-    mostrarMensagem("Histórico apagado.");
-}
+    await db.collection("historico").doc(id).delete( );
+    mostrarMensagem("Histórico apagado." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao apagar.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao apagar.", "erro" );
   }
 }
 
 function editar(id) {
-  const t = stockGlobal.find(x => x.idDoc === id);
-}
+  const t = stockGlobal.find(x => x.idDoc === id );
   if (!t) return;
 
-  localStorage.setItem("editarToner", JSON.stringify(t));
-}
+  localStorage.setItem("editarToner", JSON.stringify(t) );
   window.location.href = "add-toner.html";
 }
 
-function exportar() { exportarExcelStock();
-} }
+function exportar() { exportarExcelStock( ); }
 
-function filtrar() { filtrarStockDebounced();
-} }
+function filtrar() { filtrarStockDebounced( ); }
 
-function filtrarDashboard() { filtrarDashDebounced();
-} }
+function filtrarDashboard() { filtrarDashDebounced( ); }
 
 /* =========================
    COMPUTADORES
@@ -920,8 +737,7 @@ const passos = [
 ];
 
 function carregarChecklist() {
-  const checklist = el("checklist");
-}
+  const checklist = el("checklist" );
   if (!checklist) return;
 
   checklist.innerHTML = passos.map((p, i) => `
@@ -929,13 +745,11 @@ function carregarChecklist() {
       <input type="checkbox" id="p${i}">
       <span>${p}</span>
     </label>
-  `).join("");
-}
+  `).join("" );
 }
 
 function renderPCCards(items) {
-  const lista = el("listaPC");
-}
+  const lista = el("listaPC" );
   if (!lista) return;
 
   if (!items.length) {
@@ -946,8 +760,7 @@ function renderPCCards(items) {
   lista.innerHTML = items.map(d => {
     const htmlPassos = (d.passos || []).map(p => `
       <div class="meta-line">${p.feito ? "✔" : "❌"} <span class="meta-value">${p.passo}</span></div>
-    `).join("");
-}
+    `).join("" );
 
     return `
       <div class="pc-card">
@@ -961,25 +774,20 @@ function renderPCCards(items) {
         </div>
       </div>
     `;
-  }).join("");
-}
+  }).join("" );
 }
 
 async function guardarPC() {
-  const nomePC = el("nomePC");
-}
-  const dataPC = el("dataPC");
-}
+  const nomePC = el("nomePC" );
+  const dataPC = el("dataPC" );
 
   if (!nomePC) return;
 
-  const nome = nomePC.value.trim();
-}
+  const nome = nomePC.value.trim( );
   let data = dataPC ? dataPC.value : "";
 
   if (!nome) {
-    mostrarMensagem("Nome obrigatório.", "erro");
-}
+    mostrarMensagem("Nome obrigatório.", "erro" );
     return;
   }
 
@@ -990,10 +798,8 @@ async function guardarPC() {
     dados.push({
       passo: p,
       feito: el("p" + i)?.checked || false
-    });
-}
-  });
-}
+    } );
+  } );
 
   try {
     await db.collection("pcs").add({
@@ -1001,34 +807,25 @@ async function guardarPC() {
       data,
       passos: dados,
       created: new Date()
-    });
-}
+    } );
 
     nomePC.value = "";
     if (dataPC) dataPC.value = "";
-    carregarChecklist();
-}
-    mostrarMensagem("Computador guardado com sucesso.");
-}
+    carregarChecklist( );
+    mostrarMensagem("Computador guardado com sucesso." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao guardar computador.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao guardar computador.", "erro" );
   }
 }
 
 async function apagarPC(id) {
   try {
-    await db.collection("pcs").doc(id).delete();
-}
-    mostrarMensagem("Registo apagado.");
-}
+    await db.collection("pcs").doc(id).delete( );
+    mostrarMensagem("Registo apagado." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao apagar registo.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao apagar registo.", "erro" );
   }
 }
 
@@ -1048,8 +845,7 @@ async function guardarManutencao() {
   const dataResolucao = el("manutencaoResolucao")?.value || "";
 
   if (!tecnico || !armazem || !localizacao || !modelo || !serie || !ip || !motivo || !dataPedido) {
-    mostrarMensagem("Preenche os campos obrigatórios da manutenção.", "erro");
-}
+    mostrarMensagem("Preenche os campos obrigatórios da manutenção.", "erro" );
     return;
   }
 
@@ -1066,24 +862,18 @@ async function guardarManutencao() {
       dataPedido,
       dataResolucao: dataResolucao || "Sem resolução",
       created: new Date()
-    });
-}
+    } );
 
-    limparFormularioManutencao();
-}
-    mostrarMensagem("Manutenção guardada com sucesso.");
-}
+    limparFormularioManutencao( );
+    mostrarMensagem("Manutenção guardada com sucesso." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao guardar manutenção.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao guardar manutenção.", "erro" );
   }
 }
 
 function renderManutencoes(items) {
-  const lista = el("listaManutencoes");
-}
+  const lista = el("listaManutencoes" );
   if (!lista) return;
 
   if (!items.length) {
@@ -1119,13 +909,11 @@ function renderManutencoes(items) {
         <button class="small-btn btn-delete" onclick="apagarManutencao('${item.idDoc}')">Apagar</button>
       </div>
     </div>
-  `).join("");
-}
+  `).join("" );
 }
 
 function filtrarManutencoes() {
-  const texto = normalizarTexto(el("searchManutencoes")?.value || "");
-}
+  const texto = normalizarTexto(el("searchManutencoes")?.value || "" );
   const estado = el("filterEstadoManutencao")?.value || "";
   const armazem = el("filterArmazemManutencao")?.value || "";
 
@@ -1135,18 +923,15 @@ function filtrarManutencoes() {
       normalizarTexto(item.serie).includes(texto) ||
       normalizarTexto(item.ip).includes(texto) ||
       normalizarTexto(item.localizacao).includes(texto) ||
-      normalizarTexto(item.motivo).includes(texto);
-}
+      normalizarTexto(item.motivo).includes(texto );
 
     const passaEstado = !estado || item.estado === estado;
     const passaArmazem = !armazem || item.armazem === armazem;
 
     return passaTexto && passaEstado && passaArmazem;
-  });
-}
+  } );
 
-  renderManutencoes(filtradas);
-}
+  renderManutencoes(filtradas );
 }
 
 async function marcarResolvido(id) {
@@ -1154,41 +939,31 @@ async function marcarResolvido(id) {
     await db.collection("manutencoes").doc(id).update({
       estado: "Resolvido",
       dataResolucao: new Date().toISOString().split("T")[0]
-    });
-}
+    } );
 
-    mostrarMensagem("Manutenção marcada como resolvida.");
-}
+    mostrarMensagem("Manutenção marcada como resolvida." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao atualizar manutenção.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao atualizar manutenção.", "erro" );
   }
 }
 
 async function apagarManutencao(id) {
   try {
-    await db.collection("manutencoes").doc(id).delete();
-}
-    mostrarMensagem("Registo de manutenção apagado.");
-}
+    await db.collection("manutencoes").doc(id).delete( );
+    mostrarMensagem("Registo de manutenção apagado." );
   } catch (error) {
-    console.error(error);
-}
-    mostrarMensagem("Erro ao apagar manutenção.", "erro");
-}
+    console.error(error );
+    mostrarMensagem("Erro ao apagar manutenção.", "erro" );
   }
 }
 
 function carregarEdicaoToner() {
-  const item = localStorage.getItem("editarToner");
-}
+  const item = localStorage.getItem("editarToner" );
   if (!item || !el("equipamento")) return;
 
   try {
-    const toner = JSON.parse(item);
-}
+    const toner = JSON.parse(item );
     el("equipamento").value = toner.equipamento || "";
     el("localizacao").value = toner.localizacao || "";
     el("cor").value = toner.cor || "";
@@ -1196,29 +971,23 @@ function carregarEdicaoToner() {
     if (el("lote")) el("lote").value = toner.lote || "";
     if (el("dataFolha")) el("dataFolha").value = toner.dataFolha || "";
   } catch (e) {
-    console.error(e);
-}
+    console.error(e );
   }
 }
 
 function extrairPercentagemTonerDoHTML(html) {
   if (!html) return null;
 
-  const texto = String(html);
-}
-  const linhaPreto = texto.match(/Preto[\s\S]{0,160}?(\d{1,3})\s*%/i) || texto.match(/Black[\s\S]{0,160}?(\d{1,3})\s*%/i);
-}
+  const texto = String(html );
+  const linhaPreto = texto.match(/Preto[\s\S]{0,160}?(\d{1,3})\s*%/i) || texto.match(/Black[\s\S]{0,160}?(\d{1,3})\s*%/i );
   if (linhaPreto) {
-    const valor = parseInt(linhaPreto[1], 10);
-}
+    const valor = parseInt(linhaPreto[1], 10 );
     if (!Number.isNaN(valor) && valor >= 0 && valor <= 100) return valor;
   }
 
-  const match = texto.match(/(\d{1,3})\s?%/i);
-}
+  const match = texto.match(/(\d{1,3})\s?%/i );
   if (match) {
-    const valor = parseInt(match[1], 10);
-}
+    const valor = parseInt(match[1], 10 );
     if (!Number.isNaN(valor) && valor >= 0 && valor <= 100) return valor;
   }
   return null;
@@ -1261,10 +1030,8 @@ function classeEstadoToner(percentagem, cor = "black") {
 }
 
 function gerarHTMLBarraToner(percentagem, label = "Toner", cor = "black") {
-  const estado = estadoBarraToner(percentagem, cor);
-}
-  const estadoClasse = classeEstadoToner(percentagem, cor);
-}
+  const estado = estadoBarraToner(percentagem, cor );
+  const estadoClasse = classeEstadoToner(percentagem, cor );
 
   if (percentagem === null || percentagem === undefined) {
     return `
@@ -1283,10 +1050,8 @@ function gerarHTMLBarraToner(percentagem, label = "Toner", cor = "black") {
     `;
   }
 
-  const largura = Math.max(0, Math.min(100, percentagem));
-}
-  const barraCor = corBarraToner(percentagem, cor);
-}
+  const largura = Math.max(0, Math.min(100, percentagem) );
+  const barraCor = corBarraToner(percentagem, cor );
 
   return `
     <div class="printer-toner-box">
@@ -1310,22 +1075,18 @@ function gerarHTMLToners(info) {
   const monoPercent = info && typeof info.percent === "number" ? info.percent : null;
 
   if (!colorItems.length && !residueItem && monoPercent === null) {
-    return gerarHTMLBarraToner(null, "Toner", "black");
-}
+    return gerarHTMLBarraToner(null, "Toner", "black" );
   }
 
   const blocks = [];
-  colorItems.forEach((c) => blocks.push(gerarHTMLBarraToner(c.percent, c.label, c.key)));
-}
+  colorItems.forEach((c) => blocks.push(gerarHTMLBarraToner(c.percent, c.label, c.key)) );
 
   if (!colorItems.length && monoPercent !== null) {
-    blocks.push(gerarHTMLBarraToner(monoPercent, "Preto", "black"));
-}
+    blocks.push(gerarHTMLBarraToner(monoPercent, "Preto", "black") );
   }
 
   if (residueItem) {
-    blocks.push(gerarHTMLBarraToner(residueItem.percent, residueItem.label || "Resíduo", "waste"));
-}
+    blocks.push(gerarHTMLBarraToner(residueItem.percent, residueItem.label || "Resíduo", "waste") );
   }
 
   return `<div class="printer-toners-grid">${blocks.join("")}</div>`;
@@ -1334,26 +1095,21 @@ function gerarHTMLToners(info) {
 function maybeNotifyCriticalSupply(ip, info) {
   if (!info) return;
 
-  const printer = impressorasData.find(i => i.ip === ip);
-}
+  const printer = impressorasData.find(i => i.ip === ip );
   const printerLabel = printer ? `${printer.modelo} - ${printer.localizacao}` : ip;
   const issues = [];
 
   (info.colors || []).forEach((item) => {
     if (typeof item.percent === "number" && item.percent <= 20) {
-      issues.push(`${item.label}: ${item.percent}%`);
-}
+      issues.push(`${item.label}: ${item.percent}%` );
     }
-  });
-}
+  } );
 
   if (info.residue && typeof info.residue.percent === "number" && info.residue.percent >= 80) {
-    issues.push(`${info.residue.label || "Resíduo"}: ${info.residue.percent}%`);
-}
+    issues.push(`${info.residue.label || "Resíduo"}: ${info.residue.percent}%` );
   }
 
-  const key = issues.join(" | ");
-}
+  const key = issues.join(" | " );
   if (!key) {
     tonerAlertState[ip] = "";
     return;
@@ -1362,19 +1118,15 @@ function maybeNotifyCriticalSupply(ip, info) {
   tonerAlertState[ip] = key;
 
   const message = `Estado crítico em ${printerLabel} — ${key}`;
-  mostrarMensagem(message, "erro");
-}
+  mostrarMensagem(message, "erro" );
 
   if ("Notification" in window) {
     if (Notification.permission === "granted") {
-      new Notification("Alerta de consumíveis", { body: message });
-}
+      new Notification("Alerta de consumíveis", { body: message } );
     } else if (Notification.permission !== "denied") {
       Notification.requestPermission().then((perm) => {
-        if (perm === "granted") new Notification("Alerta de consumíveis", { body: message });
-}
-      }).catch(() => {});
-}
+        if (perm === "granted") new Notification("Alerta de consumíveis", { body: message } );
+      }).catch(() => {} );
     }
   }
 }
@@ -1382,8 +1134,7 @@ function maybeNotifyCriticalSupply(ip, info) {
 async function obterTonerInfo(ip) {
   try {
     if (!window.electronAPI || !window.electronAPI.getTonerSNMP) return null;
-    const resposta = await window.electronAPI.getTonerSNMP(ip);
-}
+    const resposta = await window.electronAPI.getTonerSNMP(ip );
 
     if (resposta && resposta.ok) {
       return {
@@ -1394,25 +1145,21 @@ async function obterTonerInfo(ip) {
     }
 
     if (window.electronAPI.getPrinterHTML) {
-      const htmlResp = await window.electronAPI.getPrinterHTML(ip);
-}
+      const htmlResp = await window.electronAPI.getPrinterHTML(ip );
       if (htmlResp && htmlResp.ok && htmlResp.body) {
-        const percent = extrairPercentagemTonerDoHTML(htmlResp.body);
-}
+        const percent = extrairPercentagemTonerDoHTML(htmlResp.body );
         return { colors: [{ key: "black", label: "Preto", percent }], residue: null };
       }
     }
     return null;
   } catch (error) {
-    console.error("Erro ao obter toner da impressora:", error);
-}
+    console.error("Erro ao obter toner da impressora:", error );
     return null;
   }
 }
 
 async function testarTonerImpressora(ip, outputId) {
-  const output = el(outputId);
-}
+  const output = el(outputId );
   if (output) {
     output.innerHTML = `
       <div class="printer-toner-box">
@@ -1430,20 +1177,14 @@ async function testarTonerImpressora(ip, outputId) {
     `;
   }
 
-  const info = await obterTonerInfo(ip);
-}
+  const info = await obterTonerInfo(ip );
   tonerInfoState[ip] = info || null;
 
-  if (output) output.innerHTML = gerarHTMLToners(info);
-}
-  if (info) maybeNotifyCriticalSupply(ip, info);
-}
-  updateTonerDiagnosticStatus(info ? "ok" : "error", { running: false, lastRunAt: new Date(), successCount: info ? 1 : 0, totalCount: 1, source: resolveDiagSource() });
-}
-  pushTonerDiagnosticLog(ip, info ? summarizeTonerInfo(info) : "sem resposta");
-}
-  renderDashboardCards();
-}
+  if (output) output.innerHTML = gerarHTMLToners(info );
+  if (info) maybeNotifyCriticalSupply(ip, info );
+  updateTonerDiagnosticStatus(info ? "ok" : "error", { running: false, lastRunAt: new Date(), successCount: info ? 1 : 0, totalCount: 1, source: resolveDiagSource() } );
+  pushTonerDiagnosticLog(ip, info ? summarizeTonerInfo(info) : "sem resposta" );
+  renderDashboardCards( );
 }
 
 async function testarTodasAsImpressoras() {
@@ -1451,53 +1192,40 @@ async function testarTodasAsImpressoras() {
     const alvoId = `toner-${item.ip.replace(/\./g, "-")}`;
 
     if (el(alvoId)) {
-      await testarTonerImpressora(item.ip, alvoId);
-}
+      await testarTonerImpressora(item.ip, alvoId );
     } else {
-      const info = await obterTonerInfo(item.ip);
-}
+      const info = await obterTonerInfo(item.ip );
       tonerInfoState[item.ip] = info || null;
-      if (info) maybeNotifyCriticalSupply(item.ip, info);
-}
+      if (info) maybeNotifyCriticalSupply(item.ip, info );
     }
   }
 
-  renderDashboardCards();
-}
+  renderDashboardCards( );
 }
 
 window.testarTonerImpressora = testarTonerImpressora;
 
 
 function filtrarHistoricoPorImpressora(item) {
-  const serie = String(item.serie || "");
-}
-  const loc = String(item.localizacao || "");
-}
-  const arm = String(item.armazem || "");
-}
+  const serie = String(item.serie || "" );
+  const loc = String(item.localizacao || "" );
+  const arm = String(item.armazem || "" );
 
   return historicoGlobal.filter(h => {
-    const hLoc = String(h.localizacao || "");
-}
-    const hEq = String(h.equipamento || "");
-}
+    const hLoc = String(h.localizacao || "" );
+    const hEq = String(h.equipamento || "" );
     return hLoc.includes(serie) ||
       hLoc.includes(loc) ||
       (hLoc.includes(arm) && hLoc.includes(loc)) ||
-      normalizarTexto(hEq).includes(normalizarTexto(item.modelo));
-}
-  });
-}
+      normalizarTexto(hEq).includes(normalizarTexto(item.modelo) );
+  } );
 }
 
 function abrirHistoricoImpressora(item) {
-  const host = el("historicoImpressoraPanel");
-}
+  const host = el("historicoImpressoraPanel" );
   if (!host) return;
 
-  const itens = filtrarHistoricoPorImpressora(item);
-}
+  const itens = filtrarHistoricoPorImpressora(item );
   const ultimo = itens[0] || null;
 
   host.innerHTML = `
@@ -1536,56 +1264,41 @@ function abrirHistoricoImpressora(item) {
 
 function guardarImpressorasLocal() {
   try {
-    impressorasData.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; });
-}
-    localStorage.setItem(IMPRESSORAS_STORAGE_KEY, JSON.stringify(impressorasData.map(i => ({ ...i }))));
-}
-  } catch (e) { console.warn('Nao foi possivel guardar impressoras no localStorage.', e);
-} }
+    impressorasData.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; } );
+    localStorage.setItem(IMPRESSORAS_STORAGE_KEY, JSON.stringify(impressorasData.map(i => ({ ...i }))) );
+  } catch (e) { console.warn('Nao foi possivel guardar impressoras no localStorage.', e ); }
 }
 
 function carregarImpressorasLocal() {
   try {
-    const raw = localStorage.getItem(IMPRESSORAS_STORAGE_KEY);
-}
+    const raw = localStorage.getItem(IMPRESSORAS_STORAGE_KEY );
     if (!raw) return;
-    const parsed = JSON.parse(raw);
-}
+    const parsed = JSON.parse(raw );
     if (!Array.isArray(parsed) || !parsed.length) return;
-    parsed.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; });
-}
-    impressorasData.splice(0, impressorasData.length, ...parsed);
-}
-  } catch (e) { console.warn('Nao foi possivel carregar impressoras do localStorage.', e);
-} }
+    parsed.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; } );
+    impressorasData.splice(0, impressorasData.length, ...parsed );
+  } catch (e) { console.warn('Nao foi possivel carregar impressoras do localStorage.', e ); }
 }
 
 function renderImpressoras(lista = impressorasData) {
-  const tbody = el("impressorasTableBody");
-}
+  const tbody = el("impressorasTableBody" );
   if (!tbody) return;
 
   const total = impressorasData.length;
   const ok = impressorasData.filter(i => obterEstadoImpressora(i.ip) === "OK").length;
   const problema = impressorasData.filter(i => {
-    const e = obterEstadoImpressora(i.ip);
-}
+    const e = obterEstadoImpressora(i.ip );
     return e === "Pendente" || e === "Em reparação";
   }).length;
   const resolvidas = impressorasData.filter(i => obterEstadoImpressora(i.ip) === "Resolvido").length;
 
-  setText("countImpressoras", total);
-}
-  setText("countImpressorasOk", ok);
-}
-  setText("countImpressorasProblema", problema);
-}
-  setText("countImpressorasResolvidas", resolvidas);
-}
+  setText("countImpressoras", total );
+  setText("countImpressorasOk", ok );
+  setText("countImpressorasProblema", problema );
+  setText("countImpressorasResolvidas", resolvidas );
 
   tbody.innerHTML = lista.map(item => {
-    const estado = obterEstadoImpressora(item.ip);
-}
+    const estado = obterEstadoImpressora(item.ip );
     const tonerId = `toner-${item.ip.replace(/\./g, "-")}`;
 
     return `
@@ -1607,37 +1320,31 @@ function renderImpressoras(lista = impressorasData) {
         </td>
       </tr>
     `;
-  }).join("");
-}
+  }).join("" );
 }
 
 function filtrarImpressoras() {
-  const texto = normalizarTexto(el("searchImpressoras")?.value || "");
-}
+  const texto = normalizarTexto(el("searchImpressoras")?.value || "" );
   const armazem = el("filterArmazem")?.value || "";
   const estado = el("filterEstadoImpressora")?.value || "";
 
   const filtrada = impressorasData.filter(item => {
-    const estadoAtual = obterEstadoImpressora(item.ip);
-}
+    const estadoAtual = obterEstadoImpressora(item.ip );
 
     const passaTexto =
       normalizarTexto(item.modelo).includes(texto) ||
       normalizarTexto(item.serie).includes(texto) ||
       normalizarTexto(item.ip).includes(texto) ||
       normalizarTexto(item.localizacao).includes(texto) ||
-      normalizarTexto(item.armazem).includes(texto);
-}
+      normalizarTexto(item.armazem).includes(texto );
 
     const passaArmazem = !armazem || item.armazem === armazem;
     const passaEstado = !estado || estadoAtual === estado;
 
     return passaTexto && passaArmazem && passaEstado;
-  });
-}
+  } );
 
-  renderImpressoras(filtrada);
-}
+  renderImpressoras(filtrada );
 }
 
 /* =========================
@@ -1674,8 +1381,7 @@ function renderPistolas(lista = window.pistolasData) {
         ""
       )
       .toLowerCase()
-      .trim();
-}
+      .trim( );
  
     const bTxt =
       String(
@@ -1686,8 +1392,7 @@ function renderPistolas(lista = window.pistolasData) {
         ""
       )
       .toLowerCase()
-      .trim();
-}
+      .trim( );
  
     return aTxt.localeCompare(
       bTxt,
@@ -1696,15 +1401,12 @@ function renderPistolas(lista = window.pistolasData) {
         numeric:true,
         sensitivity:'base'
       }
-    );
-}
+     );
  
-  });
-}
+  } );
  
   
-  setText("countPistolas", lista.length);
-}
+  setText("countPistolas", lista.length );
 
   setText(
     "countPistolasBraga",
@@ -1713,8 +1415,7 @@ function renderPistolas(lista = window.pistolasData) {
         .toLowerCase()
         .includes("braga")
     ).length
-  );
-}
+   );
 
   setText(
     "countPistolasReserva",
@@ -1723,12 +1424,10 @@ function renderPistolas(lista = window.pistolasData) {
         .toLowerCase()
         .includes("reserva")
     ).length
-  );
-}
+   );
 
  
-  const container = document.querySelector("#listaPistolas");
-}
+  const container = document.querySelector("#listaPistolas" );
  
   if (!container) return;
  
@@ -1801,17 +1500,14 @@ function renderPistolas(lista = window.pistolasData) {
     </div>
     `;
  
-  }).join("");
-}
+  }).join("" );
 
- renderUsers(filtrado);
-}
+ renderUsers(filtrado );
 }	
 	
 function filtrarUsersComFiltros() {
   const texto = el("searchUsers")?.value || "";
-  filtrarUsers(texto);
-}
+  filtrarUsers(texto );
 }
 
 /* =========================
@@ -1841,35 +1537,26 @@ function atualizarContadoresPortas(lista = window.portasData) {
   let semUser = 0;
 
   lista.forEach(porta => {
-    const estado = estadoPorta(porta);
-}
+    const estado = estadoPorta(porta );
     if (estado === "ocupado") usadas++;
     if (estado === "livre") livres++;
     if (estado === "semUser") semUser++;
-  });
-}
+  } );
 
-  setText("countPortas", total);
-}
-  setText("countPortasUsadas", usadas);
-}
-  setText("countPortasLivres", livres);
-}
-  setText("countPortasSemUser", semUser);
-}
+  setText("countPortas", total );
+  setText("countPortasUsadas", usadas );
+  setText("countPortasLivres", livres );
+  setText("countPortasSemUser", semUser );
 }
 
 function renderPortas(lista = window.portasData) {
-  const container = el("listaPortas");
-}
+  const container = el("listaPortas" );
   if (!container) return;
 
-  atualizarContadoresPortas(lista);
-}
+  atualizarContadoresPortas(lista );
 
   container.innerHTML = lista.map((p, index) => {
-    const estado = estadoPorta(p);
-}
+    const estado = estadoPorta(p );
     const ref = p.idDoc ? `'${p.idDoc}'` : `'${p._ref || `local-porta-${window.portasData.indexOf(p)}`}'`;
     return `
       <div class="pc-card">
@@ -1889,38 +1576,31 @@ function renderPortas(lista = window.portasData) {
         </div>
       </div>
     `;
-  }).join("");
-}
+  }).join("" );
 }
 
 function filtrarPortas(txt = "") {
-  const texto = normalizarTexto(txt);
-}
-  const estadoSelecionado = normalizarTexto(el("filterEstadoPortas")?.value || "");
-}
+  const texto = normalizarTexto(txt );
+  const estadoSelecionado = normalizarTexto(el("filterEstadoPortas")?.value || "" );
 
   const filtradas = window.portasData.filter(p => {
     const passaTexto =
       normalizarTexto(p.porta).includes(texto) ||
       normalizarTexto(p.local).includes(texto) ||
       normalizarTexto(p.user).includes(texto) ||
-      normalizarTexto(p.ip).includes(texto);
-}
+      normalizarTexto(p.ip).includes(texto );
 
     const passaEstado = !estadoSelecionado || estadoPorta(p) === estadoSelecionado;
 
     return passaTexto && passaEstado;
-  });
-}
+  } );
 
-  renderPortas(filtradas);
-}
+  renderPortas(filtradas );
 }
 
 function filtrarPortasComEstado() {
   const texto = el("searchPortas")?.value || "";
-  filtrarPortas(texto);
-}
+  filtrarPortas(texto );
 }
 
 
@@ -1930,94 +1610,70 @@ const PORTAS_STORAGE_KEY = 'appbraga_portas_custom_v1';
 function prepararRefsPistolas() {
   window.pistolasData.forEach((p, i) => {
     if (!p.idDoc && !p._ref) p._ref = `local-pistola-${i}`;
-  });
-}
+  } );
 }
 
 function guardarPistolasLocal() {
   try {
-    const serializavel = window.pistolasData.map(p => ({ ...p }));
-}
-    localStorage.setItem(PISTOLAS_STORAGE_KEY, JSON.stringify(serializavel));
-}
+    const serializavel = window.pistolasData.map(p => ({ ...p }) );
+    localStorage.setItem(PISTOLAS_STORAGE_KEY, JSON.stringify(serializavel) );
   } catch (e) {
-    console.warn('Nao foi possivel guardar pistolas no localStorage.', e);
-}
+    console.warn('Nao foi possivel guardar pistolas no localStorage.', e );
   }
 }
 
 function carregarPistolasLocal() {
   try {
-    const raw = localStorage.getItem(PISTOLAS_STORAGE_KEY);
-}
+    const raw = localStorage.getItem(PISTOLAS_STORAGE_KEY );
     if (!raw) {
-      prepararRefsPistolas();
-}
+      prepararRefsPistolas( );
       return;
     }
-    const parsed = JSON.parse(raw);
-}
+    const parsed = JSON.parse(raw );
     if (!Array.isArray(parsed) || !parsed.length) {
-      prepararRefsPistolas();
-}
+      prepararRefsPistolas( );
       return;
     }
-    window.pistolasData.splice(0, window.pistolasData.length, ...parsed);
-}
-    prepararRefsPistolas();
-}
+    window.pistolasData.splice(0, window.pistolasData.length, ...parsed );
+    prepararRefsPistolas( );
   } catch (e) {
-    console.warn('Nao foi possivel carregar pistolas do localStorage.', e);
-}
-    prepararRefsPistolas();
-}
+    console.warn('Nao foi possivel carregar pistolas do localStorage.', e );
+    prepararRefsPistolas( );
   }
 }
 
 function prepararRefsPortas() {
   window.portasData.forEach((p, i) => {
     if (!p.idDoc && !p._ref) p._ref = `local-porta-${i}`;
-  });
-}
+  } );
 }
 
 function guardarPortasLocal() {
   try {
-    const serializavel = window.portasData.map(p => ({ ...p }));
-}
-    localStorage.setItem(PORTAS_STORAGE_KEY, JSON.stringify(serializavel));
-}
+    const serializavel = window.portasData.map(p => ({ ...p }) );
+    localStorage.setItem(PORTAS_STORAGE_KEY, JSON.stringify(serializavel) );
   } catch (e) {
-    console.warn('Nao foi possivel guardar portas no localStorage.', e);
-}
+    console.warn('Nao foi possivel guardar portas no localStorage.', e );
   }
 }
 
 function carregarPortasLocal() {
   try {
-    const raw = localStorage.getItem(PORTAS_STORAGE_KEY);
-}
+    const raw = localStorage.getItem(PORTAS_STORAGE_KEY );
     if (!raw) {
-      prepararRefsPortas();
-}
+      prepararRefsPortas( );
       return;
     }
-    const parsed = JSON.parse(raw);
-}
+    const parsed = JSON.parse(raw );
     if (!Array.isArray(parsed) || !parsed.length) {
-      prepararRefsPortas();
-}
+      prepararRefsPortas( );
       return;
     }
-    window.portasData.splice(0, window.portasData.length, ...parsed);
-}
-    prepararRefsPortas();
-}
+    window.portasData.splice(0, window.portasData.length, ...parsed );
+    prepararRefsPortas( );
   } catch (e) {
-    console.warn('Nao foi possivel carregar portas do localStorage.', e);
-}
-    prepararRefsPortas();
-}
+    console.warn('Nao foi possivel carregar portas do localStorage.', e );
+    prepararRefsPortas( );
   }
 }
 
@@ -2041,37 +1697,29 @@ function badgeUser(valor) {
 }
 
 function atualizarContadoresUsers(lista = window.usersData) {
-  setText("countUsers", lista.length);
-}
-  setText("countUsersMO365", lista.filter(utilizadorTemMO365).length);
-}
-  setText("countUsersPistola", lista.filter(utilizadorTemPistola).length);
-}
-  setText("countUsersTV", lista.filter(utilizadorTemTeamviewer).length);
-}
+  setText("countUsers", lista.length );
+  setText("countUsersMO365", lista.filter(utilizadorTemMO365).length );
+  setText("countUsersPistola", lista.filter(utilizadorTemPistola).length );
+  setText("countUsersTV", lista.filter(utilizadorTemTeamviewer).length );
 }
 
 function renderUsers(lista = window.usersData) {
-  const container = el("listaUsers");
-}
+  const container = el("listaUsers" );
   if (!container) return;
 
-  atualizarContadoresUsers(lista);
-}
+  atualizarContadoresUsers(lista );
 
 window.usersData.sort((a,b)=>{
  
   const aTxt =
     String(a.nome || "")
       .toLowerCase()
-      .trim();
-}
+      .trim( );
  
   const bTxt =
     String(b.nome || "")
       .toLowerCase()
-      .trim();
-}
+      .trim( );
  
   return aTxt.localeCompare(
     bTxt,
@@ -2080,11 +1728,9 @@ window.usersData.sort((a,b)=>{
       numeric:true,
       sensitivity:'base'
     }
-  );
-}
+   );
  
-});
-}
+} );
   
   container.innerHTML = lista.map((u, index) => {
     const ref = u.idDoc ? `'${u.idDoc}'` : `'${u._ref || `local-user-${index}`}'`;
@@ -2110,17 +1756,13 @@ window.usersData.sort((a,b)=>{
       </div>
     </div>
   `;
-  }).join("");
-}
+  }).join("" );
 }
 
 function filtrarUsers(txt = "") {
-  const texto = normalizarTexto(txt);
-}
-  const filtroMO365 = normalizarTexto(el("filterUsersMO365")?.value || "");
-}
-  const filtroPistola = normalizarTexto(el("filterUsersPistola")?.value || "");
-}
+  const texto = normalizarTexto(txt );
+  const filtroMO365 = normalizarTexto(el("filterUsersMO365")?.value || "" );
+  const filtroPistola = normalizarTexto(el("filterUsersPistola")?.value || "" );
 
   const filtrado = window.usersData.filter(u => {
     const passaTexto =
@@ -2136,187 +1778,130 @@ function filtrarUsers(txt = "") {
       normalizarTexto(u.user_mo365).includes(texto) ||
       normalizarTexto(u.pw_mo365).includes(texto) ||
       normalizarTexto(u.email_bragalis).includes(texto) ||
-      normalizarTexto(u.pass_bragalis).includes(texto);
-}
+      normalizarTexto(u.pass_bragalis).includes(texto );
 
     let passaMO365 = true;
-    if (filtroMO365 === "sim") passaMO365 = utilizadorTemMO365(u);
-}
-    if (filtroMO365 === "nao") passaMO365 = !utilizadorTemMO365(u);
-}
+    if (filtroMO365 === "sim") passaMO365 = utilizadorTemMO365(u );
+    if (filtroMO365 === "nao") passaMO365 = !utilizadorTemMO365(u );
 
     let passaPistola = true;
-    if (filtroPistola === "sim") passaPistola = utilizadorTemPistola(u);
-}
-    if (filtroPistola === "nao") passaPistola = !utilizadorTemPistola(u);
-}
+    if (filtroPistola === "sim") passaPistola = utilizadorTemPistola(u );
+    if (filtroPistola === "nao") passaPistola = !utilizadorTemPistola(u );
 
     return passaTexto && passaMO365 && passaPistola;
-  });
-}
+  } );
 
-  renderUsers(filtrado);
-}
+  renderUsers(filtrado );
 }
 
 function filtrarUsersComFiltros() {
   const texto = el("searchUsers")?.value || "";
-  filtrarUsers(texto);
-}
+  filtrarUsers(texto );
 }
 
 function applyAppTheme(mode) {
   const isDark = mode === "dark";
   document.if(documentElement){
-documentElement.classList.toggle("dark", isDark);
-}
+documentElement.classList.toggle("dark", isDark );
   document.if(documentElement){
-documentElement.classList.toggle("app-dark", isDark);
-}
+documentElement.classList.toggle("app-dark", isDark );
   document.if(body){
-body.classList.toggle("dark", isDark);
-}
+body.classList.toggle("dark", isDark );
   document.if(body){
-body.classList.toggle("app-dark", isDark);
-}
-  localStorage.setItem("modo", isDark ? "dark" : "light");
-}
+body.classList.toggle("app-dark", isDark );
+  localStorage.setItem("modo", isDark ? "dark" : "light" );
 
   document.querySelectorAll(".theme-toggle").forEach((button) => {
     button.textContent = isDark ? "Modo claro" : "Modo escuro";
-    button.setAttribute("aria-pressed", String(isDark));
-}
-  });
-}
+    button.setAttribute("aria-pressed", String(isDark) );
+  } );
 
-  const sw = el("darkSwitch");
-}
+  const sw = el("darkSwitch" );
   if (sw) sw.checked = isDark;
 }
 
 function initGlobalTheme() {
   const savedMode = localStorage.getItem("modo") === "dark" ? "dark" : "light";
-  applyAppTheme(savedMode);
-}
+  applyAppTheme(savedMode );
 
-  const sidebar = document.querySelector(".sidebar");
-}
+  const sidebar = document.querySelector(".sidebar" );
   if (sidebar && !document.querySelector(".theme-toggle")) {
-    const button = document.createElement("button");
-}
+    const button = document.createElement("button" );
     button.type = "button";
     button.className = "theme-toggle";
     button.addEventListener("click", () => {
       const nextMode = document.body.classList.contains("app-dark") ? "light" : "dark";
-      applyAppTheme(nextMode);
-}
-    });
-}
+      applyAppTheme(nextMode );
+    } );
 
-    const brand = sidebar.querySelector(".brand, .premium-brand, .brand-block");
-}
+    const brand = sidebar.querySelector(".brand, .premium-brand, .brand-block" );
     if (brand && brand.parentNode) {
-      brand.insertAdjacentElement("afterend", button);
-}
+      brand.insertAdjacentElement("afterend", button );
     } else {
-      sidebar.insertBefore(button, sidebar.firstChild);
-}
+      sidebar.insertBefore(button, sidebar.firstChild );
     }
   }
 
-  const sw = el("darkSwitch");
-}
+  const sw = el("darkSwitch" );
   if (sw && !sw.dataset.themeBound) {
     sw.dataset.themeBound = "1";
     sw.addEventListener("change", () => {
-      applyAppTheme(sw.checked ? "dark" : "light");
-}
-    });
-}
+      applyAppTheme(sw.checked ? "dark" : "light" );
+    } );
   }
 
-  applyAppTheme(localStorage.getItem("modo") === "dark" ? "dark" : "light");
-}
+  applyAppTheme(localStorage.getItem("modo") === "dark" ? "dark" : "light" );
 }
 
 /* =========================
    INIT
 ========================= */
 window.addEventListener("DOMContentLoaded", () => {
-  if (el("historicoImpressoraPanel") && impressorasData && impressorasData.length) { abrirHistoricoImpressora(impressorasData[0]);
-} }
-  initGlobalTheme();
-}
+  if (el("historicoImpressoraPanel") && impressorasData && impressorasData.length) { abrirHistoricoImpressora(impressorasData[0] ); }
+  initGlobalTheme( );
 
-  carregarChecklist();
-}
-  carregarEdicaoToner();
-}
-  ensureLoteFieldOnEdit();
-}
-  tryRenderAppBraga(renderStockMinimoConfig);
-}
-  tryRenderAppBraga(renderStockMinimoPainel);
-}
-  tryRenderAppBraga(renderAlertasInteligentes);
-}
-  tryRenderAppBraga(() => enhanceScannerStatus("Leitura pronta."));
-}
-  preencherLocaisManutencao();
-}
-  preencherFormularioManutencao();
-}
+  carregarChecklist( );
+  carregarEdicaoToner( );
+  ensureLoteFieldOnEdit( );
+  tryRenderAppBraga(renderStockMinimoConfig );
+  tryRenderAppBraga(renderStockMinimoPainel );
+  tryRenderAppBraga(renderAlertasInteligentes );
+  tryRenderAppBraga(() => enhanceScannerStatus("Leitura pronta.") );
+  preencherLocaisManutencao( );
+  preencherFormularioManutencao( );
 
-  carregarImpressorasLocal();
-}
-  renderImpressoras();
-}
-  renderManutencoes(manutencoesGlobal);
-}
-  carregarPistolasLocal();
-}
-  carregarPortasLocal();
-}
-  renderPistolas();
-}
-  renderPortas();
-}
-  carregarUsersLocal();
-}
-  renderUsers();
-}
+  carregarImpressorasLocal( );
+  renderImpressoras( );
+  renderManutencoes(manutencoesGlobal );
+  carregarPistolasLocal( );
+  carregarPortasLocal( );
+  renderPistolas( );
+  renderPortas( );
+  carregarUsersLocal( );
+  renderUsers( );
 
   if (el("manutencaoSerie")) {
-    el("manutencaoSerie").addEventListener("change", sincronizarCamposImpressora);
-}
+    el("manutencaoSerie").addEventListener("change", sincronizarCamposImpressora );
   }
 
   if (el("manutencaoIP")) {
-    el("manutencaoIP").addEventListener("change", sincronizarCamposImpressora);
-}
+    el("manutencaoIP").addEventListener("change", sincronizarCamposImpressora );
   }
 
-  const estaNaPaginaImpressoras = !!el("impressorasTableBody");
-}
-  const estaNoDashboard = !!el("listaDashboardStock") || !!el("searchDashboard");
-}
+  const estaNaPaginaImpressoras = !!el("impressorasTableBody" );
+  const estaNoDashboard = !!el("listaDashboardStock") || !!el("searchDashboard" );
 
   if (estaNaPaginaImpressoras || estaNoDashboard) {
     setTimeout(() => {
-      testarTodasAsImpressoras();
-}
-    }, 600);
-}
+      testarTodasAsImpressoras( );
+    }, 600 );
 
     setInterval(() => {
-      testarTodasAsImpressoras();
-}
-    }, 60000);
-}
+      testarTodasAsImpressoras( );
+    }, 60000 );
   }
 
-});
-}
+} );
 
 /* =========================
    TABLET / FIREBASE COMPLETO
@@ -2325,8 +1910,7 @@ const printerFirebaseState = {};
 const printerFirebaseSyncState = {};
 
 function normalizePrinterIp(ip) {
-  return String(ip || "").trim().replace(/^https?:\/\//i, "").replace(/\/$/, "");
-}
+  return String(ip || "").trim().replace(/^https?:\/\//i, "").replace(/\/$/, "" );
 }
 
 function hasUsablePrinterInfo(info) {
@@ -2348,24 +1932,19 @@ function buildPrinterFirebasePayload(ip, info) {
     payload.toner = {};
     info.colors.forEach((color) => {
       if (!color || typeof color.percent !== "number") return;
-      const key = String(color.key || "").toLowerCase();
-}
+      const key = String(color.key || "").toLowerCase( );
       if (["black", "cyan", "magenta", "yellow"].includes(key)) {
-        payload.toner[key] = Math.max(0, Math.min(100, Math.round(color.percent)));
-}
+        payload.toner[key] = Math.max(0, Math.min(100, Math.round(color.percent)) );
       }
-    });
-}
+    } );
   }
 
   if (info.residue && typeof info.residue.percent === "number") {
-    payload.waste = Math.max(0, Math.min(100, Math.round(info.residue.percent)));
-}
+    payload.waste = Math.max(0, Math.min(100, Math.round(info.residue.percent)) );
   }
 
   if (typeof info.percent === "number") {
-    payload.percent = Math.max(0, Math.min(100, Math.round(info.percent)));
-}
+    payload.percent = Math.max(0, Math.min(100, Math.round(info.percent)) );
   } else if (payload.toner && typeof payload.toner.black === "number") {
     payload.percent = payload.toner.black;
   }
@@ -2374,29 +1953,23 @@ function buildPrinterFirebasePayload(ip, info) {
 }
 
 async function syncPrinterInfoToFirebase(ip, info) {
-  const cleanIp = normalizePrinterIp(ip);
-}
+  const cleanIp = normalizePrinterIp(ip );
   if (!cleanIp || !db || !db.collection || !hasUsablePrinterInfo(info)) return false;
 
-  const payload = buildPrinterFirebasePayload(cleanIp, info);
-}
+  const payload = buildPrinterFirebasePayload(cleanIp, info );
   const compareKey = JSON.stringify({
     ip: payload.ip,
     toner: payload.toner || null,
     waste: typeof payload.waste === "number" ? payload.waste : null,
     percent: typeof payload.percent === "number" ? payload.percent : null
-  });
-}
+  } );
 
   if (printerFirebaseSyncState[cleanIp] === compareKey) return true;
 
-  await db.collection("printers").doc(cleanIp).set(payload, { merge: true });
-}
+  await db.collection("printers").doc(cleanIp).set(payload, { merge: true } );
   printerFirebaseSyncState[cleanIp] = compareKey;
-  printerFirebaseState[cleanIp] = Object.assign({}, printerFirebaseState[cleanIp] || {}, payload);
-}
-  tonerInfoState[cleanIp] = mapFirebasePrinterInfo(printerFirebaseState[cleanIp]);
-}
+  printerFirebaseState[cleanIp] = Object.assign({}, printerFirebaseState[cleanIp] || {}, payload );
+  tonerInfoState[cleanIp] = mapFirebasePrinterInfo(printerFirebaseState[cleanIp] );
   return true;
 }
 
@@ -2412,16 +1985,12 @@ function normalizePrinterColorsFromFirebase(printerDoc) {
   ];
 
   const normalizePercentValue = (value) => {
-    if (typeof value === "number" && Number.isFinite(value)) return Math.max(0, Math.min(100, Math.round(value)));
-}
+    if (typeof value === "number" && Number.isFinite(value)) return Math.max(0, Math.min(100, Math.round(value)) );
     if (typeof value === "string") {
-      const match = value.replace(",", ".").match(/\d{1,3}(?:\.\d+)?/);
-}
+      const match = value.replace(",", ".").match(/\d{1,3}(?:\.\d+)?/ );
       if (match) {
-        const parsed = Number(match[0]);
-}
-        if (Number.isFinite(parsed)) return Math.max(0, Math.min(100, Math.round(parsed)));
-}
+        const parsed = Number(match[0] );
+        if (Number.isFinite(parsed)) return Math.max(0, Math.min(100, Math.round(parsed)) );
       }
     }
     return null;
@@ -2430,21 +1999,16 @@ function normalizePrinterColorsFromFirebase(printerDoc) {
   if (Array.isArray(printerDoc && printerDoc.colors)) {
     printerDoc.colors.forEach((item) => {
       if (!item) return;
-      const key = String(item.key || item.color || item.cor || "").toLowerCase();
-}
-      const percent = normalizePercentValue(item.percent ?? item.value ?? item.valor ?? item.nivel);
-}
+      const key = String(item.key || item.color || item.cor || "").toLowerCase( );
+      const percent = normalizePercentValue(item.percent ?? item.value ?? item.valor ?? item.nivel );
       if (percent === null) return;
-      const known = colorMap.find(([field,, mappedKey]) => key === field || key === mappedKey);
-}
+      const known = colorMap.find(([field,, mappedKey]) => key === field || key === mappedKey );
       colors.push({
         key: known ? known[2] : (key || "black"),
         label: item.label || item.cor || (known ? known[1] : "Toner"),
         percent
-      });
-}
-    });
-}
+      } );
+    } );
   }
 
   colorMap.forEach(([field, label, key]) => {
@@ -2455,14 +2019,11 @@ function normalizePrinterColorsFromFirebase(printerDoc) {
       printerDoc?.[`${field}Percent`] ??
       printerDoc?.[`${field}_percent`];
 
-    const percent = normalizePercentValue(value);
-}
+    const percent = normalizePercentValue(value );
     if (percent !== null && !colors.some(c => c.key === key)) {
-      colors.push({ key, label, percent });
-}
+      colors.push({ key, label, percent } );
     }
-  });
-}
+  } );
 
   return colors;
 }
@@ -2470,8 +2031,7 @@ function normalizePrinterColorsFromFirebase(printerDoc) {
 function normalizePrinterResidueFromFirebase(printerDoc) {
   const wasteValue = printerDoc && typeof printerDoc.waste === "number"
     ? printerDoc.waste
-    : (printerDoc && typeof printerDoc.residue === "number" ? printerDoc.residue : null);
-}
+    : (printerDoc && typeof printerDoc.residue === "number" ? printerDoc.residue : null );
 
   if (typeof wasteValue !== "number") return null;
 
@@ -2483,21 +2043,15 @@ function normalizePrinterResidueFromFirebase(printerDoc) {
 }
 
 function mapFirebasePrinterInfo(printerDoc) {
-  const colors = normalizePrinterColorsFromFirebase(printerDoc);
-}
-  const residue = normalizePrinterResidueFromFirebase(printerDoc);
-}
+  const colors = normalizePrinterColorsFromFirebase(printerDoc );
+  const residue = normalizePrinterResidueFromFirebase(printerDoc );
   const normalizePercentValue = (value) => {
-    if (typeof value === "number" && Number.isFinite(value)) return Math.max(0, Math.min(100, Math.round(value)));
-}
+    if (typeof value === "number" && Number.isFinite(value)) return Math.max(0, Math.min(100, Math.round(value)) );
     if (typeof value === "string") {
-      const match = value.replace(",", ".").match(/\d{1,3}(?:\.\d+)?/);
-}
+      const match = value.replace(",", ".").match(/\d{1,3}(?:\.\d+)?/ );
       if (match) {
-        const parsed = Number(match[0]);
-}
-        if (Number.isFinite(parsed)) return Math.max(0, Math.min(100, Math.round(parsed)));
-}
+        const parsed = Number(match[0] );
+        if (Number.isFinite(parsed)) return Math.max(0, Math.min(100, Math.round(parsed)) );
       }
     }
     return null;
@@ -2509,8 +2063,7 @@ function mapFirebasePrinterInfo(printerDoc) {
     printerDoc?.nivelToner ??
     printerDoc?.nivel ??
     printerDoc?.percentage
-  );
-}
+   );
 
   if (percent === null && colors.length === 1 && colors[0].key === "black") {
     percent = colors[0].percent;
@@ -2525,146 +2078,108 @@ function bindPrintersFirebaseRealtime() {
   db.collection("printers").onSnapshot((snap) => {
     snap.forEach((doc) => {
       const data = ({ firebaseId: doc.id, ...doc.data() }) || {};
-      const ip = normalizePrinterIp(data.ip || doc.id);
-}
+      const ip = normalizePrinterIp(data.ip || doc.id );
       if (!ip) return;
 
-      const mapped = mapFirebasePrinterInfo(data);
-}
-      printerFirebaseState[ip] = Object.assign({}, data, { ip });
-}
+      const mapped = mapFirebasePrinterInfo(data );
+      printerFirebaseState[ip] = Object.assign({}, data, { ip } );
       tonerInfoState[ip] = mapped;
-      maybeNotifyCriticalSupply(ip, mapped);
-}
-    });
-}
+      maybeNotifyCriticalSupply(ip, mapped );
+    } );
 
-    renderDashboardCards();
-}
-    renderImpressoras();
-}
-    renderTonerDiagnostics();
-}
+    renderDashboardCards( );
+    renderImpressoras( );
+    renderTonerDiagnostics( );
 
-    const dashboardHasSearch = !!el("searchDashboard");
-}
+    const dashboardHasSearch = !!el("searchDashboard" );
     if (dashboardHasSearch && normalizarTexto(el("searchDashboard")?.value || "")) {
-      renderDashboardCards();
-}
+      renderDashboardCards( );
     }
   }, (error) => {
-    console.error("Erro ao ler coleção printers:", error);
-}
-  });
-}
+    console.error("Erro ao ler coleção printers:", error );
+  } );
 }
 
 const __originalObterTonerInfo = obterTonerInfo;
 obterTonerInfo = async function(ip) {
-  const cleanIp = normalizePrinterIp(ip);
-}
-  const desktopMode = !!(window.electronAPI && window.electronAPI.getTonerSNMP);
-}
+  const cleanIp = normalizePrinterIp(ip );
+  const desktopMode = !!(window.electronAPI && window.electronAPI.getTonerSNMP );
 
   if (desktopMode) {
-    const freshInfo = await __originalObterTonerInfo(cleanIp);
-}
+    const freshInfo = await __originalObterTonerInfo(cleanIp );
     if (hasUsablePrinterInfo(freshInfo)) {
       try {
-        await syncPrinterInfoToFirebase(cleanIp, freshInfo);
-}
+        await syncPrinterInfoToFirebase(cleanIp, freshInfo );
       } catch (error) {
-        console.error("Erro ao sincronizar impressora para Firebase:", cleanIp, error);
-}
+        console.error("Erro ao sincronizar impressora para Firebase:", cleanIp, error );
       }
       return freshInfo;
     }
 
     if (printerFirebaseState[cleanIp]) {
-      return mapFirebasePrinterInfo(printerFirebaseState[cleanIp]);
-}
+      return mapFirebasePrinterInfo(printerFirebaseState[cleanIp] );
     }
 
     return freshInfo;
   }
 
   if (printerFirebaseState[cleanIp]) {
-    return mapFirebasePrinterInfo(printerFirebaseState[cleanIp]);
-}
+    return mapFirebasePrinterInfo(printerFirebaseState[cleanIp] );
   }
-  return await __originalObterTonerInfo(cleanIp);
-}
+  return await __originalObterTonerInfo(cleanIp );
 };
 
 const __originalTestarTodasAsImpressoras = testarTodasAsImpressoras;
 testarTodasAsImpressoras = async function() {
-  const webMode = !(window.electronAPI && window.electronAPI.getTonerSNMP);
-}
+  const webMode = !(window.electronAPI && window.electronAPI.getTonerSNMP );
   if (webMode) {
     impressorasData.forEach((item) => {
       const info = printerFirebaseState[item.ip] ? mapFirebasePrinterInfo(printerFirebaseState[item.ip]) : null;
       tonerInfoState[item.ip] = info;
       const alvoId = `toner-${item.ip.replace(/\./g, "-")}`;
       if (el(alvoId)) {
-        el(alvoId).innerHTML = gerarHTMLToners(info);
-}
+        el(alvoId).innerHTML = gerarHTMLToners(info );
       }
-      if (info) maybeNotifyCriticalSupply(item.ip, info);
-}
-    });
-}
-    renderDashboardCards();
-}
+      if (info) maybeNotifyCriticalSupply(item.ip, info );
+    } );
+    renderDashboardCards( );
     return;
   }
-  return await __originalTestarTodasAsImpressoras();
-}
+  return await __originalTestarTodasAsImpressoras( );
 };
 
 const __originalAbrirIP = abrirIP;
 abrirIP = function(ip) {
   // No tablet/web o IP fica só de leitura
-  const webMode = !(window.electronAPI && window.electronAPI.getTonerSNMP);
-}
+  const webMode = !(window.electronAPI && window.electronAPI.getTonerSNMP );
   if (webMode) return;
-  return __originalAbrirIP(ip);
-}
+  return __originalAbrirIP(ip );
 };
 
 const __originalRenderImpressoras = renderImpressoras;
 renderImpressoras = function(lista = impressorasData) {
-  const tbody = el("impressorasTableBody");
-}
-  if (!tbody) return __originalRenderImpressoras(lista);
-}
+  const tbody = el("impressorasTableBody" );
+  if (!tbody) return __originalRenderImpressoras(lista );
 
   const total = impressorasData.length;
   const ok = impressorasData.filter(i => obterEstadoImpressora(i.ip) === "OK").length;
   const problema = impressorasData.filter(i => {
-    const e = obterEstadoImpressora(i.ip);
-}
+    const e = obterEstadoImpressora(i.ip );
     return e === "Pendente" || e === "Em reparação";
   }).length;
   const resolvidas = impressorasData.filter(i => obterEstadoImpressora(i.ip) === "Resolvido").length;
 
-  setText("countImpressoras", total);
-}
-  setText("countImpressorasOk", ok);
-}
-  setText("countImpressorasProblema", problema);
-}
-  setText("countImpressorasResolvidas", resolvidas);
-}
+  setText("countImpressoras", total );
+  setText("countImpressorasOk", ok );
+  setText("countImpressorasProblema", problema );
+  setText("countImpressorasResolvidas", resolvidas );
 
-  const webMode = !(window.electronAPI && window.electronAPI.getTonerSNMP);
-}
+  const webMode = !(window.electronAPI && window.electronAPI.getTonerSNMP );
 
   tbody.innerHTML = lista.map(item => {
-    const estado = obterEstadoImpressora(item.ip);
-}
+    const estado = obterEstadoImpressora(item.ip );
     const tonerId = `toner-${item.ip.replace(/\./g, "-")}`;
-    const info = printerFirebaseState[item.ip] ? mapFirebasePrinterInfo(printerFirebaseState[item.ip]) : (tonerInfoState[item.ip] || null);
-}
+    const info = printerFirebaseState[item.ip] ? mapFirebasePrinterInfo(printerFirebaseState[item.ip]) : (tonerInfoState[item.ip] || null );
     const ipHtml = webMode ? item.ip : `<a href="http://${item.ip}" target="_blank" rel="noopener noreferrer">${item.ip}</a>`;
 
     return `
@@ -2685,17 +2200,13 @@ renderImpressoras = function(lista = impressorasData) {
         </td>
       </tr>
     `;
-  }).join("");
-}
+  }).join("" );
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  if (el("historicoImpressoraPanel") && impressorasData && impressorasData.length) { abrirHistoricoImpressora(impressorasData[0]);
-} }
-  bindPrintersFirebaseRealtime();
-}
-});
-}
+  if (el("historicoImpressoraPanel") && impressorasData && impressorasData.length) { abrirHistoricoImpressora(impressorasData[0] ); }
+  bindPrintersFirebaseRealtime( );
+} );
 
 
 
@@ -2717,11 +2228,9 @@ const tonerDiagnosticsState = {
 function formatDiagTime(date) {
   if (!date) return "—";
   try {
-    return new Intl.DateTimeFormat("pt-PT", { hour: "2-digit", minute: "2-digit", second: "2-digit", day: "2-digit", month: "2-digit" }).format(date);
-}
+    return new Intl.DateTimeFormat("pt-PT", { hour: "2-digit", minute: "2-digit", second: "2-digit", day: "2-digit", month: "2-digit" }).format(date );
   } catch (e) {
-    return date.toLocaleString();
-}
+    return date.toLocaleString( );
   }
 }
 
@@ -2733,40 +2242,29 @@ function resolveDiagSource() {
 const tonerDiagUiState = { logsVisible: false };
 
 function renderTonerDiagLogVisibility() {
-  const wrapEl = el("tonerDiagLogWrap");
-}
-  const btnEl = el("toggleTonerDiagLogBtn");
-}
+  const wrapEl = el("tonerDiagLogWrap" );
+  const btnEl = el("toggleTonerDiagLogBtn" );
   if (!wrapEl || !btnEl) return;
   if(wrapEl){
-wrapEl.classList.toggle("is-collapsed", !tonerDiagUiState.logsVisible);
-}
+wrapEl.classList.toggle("is-collapsed", !tonerDiagUiState.logsVisible );
   btnEl.textContent = tonerDiagUiState.logsVisible ? "Esconder logs" : "Ver logs";
 }
 
 function toggleTonerDiagLog(force) {
   tonerDiagUiState.logsVisible = typeof force === "boolean" ? force : !tonerDiagUiState.logsVisible;
-  renderTonerDiagLogVisibility();
-}
+  renderTonerDiagLogVisibility( );
 }
 window.toggleTonerDiagLog = toggleTonerDiagLog;
 
 function renderTonerDiagnostics() {
-  const statusEl = el("tonerDiagStatus");
-}
-  const dotEl = el("tonerDiagDot");
-}
-  const lastRunEl = el("tonerDiagLastRun");
-}
-  const sourceEl = el("tonerDiagSource");
-}
-  const summaryEl = el("tonerDiagSummary");
-}
-  const logEl = el("tonerDiagLog");
-}
+  const statusEl = el("tonerDiagStatus" );
+  const dotEl = el("tonerDiagDot" );
+  const lastRunEl = el("tonerDiagLastRun" );
+  const sourceEl = el("tonerDiagSource" );
+  const summaryEl = el("tonerDiagSummary" );
+  const logEl = el("tonerDiagLog" );
   if (!statusEl || !dotEl || !lastRunEl || !sourceEl || !summaryEl || !logEl) return;
-  renderTonerDiagLogVisibility();
-}
+  renderTonerDiagLogVisibility( );
 
   const map = {
     idle: ["Sem teste", "is-idle"],
@@ -2779,8 +2277,7 @@ function renderTonerDiagnostics() {
   const current = map[tonerDiagnosticsState.status] || map.idle;
   statusEl.textContent = current[0];
   dotEl.className = `diag-dot ${current[1]}`;
-  lastRunEl.textContent = formatDiagTime(tonerDiagnosticsState.lastRunAt);
-}
+  lastRunEl.textContent = formatDiagTime(tonerDiagnosticsState.lastRunAt );
   sourceEl.textContent = tonerDiagnosticsState.source || "—";
 
   if (tonerDiagnosticsState.running) {
@@ -2801,8 +2298,7 @@ function renderTonerDiagnostics() {
       <span class="diag-time">${item.time}</span>
       <strong>${item.ip}</strong> · ${item.message}
     </div>
-  `).join("");
-}
+  `).join("" );
 }
 
 function pushTonerDiagnosticLog(ip, message) {
@@ -2810,27 +2306,21 @@ function pushTonerDiagnosticLog(ip, message) {
     ip: ip || "Sistema",
     message,
     time: formatDiagTime(new Date())
-  });
-}
-  tonerDiagnosticsState.log = tonerDiagnosticsState.log.slice(0, 10);
-}
-  renderTonerDiagnostics();
-}
+  } );
+  tonerDiagnosticsState.log = tonerDiagnosticsState.log.slice(0, 10 );
+  renderTonerDiagnostics( );
 }
 
 function updateTonerDiagnosticStatus(status, partial = {}) {
   tonerDiagnosticsState.status = status;
-  Object.assign(tonerDiagnosticsState, partial);
-}
-  renderTonerDiagnostics();
-}
+  Object.assign(tonerDiagnosticsState, partial );
+  renderTonerDiagnostics( );
 }
 
 function summarizeTonerInfo(info) {
   if (!info) return "sem leitura";
   if (Array.isArray(info.colors) && info.colors.length) {
-    return info.colors.map(c => `${c.label || c.key}: ${typeof c.percent === "number" ? Math.round(c.percent) : "N/D"}%`).join(" · ");
-}
+    return info.colors.map(c => `${c.label || c.key}: ${typeof c.percent === "number" ? Math.round(c.percent) : "N/D"}%`).join(" · " );
   }
   if (typeof info.percent === "number") return `Preto: ${Math.round(info.percent)}%`;
   return "sem percentagem";
@@ -2842,28 +2332,21 @@ async function testarSistemaToner() {
     source: resolveDiagSource(),
     totalCount: impressorasData.length || 0,
     successCount: 0
-  });
-}
-  pushTonerDiagnosticLog("Sistema", `Teste iniciado por ${resolveDiagSource()}`);
-}
+  } );
+  pushTonerDiagnosticLog("Sistema", `Teste iniciado por ${resolveDiagSource()}` );
 
   let success = 0;
   for (const item of impressorasData) {
-    const info = await obterTonerInfo(item.ip);
-}
+    const info = await obterTonerInfo(item.ip );
     tonerInfoState[item.ip] = info || null;
     const alvoId = `toner-${item.ip.replace(/\./g, "-")}`;
-    if (el(alvoId)) el(alvoId).innerHTML = gerarHTMLToners(info);
-}
+    if (el(alvoId)) el(alvoId).innerHTML = gerarHTMLToners(info );
     if (info) {
       success += 1;
-      pushTonerDiagnosticLog(item.ip, summarizeTonerInfo(info));
-}
-      maybeNotifyCriticalSupply(item.ip, info);
-}
+      pushTonerDiagnosticLog(item.ip, summarizeTonerInfo(info) );
+      maybeNotifyCriticalSupply(item.ip, info );
     } else {
-      pushTonerDiagnosticLog(item.ip, "sem resposta");
-}
+      pushTonerDiagnosticLog(item.ip, "sem resposta" );
     }
   }
 
@@ -2873,13 +2356,10 @@ async function testarSistemaToner() {
     successCount: success,
     totalCount: impressorasData.length || 0,
     source: resolveDiagSource()
-  });
-}
+  } );
 
-  renderDashboardCards();
-}
-  renderImpressoras();
-}
+  renderDashboardCards( );
+  renderImpressoras( );
 }
 
 window.testarSistemaToner = testarSistemaToner;
@@ -2894,22 +2374,16 @@ function atualizarEstadoLigacaoAppBraga() {
   document.querySelectorAll(".status-pill").forEach(node => {
     node.textContent = online ? "Sistema Online" : "Sistema Offline";
     if(node){
-node.classList.toggle("offline", !online);
-}
-  });
-}
+node.classList.toggle("offline", !online );
+  } );
   document.querySelectorAll(".version-pill").forEach(node => {
     node.textContent = APP_BRAGA_VERSION;
-  });
-}
+  } );
 }
 
-window.addEventListener("online", atualizarEstadoLigacaoAppBraga);
-}
-window.addEventListener("offline", atualizarEstadoLigacaoAppBraga);
-}
-document.addEventListener("DOMContentLoaded", atualizarEstadoLigacaoAppBraga);
-}
+window.addEventListener("online", atualizarEstadoLigacaoAppBraga );
+window.addEventListener("offline", atualizarEstadoLigacaoAppBraga );
+document.addEventListener("DOMContentLoaded", atualizarEstadoLigacaoAppBraga );
 
 /* =========================
    ADD TONER - ESTÁVEL
@@ -2927,8 +2401,7 @@ let scannerInstanceStable = null;
 let scannerAtivoStable = false;
 
 function mostrarOCRStatusStable(texto) {
-  const box = el("ocrStatus");
-}
+  const box = el("ocrStatus" );
   if (!box) return;
   box.style.display = "block";
   box.innerText = texto;
@@ -2941,23 +2414,17 @@ function normalizarTextoOCRStable(texto) {
     .replace(/—/g, "-")
     .replace(/_/g, "-")
     .trim()
-    .toUpperCase();
-}
+    .toUpperCase( );
 }
 
 function preencherDataAtualSeVaziaStable() {
-  const dataEl = el("data");
-}
+  const dataEl = el("data" );
   if (!dataEl) return;
   if (!dataEl.value) {
-    const hoje = new Date();
-}
-    const yyyy = hoje.getFullYear();
-}
-    const mm = String(hoje.getMonth() + 1).padStart(2, "0");
-}
-    const dd = String(hoje.getDate()).padStart(2, "0");
-}
+    const hoje = new Date( );
+    const yyyy = hoje.getFullYear( );
+    const mm = String(hoje.getMonth() + 1).padStart(2, "0" );
+    const dd = String(hoje.getDate()).padStart(2, "0" );
     dataEl.value = `${yyyy}-${mm}-${dd}`;
   }
 }
@@ -2967,74 +2434,59 @@ function montarTextoLocalizacaoStable(item) {
 }
 
 function procurarImpressoraPorUltimos3DigitosStable(final3) {
-  const alvo = String(final3 || "").trim().toUpperCase();
-}
+  const alvo = String(final3 || "").trim().toUpperCase( );
   if (alvo.length !== 3) return null;
   return impressorasData.find(item => String(item.serie || "").toUpperCase().slice(-3) === alvo) || null;
 }
 
 function abrirSerie3DigitosStable() {
-  const box = el("serial3Box");
-}
+  const box = el("serial3Box" );
   if (box) box.style.display = "block";
-  const input = el("serial3Input");
-}
+  const input = el("serial3Input" );
   if (input) {
     input.value = "";
-    setTimeout(() => input.focus(), 120);
-}
+    setTimeout(() => input.focus(), 120 );
   }
 }
 
 function fecharSerie3DigitosStable() {
-  const box = el("serial3Box");
-}
+  const box = el("serial3Box" );
   if (box) box.style.display = "none";
-  const input = el("serial3Input");
-}
+  const input = el("serial3Input" );
   if (input) input.value = "";
 }
 
 function aplicarDadosTonerStable(toner) {
   if (el("equipamento")) el("equipamento").value = toner.equipamento || "";
   if (el("cor")) el("cor").value = toner.cor || "";
-  preencherDataAtualSeVaziaStable();
-}
+  preencherDataAtualSeVaziaStable( );
 }
 
 function extrairDadosEtiquetaOCRStable(texto) {
-  const t = normalizarTextoOCRStable(texto);
-}
+  const t = normalizarTextoOCRStable(texto );
 
   let tonerCode = "";
-  const tkMatch = t.match(/TK[\s-]?(\d{4}[A-Z]?)/);
-}
+  const tkMatch = t.match(/TK[\s-]?(\d{4}[A-Z]?)/ );
   if (tkMatch) tonerCode = `TK-${tkMatch[1]}`;
 
   let dataFolha = "";
-  const dataISO = t.match(/\d{4}-\d{2}-\d{2}/);
-}
-  const dataPTSlash = t.match(/\d{2}\/\d{2}\/\d{4}/);
-}
-  const dataPTHyphen = t.match(/\d{2}-\d{2}-\d{4}/);
-}
+  const dataISO = t.match(/\d{4}-\d{2}-\d{2}/ );
+  const dataPTSlash = t.match(/\d{2}\/\d{2}\/\d{4}/ );
+  const dataPTHyphen = t.match(/\d{2}-\d{2}-\d{4}/ );
 
   if (dataISO) {
     dataFolha = dataISO[0];
   } else if (dataPTSlash) {
-    const [dd, mm, yyyy] = dataPTSlash[0].split("/");
-}
+    const [dd, mm, yyyy] = dataPTSlash[0].split("/" );
     dataFolha = `${yyyy}-${mm}-${dd}`;
   } else if (dataPTHyphen) {
-    const [dd, mm, yyyy] = dataPTHyphen[0].split("-");
-}
+    const [dd, mm, yyyy] = dataPTHyphen[0].split("-" );
     dataFolha = `${yyyy}-${mm}-${dd}`;
   }
 
   let serieEncontrada = "";
   for (const item of impressorasData) {
-    const s = String(item.serie || "").toUpperCase();
-}
+    const s = String(item.serie || "").toUpperCase( );
     if (s && t.includes(s)) {
       serieEncontrada = item.serie;
       break;
@@ -3062,8 +2514,7 @@ function extrairDadosEtiquetaOCRStable(texto) {
     else cor = "Preto";
   }
 
-  const lote = extractLoteFromText(t);
-}
+  const lote = extractLoteFromText(t );
 
   return {
     lote,
@@ -3088,109 +2539,83 @@ function aplicarDadosOCRNoFormularioStable(dados) {
     el("lote").value = dados.lote || "";
   }
 
-  preencherDataAtualSeVaziaStable();
-}
+  preencherDataAtualSeVaziaStable( );
 
   if (dados.serie && el("localizacao")) {
-    const printer = impressorasData.find(p => p.serie === dados.serie);
-}
+    const printer = impressorasData.find(p => p.serie === dados.serie );
     if (printer) {
-      el("localizacao").value = montarTextoLocalizacaoStable(printer);
-}
+      el("localizacao").value = montarTextoLocalizacaoStable(printer );
     }
   } else if (dados.equipamento || dados.cor) {
-    abrirSerie3DigitosStable();
-}
+    abrirSerie3DigitosStable( );
   }
 
-  return !!(dados.tonerCode || dados.equipamento || dados.cor || dados.dataFolha || dados.serie);
-}
+  return !!(dados.tonerCode || dados.equipamento || dados.cor || dados.dataFolha || dados.serie );
 }
 
 function processarTextoLidoStable(textoLido) {
-  const bruto = String(textoLido || "");
-}
-  const normal = normalizarTextoOCRStable(bruto);
-}
+  const bruto = String(textoLido || "" );
+  const normal = normalizarTextoOCRStable(bruto );
 
-  const tkMatch = normal.match(/TK[\s-]?(\d{4}[A-Z]?)/);
-}
+  const tkMatch = normal.match(/TK[\s-]?(\d{4}[A-Z]?)/ );
   if (tkMatch) {
     const tk = `TK-${tkMatch[1]}`;
     const toner = tonerMapStable[tk] || null;
     if (toner) {
-      aplicarDadosTonerStable(toner);
-}
-      mostrarMensagem(`Toner identificado: ${tk}`);
-}
-      abrirSerie3DigitosStable();
-}
+      aplicarDadosTonerStable(toner );
+      mostrarMensagem(`Toner identificado: ${tk}` );
+      abrirSerie3DigitosStable( );
       return true;
     }
   }
 
-  mostrarMensagem("Código não reconhecido para preenchimento automático.", "erro");
-}
+  mostrarMensagem("Código não reconhecido para preenchimento automático.", "erro" );
   return false;
 }
 
 async function startScannerStable() {
-  const reader = el("reader");
-}
+  const reader = el("reader" );
 
   if (!reader) {
-    mostrarMensagem("Zona do scanner não encontrada.", "erro");
-}
+    mostrarMensagem("Zona do scanner não encontrada.", "erro" );
     return;
   }
 
   if (typeof Html5Qrcode === "undefined") {
-    mostrarMensagem("Biblioteca da câmara não carregada.", "erro");
-}
+    mostrarMensagem("Biblioteca da câmara não carregada.", "erro" );
     return;
   }
 
   if (scannerAtivoStable) {
-    mostrarMensagem("A câmara já está aberta.", "erro");
-}
+    mostrarMensagem("A câmara já está aberta.", "erro" );
     return;
   }
 
   reader.innerHTML = "";
-  scannerInstanceStable = new Html5Qrcode("reader");
-}
+  scannerInstanceStable = new Html5Qrcode("reader" );
 
   try {
     await scannerInstanceStable.start(
       { facingMode: "environment" },
       { fps: 10, qrbox: { width: 280, height: 180 } },
       (decodedText) => {
-        enhanceScannerStatus("Código lido. A processar automaticamente...");
-}
-        processarTextoLidoStable(decodedText);
-}
-        stopScannerStable();
-}
+        enhanceScannerStatus("Código lido. A processar automaticamente..." );
+        processarTextoLidoStable(decodedText );
+        stopScannerStable( );
       },
       () => {}
-    );
-}
+     );
     scannerAtivoStable = true;
-    enhanceScannerStatus("Câmara iniciada. À espera de leitura inteligente.");
-}
-    mostrarMensagem("Câmara iniciada.");
-}
+    enhanceScannerStatus("Câmara iniciada. À espera de leitura inteligente." );
+    mostrarMensagem("Câmara iniciada." );
   } catch (e) {
-    console.error("Erro ao iniciar scanner:", e);
-}
-    mostrarMensagem("Não foi possível abrir a câmara.", "erro");
-}
+    console.error("Erro ao iniciar scanner:", e );
+    mostrarMensagem("Não foi possível abrir a câmara.", "erro" );
   }
 }
 
 async function stopScannerStable() {
-  const reader = el("reader");
-}
+  const reader = el("reader" );
   if (!scannerInstanceStable || !scannerAtivoStable) {
     if (reader) reader.innerHTML = "";
     scannerAtivoStable = false;
@@ -3198,13 +2623,10 @@ async function stopScannerStable() {
   }
 
   try {
-    await scannerInstanceStable.stop();
-}
-    await scannerInstanceStable.clear();
-}
+    await scannerInstanceStable.stop( );
+    await scannerInstanceStable.clear( );
   } catch (e) {
-    console.error("Erro ao fechar scanner:", e);
-}
+    console.error("Erro ao fechar scanner:", e );
   } finally {
     scannerInstanceStable = null;
     scannerAtivoStable = false;
@@ -3213,16 +2635,13 @@ async function stopScannerStable() {
 }
 
 function abrirOCRStable() {
-  const input = el("ocrInput");
-}
+  const input = el("ocrInput" );
   if (!input) {
-    mostrarMensagem("Input OCR não encontrado.", "erro");
-}
+    mostrarMensagem("Input OCR não encontrado.", "erro" );
     return;
   }
   input.value = "";
-  input.click();
-}
+  input.click( );
 }
 
 async function processarOCRInputStable(event) {
@@ -3230,24 +2649,18 @@ async function processarOCRInputStable(event) {
   if (!file) return;
 
   if (typeof Tesseract === "undefined") {
-    mostrarMensagem("Biblioteca OCR não carregada.", "erro");
-}
+    mostrarMensagem("Biblioteca OCR não carregada.", "erro" );
     return;
   }
 
   try {
-    mostrarOCRStatusStable("A ler a folha... pode demorar alguns segundos.");
-}
-    mostrarMensagem("A ler a folha...");
-}
+    mostrarOCRStatusStable("A ler a folha... pode demorar alguns segundos." );
+    mostrarMensagem("A ler a folha..." );
 
-    const result = await Tesseract.recognize(file, "eng", { logger: () => {} });
-}
+    const result = await Tesseract.recognize(file, "eng", { logger: () => {} } );
     const texto = result && result.data ? result.data.text : "";
-    const dados = extrairDadosEtiquetaOCRStable(texto);
-}
-    const ok = aplicarDadosOCRNoFormularioStable(dados);
-}
+    const dados = extrairDadosEtiquetaOCRStable(texto );
+    const ok = aplicarDadosOCRNoFormularioStable(dados );
 
     const resumo = [
       dados.tonerCode ? `Toner: ${dados.tonerCode}` : "",
@@ -3257,54 +2670,40 @@ async function processarOCRInputStable(event) {
       dados.dataFolha ? `Data folha: ${dados.dataFolha}` : "",
       el("data") && el("data").value ? `Data scan: ${el("data").value}` : "",
       dados.serie ? `Série: ${dados.serie}` : ""
-    ].filter(Boolean).join(" | ");
-}
+    ].filter(Boolean).join(" | " );
 
-    mostrarOCRStatusStable(resumo || "A folha foi lida, mas não encontrei dados suficientes.");
-}
-    mostrarMensagem(ok ? "Folha lida com sucesso." : "Não encontrei dados suficientes na folha.", ok ? "sucesso" : "erro");
-}
+    mostrarOCRStatusStable(resumo || "A folha foi lida, mas não encontrei dados suficientes." );
+    mostrarMensagem(ok ? "Folha lida com sucesso." : "Não encontrei dados suficientes na folha.", ok ? "sucesso" : "erro" );
     if (ok && dados.serie && dados.equipamento) {
-      await gerarWordEtiquetaFromForm(true);
-}
+      await gerarWordEtiquetaFromForm(true );
     }
   } catch (e) {
-    console.error("Erro OCR:", e);
-}
-    mostrarOCRStatusStable("Erro ao ler a folha.");
-}
-    mostrarMensagem("Erro ao ler a folha.", "erro");
-}
+    console.error("Erro OCR:", e );
+    mostrarOCRStatusStable("Erro ao ler a folha." );
+    mostrarMensagem("Erro ao ler a folha.", "erro" );
   }
 }
 
 function confirmarSerie3DigitosStable() {
-  const valor = ((el("serial3Input") && el("serial3Input").value) || "").trim().toUpperCase();
-}
+  const valor = ((el("serial3Input") && el("serial3Input").value) || "").trim().toUpperCase( );
 
   if (valor.length !== 3) {
-    mostrarMensagem("Introduza exatamente 3 dígitos.", "erro");
-}
+    mostrarMensagem("Introduza exatamente 3 dígitos.", "erro" );
     return;
   }
 
-  const printer = procurarImpressoraPorUltimos3DigitosStable(valor);
-}
+  const printer = procurarImpressoraPorUltimos3DigitosStable(valor );
   if (!printer) {
-    mostrarMensagem("Nenhuma impressora encontrada com esses 3 dígitos.", "erro");
-}
+    mostrarMensagem("Nenhuma impressora encontrada com esses 3 dígitos.", "erro" );
     return;
   }
 
   if (el("localizacao")) {
-    el("localizacao").value = montarTextoLocalizacaoStable(printer);
-}
+    el("localizacao").value = montarTextoLocalizacaoStable(printer );
   }
 
-  fecharSerie3DigitosStable();
-}
-  mostrarMensagem("Localização selecionada com sucesso.");
-}
+  fecharSerie3DigitosStable( );
+  mostrarMensagem("Localização selecionada com sucesso." );
 }
 
 window.startScanner = startScannerStable;
@@ -3319,13 +2718,11 @@ window.fecharSerie3Digitos = fecharSerie3DigitosStable;
    ETIQUETA WORD AUTOMÁTICA
 ========================= */
 function formatDatePTAppBraga(valor) {
-  const raw = String(valor || "").trim();
-}
+  const raw = String(valor || "").trim( );
   if (!raw) return "";
 
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    const [yyyy, mm, dd] = raw.split("-");
-}
+    const [yyyy, mm, dd] = raw.split("-" );
     return `${dd}/${mm}/${yyyy}`;
   }
 
@@ -3345,19 +2742,16 @@ function extrairDadosEtiquetaWord() {
   let localCurto = "";
   let armazem = "";
 
-  const parts = loc.split(" - ").map(v => v.trim()).filter(Boolean);
-}
+  const parts = loc.split(" - ").map(v => v.trim()).filter(Boolean );
   if (parts.length >= 3) {
     serie = parts[0] || "";
     armazem = parts[1] || "";
-    localCurto = parts.slice(2).join(" - ");
-}
+    localCurto = parts.slice(2).join(" - " );
   } else {
     localCurto = loc || "Sem Localização";
   }
 
-  const dataEtiqueta = formatDatePTAppBraga(dataFolha || dataScan);
-}
+  const dataEtiqueta = formatDatePTAppBraga(dataFolha || dataScan );
 
   return {
     serie: serie || "SEM SÉRIE",
@@ -3370,17 +2764,14 @@ function extrairDadosEtiquetaWord() {
 async function gerarWordEtiquetaFromForm(auto = false) {
   try {
     if (typeof docx === "undefined") {
-      mostrarMensagem("Biblioteca Word não carregada.", "erro");
-}
+      mostrarMensagem("Biblioteca Word não carregada.", "erro" );
       return;
     }
 
-    const dados = extrairDadosEtiquetaWord();
-}
+    const dados = extrairDadosEtiquetaWord( );
 
     if (!dados.localCurto || !dados.serie) {
-      mostrarMensagem("Faltam dados para gerar a etiqueta Word.", "erro");
-}
+      mostrarMensagem("Faltam dados para gerar a etiqueta Word.", "erro" );
       return;
     }
 
@@ -3437,42 +2828,29 @@ async function gerarWordEtiquetaFromForm(auto = false) {
           ]
         }
       ]
-    });
-}
+    } );
 
-    const blob = await Packer.toBlob(doc);
-}
+    const blob = await Packer.toBlob(doc );
     const fileName = `Etiqueta_${dados.localCurto.replace(/\s+/g, "_")}_${dados.serie}.docx`;
 
-    const a = document.createElement("a");
-}
-    a.href = URL.createObjectURL(blob);
-}
+    const a = document.createElement("a" );
+    a.href = URL.createObjectURL(blob );
     a.download = fileName;
-    document.body.appendChild(a);
-}
-    a.click();
-}
+    document.body.appendChild(a );
+    a.click( );
     setTimeout(() => {
-      URL.revokeObjectURL(a.href);
-}
-      a.remove();
-}
-    }, 1200);
-}
+      URL.revokeObjectURL(a.href );
+      a.remove( );
+    }, 1200 );
 
-    await guardarEtiquetaPartilhada({ origem: auto ? "scan" : "manual" });
-}
+    await guardarEtiquetaPartilhada({ origem: auto ? "scan" : "manual" } );
 
     if (!auto) {
-      mostrarMensagem("Etiqueta Word gerada com sucesso.");
-}
+      mostrarMensagem("Etiqueta Word gerada com sucesso." );
     }
   } catch (error) {
-    console.error("Erro ao gerar Word:", error);
-}
-    mostrarMensagem("Erro ao gerar a etiqueta Word.", "erro");
-}
+    console.error("Erro ao gerar Word:", error );
+    mostrarMensagem("Erro ao gerar a etiqueta Word.", "erro" );
   }
 }
 
@@ -3485,17 +2863,14 @@ window.gerarWordEtiquetaFromForm = gerarWordEtiquetaFromForm;
 ========================= */
 async function migrarPortasParaFirebase() {
   if (!window.db) {
-    mostrarMensagem("Firebase não está disponível.", "erro");
-}
+    mostrarMensagem("Firebase não está disponível.", "erro" );
     return;
   }
 
   try {
-    const snap = await db.collection("portas").get();
-}
+    const snap = await db.collection("portas").get( );
     if (!snap.empty) {
-      mostrarMensagem("A coleção portas já tem dados. Migração não necessária.");
-}
+      mostrarMensagem("A coleção portas já tem dados. Migração não necessária." );
       return;
     }
 
@@ -3508,59 +2883,46 @@ async function migrarPortasParaFirebase() {
         ip: p.ip || "",
         created: new Date()
       };
-      await db.collection("portas").add(payload);
-}
+      await db.collection("portas").add(payload );
     }
 
-    mostrarMensagem("Migração das portas concluída com sucesso.");
-}
+    mostrarMensagem("Migração das portas concluída com sucesso." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao migrar portas para Firebase.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao migrar portas para Firebase.", "erro" );
   }
 }
 
 async function carregarPortasComFallback() {
   if (!window.db) {
-    carregarPortasLocal();
-}
-    renderPortas(window.portasData);
-}
+    carregarPortasLocal( );
+    renderPortas(window.portasData );
     return;
   }
 
   try {
     db.collection("portas").onSnapshot(snap => {
       if (snap.empty) {
-        carregarPortasLocal();
-}
-        renderPortas(window.portasData);
-}
-        const countEl = document.getElementById("countPortas");
-}
-        if (countEl) countEl.innerText = String(window.portasData.length);
-}
+        carregarPortasLocal( );
+        renderPortas(window.portasData );
+        const countEl = document.getElementById("countPortas" );
+        if (countEl) countEl.innerText = String(window.portasData.length );
         return;
       }
 
-      window.portasData = snap.docs.map(doc => ({ idDoc: doc.id, ...({ firebaseId: doc.id, ...doc.data() }) }));
-}
+      window.portasData = snap.docs.map(doc => ({ idDoc: doc.id, ...({ firebaseId: doc.id, ...doc.data() }) }) );
 
       window.portasData.sort((a,b)=>{
 
         const aTxt =
           String(a.porta || a.nome || "")
             .toLowerCase()
-            .trim();
-}
+            .trim( );
 
         const bTxt =
           String(b.porta || b.nome || "")
             .toLowerCase()
-            .trim();
-}
+            .trim( );
 
         return aTxt.localeCompare(
           bTxt,
@@ -3569,80 +2931,58 @@ async function carregarPortasComFallback() {
             numeric:true,
             sensitivity:'base'
           }
-        );
-}
+         );
 
-      });
-}
+      } );
 
-      prepararRefsPortas();
-}
-      guardarPortasLocal();
-}
-      renderPortas(window.portasData);
-}
+      prepararRefsPortas( );
+      guardarPortasLocal( );
+      renderPortas(window.portasData );
     }, error => {
-      console.error(error);
-}
-      renderPortas(window.portasData);
-}
-    });
-}
+      console.error(error );
+      renderPortas(window.portasData );
+    } );
   } catch (e) {
-    console.error(e);
-}
-    renderPortas(window.portasData);
-}
+    console.error(e );
+    renderPortas(window.portasData );
   }
 }
 
 window.migrarPortasParaFirebase = migrarPortasParaFirebase;
 
 window.addEventListener("DOMContentLoaded", () => {
-  const host = document.getElementById("listaPortas");
-}
+  const host = document.getElementById("listaPortas" );
   if (host) {
     setTimeout(() => {
-      try { carregarPortasComFallback();
-} } catch (e) { console.error(e);
-} }
-    }, 400);
-}
+      try { carregarPortasComFallback( ); } catch (e) { console.error(e ); }
+    }, 400 );
   }
-});
-}
+} );
 
 
 /* ===== AUTO UPDATE PRO FINAL ===== */
 const APP_REMOTE_BASE = "https://picafern-commits.github.io/App-Tablet/";
-const APP_VERSION_URL = APP_REMOTE_BASE + "version.json?t=" + Date.now();
-}
+const APP_VERSION_URL = APP_REMOTE_BASE + "version.json?t=" + Date.now( );
 
 async function limparServiceWorkersAntigosAppBraga() {
   try {
     if (!("serviceWorker" in navigator)) return;
-    const regs = await navigator.serviceWorker.getRegistrations();
-}
+    const regs = await navigator.serviceWorker.getRegistrations( );
     for (const reg of regs) {
-      await reg.unregister();
-}
+      await reg.unregister( );
     }
     if ("caches" in window) {
-      const keys = await caches.keys();
-}
-      await Promise.all(keys.map(k => caches.delete(k)));
-}
+      const keys = await caches.keys( );
+      await Promise.all(keys.map(k => caches.delete(k)) );
     }
   } catch (e) {
-    console.error("Erro a limpar service workers/cache", e);
-}
+    console.error("Erro a limpar service workers/cache", e );
   }
 }
 
 async function verificarAtualizacao() {
   try {
-    await limparServiceWorkersAntigosAppBraga();
-}
+    await limparServiceWorkersAntigosAppBraga( );
 
     const res = await fetch(APP_VERSION_URL, {
       cache: "no-store",
@@ -3650,59 +2990,45 @@ async function verificarAtualizacao() {
         "Cache-Control": "no-cache, no-store, must-revalidate",
         "Pragma": "no-cache"
       }
-    });
-}
+    } );
 
-    const data = await res.json();
-}
-    atualizarVersaoUI((data && data.version) ? data.version : APP_VERSION);
-}
+    const data = await res.json( );
+    atualizarVersaoUI((data && data.version) ? data.version : APP_VERSION );
 
     if (data && data.version && data.version !== APP_VERSION) {
-      mostrarAvisoUpdateObrigatorio(data.version);
-}
+      mostrarAvisoUpdateObrigatorio(data.version );
     }
   } catch (e) {
-    console.error("Erro a verificar updates", e);
-}
-    atualizarVersaoUI(APP_VERSION);
-}
+    console.error("Erro a verificar updates", e );
+    atualizarVersaoUI(APP_VERSION );
   }
 }
 
 function atualizarVersaoUI(versionValue = APP_VERSION) {
-  const nodes = document.querySelectorAll("#appVersion, .version-pill");
-}
+  const nodes = document.querySelectorAll("#appVersion, .version-pill" );
   nodes.forEach((node) => {
     if (!node) return;
     node.innerText = "v" + versionValue + " Premium";
     node.title = "Versão atual da app";
-  });
-}
+  } );
 }
 
 function mostrarAvisoUpdateObrigatorio(novaVersao) {
-  let overlay = document.getElementById("updateOverlayAppBraga");
-}
-  let box = document.getElementById("updateBoxAppBraga");
-}
+  let overlay = document.getElementById("updateOverlayAppBraga" );
+  let box = document.getElementById("updateBoxAppBraga" );
 
   if (!overlay) {
-    overlay = document.createElement("div");
-}
+    overlay = document.createElement("div" );
     overlay.id = "updateOverlayAppBraga";
     overlay.className = "update-overlay-appbraga";
-    document.body.appendChild(overlay);
-}
+    document.body.appendChild(overlay );
   }
 
   if (!box) {
-    box = document.createElement("div");
-}
+    box = document.createElement("div" );
     box.id = "updateBoxAppBraga";
     box.className = "update-box-appbraga mandatory";
-    document.body.appendChild(box);
-}
+    document.body.appendChild(box );
   }
 
   box.innerHTML = `
@@ -3721,8 +3047,7 @@ function mostrarAvisoUpdateObrigatorio(novaVersao) {
 }
 
 function atualizarAppObrigatorio() {
-  const box = document.getElementById("updateBoxAppBraga");
-}
+  const box = document.getElementById("updateBoxAppBraga" );
   if (box) {
     box.innerHTML = `
       <div class="update-title">⏳ A atualizar...</div>
@@ -3730,25 +3055,20 @@ function atualizarAppObrigatorio() {
     `;
   }
 
-  const target = APP_REMOTE_BASE + "index.html?update=" + Date.now();
-}
+  const target = APP_REMOTE_BASE + "index.html?update=" + Date.now( );
   const currentBefore = window.location.href;
 
   setTimeout(async () => {
     try {
-      await limparServiceWorkersAntigosAppBraga();
-}
+      await limparServiceWorkersAntigosAppBraga( );
     } catch (e) {
-      console.error(e);
-}
+      console.error(e );
     }
 
     try {
-      window.location.replace(target);
-}
+      window.location.replace(target );
     } catch (e) {
-      console.error("replace falhou", e);
-}
+      console.error("replace falhou", e );
     }
 
     setTimeout(() => {
@@ -3756,42 +3076,31 @@ function atualizarAppObrigatorio() {
         try {
           window.location.href = target;
         } catch (e) {
-          console.error("href falhou", e);
-}
+          console.error("href falhou", e );
         }
       }
-    }, 1200);
-}
+    }, 1200 );
 
     setTimeout(() => {
       if (window.location.href === currentBefore) {
         try {
-          const a = document.createElement("a");
-}
+          const a = document.createElement("a" );
           a.href = target;
           a.target = "_self";
           a.rel = "noopener";
-          document.body.appendChild(a);
-}
-          a.click();
-}
-          a.remove();
-}
+          document.body.appendChild(a );
+          a.click( );
+          a.remove( );
         } catch (e) {
-          console.error("link fallback falhou", e);
-}
+          console.error("link fallback falhou", e );
         }
       }
-    }, 2200);
-}
-  }, 400);
-}
+    }, 2200 );
+  }, 400 );
 }
 
-window.addEventListener("load", verificarAtualizacao);
-}
-window.addEventListener("load", () => atualizarVersaoUI(APP_VERSION));
-}
+window.addEventListener("load", verificarAtualizacao );
+window.addEventListener("load", () => atualizarVersaoUI(APP_VERSION) );
 
 
 
@@ -3804,21 +3113,17 @@ function itemPorRef(lista, ref) {
      i.firebaseId === ref
    ) || null;
  }
- const idx = Number(ref);
-}
+ const idx = Number(ref );
  return Number.isNaN(idx)
    ? null
-   : (lista[idx] || null);
-}
+   : (lista[idx] || null );
 }
 
 function idxPorRef(lista, ref) {
   if (typeof ref === "string") {
-    return lista.findIndex(i => i.idDoc === ref || i._ref === ref);
-}
+    return lista.findIndex(i => i.idDoc === ref || i._ref === ref );
   }
-  const idx = Number(ref);
-}
+  const idx = Number(ref );
   return Number.isNaN(idx) ? -1 : idx;
 }
 
@@ -3827,21 +3132,15 @@ let portaEditRef = null;
 
 function abrirAdicionarPorta() {
   portaEditRef = "__new__";
-  [["editPorta",""],["editLocal",""],["editUser",""],["editEquipamento",""],["editIP",""]].forEach(([id,v]) => { const node = el(id);
-} if (node) node.value = v; });
-}
-  const h3 = document.querySelector('#modalEditarPorta h3');
-} if (h3) h3.textContent = 'Adicionar Porta';
-  const sub = document.querySelector('#modalEditarPorta .section-subtitle');
-} if (sub) sub.textContent = 'Criar uma nova porta de rede';
+  [["editPorta",""],["editLocal",""],["editUser",""],["editEquipamento",""],["editIP",""]].forEach(([id,v]) => { const node = el(id ); if (node) node.value = v; } );
+  const h3 = document.querySelector('#modalEditarPorta h3' ); if (h3) h3.textContent = 'Adicionar Porta';
+  const sub = document.querySelector('#modalEditarPorta .section-subtitle' ); if (sub) sub.textContent = 'Criar uma nova porta de rede';
   if (el("modalEditarPorta")) el("modalEditarPorta").style.display = "flex";
 }
 
 function editarPorta(ref) {
-  const item = itemPorRef(window.portasData, ref);
-}
-  if (!item) return mostrarMensagem("Porta não encontrada.", "erro");
-}
+  const item = itemPorRef(window.portasData, ref );
+  if (!item) return mostrarMensagem("Porta não encontrada.", "erro" );
   portaEditRef = ref;
   if (el("editPorta")) el("editPorta").value = item.porta || "";
   if (el("editLocal")) el("editLocal").value = item.local || "";
@@ -3853,16 +3152,13 @@ function editarPorta(ref) {
 
 function fecharEditarPorta() {
   portaEditRef = null;
-  const h3 = document.querySelector('#modalEditarPorta h3');
-} if (h3) h3.textContent = 'Editar Porta';
-  const sub = document.querySelector('#modalEditarPorta .section-subtitle');
-} if (sub) sub.textContent = 'Editar a porta selecionada';
+  const h3 = document.querySelector('#modalEditarPorta h3' ); if (h3) h3.textContent = 'Editar Porta';
+  const sub = document.querySelector('#modalEditarPorta .section-subtitle' ); if (sub) sub.textContent = 'Editar a porta selecionada';
   if (el("modalEditarPorta")) el("modalEditarPorta").style.display = "none";
 }
 
 async function guardarEdicaoPorta() {
-  if (portaEditRef === null || typeof portaEditRef === "undefined") return mostrarMensagem("Nenhuma porta selecionada.", "erro");
-}
+  if (portaEditRef === null || typeof portaEditRef === "undefined") return mostrarMensagem("Nenhuma porta selecionada.", "erro" );
   const isNovaPorta = portaEditRef === "__new__";
   const payload = {
     porta: el("editPorta") ? el("editPorta").value : "",
@@ -3875,38 +3171,26 @@ async function guardarEdicaoPorta() {
   try {
     if (isNovaPorta) {
       if (window.db) {
-        const docRef = await db.collection("portas").add(payload);
-}
-        window.portasData.unshift({ idDoc: docRef.id, ...payload });
-}
+        const docRef = await db.collection("portas").add(payload );
+        window.portasData.unshift({ idDoc: docRef.id, ...payload } );
       } else {
-        window.portasData.unshift({ _ref: `local-porta-${Date.now()}`, ...payload });
-}
+        window.portasData.unshift({ _ref: `local-porta-${Date.now()}`, ...payload } );
       }
     } else if (typeof portaEditRef === "string" && window.db) {
-      await db.collection("portas").doc(portaEditRef).update(payload);
-}
-      const idx = idxPorRef(window.portasData, portaEditRef);
-}
+      await db.collection("portas").doc(portaEditRef).update(payload );
+      const idx = idxPorRef(window.portasData, portaEditRef );
       if (idx >= 0) window.portasData[idx] = { ...window.portasData[idx], ...payload };
     } else {
-      const idx = idxPorRef(window.portasData, portaEditRef);
-}
+      const idx = idxPorRef(window.portasData, portaEditRef );
       if (idx >= 0) window.portasData[idx] = { ...window.portasData[idx], ...payload };
     }
-    guardarPortasLocal();
-}
-    fecharEditarPorta();
-}
-    filtrarPortasComEstado();
-}
-    mostrarMensagem(isNovaPorta ? "Porta adicionada com sucesso." : "Porta atualizada com sucesso.");
-}
+    guardarPortasLocal( );
+    fecharEditarPorta( );
+    filtrarPortasComEstado( );
+    mostrarMensagem(isNovaPorta ? "Porta adicionada com sucesso." : "Porta atualizada com sucesso." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao atualizar a porta.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao atualizar a porta.", "erro" );
   }
 }
 
@@ -3914,24 +3198,16 @@ async function apagarPorta(ref) {
   if (!confirm("Queres apagar esta porta?")) return;
   try {
     if (typeof ref === "string" && window.db) {
-      await db.collection("portas").doc(ref).delete();
-}
+      await db.collection("portas").doc(ref).delete( );
     }
-    const idx = idxPorRef(window.portasData, ref);
-}
-    if (idx >= 0) window.portasData.splice(idx, 1);
-}
-    guardarPortasLocal();
-}
-    filtrarPortasComEstado();
-}
-    mostrarMensagem("Porta apagada com sucesso.");
-}
+    const idx = idxPorRef(window.portasData, ref );
+    if (idx >= 0) window.portasData.splice(idx, 1 );
+    guardarPortasLocal( );
+    filtrarPortasComEstado( );
+    mostrarMensagem("Porta apagada com sucesso." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao apagar a porta.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao apagar a porta.", "erro" );
   }
 }
 
@@ -3941,35 +3217,25 @@ let userEditRef = null;
 function abrirAdicionarUser() {
   userEditRef = "__new__";
   const fields = ["nome","zona","user_pc_eye","pass_remote","pass_eye_peak","op_pistola","pass_pistola","nome_pc","teamviewer","user_mo365","pw_mo365","email_bragalis","pass_bragalis"];
-  fields.forEach(f => { const node = el("editUser_" + f);
-} if (node) node.value = ""; });
-}
-  const h3 = document.querySelector('#modalEditarUser h3');
-} if (h3) h3.textContent = 'Adicionar User';
-  const sub = document.querySelector('#modalEditarUser .section-subtitle');
-} if (sub) sub.textContent = 'Criar um novo utilizador';
+  fields.forEach(f => { const node = el("editUser_" + f ); if (node) node.value = ""; } );
+  const h3 = document.querySelector('#modalEditarUser h3' ); if (h3) h3.textContent = 'Adicionar User';
+  const sub = document.querySelector('#modalEditarUser .section-subtitle' ); if (sub) sub.textContent = 'Criar um novo utilizador';
   if (el("modalEditarUser")) el("modalEditarUser").style.display = "flex";
 }
 
 function editarUser(ref) {
-  const item = itemPorRef(window.usersData, ref);
-}
-  if (!item) return mostrarMensagem("User não encontrado.", "erro");
-}
+  const item = itemPorRef(window.usersData, ref );
+  if (!item) return mostrarMensagem("User não encontrado.", "erro" );
   userEditRef = ref;
   const fields = ["nome","zona","user_pc_eye","pass_remote","pass_eye_peak","op_pistola","pass_pistola","nome_pc","teamviewer","user_mo365","pw_mo365","email_bragalis","pass_bragalis"];
-  fields.forEach(f => { const node = el("editUser_" + f);
-} if (node) node.value = item[f] || ""; });
-}
+  fields.forEach(f => { const node = el("editUser_" + f ); if (node) node.value = item[f] || ""; } );
   if (el("modalEditarUser")) el("modalEditarUser").style.display = "flex";
 }
 
 function fecharEditarUser() {
   userEditRef = null;
-  const h3 = document.querySelector('#modalEditarUser h3');
-} if (h3) h3.textContent = 'Editar User';
-  const sub = document.querySelector('#modalEditarUser .section-subtitle');
-} if (sub) sub.textContent = 'Editar o utilizador selecionado';
+  const h3 = document.querySelector('#modalEditarUser h3' ); if (h3) h3.textContent = 'Editar User';
+  const sub = document.querySelector('#modalEditarUser .section-subtitle' ); if (sub) sub.textContent = 'Editar o utilizador selecionado';
   if (el("modalEditarUser")) el("modalEditarUser").style.display = "none";
 }
 
@@ -3977,8 +3243,7 @@ function fecharEditarUser() {
 async function guardarEdicaoUser() {
 
   if (userEditRef === null || typeof userEditRef === "undefined") {
-    return mostrarMensagem("Nenhum user selecionado.", "erro");
-}
+    return mostrarMensagem("Nenhum user selecionado.", "erro" );
   }
 
   const isNovoUser = userEditRef === "__new__";
@@ -4006,42 +3271,36 @@ async function guardarEdicaoUser() {
         ? el("editUser_" + f).value
         : "";
 
-  });
-}
+  } );
 
   try {
 
     const userAtual =
-      itemPorRef(window.usersData, userEditRef);
-}
+      itemPorRef(window.usersData, userEditRef );
 
     const temFirebaseId =
       userAtual &&
       userAtual.idDoc &&
-      !String(userAtual.idDoc).startsWith("local-user-");
-}
+      !String(userAtual.idDoc).startsWith("local-user-" );
 
     if (isNovoUser) {
 
       if (window.db) {
 
         const docRef =
-          await db.collection("users").add(payload);
-}
+          await db.collection("users").add(payload );
 
         window.usersData.unshift({
           idDoc: docRef.id,
           ...payload
-        });
-}
+        } );
 
       } else {
 
         window.usersData.unshift({
           _ref: `local-user-${Date.now()}`,
           ...payload
-        });
-}
+        } );
 
       }
 
@@ -4050,12 +3309,10 @@ async function guardarEdicaoUser() {
       await db
         .collection("users")
         .doc(userAtual.idDoc)
-        .update(payload);
-}
+        .update(payload );
 
       const idx =
-        idxPorRef(window.usersData, userEditRef);
-}
+        idxPorRef(window.usersData, userEditRef );
 
       if (idx >= 0) {
 
@@ -4071,12 +3328,10 @@ async function guardarEdicaoUser() {
       if (window.db) {
 
         const docRef =
-          await db.collection("users").add(payload);
-}
+          await db.collection("users").add(payload );
 
         const idx =
-          idxPorRef(window.usersData, userEditRef);
-}
+          idxPorRef(window.usersData, userEditRef );
 
         if (idx >= 0) {
 
@@ -4090,8 +3345,7 @@ async function guardarEdicaoUser() {
       } else {
 
         const idx =
-          idxPorRef(window.usersData, userEditRef);
-}
+          idxPorRef(window.usersData, userEditRef );
 
         if (idx >= 0) {
 
@@ -4106,32 +3360,26 @@ async function guardarEdicaoUser() {
 
     }
 
-    guardarUsersLocal();
-}
+    guardarUsersLocal( );
 
-    fecharEditarUser();
-}
+    fecharEditarUser( );
 
-    filtrarUsersComFiltros();
-}
+    filtrarUsersComFiltros( );
 
     mostrarMensagem(
       isNovoUser
         ? "User adicionado com sucesso."
         : "User atualizado com sucesso."
-    );
-}
+     );
 
   } catch (e) {
 
-    console.error(e);
-}
+    console.error(e );
 
     mostrarMensagem(
       "Erro ao atualizar o user.",
       "erro"
-    );
-}
+     );
 
   }
 
@@ -4142,24 +3390,16 @@ async function apagarUser(ref) {
   if (!confirm("Queres apagar este user?")) return;
   try {
     if (typeof ref === "string" && window.db) {
-      await db.collection("users").doc(ref).delete();
-}
+      await db.collection("users").doc(ref).delete( );
     }
-    const idx = idxPorRef(window.usersData, ref);
-}
-    if (idx >= 0) window.usersData.splice(idx, 1);
-}
-    guardarUsersLocal();
-}
-    filtrarUsersComFiltros();
-}
-    mostrarMensagem("User apagado com sucesso.");
-}
+    const idx = idxPorRef(window.usersData, ref );
+    if (idx >= 0) window.usersData.splice(idx, 1 );
+    guardarUsersLocal( );
+    filtrarUsersComFiltros( );
+    mostrarMensagem("User apagado com sucesso." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao apagar o user.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao apagar o user.", "erro" );
   }
 }
 
@@ -4189,8 +3429,7 @@ function escapeHtmlAppBraga(valor) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
+    .replace(/'/g, "&#39;" );
 }
 
 function imprimirUser(user) {
@@ -4204,8 +3443,7 @@ function imprimirUser(user) {
     return mostrarMensagem(
       "User não encontrado.",
       "erro"
-    );
-}
+     );
 
   }
 
@@ -4241,8 +3479,7 @@ function imprimirUser(user) {
 
       return (
         (user[campo] || "").trim() !== ""
-      );
-}
+       );
 
     })
 
@@ -4268,8 +3505,7 @@ function imprimirUser(user) {
 
     `)
 
-    .join("");
-}
+    .join("" );
 
   // =========================
   // TÍTULO
@@ -4466,8 +3702,7 @@ body {
   const iframe =
     document.createElement(
       "iframe"
-    );
-}
+     );
 
   iframe.style.position =
     "fixed";
@@ -4484,22 +3719,19 @@ body {
 
   document.body.appendChild(
     iframe
-  );
-}
+   );
 
   const frameWindow =
     iframe.contentWindow;
 
   if (!frameWindow) {
 
-    iframe.remove();
-}
+    iframe.remove( );
 
     return mostrarMensagem(
       "Erro ao abrir impressão",
       "erro"
-    );
-}
+     );
 
   }
 
@@ -4509,42 +3741,33 @@ body {
 
       try {
 
-        frameWindow.focus();
-}
+        frameWindow.focus( );
 
-        frameWindow.print();
-}
+        frameWindow.print( );
 
       } catch (err) {
 
-        console.error(err);
-}
+        console.error(err );
 
       }
 
       setTimeout(() => {
 
-        iframe.remove();
-}
+        iframe.remove( );
 
-      }, 1500);
-}
+      }, 1500 );
 
-    }, 300);
-}
+    }, 300 );
 
   };
 
-  frameWindow.document.open();
-}
+  frameWindow.document.open( );
 
   frameWindow.document.write(
     htmlImpressao
-  );
-}
+   );
 
-  frameWindow.document.close();
-}
+  frameWindow.document.close( );
 
 }
 
@@ -4553,85 +3776,61 @@ let pistolaEditRef = null;
 
 function abrirAdicionarPistola() {
   pistolaEditRef = "__new__";
-  ["num","nome","password","cn","sn","mac","operador","armazem","prontas"].forEach(f => { const node = el("editP_" + f);
-} if (node) node.value = ""; });
-}
-  const h3 = document.querySelector('#modalEditarPistola h3');
-} if (h3) h3.textContent = 'Adicionar Pistola CK65';
-  const sub = document.querySelector('#modalEditarPistola .section-subtitle');
-} if (sub) sub.textContent = 'Criar uma nova pistola';
+  ["num","nome","password","cn","sn","mac","operador","armazem","prontas"].forEach(f => { const node = el("editP_" + f ); if (node) node.value = ""; } );
+  const h3 = document.querySelector('#modalEditarPistola h3' ); if (h3) h3.textContent = 'Adicionar Pistola CK65';
+  const sub = document.querySelector('#modalEditarPistola .section-subtitle' ); if (sub) sub.textContent = 'Criar uma nova pistola';
   if (el("modalEditarPistola")) el("modalEditarPistola").style.display = "flex";
 }
 
 function editarPistola(ref) {
-  const item = itemPorRef(window.pistolasData, ref);
-}
-  if (!item) return mostrarMensagem("Pistola não encontrada.", "erro");
-}
+  const item = itemPorRef(window.pistolasData, ref );
+  if (!item) return mostrarMensagem("Pistola não encontrada.", "erro" );
   pistolaEditRef = ref;
   ["num","nome","password","cn","sn","mac","operador","armazem","prontas"].forEach(f => {
-    const node = el("editP_" + f);
-}
+    const node = el("editP_" + f );
     if (node) node.value = item[f] || "";
-  });
-}
+  } );
   if (el("modalEditarPistola")) el("modalEditarPistola").style.display = "flex";
 }
 
 function fecharEditarPistola() {
   pistolaEditRef = null;
-  const h3 = document.querySelector('#modalEditarPistola h3');
-} if (h3) h3.textContent = 'Editar Pistola CK65';
-  const sub = document.querySelector('#modalEditarPistola .section-subtitle');
-} if (sub) sub.textContent = 'Editar a pistola selecionada';
+  const h3 = document.querySelector('#modalEditarPistola h3' ); if (h3) h3.textContent = 'Editar Pistola CK65';
+  const sub = document.querySelector('#modalEditarPistola .section-subtitle' ); if (sub) sub.textContent = 'Editar a pistola selecionada';
   if (el("modalEditarPistola")) el("modalEditarPistola").style.display = "none";
 }
 
 async function guardarEdicaoPistola() {
-  if (pistolaEditRef === null || typeof pistolaEditRef === "undefined") return mostrarMensagem("Nenhuma pistola selecionada.", "erro");
-}
+  if (pistolaEditRef === null || typeof pistolaEditRef === "undefined") return mostrarMensagem("Nenhuma pistola selecionada.", "erro" );
   const isNovaPistola = pistolaEditRef === "__new__";
   const payload = {};
   ["num","nome","password","cn","sn","mac","operador","armazem","prontas"].forEach(f => {
     payload[f] = el("editP_" + f) ? el("editP_" + f).value : "";
-  });
-}
+  } );
 
   try {
     if (isNovaPistola) {
       if (window.db) {
-        const docRef = await db.collection("pistolas").add(payload);
-}
-        window.pistolasData.unshift({ idDoc: docRef.id, ...payload });
-}
+        const docRef = await db.collection("pistolas").add(payload );
+        window.pistolasData.unshift({ idDoc: docRef.id, ...payload } );
       } else {
-        window.pistolasData.unshift({ _ref: `local-pistola-${Date.now()}`, ...payload });
-}
+        window.pistolasData.unshift({ _ref: `local-pistola-${Date.now()}`, ...payload } );
       }
     } else if (typeof pistolaEditRef === "string" && window.db) {
-      await db.collection("pistolas").doc(pistolaEditRef).update(payload);
-}
-      const idx = idxPorRef(window.pistolasData, pistolaEditRef);
-}
+      await db.collection("pistolas").doc(pistolaEditRef).update(payload );
+      const idx = idxPorRef(window.pistolasData, pistolaEditRef );
       if (idx >= 0) window.pistolasData[idx] = { ...window.pistolasData[idx], ...payload };
     } else {
-      const idx = idxPorRef(window.pistolasData, pistolaEditRef);
-}
+      const idx = idxPorRef(window.pistolasData, pistolaEditRef );
       if (idx >= 0) window.pistolasData[idx] = { ...window.pistolasData[idx], ...payload };
     }
-    guardarPistolasLocal();
-}
-    fecharEditarPistola();
-}
-    filtrarPistolasComFiltros();
-}
-    mostrarMensagem(isNovaPistola ? "Pistola adicionada com sucesso." : "Pistola atualizada com sucesso.");
-}
+    guardarPistolasLocal( );
+    fecharEditarPistola( );
+    filtrarPistolasComFiltros( );
+    mostrarMensagem(isNovaPistola ? "Pistola adicionada com sucesso." : "Pistola atualizada com sucesso." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao atualizar a pistola.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao atualizar a pistola.", "erro" );
   }
 }
 
@@ -4639,32 +3838,22 @@ async function apagarPistola(ref) {
   if (!confirm("Queres apagar esta pistola?")) return;
   try {
     if (typeof ref === "string" && window.db) {
-      await db.collection("pistolas").doc(ref).delete();
-}
+      await db.collection("pistolas").doc(ref).delete( );
     }
-    const idx = idxPorRef(window.pistolasData, ref);
-}
-    if (idx >= 0) window.pistolasData.splice(idx, 1);
-}
-    guardarPistolasLocal();
-}
-    filtrarPistolasComFiltros();
-}
-    mostrarMensagem("Pistola apagada com sucesso.");
-}
+    const idx = idxPorRef(window.pistolasData, ref );
+    if (idx >= 0) window.pistolasData.splice(idx, 1 );
+    guardarPistolasLocal( );
+    filtrarPistolasComFiltros( );
+    mostrarMensagem("Pistola apagada com sucesso." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao apagar a pistola.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao apagar a pistola.", "erro" );
   }
 }
 
 
 function abrirAdicionarImpressora() {
-  [["addImp_modelo",""],["addImp_serie",""],["addImp_armazem",""],["addImp_localizacao",""],["addImp_ip",""]].forEach(([id,v]) => { const node = el(id);
-} if (node) node.value = v; });
-}
+  [["addImp_modelo",""],["addImp_serie",""],["addImp_armazem",""],["addImp_localizacao",""],["addImp_ip",""]].forEach(([id,v]) => { const node = el(id ); if (node) node.value = v; } );
   if (el("modalAdicionarImpressora")) el("modalAdicionarImpressora").style.display = "flex";
 }
 
@@ -4681,19 +3870,13 @@ async function guardarNovaImpressora() {
     ip: el("addImp_ip")?.value || ""
   };
   if (!normalizarTexto(payload.modelo) || !normalizarTexto(payload.serie) || !normalizarTexto(payload.ip)) {
-    return mostrarMensagem("Preenche pelo menos Modelo, Série e IP.", "erro");
-}
+    return mostrarMensagem("Preenche pelo menos Modelo, Série e IP.", "erro" );
   }
-  impressorasData.unshift({ _ref: `local-impressora-${Date.now()}`, ...payload });
-}
-  guardarImpressorasLocal();
-}
-  fecharAdicionarImpressora();
-}
-  filtrarImpressoras();
-}
-  mostrarMensagem("Impressora adicionada com sucesso.");
-}
+  impressorasData.unshift({ _ref: `local-impressora-${Date.now()}`, ...payload } );
+  guardarImpressorasLocal( );
+  fecharAdicionarImpressora( );
+  filtrarImpressoras( );
+  mostrarMensagem("Impressora adicionada com sucesso." );
 }
 
 window.editarPorta = editarPorta;
@@ -4719,8 +3902,7 @@ window.abrirAdicionarPistola = abrirAdicionarPistola;
 
 /* ===== MODO VISUAL ===== */
 function modoVisualInit() {
-  document.body.classList.add("modo-visual-on");
-}
+  document.body.classList.add("modo-visual-on" );
   document.querySelectorAll(".panel, .pc-card, .dashboard-card, .stock-card, .history-card").forEach((node, index) => {
     node.style.opacity = "0";
     node.style.transform = "translateY(8px)";
@@ -4728,59 +3910,44 @@ function modoVisualInit() {
       node.style.transition = "opacity 0.24s ease, transform 0.24s ease";
       node.style.opacity = "1";
       node.style.transform = "translateY(0)";
-    }, 25 * Math.min(index, 10));
-}
-  });
-}
+    }, 25 * Math.min(index, 10) );
+  } );
 }
 
-window.addEventListener("load", modoVisualInit);
-}
+window.addEventListener("load", modoVisualInit );
 
 
 /* ===== MODO GESTOR EXTREMO ===== */
 function getTopConsumoEquipamentos(limit = 4) {
-  const map = new Map();
-}
+  const map = new Map( );
   historicoGlobal.forEach(item => {
     const key = `${item.equipamento || "-"} · ${item.localizacao || "-"}`;
-    map.set(key, (map.get(key) || 0) + 1);
-}
-  });
-}
-  return [...map.entries()].sort((a,b) => b[1]-a[1]).slice(0, limit);
-}
+    map.set(key, (map.get(key) || 0) + 1 );
+  } );
+  return [...map.entries()].sort((a,b) => b[1]-a[1]).slice(0, limit );
 }
 
 function getTopProblemasDoDia(limit = 3) {
-  const buckets = getCriticalityBucketsAppBraga();
-}
-  const topLocs = getTopLocalizacoesHistorico(2);
-}
-  const ultimos = getUltimosMovimentos(1);
-}
+  const buckets = getCriticalityBucketsAppBraga( );
+  const topLocs = getTopLocalizacoesHistorico(2 );
+  const ultimos = getUltimosMovimentos(1 );
   const problems = [];
 
   if (buckets.critical > 0) {
-    problems.push(`Existem ${buckets.critical} impressoras em estado crítico.`);
-}
+    problems.push(`Existem ${buckets.critical} impressoras em estado crítico.` );
   }
   if (buckets.warning > 0) {
-    problems.push(`Existem ${buckets.warning} impressoras em zona de atenção.`);
-}
+    problems.push(`Existem ${buckets.warning} impressoras em zona de atenção.` );
   }
   if (topLocs.length) {
-    problems.push(`Maior pressão recente em ${topLocs[0][0]} com ${topLocs[0][1]} movimentos.`);
-}
+    problems.push(`Maior pressão recente em ${topLocs[0][0]} com ${topLocs[0][1]} movimentos.` );
   }
   if (ultimos.length) {
     const u = ultimos[0];
-    problems.push(`Último movimento: ${u.equipamento || "-"} · ${u.cor || "-"} · ${u.localizacao || "-"}.`);
-}
+    problems.push(`Último movimento: ${u.equipamento || "-"} · ${u.cor || "-"} · ${u.localizacao || "-"}.` );
   }
 
-  return problems.slice(0, limit);
-}
+  return problems.slice(0, limit );
 }
 
 function getPrioridadeMaximaGestor(limit = 4) {
@@ -4788,42 +3955,29 @@ function getPrioridadeMaximaGestor(limit = 4) {
   impressorasData.forEach(item => {
     const info = tonerInfoState[item.ip] || null;
     const colors = Array.isArray(info?.colors) ? info.colors : [];
-    const crit = colors.filter(c => typeof c.percent === "number" && c.percent <= 10);
-}
+    const crit = colors.filter(c => typeof c.percent === "number" && c.percent <= 10 );
     if (crit.length) {
       rows.push({
         label: `${item.modelo} · ${item.localizacao}`,
         detail: crit.map(c => `${c.label}: ${c.percent}%`).join(" | ")
-      });
-}
+      } );
     }
-  });
-}
-  return rows.slice(0, limit);
-}
+  } );
+  return rows.slice(0, limit );
 }
 
 function renderModoGestorExtremo() {
-  const board = el("gestorExtremeBoard");
-}
-  const prioridade = el("gestorPrioridadeMaxima");
-}
-  const consumo = el("gestorTopConsumo");
-}
-  const problemas = el("gestorTopProblemas");
-}
+  const board = el("gestorExtremeBoard" );
+  const prioridade = el("gestorPrioridadeMaxima" );
+  const consumo = el("gestorTopConsumo" );
+  const problemas = el("gestorTopProblemas" );
   if (!board && !prioridade && !consumo && !problemas) return;
 
-  const buckets = getCriticalityBucketsAppBraga();
-}
-  const topLocs = getTopLocalizacoesHistorico(4);
-}
-  const topEquip = getTopConsumoEquipamentos(4);
-}
-  const topProb = getTopProblemasDoDia(3);
-}
-  const maxRows = getPrioridadeMaximaGestor(4);
-}
+  const buckets = getCriticalityBucketsAppBraga( );
+  const topLocs = getTopLocalizacoesHistorico(4 );
+  const topEquip = getTopConsumoEquipamentos(4 );
+  const topProb = getTopProblemasDoDia(3 );
+  const maxRows = getPrioridadeMaximaGestor(4 );
 
   if (board) {
     board.innerHTML = `
@@ -4914,42 +4068,33 @@ let historicoEditModalId = null;
 function debounceAppBraga(fn, wait = 180) {
   let t = null;
   return function(...args) {
-    clearTimeout(t);
-}
-    t = setTimeout(() => fn.apply(this, args), wait);
-}
+    clearTimeout(t );
+    t = setTimeout(() => fn.apply(this, args), wait );
   };
 }
 
 function tryRenderAppBraga(fn) {
-  try { fn();
-} } catch (e) { console.error(e);
-} }
+  try { fn( ); } catch (e) { console.error(e ); }
 }
 
 function loadStockMinConfig() {
   try {
-    const saved = JSON.parse(localStorage.getItem("stockMinConfig") || "{}");
-}
+    const saved = JSON.parse(localStorage.getItem("stockMinConfig") || "{}" );
     return { ...STOCK_MIN_DEFAULTS, ...saved };
   } catch (e) {
-    console.error(e);
-}
+    console.error(e );
     return { ...STOCK_MIN_DEFAULTS };
   }
 }
 
 function saveStockMinConfig(cfg) {
-  localStorage.setItem("stockMinConfig", JSON.stringify(cfg || {}));
-}
+  localStorage.setItem("stockMinConfig", JSON.stringify(cfg || {}) );
 }
 
 function normalizeLocMin(loc) {
-  const raw = String(loc || "Sem Localização");
-}
+  const raw = String(loc || "Sem Localização" );
   if (raw.includes(" - ")) {
-    const parts = raw.split(" - ");
-}
+    const parts = raw.split(" - " );
     if (parts.length >= 3) return `${parts[1]} - ${parts[2]}`;
   }
   return raw;
@@ -4958,39 +4103,30 @@ function normalizeLocMin(loc) {
 function getStockByLocationCounts() {
   const map = {};
   stockGlobal.forEach(item => {
-    const key = normalizeLocMin(item.localizacao);
-}
+    const key = normalizeLocMin(item.localizacao );
     map[key] = (map[key] || 0) + 1;
-  });
-}
+  } );
   return map;
 }
 
 function renderStockMinimoPainel() {
-  const host = el("stockMinimoPainel");
-}
+  const host = el("stockMinimoPainel" );
   if (!host) return;
-  const config = loadStockMinConfig();
-}
-  const counts = getStockByLocationCounts();
-}
+  const config = loadStockMinConfig( );
+  const counts = getStockByLocationCounts( );
   host.innerHTML = Object.keys(config).map(loc => {
     const atual = counts[loc] || 0;
-    const minimo = Number(config[loc] || 0);
-}
+    const minimo = Number(config[loc] || 0 );
     const cls = atual < minimo ? "item-danger" : atual === minimo ? "item-warning" : "item-ok";
     const estado = atual < minimo ? "Abaixo do mínimo" : atual === minimo ? "No mínimo" : "Acima do mínimo";
     return `<div class="stock-min-card"><strong>${loc}</strong><div class="meta-line">Atual: <span class="meta-value ${cls}">${atual}</span></div><div class="meta-line">Mínimo: <span class="meta-value">${minimo}</span></div><div class="meta-line">${estado}</div></div>`;
-  }).join("");
-}
+  }).join("" );
 }
 
 function renderStockMinimoConfig() {
-  const host = el("stockMinimoConfigList");
-}
+  const host = el("stockMinimoConfigList" );
   if (!host) return;
-  const cfg = loadStockMinConfig();
-}
+  const cfg = loadStockMinConfig( );
   host.innerHTML = `<div class="minimo-grid">${
     Object.keys(cfg).map(loc => `
       <div class="minimo-item">
@@ -5002,136 +4138,94 @@ function renderStockMinimoConfig() {
 }
 
 function guardarStockMinimoConfig() {
-  const inputs = document.querySelectorAll("[data-stock-min-loc]");
-}
+  const inputs = document.querySelectorAll("[data-stock-min-loc]" );
   const cfg = {};
-  inputs.forEach(inp => { cfg[inp.getAttribute("data-stock-min-loc")] = Math.max(0, parseInt(inp.value || "0", 10) || 0);
-} });
-}
-  saveStockMinConfig(cfg);
-}
-  mostrarMensagem("Stock mínimo guardado com sucesso.");
-}
-  tryRenderAppBraga(renderStockMinimoPainel);
-}
-  tryRenderAppBraga(renderAlertasInteligentes);
-}
+  inputs.forEach(inp => { cfg[inp.getAttribute("data-stock-min-loc")] = Math.max(0, parseInt(inp.value || "0", 10) || 0 ); } );
+  saveStockMinConfig(cfg );
+  mostrarMensagem("Stock mínimo guardado com sucesso." );
+  tryRenderAppBraga(renderStockMinimoPainel );
+  tryRenderAppBraga(renderAlertasInteligentes );
 }
 
 function resetStockMinimoConfig() {
-  saveStockMinConfig(STOCK_MIN_DEFAULTS);
-}
-  renderStockMinimoConfig();
-}
-  renderStockMinimoPainel();
-}
-  renderAlertasInteligentes();
-}
-  mostrarMensagem("Stock mínimo reposto.");
-}
+  saveStockMinConfig(STOCK_MIN_DEFAULTS );
+  renderStockMinimoConfig( );
+  renderStockMinimoPainel( );
+  renderAlertasInteligentes( );
+  mostrarMensagem("Stock mínimo reposto." );
 }
 
 function ensureLoteFieldOnEdit() {
-  const item = localStorage.getItem("editarToner");
-}
+  const item = localStorage.getItem("editarToner" );
   if (!item || !el("lote")) return;
   try {
-    const toner = JSON.parse(item);
-}
+    const toner = JSON.parse(item );
     el("lote").value = toner.lote || "";
     if (el("dataFolha")) el("dataFolha").value = toner.dataFolha || "";
-  } catch (e) { console.error(e);
-} }
+  } catch (e) { console.error(e ); }
 }
 
 function extractLoteFromText(text) {
-  const t = String(text || "").toUpperCase();
-}
-  const m = t.match(/(?:LOTE|LOT|BATCH)\s*[:#-]?\s*([A-Z0-9-]{4})/);
-}
+  const t = String(text || "").toUpperCase( );
+  const m = t.match(/(?:LOTE|LOT|BATCH)\s*[:#-]?\s*([A-Z0-9-]{4})/ );
   return m ? m[1] : "";
 }
 
 function enhanceScannerStatus(extra = "") {
-  const box = el("scannerSmartStatus");
-}
+  const box = el("scannerSmartStatus" );
   if (!box) return;
   box.innerText = extra || "Leitura pronta.";
 }
 
 function exportCsvFile(filename, headers, rows) {
-  const content = [headers.join(";"), ...rows.map(r => headers.map(h => String(r[h] ?? "").replace(/\n/g, " ")).join(";"))].join("\n");
-}
-  const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
-}
-  const a = document.createElement("a");
-}
-  a.href = URL.createObjectURL(blob);
-}
+  const content = [headers.join(";"), ...rows.map(r => headers.map(h => String(r[h] ?? "").replace(/\n/g, " ")).join(";"))].join("\n" );
+  const blob = new Blob([content], { type: "text/csv;charset=utf-8;" } );
+  const a = document.createElement("a" );
+  a.href = URL.createObjectURL(blob );
   a.download = filename;
-  a.click();
-}
+  a.click( );
 }
 
 function exportarExcelStock() {
-  if (!stockGlobal.length) return mostrarMensagem("Não há stock para exportar.", "erro");
-}
-  exportCsvFile("stock_app_braga.csv", ["idInterno","equipamento","localizacao","cor","lote","data","dataFolha"], stockGlobal);
-}
+  if (!stockGlobal.length) return mostrarMensagem("Não há stock para exportar.", "erro" );
+  exportCsvFile("stock_app_braga.csv", ["idInterno","equipamento","localizacao","cor","lote","data","dataFolha"], stockGlobal );
 }
 
 function exportarExcelHistorico() {
-  if (!historicoGlobal.length) return mostrarMensagem("Não há histórico para exportar.", "erro");
-}
-  exportCsvFile("historico_app_braga.csv", ["idInterno","equipamento","localizacao","cor","lote","data","dataFolha"], historicoGlobal);
-}
+  if (!historicoGlobal.length) return mostrarMensagem("Não há histórico para exportar.", "erro" );
+  exportCsvFile("historico_app_braga.csv", ["idInterno","equipamento","localizacao","cor","lote","data","dataFolha"], historicoGlobal );
 }
 
 function exportarExcelTudo() {
   const rows = [...stockGlobal.map(x => ({...x, origem:"stock"})), ...historicoGlobal.map(x => ({...x, origem:"historico"}))];
-  if (!rows.length) return mostrarMensagem("Não há dados para exportar.", "erro");
-}
-  exportCsvFile("dados_completos_app_braga.csv", ["origem","idInterno","equipamento","localizacao","cor","lote","data","dataFolha"], rows);
-}
+  if (!rows.length) return mostrarMensagem("Não há dados para exportar.", "erro" );
+  exportCsvFile("dados_completos_app_braga.csv", ["origem","idInterno","equipamento","localizacao","cor","lote","data","dataFolha"], rows );
 }
 
 function filtrarHistoricoAvancado() {
-  const texto = normalizarTexto(el("searchHistorico")?.value || "");
-}
+  const texto = normalizarTexto(el("searchHistorico")?.value || "" );
   const dFrom = el("filterHistoricoFrom")?.value || "";
   const dTo = el("filterHistoricoTo")?.value || "";
-  const fLoc = normalizarTexto(el("filterHistoricoLocal")?.value || "");
-}
-  const fEq = normalizarTexto(el("filterHistoricoEquipamento")?.value || "");
-}
-  const fCor = normalizarTexto(el("filterHistoricoCor")?.value || "");
-}
+  const fLoc = normalizarTexto(el("filterHistoricoLocal")?.value || "" );
+  const fEq = normalizarTexto(el("filterHistoricoEquipamento")?.value || "" );
+  const fCor = normalizarTexto(el("filterHistoricoCor")?.value || "" );
 
   const items = historicoGlobal.filter(t => {
-    const data = String(t.data || "");
-}
-    const okText = !texto || [t.idInterno,t.equipamento,t.localizacao,t.cor,t.lote].some(v => normalizarTexto(v).includes(texto));
-}
+    const data = String(t.data || "" );
+    const okText = !texto || [t.idInterno,t.equipamento,t.localizacao,t.cor,t.lote].some(v => normalizarTexto(v).includes(texto) );
     const okFrom = !dFrom || data >= dFrom;
     const okTo = !dTo || data <= dTo;
-    const okLoc = !fLoc || normalizarTexto(t.localizacao).includes(fLoc);
-}
-    const okEq = !fEq || normalizarTexto(t.equipamento).includes(fEq);
-}
-    const okCor = !fCor || normalizarTexto(t.cor).includes(fCor);
-}
+    const okLoc = !fLoc || normalizarTexto(t.localizacao).includes(fLoc );
+    const okEq = !fEq || normalizarTexto(t.equipamento).includes(fEq );
+    const okCor = !fCor || normalizarTexto(t.cor).includes(fCor );
     return okText && okFrom && okTo && okLoc && okEq && okCor;
-  });
-}
-  renderHistoricoCards(items);
-}
+  } );
+  renderHistoricoCards(items );
 }
 
 function abrirEditarStockModal(id) {
-  const item = stockGlobal.find(x => x.idDoc === id);
-}
-  if (!item) return mostrarMensagem("Item de stock não encontrado.", "erro");
-}
+  const item = stockGlobal.find(x => x.idDoc === id );
+  if (!item) return mostrarMensagem("Item de stock não encontrado.", "erro" );
   stockEditModalId = id;
   if (el("editStockEquipamento")) el("editStockEquipamento").value = item.equipamento || "";
   if (el("editStockCor")) el("editStockCor").value = item.cor || "";
@@ -5158,40 +4252,29 @@ async function guardarEdicaoStockModal() {
     dataFolha: el("editStockDataFolha")?.value || ""
   };
   try {
-    await db.collection("stock").doc(stockEditModalId).update(payload);
-}
-    fecharEdicaoStockModal();
-}
-    mostrarMensagem("Stock atualizado.");
-}
+    await db.collection("stock").doc(stockEditModalId).update(payload );
+    fecharEdicaoStockModal( );
+    mostrarMensagem("Stock atualizado." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao atualizar stock.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao atualizar stock.", "erro" );
   }
 }
 
 async function apagarStockItem(id) {
   if (!confirm("Queres apagar este item do stock?")) return;
   try {
-    await db.collection("stock").doc(id).delete();
-}
-    mostrarMensagem("Item de stock apagado.");
-}
+    await db.collection("stock").doc(id).delete( );
+    mostrarMensagem("Item de stock apagado." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao apagar stock.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao apagar stock.", "erro" );
   }
 }
 
 function abrirEditarHistoricoModal(id) {
-  const item = historicoGlobal.find(x => x.idDoc === id);
-}
-  if (!item) return mostrarMensagem("Histórico não encontrado.", "erro");
-}
+  const item = historicoGlobal.find(x => x.idDoc === id );
+  if (!item) return mostrarMensagem("Histórico não encontrado.", "erro" );
   historicoEditModalId = id;
   if (el("editHistoricoEquipamento")) el("editHistoricoEquipamento").value = item.equipamento || "";
   if (el("editHistoricoCor")) el("editHistoricoCor").value = item.cor || "";
@@ -5218,86 +4301,62 @@ async function guardarEdicaoHistoricoModal() {
     dataFolha: el("editHistoricoDataFolha")?.value || ""
   };
   try {
-    await db.collection("historico").doc(historicoEditModalId).update(payload);
-}
-    fecharEdicaoHistoricoModal();
-}
-    mostrarMensagem("Histórico atualizado.");
-}
+    await db.collection("historico").doc(historicoEditModalId).update(payload );
+    fecharEdicaoHistoricoModal( );
+    mostrarMensagem("Histórico atualizado." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao atualizar histórico.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao atualizar histórico.", "erro" );
   }
 }
 
 function buildAlertasInteligentes() {
-  const cfg = loadStockMinConfig();
-}
-  const counts = getStockByLocationCounts();
-}
+  const cfg = loadStockMinConfig( );
+  const counts = getStockByLocationCounts( );
   const rows = [];
   Object.keys(cfg).forEach(loc => {
     const atual = counts[loc] || 0;
-    const minimo = Number(cfg[loc] || 0);
-}
-    if (atual < minimo) rows.push({ tipo: "stock", titulo: loc, detalhe: `Stock abaixo do mínimo: ${atual}/${minimo}` });
-}
-  });
-}
+    const minimo = Number(cfg[loc] || 0 );
+    if (atual < minimo) rows.push({ tipo: "stock", titulo: loc, detalhe: `Stock abaixo do mínimo: ${atual}/${minimo}` } );
+  } );
 
   if (typeof impressorasData !== "undefined" && typeof tonerInfoState !== "undefined") {
     impressorasData.forEach(item => {
       const info = tonerInfoState[item.ip] || null;
       const colors = Array.isArray(info?.colors) ? info.colors : [];
-      const crit = colors.filter(c => typeof c.percent === "number" && c.percent <= 20);
-}
-      if (crit.length) rows.push({ tipo: "printer", titulo: `${item.modelo} · ${item.localizacao}`, detalhe: crit.map(c => `${c.label}: ${c.percent}%`).join(" | ") });
-}
-    });
-}
+      const crit = colors.filter(c => typeof c.percent === "number" && c.percent <= 20 );
+      if (crit.length) rows.push({ tipo: "printer", titulo: `${item.modelo} · ${item.localizacao}`, detalhe: crit.map(c => `${c.label}: ${c.percent}%`).join(" | ") } );
+    } );
   }
-  return rows.slice(0, 8);
-}
+  return rows.slice(0, 8 );
 }
 
 function renderAlertasInteligentes() {
-  const rows = buildAlertasInteligentes();
-}
+  const rows = buildAlertasInteligentes( );
   ["alertasInteligentesDashboard","alertasInteligentesImpressoras"].forEach(id => {
-    const host = el(id);
-}
+    const host = el(id );
     if (!host) return;
     host.innerHTML = rows.length ? rows.map(r => `<div class="alert-inteligente-card"><strong>${r.titulo}</strong><div class="meta-line">${r.detalhe}</div></div>`).join("") : `<div class="alert-inteligente-card"><strong>Sem alertas</strong><div class="meta-line">Não existem alertas inteligentes ativos.</div></div>`;
-  });
-}
+  } );
 }
 
 const filtrarStockDebounced = debounceAppBraga(function() {
-  const input = el("search");
-}
+  const input = el("search" );
   if (!input) return;
-  const txt = input.value.toLowerCase();
-}
+  const txt = input.value.toLowerCase( );
   const filtrados = stockGlobal.filter(t =>
     normalizarTexto(t.idInterno).includes(txt) ||
     normalizarTexto(t.equipamento).includes(txt) ||
     normalizarTexto(t.cor).includes(txt) ||
     normalizarTexto(t.localizacao).includes(txt) ||
     normalizarTexto(t.lote).includes(txt)
-  );
-}
-  renderStockCards(filtrados);
-}
-}, 120);
-}
+   );
+  renderStockCards(filtrados );
+}, 120 );
 
 const filtrarDashDebounced = debounceAppBraga(function() {
-  renderDashboardCards();
-}
-}, 120);
-}
+  renderDashboardCards( );
+}, 120 );
 
 window.exportarExcelStock = exportarExcelStock;
 window.exportarExcelHistorico = exportarExcelHistorico;
@@ -5323,25 +4382,21 @@ try { BACKUP_KEYS_APP_BRAGA.etiquetas = "appBraga_backup_etiquetas"; } catch (e)
 let etiquetasWordGlobal = [];
 
 function formatDatePTShared(valor) {
-  const raw = String(valor || "").trim();
-}
+  const raw = String(valor || "").trim( );
   if (!raw) return "";
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    const [yyyy, mm, dd] = raw.split("-");
-}
+    const [yyyy, mm, dd] = raw.split("-" );
     return `${dd}/${mm}/${yyyy}`;
   }
   return raw;
 }
 
 function parseLocalizacaoEtiquetaShared(loc) {
-  const raw = String(loc || "").trim();
-}
+  const raw = String(loc || "").trim( );
   let serie = "";
   let localCurto = raw || "Sem Localização";
   let armazem = "";
-  const parts = raw.split(" - ").map(v => v.trim()).filter(Boolean);
-}
+  const parts = raw.split(" - ").map(v => v.trim()).filter(Boolean );
   if (parts.length >= 3) {
     serie = parts[0] || "";
     armazem = parts[1] || "";
@@ -5358,20 +4413,13 @@ function parseLocalizacaoEtiquetaShared(loc) {
 }
 
 function montarPayloadEtiquetaPartilhada(extra = {}) {
-  const loc = extra.localizacao || ((el("localizacao") && el("localizacao").value) || "");
-}
-  const info = parseLocalizacaoEtiquetaShared(loc);
-}
-  const dataFolha = extra.dataFolha || ((el("dataFolha") && el("dataFolha").value) || "");
-}
-  const dataScan = extra.data || ((el("data") && el("data").value) || "");
-}
-  const equipamento = extra.equipamento || ((el("equipamento") && el("equipamento").value) || "");
-}
-  const cor = extra.cor || ((el("cor") && el("cor").value) || "");
-}
-  const lote = extra.lote || ((el("lote") && el("lote").value) || "");
-}
+  const loc = extra.localizacao || ((el("localizacao") && el("localizacao").value) || "" );
+  const info = parseLocalizacaoEtiquetaShared(loc );
+  const dataFolha = extra.dataFolha || ((el("dataFolha") && el("dataFolha").value) || "" );
+  const dataScan = extra.data || ((el("data") && el("data").value) || "" );
+  const equipamento = extra.equipamento || ((el("equipamento") && el("equipamento").value) || "" );
+  const cor = extra.cor || ((el("cor") && el("cor").value) || "" );
+  const lote = extra.lote || ((el("lote") && el("lote").value) || "" );
   const origem = extra.origem || "scan";
   return {
     serie: info.serie || extra.serie || "SEM SÉRIE",
@@ -5393,14 +4441,11 @@ function montarPayloadEtiquetaPartilhada(extra = {}) {
 async function guardarEtiquetaPartilhada(extra = {}) {
   if (!db || !db.collection) return null;
   try {
-    const payload = montarPayloadEtiquetaPartilhada(extra);
-}
-    const ref = await db.collection("etiquetasWord").add(payload);
-}
+    const payload = montarPayloadEtiquetaPartilhada(extra );
+    const ref = await db.collection("etiquetasWord").add(payload );
     return { idDoc: ref.id, ...payload };
   } catch (e) {
-    console.error("Erro ao guardar etiqueta partilhada:", e);
-}
+    console.error("Erro ao guardar etiqueta partilhada:", e );
     return null;
   }
 }
@@ -5408,12 +4453,10 @@ async function guardarEtiquetaPartilhada(extra = {}) {
 async function gerarWordEtiquetaPartilhada(dados, opts = {}) {
   try {
     if (typeof docx === "undefined") {
-      mostrarMensagem("Biblioteca Word não carregada.", "erro");
-}
+      mostrarMensagem("Biblioteca Word não carregada.", "erro" );
       return false;
     }
-    const payload = montarPayloadEtiquetaPartilhada(dados || {});
-}
+    const payload = montarPayloadEtiquetaPartilhada(dados || {} );
     const { Document, Packer, Paragraph, AlignmentType, TextRun } = docx;
     const doc = new Document({
       creator: "App Braga",
@@ -5423,34 +4466,21 @@ async function gerarWordEtiquetaPartilhada(dados, opts = {}) {
         new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 200, after: 2800 }, children: [ new TextRun({ text: payload.serie, bold: true, size: 64 }) ] }),
         new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [ new TextRun({ text: payload.dataEtiqueta, bold: true, size: 56 }) ] })
       ] }]
-    });
-}
-    const blob = await Packer.toBlob(doc);
-}
+    } );
+    const blob = await Packer.toBlob(doc );
     const fileName = `Etiqueta_${String(payload.localCurto || "Etiqueta").replace(/\s+/g, "_")}_${payload.serie || "SEM_SERIE"}.docx`;
-    const a = document.createElement("a");
-}
-    a.href = URL.createObjectURL(blob);
-}
+    const a = document.createElement("a" );
+    a.href = URL.createObjectURL(blob );
     a.download = fileName;
-    document.body.appendChild(a);
-}
-    a.click();
-}
-    setTimeout(() => { try { URL.revokeObjectURL(a.href);
-} a.remove();
-} } catch (e) {} }, 1200);
-}
-    if (opts.saveRecord !== false) await guardarEtiquetaPartilhada(payload);
-}
-    if (!opts.silent) mostrarMensagem("Etiqueta guardada e pronta para download.");
-}
+    document.body.appendChild(a );
+    a.click( );
+    setTimeout(() => { try { URL.revokeObjectURL(a.href ); a.remove( ); } catch (e) {} }, 1200 );
+    if (opts.saveRecord !== false) await guardarEtiquetaPartilhada(payload );
+    if (!opts.silent) mostrarMensagem("Etiqueta guardada e pronta para download." );
     return true;
   } catch (e) {
-    console.error("Erro ao gerar etiqueta partilhada:", e);
-}
-    mostrarMensagem("Erro ao gerar a etiqueta Word.", "erro");
-}
+    console.error("Erro ao gerar etiqueta partilhada:", e );
+    mostrarMensagem("Erro ao gerar a etiqueta Word.", "erro" );
     return false;
   }
 }
@@ -5458,29 +4488,20 @@ async function gerarWordEtiquetaPartilhada(dados, opts = {}) {
 window.gerarWordEtiquetaPartilhada = gerarWordEtiquetaPartilhada;
 
 function renderEtiquetasWordCards() {
-  const host = el("listaEtiquetasWord");
-}
+  const host = el("listaEtiquetasWord" );
   if (!host) return;
-  const texto = normalizarTexto(el("searchEtiquetasWord")?.value || "");
-}
-  const origem = normalizarTexto(el("filterEtiquetasOrigem")?.value || "");
-}
+  const texto = normalizarTexto(el("searchEtiquetasWord")?.value || "" );
+  const origem = normalizarTexto(el("filterEtiquetasOrigem")?.value || "" );
   let items = Array.isArray(etiquetasWordGlobal) ? [...etiquetasWordGlobal] : [];
-  if (origem) items = items.filter(x => normalizarTexto(x.origem).includes(origem));
-}
+  if (origem) items = items.filter(x => normalizarTexto(x.origem).includes(origem) );
   if (texto) {
-    items = items.filter(x => [x.serie,x.localCurto,x.localizacao,x.equipamento,x.cor,x.lote,x.dataEtiqueta].some(v => normalizarTexto(v).includes(texto)));
-}
+    items = items.filter(x => [x.serie,x.localCurto,x.localizacao,x.equipamento,x.cor,x.lote,x.dataEtiqueta].some(v => normalizarTexto(v).includes(texto)) );
   }
-  setText("countEtiquetasTotal", items.length);
-}
-  const hoje = new Date();
-}
+  setText("countEtiquetasTotal", items.length );
+  const hoje = new Date( );
   const ymd = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}-${String(hoje.getDate()).padStart(2,'0')}`;
-  setText("countEtiquetasStock", items.filter(x => String(x.data || x.dataFolha || "").startsWith(ymd) || String(x.dataEtiqueta || "").includes(`${String(hoje.getDate()).padStart(2,'0')}/${String(hoje.getMonth()+1).padStart(2,'0')}/${hoje.getFullYear()}`)).length);
-}
-  setText("countEtiquetasHistorico", new Set(items.map(x => x.serie || x.localCurto || x.localizacao)).size);
-}
+  setText("countEtiquetasStock", items.filter(x => String(x.data || x.dataFolha || "").startsWith(ymd) || String(x.dataEtiqueta || "").includes(`${String(hoje.getDate()).padStart(2,'0')}/${String(hoje.getMonth()+1).padStart(2,'0')}/${hoje.getFullYear()}`)).length );
+  setText("countEtiquetasHistorico", new Set(items.map(x => x.serie || x.localCurto || x.localizacao)).size );
   if (!items.length) {
     host.innerHTML = `<div class="panel empty-state"><h3>Sem etiquetas</h3><p>Faz scan no iPhone e a etiqueta aparece aqui para download no PC.</p></div>`;
     return;
@@ -5500,8 +4521,7 @@ function renderEtiquetasWordCards() {
         <button class="small-btn btn-use" onclick="regerarEtiquetaWordPartilhada('${t.idDoc}')">Imprimir</button>
         <button class="small-btn btn-delete" onclick="apagarEtiquetaWordPartilhada('${t.idDoc}')">Apagar</button>
       </div>
-    </div>`).join("");
-}
+    </div>`).join("" );
 }
 
 
@@ -5516,13 +4536,10 @@ function montarHtmlEtiquetaImpressao(item) {
     ["Lote", item.lote],
     ["Data", item.dataScan || item.dataEtiqueta || item.data || item.dataFolha],
     ["Origem", item.origem]
-  ].filter(([,v]) => String(v || '').trim());
-}
+  ].filter(([,v]) => String(v || '').trim() );
 
-  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c] || c));
-}
-  const rows = linhas.map(([k,v]) => `<div class="etq-row"><div class="etq-key">${escapeHtml(k)}</div><div class="etq-val">${escapeHtml(v)}</div></div>`).join('');
-}
+  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c] || c) );
+  const rows = linhas.map(([k,v]) => `<div class="etq-row"><div class="etq-key">${escapeHtml(k)}</div><div class="etq-val">${escapeHtml(v)}</div></div>`).join('' );
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -5549,17 +4566,12 @@ function montarHtmlEtiquetaImpressao(item) {
 }
 
 async function regerarEtiquetaWordPartilhada(id) {
-  const item = etiquetasWordGlobal.find(x => x.idDoc === id);
-}
-  if (!item) return mostrarMensagem("Etiqueta não encontrada.", "erro");
-}
+  const item = etiquetasWordGlobal.find(x => x.idDoc === id );
+  if (!item) return mostrarMensagem("Etiqueta não encontrada.", "erro" );
   try {
-    const existente = document.getElementById('printAreaEtiquetaAppBraga');
-}
-    if (existente) existente.remove();
-}
-    const overlay = document.createElement('div');
-}
+    const existente = document.getElementById('printAreaEtiquetaAppBraga' );
+    if (existente) existente.remove( );
+    const overlay = document.createElement('div' );
     overlay.id = 'printAreaEtiquetaAppBraga';
     overlay.style.position = 'fixed';
     overlay.style.inset = '0';
@@ -5568,40 +4580,29 @@ async function regerarEtiquetaWordPartilhada(id) {
     overlay.style.display = 'flex';
     overlay.style.alignItems = 'center';
     overlay.style.justifyContent = 'center';
-    overlay.innerHTML = montarHtmlEtiquetaOverlay(item);
-}
-    document.body.appendChild(overlay);
-}
+    overlay.innerHTML = montarHtmlEtiquetaOverlay(item );
+    document.body.appendChild(overlay );
 
     const oldTitle = document.title;
     document.title = `Etiqueta-${(item.localCurto || item.localizacao || 'Etiqueta')}`;
 
     setTimeout(() => {
       try {
-        window.print();
-}
-        mostrarMensagem('Etiqueta pronta a imprimir.');
-}
+        window.print( );
+        mostrarMensagem('Etiqueta pronta a imprimir.' );
       } catch (e) {
-        console.error(e);
-}
-        mostrarMensagem('Erro ao abrir a impressão.', 'erro');
-}
+        console.error(e );
+        mostrarMensagem('Erro ao abrir a impressão.', 'erro' );
       } finally {
         setTimeout(() => {
-          try { overlay.remove();
-} } catch (e) {}
+          try { overlay.remove( ); } catch (e) {}
           document.title = oldTitle;
-        }, 600);
-}
+        }, 600 );
       }
-    }, 150);
-}
+    }, 150 );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem('Erro ao preparar impressão.', 'erro');
-}
+    console.error(e );
+    mostrarMensagem('Erro ao preparar impressão.', 'erro' );
   }
 }
 
@@ -5616,13 +4617,10 @@ function montarHtmlEtiquetaOverlay(item) {
     ["Lote", item.lote],
     ["Data", item.dataScan || item.dataEtiqueta || item.data || item.dataFolha],
     ["Origem", item.origem]
-  ].filter(([,v]) => String(v || '').trim());
-}
+  ].filter(([,v]) => String(v || '').trim() );
 
-  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c] || c));
-}
-  const rows = linhas.map(([k,v]) => `<div class="etq-row"><div class="etq-key">${escapeHtml(k)}</div><div class="etq-val">${escapeHtml(v)}</div></div>`).join('');
-}
+  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c] || c) );
+  const rows = linhas.map(([k,v]) => `<div class="etq-row"><div class="etq-key">${escapeHtml(k)}</div><div class="etq-val">${escapeHtml(v)}</div></div>`).join('' );
   return `
     <style>
       @media print {
@@ -5648,15 +4646,11 @@ function montarHtmlEtiquetaOverlay(item) {
 async function apagarEtiquetaWordPartilhada(id) {
   if (!confirm("Queres apagar esta etiqueta?")) return;
   try {
-    await db.collection("etiquetasWord").doc(id).delete();
-}
-    mostrarMensagem("Etiqueta apagada.");
-}
+    await db.collection("etiquetasWord").doc(id).delete( );
+    mostrarMensagem("Etiqueta apagada." );
   } catch (e) {
-    console.error(e);
-}
-    mostrarMensagem("Erro ao apagar etiqueta.", "erro");
-}
+    console.error(e );
+    mostrarMensagem("Erro ao apagar etiqueta.", "erro" );
   }
 }
 window.regerarEtiquetaWordPartilhada = regerarEtiquetaWordPartilhada;
@@ -5669,36 +4663,23 @@ function bindEtiquetasWordRealtime() {
     snap.forEach((doc) => {
       const t = ({ firebaseId: doc.id, ...doc.data() }) || {};
       t.idDoc = doc.id;
-      etiquetasWordGlobal.push(t);
-}
-    });
-}
-    try { saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.etiquetas, etiquetasWordGlobal);
-} } catch (e) {}
-    renderEtiquetasWordCards();
-}
+      etiquetasWordGlobal.push(t );
+    } );
+    try { saveBackupAppBraga(BACKUP_KEYS_APP_BRAGA.etiquetas, etiquetasWordGlobal ); } catch (e) {}
+    renderEtiquetasWordCards( );
   }, (error) => {
-    console.error(error);
-}
-    try { etiquetasWordGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.etiquetas);
-} } catch (e) { etiquetasWordGlobal = []; }
-    renderEtiquetasWordCards();
-}
-  });
-}
+    console.error(error );
+    try { etiquetasWordGlobal = loadBackupAppBraga(BACKUP_KEYS_APP_BRAGA.etiquetas ); } catch (e) { etiquetasWordGlobal = []; }
+    renderEtiquetasWordCards( );
+  } );
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  if (el("searchEtiquetasWord")) el("searchEtiquetasWord").addEventListener("input", renderEtiquetasWordCards);
-}
-  if (el("filterEtiquetasOrigem")) el("filterEtiquetasOrigem").addEventListener("change", renderEtiquetasWordCards);
-}
-  if (el("listaEtiquetasWord")) renderEtiquetasWordCards();
-}
-  bindEtiquetasWordRealtime();
-}
-});
-}
+  if (el("searchEtiquetasWord")) el("searchEtiquetasWord").addEventListener("input", renderEtiquetasWordCards );
+  if (el("filterEtiquetasOrigem")) el("filterEtiquetasOrigem").addEventListener("change", renderEtiquetasWordCards );
+  if (el("listaEtiquetasWord")) renderEtiquetasWordCards( );
+  bindEtiquetasWordRealtime( );
+} );
 
 
 
@@ -5707,39 +4688,10 @@ window.addEventListener("DOMContentLoaded", () => {
    ========================================================= */
 (function(){
   function closestPanel(el){while(el&&el!==document.body){if(el.classList&&el.classList.contains('panel'))return el;el=el.parentElement;}return null;}
-  function initBrinkaSidebar(){var sidebar=document.querySelector('.sidebar');
-}if(!sidebar)return;if(!document.querySelector('.app-menu-toggle')){var btn=document.createElement('button');
-}btn.className='app-menu-toggle';btn.type='button';btn.setAttribute('aria-label','Abrir menu');
-}btn.textContent='☰';document.body.appendChild(btn);
-}}if(!document.querySelector('.app-sidebar-overlay')){var ov=document.createElement('div');
-}ov.className='app-sidebar-overlay';document.body.appendChild(ov);
-}}var btn=document.querySelector('.app-menu-toggle');
-}var overlay=document.querySelector('.app-sidebar-overlay');
-}function open(){sidebar.classList.add('app-open');
-}overlay.classList.add('show');
-}btn.textContent='×';}function close(){sidebar.classList.remove('app-open');
-}overlay.classList.remove('show');
-}btn.textContent='☰';}btn.onclick=function(e){e.preventDefault();
-}e.stopPropagation();
-}sidebar.classList.contains('app-open')?close():open();
-}};overlay.onclick=close;sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);
-}});
-}}
-  function cleanDashboard(){var path=(location.pathname||'').toLowerCase();
-}var isDashboard=path.endsWith('/')||path.endsWith('/index.html')||path.indexOf('index.html')!==-1;if(!isDashboard)return;document.body.classList.add('dashboard-clean');
-}var removeTitles=['Centro Operacional Inteligente','Prioridade Máxima','Top Consumo','Alertas do Dia','Alertas Inteligentes'];document.querySelectorAll('h3').forEach(function(h){var t=(h.textContent||'').trim();
-}if(removeTitles.indexOf(t)>=0){var p=closestPanel(h);
-}if(p)p.classList.add('is-dashboard-removed');
-}}});
-}}
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){initBrinkaSidebar();
-}cleanDashboard();
-}});
-}}else{initBrinkaSidebar();
-}cleanDashboard();
-}}
-})();
-}
+  function initBrinkaSidebar(){var sidebar=document.querySelector('.sidebar' );if(!sidebar)return;if(!document.querySelector('.app-menu-toggle')){var btn=document.createElement('button' );btn.className='app-menu-toggle';btn.type='button';btn.setAttribute('aria-label','Abrir menu' );btn.textContent='☰';document.body.appendChild(btn );}if(!document.querySelector('.app-sidebar-overlay')){var ov=document.createElement('div' );ov.className='app-sidebar-overlay';document.body.appendChild(ov );}var btn=document.querySelector('.app-menu-toggle' );var overlay=document.querySelector('.app-sidebar-overlay' );function open(){sidebar.classList.add('app-open' );overlay.classList.add('show' );btn.textContent='×';}function close(){sidebar.classList.remove('app-open' );overlay.classList.remove('show' );btn.textContent='☰';}btn.onclick=function(e){e.preventDefault( );e.stopPropagation( );sidebar.classList.contains('app-open')?close():open( );};overlay.onclick=close;sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close );} );}
+  function cleanDashboard(){var path=(location.pathname||'').toLowerCase( );var isDashboard=path.endsWith('/')||path.endsWith('/index.html')||path.indexOf('index.html')!==-1;if(!isDashboard)return;document.body.classList.add('dashboard-clean' );var removeTitles=['Centro Operacional Inteligente','Prioridade Máxima','Top Consumo','Alertas do Dia','Alertas Inteligentes'];document.querySelectorAll('h3').forEach(function(h){var t=(h.textContent||'').trim( );if(removeTitles.indexOf(t)>=0){var p=closestPanel(h );if(p)p.classList.add('is-dashboard-removed' );}} );}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){initBrinkaSidebar( );cleanDashboard( );} );}else{initBrinkaSidebar( );cleanDashboard( );}
+})( );
 
 
 /* =========================
@@ -5751,21 +4703,18 @@ async function importarExcelFirebase(){
   const input =
     document.getElementById(
       "excelImportFirebase"
-    );
-}
+     );
 
   if(!input){
 
     alert(
       "Input Excel não encontrado."
-    );
-}
+     );
 
     return;
   }
 
-  input.click();
-}
+  input.click( );
 
 }
 
@@ -5779,14 +4728,12 @@ window.addEventListener(
     const excelInput =
       document.getElementById(
         "excelImportFirebase"
-      );
-}
+       );
 
     if(!excelInput){
       console.log(
         "Input Excel não encontrado"
-      );
-}
+       );
       return;
     }
 
@@ -5802,12 +4749,10 @@ window.addEventListener(
           if(!file) return;
 
           const data =
-            await file.arrayBuffer();
-}
+            await file.arrayBuffer( );
 
           const workbook =
-            XLSX.read(data);
-}
+            XLSX.read(data );
 
           const usersSheet =
             workbook.Sheets["Users"];
@@ -5823,15 +4768,13 @@ window.addEventListener(
             const users =
               XLSX.utils.sheet_to_json(
                 usersSheet
-              );
-}
+               );
 
             for(const user of users){
 
               await window.db
                 .collection("users")
-                .add(user);
-}
+                .add(user );
 
             }
 
@@ -5842,15 +4785,13 @@ window.addEventListener(
             const pistolas =
               XLSX.utils.sheet_to_json(
                 pistolasSheet
-              );
-}
+               );
 
             for(const item of pistolas){
 
               await window.db
                 .collection("pistolas")
-                .add(item);
-}
+                .add(item );
 
             }
 
@@ -5861,15 +4802,13 @@ window.addEventListener(
             const portas =
               XLSX.utils.sheet_to_json(
                 portasSheet
-              );
-}
+               );
 
             for(const item of portas){
 
               await window.db
                 .collection("portas")
-                .add(item);
-}
+                .add(item );
 
             }
 
@@ -5877,28 +4816,23 @@ window.addEventListener(
 
           alert(
             "Excel importado para Firebase."
-          );
-}
+           );
 
         }catch(error){
 
-          console.error(error);
-}
+          console.error(error );
 
           alert(
             "Erro: " + error.message
-          );
-}
+           );
 
         }
 
       }
-    );
-}
+     );
 
   }
-);
-}
+ );
 
 
 
@@ -5921,48 +4855,38 @@ function descarregarJSON(nome, dados){
       {
         type:"application/json"
       }
-    );
-}
+     );
 
     const a =
-      document.createElement("a");
-}
+      document.createElement("a" );
 
     a.href =
-      URL.createObjectURL(blob);
-}
+      URL.createObjectURL(blob );
 
     a.download =
       nome + "_" +
       Date.now() +
       ".json";
 
-    document.body.appendChild(a);
-}
+    document.body.appendChild(a );
 
-    a.click();
-}
+    a.click( );
 
     setTimeout(()=>{
 
-      URL.revokeObjectURL(a.href);
-}
+      URL.revokeObjectURL(a.href );
 
-      a.remove();
-}
+      a.remove( );
 
-    },1000);
-}
+    },1000 );
 
   }catch(error){
 
-    console.error(error);
-}
+    console.error(error );
 
     alert(
       "Erro ao exportar JSON."
-    );
-}
+     );
 
   }
 
@@ -5977,8 +4901,7 @@ function exportUsersJSON(){
     typeof window.usersData !== "undefined"
       ? window.usersData
       : []
-  );
-}
+   );
 
 }
 
@@ -5991,8 +4914,7 @@ function exportPistolasJSON(){
     typeof window.pistolasData !== "undefined"
       ? window.pistolasData
       : []
-  );
-}
+   );
 
 }
 
@@ -6005,8 +4927,7 @@ function exportPortasJSON(){
     typeof window.portasData !== "undefined"
       ? window.portasData
       : []
-  );
-}
+   );
 
 }
 
@@ -6034,16 +4955,14 @@ async function importarUsersJSONFirebase(){
 
       alert(
         "Firebase não iniciada."
-      );
-}
+       );
 
       return;
 
     }
 
     const input =
-      document.createElement("input");
-}
+      document.createElement("input" );
 
     input.type = "file";
 
@@ -6059,19 +4978,16 @@ async function importarUsersJSONFirebase(){
         if(!file) return;
 
         const text =
-          await file.text();
-}
+          await file.text( );
 
         const users =
-          JSON.parse(text);
-}
+          JSON.parse(text );
 
         if(!Array.isArray(users)){
 
           alert(
             "JSON inválido."
-          );
-}
+           );
 
           return;
 
@@ -6083,8 +4999,7 @@ async function importarUsersJSONFirebase(){
 
           await window.db
             .collection("users")
-            .add(user);
-}
+            .add(user );
 
           total++;
 
@@ -6094,30 +5009,25 @@ async function importarUsersJSONFirebase(){
           "Importação concluída: "
           + total +
           " users."
-        );
-}
+         );
 
       }catch(error){
 
-        console.error(error);
-}
+        console.error(error );
 
         alert(
           "Erro ao importar JSON."
-        );
-}
+         );
 
       }
 
     };
 
-    input.click();
-}
+    input.click( );
 
   }catch(error){
 
-    console.error(error);
-}
+    console.error(error );
 
   }
 
@@ -6148,46 +5058,36 @@ function descarregarJSON(nome, dados){
       {
         type:"application/json"
       }
-    );
-}
+     );
 
     const a =
-      document.createElement("a");
-}
+      document.createElement("a" );
 
     a.href =
-      URL.createObjectURL(blob);
-}
+      URL.createObjectURL(blob );
 
     a.download =
       nome + "_" +
       Date.now() +
       ".json";
 
-    document.body.appendChild(a);
-}
+    document.body.appendChild(a );
 
-    a.click();
-}
+    a.click( );
 
     setTimeout(()=>{
 
-      URL.revokeObjectURL(a.href);
-}
+      URL.revokeObjectURL(a.href );
 
-      a.remove();
-}
+      a.remove( );
 
-    },1000);
-}
+    },1000 );
 
   }catch(error){
 
-    console.error(error);
-}
+    console.error(error );
 
-    alert("Erro export JSON");
-}
+    alert("Erro export JSON" );
 
   }
 
@@ -6202,8 +5102,7 @@ function exportUsersJSON(){
     typeof window.usersData !== "undefined"
       ? window.usersData
       : []
-  );
-}
+   );
 
 }
 
@@ -6214,8 +5113,7 @@ function exportPistolasJSON(){
     typeof window.pistolasData !== "undefined"
       ? window.pistolasData
       : []
-  );
-}
+   );
 
 }
 
@@ -6226,8 +5124,7 @@ function exportPortasJSON(){
     typeof window.portasData !== "undefined"
       ? window.portasData
       : []
-  );
-}
+   );
 
 }
 
@@ -6239,16 +5136,14 @@ async function importarUsersJSONFirebase(){
 
     if(!window.db){
 
-      alert("Firebase não iniciada.");
-}
+      alert("Firebase não iniciada." );
 
       return;
 
     }
 
     const input =
-      document.createElement("input");
-}
+      document.createElement("input" );
 
     input.type = "file";
 
@@ -6264,17 +5159,14 @@ async function importarUsersJSONFirebase(){
         if(!file) return;
 
         const text =
-          await file.text();
-}
+          await file.text( );
 
         const users =
-          JSON.parse(text);
-}
+          JSON.parse(text );
 
         if(!Array.isArray(users)){
 
-          alert("JSON inválido");
-}
+          alert("JSON inválido" );
 
           return;
 
@@ -6286,8 +5178,7 @@ async function importarUsersJSONFirebase(){
 
           await window.db
             .collection("users")
-            .add(user);
-}
+            .add(user );
 
           total++;
 
@@ -6297,31 +5188,26 @@ async function importarUsersJSONFirebase(){
           "Importação concluída: "
           + total +
           " users."
-        );
-}
+         );
 
       }catch(error){
 
-        console.error(error);
-}
+        console.error(error );
 
         alert(
           "Erro import users: "
           + error.message
-        );
-}
+         );
 
       }
 
     };
 
-    input.click();
-}
+    input.click( );
 
   }catch(error){
 
-    console.error(error);
-}
+    console.error(error );
 
   }
 
@@ -6335,16 +5221,14 @@ async function importarPistolasJSONFirebase(){
 
     if(!window.db){
 
-      alert("Firebase não iniciada.");
-}
+      alert("Firebase não iniciada." );
 
       return;
 
     }
 
     const input =
-      document.createElement("input");
-}
+      document.createElement("input" );
 
     input.type = "file";
 
@@ -6360,12 +5244,10 @@ async function importarPistolasJSONFirebase(){
         if(!file) return;
 
         const text =
-          await file.text();
-}
+          await file.text( );
 
         const dados =
-          JSON.parse(text);
-}
+          JSON.parse(text );
 
         let total = 0;
 
@@ -6373,8 +5255,7 @@ async function importarPistolasJSONFirebase(){
 
           await window.db
             .collection("pistolas")
-            .add(item);
-}
+            .add(item );
 
           total++;
 
@@ -6384,31 +5265,26 @@ async function importarPistolasJSONFirebase(){
           "Importação concluída: "
           + total +
           " pistolas."
-        );
-}
+         );
 
       }catch(error){
 
-        console.error(error);
-}
+        console.error(error );
 
         alert(
           "Erro import pistolas: "
           + error.message
-        );
-}
+         );
 
       }
 
     };
 
-    input.click();
-}
+    input.click( );
 
   }catch(error){
 
-    console.error(error);
-}
+    console.error(error );
 
   }
 
@@ -6422,16 +5298,14 @@ async function importarPortasJSONFirebase(){
 
     if(!window.db){
 
-      alert("Firebase não iniciada.");
-}
+      alert("Firebase não iniciada." );
 
       return;
 
     }
 
     const input =
-      document.createElement("input");
-}
+      document.createElement("input" );
 
     input.type = "file";
 
@@ -6447,12 +5321,10 @@ async function importarPortasJSONFirebase(){
         if(!file) return;
 
         const text =
-          await file.text();
-}
+          await file.text( );
 
         const dados =
-          JSON.parse(text);
-}
+          JSON.parse(text );
 
         let total = 0;
 
@@ -6460,8 +5332,7 @@ async function importarPortasJSONFirebase(){
 
           await window.db
             .collection("portas")
-            .add(item);
-}
+            .add(item );
 
           total++;
 
@@ -6471,31 +5342,26 @@ async function importarPortasJSONFirebase(){
           "Importação concluída: "
           + total +
           " portas."
-        );
-}
+         );
 
       }catch(error){
 
-        console.error(error);
-}
+        console.error(error );
 
         alert(
           "Erro import portas: "
           + error.message
-        );
-}
+         );
 
       }
 
     };
 
-    input.click();
-}
+    input.click( );
 
   }catch(error){
 
-    console.error(error);
-}
+    console.error(error );
 
   }
 
@@ -6516,8 +5382,7 @@ window.importarPortasJSONFirebase =
 
 
 
-window.db = firebase.firestore();
-}
+window.db = firebase.firestore( );
 
 
 
@@ -6526,8 +5391,7 @@ window.db = firebase.firestore();
 
 // removed old helper
 /*
- const el = document.getElementById("InputUser");
-}
+ const el = document.getElementById("InputUser" );
  if(el && user){
    el.value = user. || "";
  }
@@ -6536,8 +5400,7 @@ window.db = firebase.firestore();
 */
 /* removed old helper */
 function _unused(){
- const el = document.getElementById("InputUser");
-}
+ const el = document.getElementById("InputUser" );
  return el ? el.value.trim() : "";
 };
 
@@ -6549,21 +5412,15 @@ setInterval(() => {
   try{
     if(Array.isArray(window.usersData)){
       window.usersData.sort((a,b)=>{
-        const na = String(a?.nome || '').toLowerCase();
-}
-        const nb = String(b?.nome || '').toLowerCase();
-}
-        return na.localeCompare(nb,'pt',{numeric:true});
-}
-      });
-}
+        const na = String(a?.nome || '').toLowerCase( );
+        const nb = String(b?.nome || '').toLowerCase( );
+        return na.localeCompare(nb,'pt',{numeric:true} );
+      } );
     }
   }catch(e){
-    console.error(e);
-}
+    console.error(e );
   }
-},1000);
-}
+},1000 );
 
 
 
@@ -6579,13 +5436,11 @@ function ordenarColecaoAlfaNumerica(lista,campo="nome"){
 
       const aTxt =
         String(a?.[campo] || "")
-        .toLowerCase();
-}
+        .toLowerCase( );
 
       const bTxt =
         String(b?.[campo] || "")
-        .toLowerCase();
-}
+        .toLowerCase( );
 
       return aTxt.localeCompare(
         bTxt,
@@ -6594,16 +5449,13 @@ function ordenarColecaoAlfaNumerica(lista,campo="nome"){
           numeric:true,
           sensitivity:'base'
         }
-      );
-}
+       );
 
-    });
-}
+    } );
 
   }catch(e){
 
-    console.error(e);
-}
+    console.error(e );
 
     return lista;
 
@@ -6619,35 +5471,30 @@ setInterval(()=>{
       ordenarColecaoAlfaNumerica(
         window.usersData,
         "nome"
-      );
-}
+       );
     }
 
     if(window.pistolasData){
       ordenarColecaoAlfaNumerica(
         window.pistolasData,
         "nome"
-      );
-}
+       );
     }
 
     if(window.portasData){
       ordenarColecaoAlfaNumerica(
         window.portasData,
         "nome"
-      );
-}
+       );
     }
 
   }catch(e){
 
-    console.error(e);
-}
+    console.error(e );
 
   }
 
-},1500);
-}
+},1500 );
 
 
 
@@ -6663,13 +5510,11 @@ window.safeOrdenacaoAlfa = function(lista,campo="nome"){
 
       const aTxt =
         String(a?.[campo] || "")
-          .toLowerCase();
-}
+          .toLowerCase( );
 
       const bTxt =
         String(b?.[campo] || "")
-          .toLowerCase();
-}
+          .toLowerCase( );
 
       return aTxt.localeCompare(
         bTxt,
@@ -6678,16 +5523,13 @@ window.safeOrdenacaoAlfa = function(lista,campo="nome"){
           numeric:true,
           sensitivity:'base'
         }
-      );
-}
+       );
 
-    });
-}
+    } );
 
   }catch(e){
 
-    console.error(e);
-}
+    console.error(e );
 
     return lista;
 
@@ -6698,10 +5540,8 @@ window.safeOrdenacaoAlfa = function(lista,campo="nome"){
 
 
 window.addEventListener('error',function(e){
-  console.error('GLOBAL APP ERROR:',e.error||e.message);
-}
-});
-}
+  console.error('GLOBAL APP ERROR:',e.error||e.message );
+} );
 
 
 
@@ -6730,15 +5570,13 @@ window.getListaPistolas = function(){
 window.renderPistolas = function(lista){
 
   const container =
-    document.querySelector("#listaPistolas");
-}
+    document.querySelector("#listaPistolas" );
 
   if(!container) return;
 
   lista = Array.isArray(lista)
     ? lista
-    : getListaPistolas();
-}
+    : getListaPistolas( );
 
   const total = lista.length;
 
@@ -6755,16 +5593,13 @@ window.renderPistolas = function(lista){
   ).length;
 
   const totalEl =
-    document.querySelector("#countPistolas");
-}
+    document.querySelector("#countPistolas" );
 
   const bragaEl =
-    document.querySelector("#countPistolasBraga");
-}
+    document.querySelector("#countPistolasBraga" );
 
   const reservaEl =
-    document.querySelector("#countPistolasReserva");
-}
+    document.querySelector("#countPistolasReserva" );
 
   if(totalEl) totalEl.textContent = total;
   if(bragaEl) bragaEl.textContent = braga;
@@ -6807,15 +5642,13 @@ window.renderPistolas = function(lista){
 
     `;
 
-  }).join("");
-}
+  }).join("" );
 
 };
 
 window.editarPistola = function(id){
 
-  const lista = getListaPistolas();
-}
+  const lista = getListaPistolas( );
 
   const pistola = lista.find((p,index)=>{
 
@@ -6825,15 +5658,12 @@ window.editarPistola = function(id){
       p.docId ||
       index;
 
-    return String(pid) === String(id);
-}
+    return String(pid) === String(id );
 
-  });
-}
+  } );
 
   if(!pistola){
-    console.error("Pistola não encontrada", id);
-}
+    console.error("Pistola não encontrada", id );
     return;
   }
 
@@ -6853,19 +5683,16 @@ window.editarPistola = function(id){
 
   Object.entries(map).forEach(([key,selector])=>{
 
-    const el = document.querySelector(selector);
-}
+    const el = document.querySelector(selector );
 
     if(el){
       el.value = pistola[key] || "";
     }
 
-  });
-}
+  } );
 
   const modal =
-    document.querySelector("#modalEditarPistola");
-}
+    document.querySelector("#modalEditarPistola" );
 
   if(modal){
     modal.style.display = "flex";
@@ -6873,8 +5700,7 @@ window.editarPistola = function(id){
 
 };
 
-console.log("PISTOLAS REALTIME FIX OK");
-}
+console.log("PISTOLAS REALTIME FIX OK" );
 
 
 
@@ -6884,10 +5710,8 @@ window.sortPistolasNaturally = function(lista){
 
   return [...lista].sort((a,b)=>{
 
-    const aa = String(a.nome || a.num || "");
-}
-    const bb = String(b.nome || b.num || "");
-}
+    const aa = String(a.nome || a.num || "" );
+    const bb = String(b.nome || b.num || "" );
 
     return aa.localeCompare(
       bb,
@@ -6896,11 +5720,9 @@ window.sortPistolasNaturally = function(lista){
         numeric:true,
         sensitivity:"base"
       }
-    );
-}
+     );
 
-  });
-}
+  } );
 
 };
 
@@ -6910,11 +5732,9 @@ window.renderPistolas = function(lista){
 
   lista = Array.isArray(lista)
     ? sortPistolasNaturally(lista)
-    : sortPistolasNaturally(getListaPistolas());
-}
+    : sortPistolasNaturally(getListaPistolas() );
 
-  return oldRender(lista);
-}
+  return oldRender(lista );
 
 };
 
@@ -6926,8 +5746,7 @@ window.guardarEdicaoPistola = async function(){
 
     if(!pistola){
 
-      alert("Nenhuma Pistola foi selecionada");
-}
+      alert("Nenhuma Pistola foi selecionada" );
       return;
 
     }
@@ -6939,8 +5758,7 @@ window.guardarEdicaoPistola = async function(){
 
     if(!id){
 
-      alert("ID da pistola inválido");
-}
+      alert("ID da pistola inválido" );
       return;
 
     }
@@ -6979,35 +5797,28 @@ window.guardarEdicaoPistola = async function(){
     await window.db
       .collection("pistolas")
       .doc(id)
-      .update(dados);
-}
+      .update(dados );
 
     Object.assign(
       pistola,
       dados
-    );
-}
+     );
 
-    renderPistolas();
-}
+    renderPistolas( );
 
     const modal =
-      document.querySelector("#modalEditarPistola");
-}
+      document.querySelector("#modalEditarPistola" );
 
     if(modal){
       modal.style.display = "none";
     }
 
-    console.log("PISTOLA GUARDADA");
-}
+    console.log("PISTOLA GUARDADA" );
 
   }catch(err){
 
-    console.error(err);
-}
-    alert("Erro ao guardar pistola");
-}
+    console.error(err );
+    alert("Erro ao guardar pistola" );
 
   }
 
@@ -7015,8 +5826,7 @@ window.guardarEdicaoPistola = async function(){
 
 document.addEventListener("click", e => {
 
-  const btn = e.target.closest("button");
-}
+  const btn = e.target.closest("button" );
 
   if(!btn) return;
 
@@ -7027,27 +5837,22 @@ document.addEventListener("click", e => {
   ){
 
     const modal =
-      document.querySelector("#modalEditarPistola");
-}
+      document.querySelector("#modalEditarPistola" );
 
     if(modal &&
       modal.style.display !== "none"){
 
-      e.preventDefault();
-}
+      e.preventDefault( );
 
-      guardarEdicaoPistola();
-}
+      guardarEdicaoPistola( );
 
     }
 
   }
 
-});
-}
+} );
 
-console.log("PISTOLAS SAVE FIX OK");
-}
+console.log("PISTOLAS SAVE FIX OK" );
 
 
 
@@ -7055,8 +5860,7 @@ console.log("PISTOLAS SAVE FIX OK");
 
 window.verMaisPistola = function(id){
 
-  const lista = getListaPistolas();
-}
+  const lista = getListaPistolas( );
 
   const pistola = lista.find((p,index)=>{
 
@@ -7066,15 +5870,12 @@ window.verMaisPistola = function(id){
       p.docId ||
       index;
 
-    return String(pid) === String(id);
-}
+    return String(pid) === String(id );
 
-  });
-}
+  } );
 
   if(!pistola){
-    alert("Pistola não encontrada");
-}
+    alert("Pistola não encontrada" );
     return;
   }
 
@@ -7096,8 +5897,7 @@ Operador: ${pistola.operador || "-"}
 Armazém: ${pistola.armazem || "-"}
 
 Prontas: ${pistola.prontas || "-"}`
-  );
-}
+   );
 
 };
 
@@ -7105,8 +5905,7 @@ window.apagarPistola = async function(id){
 
   const confirmar = confirm(
     "Deseja apagar esta pistola?"
-  );
-}
+   );
 
   if(!confirmar) return;
 
@@ -7115,18 +5914,14 @@ window.apagarPistola = async function(id){
     await window.db
       .collection("pistolas")
       .doc(id)
-      .delete();
-}
+      .delete( );
 
-    console.log("PISTOLA APAGADA");
-}
+    console.log("PISTOLA APAGADA" );
 
   }catch(err){
 
-    console.error(err);
-}
-    alert("Erro ao apagar pistola");
-}
+    console.error(err );
+    alert("Erro ao apagar pistola" );
 
   }
 
@@ -7138,26 +5933,21 @@ window.renderPistolas = function(lista){
 
   lista = Array.isArray(lista)
     ? lista
-    : getListaPistolas();
-}
+    : getListaPistolas( );
 
-  lista = sortPistolasNaturally(lista);
-}
+  lista = sortPistolasNaturally(lista );
 
   const container =
-    document.querySelector("#listaPistolas");
-}
+    document.querySelector("#listaPistolas" );
 
   if(!container){
-    return oldRenderPistolas2(lista);
-}
+    return oldRenderPistolas2(lista );
   }
 
   const total = lista.length;
 
   const totalEl =
-    document.querySelector("#countPistolas");
-}
+    document.querySelector("#countPistolas" );
 
   if(totalEl){
     totalEl.textContent = total;
@@ -7219,8 +6009,7 @@ window.renderPistolas = function(lista){
 
     `;
 
-  }).join("");
-}
+  }).join("" );
 
 };
 
@@ -7229,11 +6018,9 @@ window.filtrarPistolas = function(txt=""){
   const termo =
     String(txt || "")
       .toLowerCase()
-      .trim();
-}
+      .trim( );
 
-  const lista = getListaPistolas();
-}
+  const lista = getListaPistolas( );
 
   const filtradas = lista.filter(p => {
 
@@ -7253,29 +6040,24 @@ window.filtrarPistolas = function(txt=""){
         .toLowerCase()
         .includes(termo)
 
-    );
-}
+     );
 
-  });
-}
+  } );
 
-  renderPistolas(filtradas);
-}
+  renderPistolas(filtradas );
 
 };
 
 window.filtrarPistolasComFiltros = function(){
 
   const input =
-    document.querySelector("#searchPistolas");
-}
+    document.querySelector("#searchPistolas" );
 
   const txt = input
     ? input.value
     : "";
 
-  filtrarPistolas(txt);
-}
+  filtrarPistolas(txt );
 
 };
 
@@ -7286,16 +6068,13 @@ document.addEventListener("input", e => {
     e.target.id === "searchPistolas"
   ){
 
-    filtrarPistolas(e.target.value);
-}
+    filtrarPistolas(e.target.value );
 
   }
 
-});
-}
+} );
 
-console.log("PISTOLAS VIEW/DELETE/SEARCH FIX OK");
-}
+console.log("PISTOLAS VIEW/DELETE/SEARCH FIX OK" );
 
 
 // ===== APP_BRAGA_THEME_SYSTEM =====
@@ -7307,21 +6086,16 @@ window.loadTheme = function(){
     const savedTheme =
       localStorage.getItem("app-theme") || "dark";
 
-    document.documentElement.classList.remove("dark");
-}
-    document.body.classList.remove("dark");
-}
+    document.documentElement.classList.remove("dark" );
+    document.body.classList.remove("dark" );
 
     if(savedTheme === "dark"){
-      document.documentElement.classList.add("dark");
-}
-      document.body.classList.add("dark");
-}
+      document.documentElement.classList.add("dark" );
+      document.body.classList.add("dark" );
     }
 
   }catch(e){
-    console.log(e);
-}
+    console.log(e );
   }
 
 };
@@ -7329,11 +6103,9 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme);
-}
+    localStorage.setItem("app-theme", theme );
   }catch(e){
-    console.log(e);
-}
+    console.log(e );
   }
 
 };
@@ -7341,28 +6113,23 @@ window.saveTheme = function(theme){
 window.toggleTheme = function(){
 
   const isDark =
-    document.body.classList.contains("dark");
-}
+    document.body.classList.contains("dark" );
 
   const newTheme =
     isDark ? "light" : "dark";
 
-  window.saveTheme(newTheme);
-}
-  window.loadTheme();
-}
+  window.saveTheme(newTheme );
+  window.loadTheme( );
 
 };
 
 document.addEventListener(
   "DOMContentLoaded",
   window.loadTheme
-);
-}
+ );
 
 window.addEventListener(
   "pageshow",
   window.loadTheme
-);
-}
+ );
 

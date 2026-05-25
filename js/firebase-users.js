@@ -2,13 +2,11 @@
 // APP BRAGA
 (function () {
  if (!window.db) {
-   console.error("Firebase DB não encontrado");
-}
+   console.error("Firebase DB não encontrado" );
    return;
  }
  const usersRef =
-   window.db.collection("users");
-}
+   window.db.collection("users" );
  // =========================
  // FIREBASE LISTENER
  // =========================
@@ -18,24 +16,18 @@
      lista.push({
        firebaseId: doc.id,
        ...doc.data()
-     });
-}
-   });
-}
+     } );
+   } );
    // ORDENAR ALFABETICAMENTE
    lista.sort((a, b) => {
      const nomeA =
        ((a.nome || "") + "")
-         .toLowerCase();
-}
+         .toLowerCase( );
      const nomeB =
        ((b.nome || "") + "")
-         .toLowerCase();
-}
-     return nomeA.localeCompare(nomeB);
-}
-   });
-}
+         .toLowerCase( );
+     return nomeA.localeCompare(nomeB );
+   } );
    window.usersData = lista;
    // =========================
    // CONTADORES
@@ -47,26 +39,21 @@
        return (
          (u.user_mo365 || "").trim() !== "" ||
          (u.pw_mo365 || "").trim() !== ""
-       );
-}
+        );
      }).length;
    const totalPistola =
      lista.filter((u) => {
        return (
          (u.op_pistola || "").trim() !== "" ||
          (u.pass_pistola || "").trim() !== ""
-       );
-}
+        );
      }).length;
    const elUsers =
-     document.getElementById("countUsers");
-}
+     document.getElementById("countUsers" );
    const elMO365 =
-     document.getElementById("countMO365");
-}
+     document.getElementById("countMO365" );
    const elPistola =
-     document.getElementById("countPistola");
-}
+     document.getElementById("countPistola" );
    if (elUsers)
      elUsers.textContent = totalUsers;
    if (elMO365)
@@ -77,11 +64,9 @@
    // RENDER
    // =========================
    if (typeof renderUsers === "function") {
-     renderUsers(lista);
-}
+     renderUsers(lista );
    }
- });
-}
+ } );
  // =========================
  // EDITAR USER
  // =========================
@@ -92,42 +77,27 @@
      const setVal =
        (id, value) => {
          const el =
-           document.getElementById(id);
-}
+           document.getElementById(id );
          if (el)
            el.value = value || "";
        };
-     setVal("editUser_nome", user.nome);
-}
-     setVal("editUser_zona", user.zona);
-}
-     setVal("editUser_user_pc_eye", user.user_pc_eye);
-}
-     setVal("editUser_pass_remote", user.pass_remote);
-}
-     setVal("editUser_pass_eye_peak", user.pass_eye_peak);
-}
-     setVal("editUser_op_pistola", user.op_pistola);
-}
-     setVal("editUser_pass_pistola", user.pass_pistola);
-}
-     setVal("editUser_nome_pc", user.nome_pc);
-}
-     setVal("editUser_teamviewer", user.teamviewer);
-}
-     setVal("editUser_user_mo365", user.user_mo365);
-}
-     setVal("editUser_pw_mo365", user.pw_mo365);
-}
-     setVal("editUser_email_bragalis", user.email_bragalis);
-}
-     setVal("editUser_pass_bragalis", user.pass_bragalis);
-}
+     setVal("editUser_nome", user.nome );
+     setVal("editUser_zona", user.zona );
+     setVal("editUser_user_pc_eye", user.user_pc_eye );
+     setVal("editUser_pass_remote", user.pass_remote );
+     setVal("editUser_pass_eye_peak", user.pass_eye_peak );
+     setVal("editUser_op_pistola", user.op_pistola );
+     setVal("editUser_pass_pistola", user.pass_pistola );
+     setVal("editUser_nome_pc", user.nome_pc );
+     setVal("editUser_teamviewer", user.teamviewer );
+     setVal("editUser_user_mo365", user.user_mo365 );
+     setVal("editUser_pw_mo365", user.pw_mo365 );
+     setVal("editUser_email_bragalis", user.email_bragalis );
+     setVal("editUser_pass_bragalis", user.pass_bragalis );
      const modal =
        document.getElementById(
          "modalEditarUser"
-       );
-}
+        );
      if (modal)
        modal.style.display = "flex";
    };
@@ -140,8 +110,7 @@
        const getVal =
          (id) => {
            const el =
-             document.getElementById(id);
-}
+             document.getElementById(id );
            return el
              ? el.value.trim()
              : "";
@@ -182,32 +151,27 @@
            .doc(
              window.currentEditingUserId
            )
-           .update(data);
-}
+           .update(data );
        } else {
          // NOVO USER
-         await usersRef.add(data);
-}
+         await usersRef.add(data );
        }
        const modal =
          document.getElementById(
            "modalEditarUser"
-         );
-}
+          );
        if (modal)
          modal.style.display = "none";
        window.currentEditingUserId =
          null;
        console.log(
          "User guardado"
-       );
-}
+        );
      } catch (error) {
        console.error(
          "Erro ao guardar user:",
          error
-       );
-}
+        );
      }
    };
  // =========================
@@ -218,21 +182,18 @@
      const confirmar =
        confirm(
          "Apagar utilizador?"
-       );
-}
+        );
      if (!confirmar)
        return;
      try {
        await usersRef
          .doc(firebaseId)
-         .delete();
-}
+         .delete( );
      } catch (error) {
        console.error(
          "Erro apagar user:",
          error
-       );
-}
+        );
      }
    };
 // =========================
@@ -244,8 +205,7 @@ window.imprimirUser =
    if (!user) {
      console.error(
        "User inválido"
-     );
-}
+      );
      return;
    }
    // =========================
@@ -273,8 +233,7 @@ window.imprimirUser =
        return (
          valor &&
          valor.toString().trim() !== ""
-       );
-}
+        );
      })
      .map(([label, valor]) => `
 <p>
@@ -282,8 +241,7 @@ window.imprimirUser =
          ${valor}
 </p>
      `)
-     .join("");
-}
+     .join("" );
    // =========================
    // HTML
    // =========================
@@ -330,8 +288,7 @@ ${linhas}
    const iframe =
      document.createElement(
        "iframe"
-     );
-}
+      );
    iframe.style.position =
      "fixed";
    iframe.style.right = "0";
@@ -341,28 +298,19 @@ ${linhas}
    iframe.style.border = "0";
    document.body.appendChild(
      iframe
-   );
-}
+    );
    const frameDoc =
      iframe.contentWindow.document;
-   frameDoc.open();
-}
-   frameDoc.write(html);
-}
-   frameDoc.close();
-}
+   frameDoc.open( );
+   frameDoc.write(html );
+   frameDoc.close( );
    setTimeout(() => {
-     iframe.contentWindow.focus();
-}
-     iframe.contentWindow.print();
-}
+     iframe.contentWindow.focus( );
+     iframe.contentWindow.print( );
      setTimeout(() => {
        document.body.removeChild(
          iframe
-       );
-}
-     }, 1000);
-}
-   }, 500);
-}
+        );
+     }, 1000 );
+   }, 500 );
  };
