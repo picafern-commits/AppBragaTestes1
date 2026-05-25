@@ -2504,7 +2504,7 @@ button.btn-primary,
   gap: 18px;
 }
 
-.dashboard-grid-bottom {
+.dashboard-fullwidth {
   display: grid;
   grid-template-columns: minmax(420px, 1fr) minmax(360px, .9fr);
   gap: 18px;
