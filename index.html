@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+
+<script id="APP_BRAGA_THEME_LOADER">
+(function(){
+
+  try{
+
+    const savedTheme =
+      localStorage.getItem("app-theme") || "dark";
+
+    if(savedTheme === "dark"){
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
+    }
+
+  }catch(e){
+    console.log(e);
+  }
+
+})();
+</script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=html/index.html" />
+  <title>App Braga</title>
+
+  <script>
+    window.location.href = "html/index.html";
+  </script>
+
+<link rel="stylesheet" href="sidebar-enterprise.css">
+</head>
+<body>
+<div class="main-content">
+  A redirecionar para a aplicação...
+  <script src="js/core/helpers.js"></script>
+</div>
+</body>
+</html>

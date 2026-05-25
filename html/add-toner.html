@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<script id="APP_BRAGA_THEME_LOADER">
+(function(){
+
+  try{
+
+    const savedTheme =
+      localStorage.getItem("app-theme") || "dark";
+
+    if(savedTheme === "dark"){
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
+    }
+
+  }catch(e){
+    console.log(e);
+  }
+
+})();
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Adicionar Toner</title>
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="App Braga">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+<link rel="stylesheet" href="sidebar-enterprise.css">
+</head>
+<body>
+<div class="main-content">
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="brand-wrap">
+      <div class="brand-logo">BR</div>
+      <div class="brand-text">
+        <h2>App Braga</h2>
+        <p>Enterprise System</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-menu">
+    <a href="index.html" class="nav-link">Dashboard</a>
+    <a href="add-toner.html" class="nav-link">Adicionar Toner</a>
+    <a href="stock.html" class="nav-link">Stock</a>
+    <a href="historico.html" class="nav-link">Histórico</a>
+    <a href="etiquetas-word.html" class="nav-link">Etiquetas Word</a>
+    <a href="impressoras.html" class="nav-link">Impressoras</a>
+    <a href="manutencao-impressoras.html" class="nav-link">Manutenção</a>
+    <a href="computadores.html" class="nav-link">Computadores</a>
+    <a href="users.html" class="nav-link">Users</a>
+    <a href="pistolas.html" class="nav-link">Pistolas CK65</a>
+    <a href="portas.html" class="nav-link">Portas Rede</a>
+    <a href="config.html" class="nav-link">Configurações</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="footer-avatar">BR</div>
+    <div>
+      <strong>Administrador</strong>
+      <p>admin@appbraga.pt</p>
+    </div>
+  </div>
+</aside>
+
+
+<main class="main">
+
+  <div class="page-hero">
+    <div class="page-hero-title">Adicionar Toner</div>
+	<span class="status-pill">Sistema Online</span>
+  </div>
+
+  <div class="panel">
+    <div class="section-header">
+      <div>
+        <h3>Leitura Folha Toner</h3>
+      </div>
+    </div>
+
+    <div class="card-actions" style="margin-bottom:14px;">
+      <button type="button" class="primary-btn" onclick="abrirOCR()">📷 Ler Folha Toner</button>
+      <input id="ocrInput" type="file" accept="image/*" capture="environment" style="display:none;" onchange="processarOCRInput(event)">
+    </div>
+
+    <div id="reader" class="scanner-box"></div>
+    <div id="ocrStatus" class="ocr-status" style="display:none;"></div>
+  </div>
+
+  <div id="serial3Box" class="barcode-learn-box" style="display:none;">
+    <div class="section-header">
+      <div>
+        <h3>Últimos 3 Dígitos da Série</h3>
+        <p class="section-subtitle">Introduza os 3 últimos dígitos da impressora para selecionar a localização automaticamente.</p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <label>
+        <span>Últimos 3 dígitos</span>
+        <input id="serial3Input" type="text" maxlength="3" placeholder="Ex: 805">
+      </label>
+    </div>
+
+    <div class="card-actions" style="margin-top:12px;">
+      <button type="button" class="primary-btn" onclick="confirmarSerie3Digitos()">Confirmar Série</button>
+      <button type="button" class="secondary-btn" onclick="fecharSerie3Digitos()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="panel form-grid">
+    <label><span>Equipamento</span>
+      <select id="equipamento">
+        <option value="">Selecionar equipamento</option>
+        <option value="P3155DN">P3155DN</option>
+        <option value="TASKalfa_255ci">TASKalfa_255ci</option>
+        <option value="PA5500x">PA5500x</option>
+      </select>
+    </label>
+
+    <label><span>Localização</span>
+      <select id="localizacao">
+        <option value="">Selecionar localização</option>
+        <option value="R4B2229805 - Braga - Ilha 01">R4B2229805 - Braga - Ilha 01</option>
+        <option value="WD44336210 - Braga - Ilha 02">WD44336210 - Braga - Ilha 02</option>
+        <option value="R4B1395508 - Braga - Ilha 03">R4B1395508 - Braga - Ilha 03</option>
+        <option value="R4B1293179 - Braga - Ilha 04">R4B1293179 - Braga - Ilha 04</option>
+        <option value="R4B1293180 - Braga - Ilha 05">R4B1293180 - Braga - Ilha 05</option>
+        <option value="R4B1293183 - Braga - Balcão 01">R4B1293183 - Braga - Balcão 01</option>
+        <option value="R4B1293184 - Braga - Balcão 02">R4B1293184 - Braga - Balcão 02</option>
+        <option value="R4B2230012 - Braga - Dep. Logistica">R4B2230012 - Braga - Dep. Logistica</option>
+        <option value="R4B1293173 - Braga - G/Encomendas">R4B1293173 - Braga - G/Encomendas</option>
+        <option value="R4B1395261 - Braga - Devoluções">R4B1395261 - Braga - Devoluções</option>
+        <option value="RVP0Z03770 - Braga - Escritorio">RVP0Z03770 - Braga - Escritorio</option>
+        <option value="R4B1293169 - Vila Real - Ilha 01">R4B1293169 - Vila Real - Ilha 01</option>
+        <option value="R4B1293174 - Vila Real - Ilha 02">R4B1293174 - Vila Real - Ilha 02</option>
+        <option value="RVP0Z03715 - Vila Real - Ilha 03">RVP0Z03715 - Vila Real - Ilha 03</option>
+        <option value="Sem Localização">Sem Localização</option>
+      </select>
+    </label>
+
+    <label><span>Cor</span>
+      <select id="cor">
+        <option value="">Selecionar cor</option>
+        <option value="Preto">Preto</option><option value="Amarelo">Amarelo</option><option value="Vermelho">Vermelho</option><option value="Azul">Azul</option>
+      </select>
+    </label>
+    <label><span>Lote</span><input type="text" id="lote" placeholder="Lote automático / opcional"></label>
+    <label><span>Data da folha</span><input type="text" id="dataFolha" readonly placeholder="Data lida da folha"></label>
+    <label><span>Data do scan</span><input type="date" id="data"></label>
+    <button class="primary-btn" onclick="disponivel()">Adicionar ao stock</button>
+    <button class="secondary-btn" onclick="gerarWordEtiquetaFromForm()">Gerar Word Etiqueta</button>
+  </div>
+
+</main>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="../js/app.js"></script>
+  <script src="../js/core/helpers.js"></script>
+</div>
+</body>
+</html>
+
+<div class="dashboard-shell">
+<div class="dashboard-header">
+<div>
+<h1>Bem-vindo de volta, Admin 👋</h1>
+<p>Resumo geral da App Braga.</p>
+</div>
+
+<div class="dashboard-actions">
+<button>22 Maio 2026</button>
+<button>+ Novo Registo</button>
+</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card blue"><span>Total Equipamentos</span><strong>1,248</strong></div>
+
+<div class="stat-card orange"><span>Tickets</span><strong>23</strong></div>
+<div class="stat-card purple"><span>Despesas</span><strong>€12,540</strong></div>
+</div>
+
+<div class="dashboard-row">
+<div class="dashboard-panel">
+<h2>Atividade Recente</h2>
+<div class="fake-chart"></div>
+</div>
+
+<div class="dashboard-panel">
+
+<div class="fake-donut"></div>
+</div>
+
+<div class="dashboard-panel">
+<h2>Atalhos</h2>
+<div class="shortcut-grid">
+<button>Novo Equipamento</button>
+<button>Novo Ticket</button>
+<button>Adicionar Despesa</button>
+<button>Gerir Stock</button>
+</div>
+</div>
+</div>
+
+<div class="dashboard-bottom">
+
+<div class="dashboard-panel">
+<h2>Equipamentos</h2>
+
+<div class="equipment-grid">
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>IMP-001</h3>
+<p>HP LaserJet</p>
+</div>
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>IMP-002</h3>
+<p>Epson EcoTank</p>
+</div>
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>CK65-001</h3>
+<p>Zebra CK65</p>
+</div>
+
+</div>
+</div>
+
+<div class="dashboard-panel">
+
+
+<div class="ticket-list">
+
+<div class="ticket-item">
+<span>Impressora sem toner</span>
+<button>Aberto</button>
+</div>
+
+<div class="ticket-item">
+<span>CK65 não liga</span>
+<button>Progresso</button>
+</div>
+
+<div class="ticket-item">
+<span>Scanner offline</span>
+<button>Resolvido</button>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>

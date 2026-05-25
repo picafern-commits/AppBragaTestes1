@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<script id="APP_BRAGA_THEME_LOADER">
+(function(){
+
+  try{
+
+    const savedTheme =
+      localStorage.getItem("app-theme") || "dark";
+
+    if(savedTheme === "dark"){
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
+    }
+
+  }catch(e){
+    console.log(e);
+  }
+
+})();
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Histórico</title>
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="App Braga">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+<link rel="stylesheet" href="sidebar-enterprise.css">
+</head>
+<body>
+<div class="main-content">
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="brand-wrap">
+      <div class="brand-logo">BR</div>
+      <div class="brand-text">
+        <h2>App Braga</h2>
+        <p>Enterprise System</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-menu">
+    <a href="index.html" class="nav-link">Dashboard</a>
+    <a href="add-toner.html" class="nav-link">Adicionar Toner</a>
+    <a href="stock.html" class="nav-link">Stock</a>
+    <a href="historico.html" class="nav-link">Histórico</a>
+    <a href="etiquetas-word.html" class="nav-link">Etiquetas Word</a>
+    <a href="impressoras.html" class="nav-link">Impressoras</a>
+    <a href="manutencao-impressoras.html" class="nav-link">Manutenção</a>
+    <a href="computadores.html" class="nav-link">Computadores</a>
+    <a href="users.html" class="nav-link">Users</a>
+    <a href="pistolas.html" class="nav-link">Pistolas CK65</a>
+    <a href="portas.html" class="nav-link">Portas Rede</a>
+    <a href="config.html" class="nav-link">Configurações</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="footer-avatar">BR</div>
+    <div>
+      <strong>Administrador</strong>
+      <p>admin@appbraga.pt</p>
+    </div>
+  </div>
+</aside>
+
+
+<main class="main">
+
+  <div class="page-hero">
+    <div class="page-hero-title">Histórico</div>
+	<span class="status-pill">Sistema Online</span>
+  </div>
+
+  <div class="stats-grid"><div class="stat-card stat-card-full"><span>Total usados</span><strong id="countUsados">0</strong></div></div>
+  <div class="panel"><div id="listaHistorico" class="cards-list"></div></div>
+
+
+  <div id="modalEditarHistorico" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <div class="section-header"><div><h3>Editar Histórico</h3><p class="section-subtitle">Editar registo histórico</p></div></div>
+      <div class="form-grid">
+        <label><span>Equipamento</span><input id="editHistoricoEquipamento" type="text"></label>
+        <label><span>Cor</span><input id="editHistoricoCor" type="text"></label>
+        <label><span>Localização</span><input id="editHistoricoLocalizacao" type="text"></label>
+        <label><span>Lote</span><input id="editHistoricoLote" type="text"></label>
+        <label><span>Data Scan</span><input id="editHistoricoData" type="text"></label>
+        <label><span>Data Folha</span><input id="editHistoricoDataFolha" type="text"></label>
+      </div>
+      <div class="card-actions" style="margin-top:14px;">
+        <button class="primary-btn" onclick="guardarEdicaoHistoricoModal()">Guardar</button>
+        <button class="secondary-btn" onclick="fecharEdicaoHistoricoModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="../js/app.js"></script>
+  <script src="../js/core/helpers.js"></script>
+</div>
+</body>
+</html>
+
+<div class="dashboard-shell">
+<div class="dashboard-header">
+<div>
+<h1>Bem-vindo de volta, Admin 👋</h1>
+<p>Resumo geral da App Braga.</p>
+</div>
+
+<div class="dashboard-actions">
+<button>22 Maio 2026</button>
+<button>+ Novo Registo</button>
+</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card blue"><span>Total Equipamentos</span><strong>1,248</strong></div>
+
+<div class="stat-card orange"><span>Tickets</span><strong>23</strong></div>
+<div class="stat-card purple"><span>Despesas</span><strong>€12,540</strong></div>
+</div>
+
+<div class="dashboard-row">
+<div class="dashboard-panel">
+<h2>Atividade Recente</h2>
+<div class="fake-chart"></div>
+</div>
+
+<div class="dashboard-panel">
+
+<div class="fake-donut"></div>
+</div>
+
+<div class="dashboard-panel">
+<h2>Atalhos</h2>
+<div class="shortcut-grid">
+<button>Novo Equipamento</button>
+<button>Novo Ticket</button>
+<button>Adicionar Despesa</button>
+<button>Gerir Stock</button>
+</div>
+</div>
+</div>
+
+<div class="dashboard-bottom">
+
+<div class="dashboard-panel">
+<h2>Equipamentos</h2>
+
+<div class="equipment-grid">
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>IMP-001</h3>
+<p>HP LaserJet</p>
+</div>
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>IMP-002</h3>
+<p>Epson EcoTank</p>
+</div>
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>CK65-001</h3>
+<p>Zebra CK65</p>
+</div>
+
+</div>
+</div>
+
+<div class="dashboard-panel">
+
+
+<div class="ticket-list">
+
+<div class="ticket-item">
+<span>Impressora sem toner</span>
+<button>Aberto</button>
+</div>
+
+<div class="ticket-item">
+<span>CK65 não liga</span>
+<button>Progresso</button>
+</div>
+
+<div class="ticket-item">
+<span>Scanner offline</span>
+<button>Resolvido</button>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
