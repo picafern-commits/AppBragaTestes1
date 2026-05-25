@@ -1,4 +1,15 @@
 
+function obterImagemDashboard(modelo = "") {
+  const nome = String(modelo).toLowerCase();
+
+  if (nome.includes("p3155")) return "../img/kyocerap3155dn.jpg";
+  if (nome.includes("pa5500")) return "../img/pa5500x.jpg";
+  if (nome.includes("2554")) return "../img/taskalfa2554ci.png";
+
+  return "../img/kyocera.png";
+}
+
+
 window.usersData = window.usersData || [];
 window.pistolasData = window.pistolasData || [];
 window.portasData = window.portasData || [];
@@ -615,7 +626,7 @@ function renderDashboardCards(items) {
     return `
       <div class="equipment-card dashboard-critical-card">
         <img
-          src="../img/kyocera.png"
+          src="${obterImagemDashboard(item.modelo)}"
           class="equipment-real-image"
           onerror="this.src='../img/printer.png'"
         >
