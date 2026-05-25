@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 
@@ -39,72 +39,57 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
+
+<link rel="stylesheet" href="sidebar-enterprise.css">
 </head>
 <body>
+<div class="main-content">
+
 <aside class="sidebar">
-  <div class="brand premium-brand">
-    <div class="brand-badge">BR</div>
-    <div>
-      <h2>App Braga</h2>
+  <div class="sidebar-top">
+    <div class="brand-wrap">
+      <div class="brand-logo">BR</div>
+      <div class="brand-text">
+        <h2>App Braga</h2>
+        <p>Enterprise System</p>
+      </div>
     </div>
   </div>
-	<a href="index.html" class="active">Dashboard</a>
-	<a href="add-toner.html">Adicionar Toner</a>
-	<a href="stock.html">Stock</a>
-	<a href="historico.html">Histórico</a>
-	<a href="etiquetas-word.html">Etiquetas Word</a>
-	<a href="impressoras.html">Impressoras</a>
-	<a href="manutencao-impressoras.html">Manutenção Impressoras</a>
-	<a href="computadores.html">Computadores</a>
-	<a href="users.html">Users</a>
-	<a href="pistolas.html">Pistolas CK65</a>
-	<a href="portas.html">Portas Rede</a>
-	<a href="radios.html">Rádios</a>
-	<a href="informacoes.html">Informações</a>
-	<a href="config.html">Configurações</a>
+
+  <nav class="sidebar-menu">
+    <a href="index.html" class="nav-link">Dashboard</a>
+    <a href="add-toner.html" class="nav-link">Adicionar Toner</a>
+    <a href="stock.html" class="nav-link">Stock</a>
+    <a href="historico.html" class="nav-link">Histórico</a>
+    <a href="etiquetas-word.html" class="nav-link">Etiquetas Word</a>
+    <a href="impressoras.html" class="nav-link">Impressoras</a>
+    <a href="manutencao-impressoras.html" class="nav-link">Manutenção</a>
+    <a href="computadores.html" class="nav-link">Computadores</a>
+    <a href="users.html" class="nav-link">Users</a>
+    <a href="pistolas.html" class="nav-link">Pistolas CK65</a>
+    <a href="portas.html" class="nav-link">Portas Rede</a>
+    <a href="config.html" class="nav-link">Configurações</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="footer-avatar">BR</div>
+    <div>
+      <strong>Administrador</strong>
+      <p>admin@appbraga.pt</p>
+    </div>
+  </div>
 </aside>
 
-<main class="main dashboard-shell">
-  <div class="dashboard-header">
-    <div>
-      <h1>Bem-vindo de volta, Ricardo</h1>
-    </div>
-    <div class="dashboard-actions">
-      <button type="button" class="dashboard-date">25 de Maio de 2026</button>
-    </div>
+
+<main class="main">
+  <div class="page-hero">
+    <div class="page-hero-title">Dashboard</div>
+	<span class="status-pill">Sistema Online</span>
   </div>
 
-  <section class="enterprise-metrics">
-    <div class="metric-card metric-blue">
-      <span>Total de Equipamentos</span>
-      <strong id="dashTotalEquipamentos">0</strong>
-      <small>Inventario ativo</small>
-    </div>
-    <div class="metric-card metric-green">
-      <span>Stock Total Toners</span>
-      <strong id="dashStockTotal">0</strong>
-      <small>Toners disponi­veis</small>
-    </div>
-    <div class="metric-card metric-orange">
-      <span>Manutenções a Decorrer</span>
-      <strong id="dashTicketsAbertos">0</strong>
-      <small>Manutenções pendentes</small>
-    </div>
-    <div class="metric-card metric-purple">
-      <span>Impressoras OK</span>
-      <strong id="dashImpressorasOk">0</strong>
-      <small>Estado operacional</small>
-    </div>
-  </section>
+  <div id="listaDashboardStock" class="cards-list"></div>
 
-  <section class="dashboard-grid-bottom">
-    <div class="dashboard-panel featured-panel">
-      <div class="panel-title-row">
-        <h2>Equipamentos em Destaque</h2>
-        <a href="impressoras.html">Ver Todos</a>
-      </div>
-      <div id="listaDashboardStock" class="equipment-grid"></div>
-    </div>
+</main>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -115,5 +100,136 @@
 <!-- FIREBASE -->
 
   <script src="../js/core/helpers.js"></script>
+</div>
 </body>
 </html>
+
+<div class="dashboard-shell">
+<div class="dashboard-header">
+<div>
+<h1>Bem-vindo de volta, Admin 👋</h1>
+<p>Resumo geral da App Braga.</p>
+</div>
+
+<div class="dashboard-actions">
+<button>22 Maio 2026</button>
+<button>+ Novo Registo</button>
+</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card blue"><span>Total Equipamentos</span><strong>1,248</strong></div>
+
+<div class="stat-card orange"><span>Tickets</span><strong>23</strong></div>
+<div class="stat-card purple"><span>Despesas</span><strong>€12,540</strong></div>
+</div>
+
+<div class="dashboard-row">
+<div class="dashboard-panel">
+<h2>Atividade Recente</h2>
+<div class="fake-chart"></div>
+</div>
+
+<div class="dashboard-panel">
+
+<div class="fake-donut"></div>
+</div>
+
+<div class="dashboard-panel">
+<h2>Atalhos</h2>
+<div class="shortcut-grid">
+<button>Novo Equipamento</button>
+<button>Novo Ticket</button>
+<button>Adicionar Despesa</button>
+<button>Gerir Stock</button>
+</div>
+</div>
+</div>
+
+<div class="dashboard-bottom">
+
+<div class="dashboard-panel">
+<h2>Equipamentos</h2>
+
+<div class="equipment-grid">
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>IMP-001</h3>
+<p>HP LaserJet</p>
+</div>
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>IMP-002</h3>
+<p>Epson EcoTank</p>
+</div>
+
+<div class="equipment-card">
+<div class="equipment-image"></div>
+<h3>CK65-001</h3>
+<p>Zebra CK65</p>
+</div>
+
+</div>
+</div>
+
+<div class="dashboard-panel">
+
+
+<div class="ticket-list">
+
+<div class="ticket-item">
+<span>Impressora sem toner</span>
+<button>Aberto</button>
+</div>
+
+<div class="ticket-item">
+<span>CK65 não liga</span>
+<button>Progresso</button>
+</div>
+
+<div class="ticket-item">
+<span>Scanner offline</span>
+<button>Resolvido</button>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+/* AUTO LAYOUT FIX */
+
+.main-content,
+.main,
+.dashboard,
+.dashboard-container,
+.page-content,
+.content,
+.content-area{
+    margin-left:250px !important;
+    width:calc(100vw - 250px) !important;
+    max-width:none !important;
+    padding:24px !important;
+    box-sizing:border-box !important;
+}
+
+.impressoras-grid,
+.equipamentos-grid,
+.cards-grid,
+.dashboard-grid{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr)) !important;
+    gap:20px !important;
+}
+
+.panel,
+.card,
+.widget{
+    width:100% !important;
+    max-width:none !important;
+}

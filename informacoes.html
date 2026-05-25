@@ -95,10 +95,6 @@ width:calc(100% - 240px);
 padding:24px;
 }
 </style>
-
-
-
-<link rel="stylesheet" href="sidebar-enterprise.css">
 </head>
 
 <body>
@@ -228,3 +224,37 @@ title.includes(value)
 </div>
 </body>
 </html>
+
+
+/* AUTO LAYOUT FIX */
+
+.main-content,
+.main,
+.dashboard,
+.dashboard-container,
+.page-content,
+.content,
+.content-area{
+    margin-left:250px !important;
+    width:calc(100vw - 250px) !important;
+    max-width:none !important;
+    padding:24px !important;
+    box-sizing:border-box !important;
+}
+
+.impressoras-grid,
+.equipamentos-grid,
+.cards-grid,
+.dashboard-grid{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr)) !important;
+    gap:20px !important;
+}
+
+.panel,
+.card,
+.widget{
+    width:100% !important;
+    max-width:none !important;
+}

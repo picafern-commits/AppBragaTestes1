@@ -236,7 +236,10 @@ window.imprimirUser =
        );
      })
      .map(([label, valor]) => `
-<p><b>${label}:</b> ${valor}</p>
+<p>
+<b>${label}:</b>
+         ${valor}
+</p>
      `)
      .join("");
    // =========================
@@ -249,26 +252,22 @@ window.imprimirUser =
  ${user.nome || "User"}
 </title>
 <style>
-@page {
- size: A4;
- margin: 10mm;
-}
 body{
  font-family: Arial;
- padding:10px;
+ padding:14px;
  color:#000;
  background:#fff;
 }
 h1{
- margin-bottom:10px;
+ margin-bottom:14px;
  color:#000;
- font-size:22px;
+ font-size:18px;
 }
 p{
- margin:2px 0;
- font-size:11px;
+ margin:4px 0;
+ font-size:12px;
  color:#000;
- line-height:1.15;
+ line-height:1.2;
 }
 b{
  color:#000;
