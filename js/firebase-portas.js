@@ -184,10 +184,6 @@ window.editarPorta = function(id){
 window.guardarEdicaoPorta = async function(){
 
     try{
-
-      if(window.currentEditingPortaId){
-
-
         // NOVA PORTA
         if(!window.portaSelecionada){
 

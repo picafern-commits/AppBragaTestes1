@@ -14,17 +14,17 @@
 
       };
 
-    });
+    } );
 
   }
 
   const observer = new MutationObserver(()=>{
-    attachEditTracking();
-  });
+    attachEditTracking( );
+  } );
 
   observer.observe(document.body,{
     childList:true,
     subtree:true
-  });
+  } );
 
-})();
+})( );

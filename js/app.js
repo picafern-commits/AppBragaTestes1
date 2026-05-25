@@ -1,4 +1,15 @@
 
+function obterImagemDashboard(modelo = "") {
+  const nome = String(modelo).toLowerCase();
+
+  if (nome.includes("p3155")) return "../img/kyocerap3155dn.png";
+  if (nome.includes("pa5500")) return "../img/pa5500x.png";
+  if (nome.includes("2554")) return "../img/taskalfa2554ci.png";
+
+  return "../img/kyocera.png";
+}
+
+
 window.usersData = window.usersData || [];
 window.pistolasData = window.pistolasData || [];
 window.portasData = window.portasData || [];
@@ -22,7 +33,7 @@ if(typeof firebase !== "undefined"){
 
 }
 
-const APP_VERSION = "1.5.0";
+const APP_VERSION = "1.6.3";
 
 
 
@@ -158,7 +169,7 @@ function guardarUsersLocal() {
     const serializavel = window.usersData.map(u => ({ ...u }));
     localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(serializavel));
   } catch (e) {
-    console.warn('Nao foi possivel guardar users no localStorage.', e);
+    console.warn('Não foi possivel guardar users no localStorage.', e);
   }
 }
 
@@ -177,7 +188,7 @@ function carregarUsersLocal() {
     window.usersData.splice(0, window.usersData.length, ...parsed);
     prepararRefsUsers();
   } catch (e) {
-    console.warn('Nao foi possivel carregar users do localStorage.', e);
+    console.warn('Não foi possivel carregar users do localStorage.', e);
     prepararRefsUsers();
   }
 }
@@ -564,6 +575,7 @@ function renderDashboardResumoInteligente() {
 }
 
 function renderDashboardCards(items) {
+  try { updateEnterpriseDashboard(); } catch (e) { console.error(e); }
   const lista = el("listaDashboardStock");
   if (!lista) return;
 
@@ -606,13 +618,44 @@ function renderDashboardCards(items) {
 
     const residueHtml = residue ? gerarHTMLBarraToner(residue.percent, residue.label || "Resíduo", "waste") : "";
 
+    const percentValue =
+      criticalColors[0]?.percent ||
+      info?.percent ||
+      0;
+
     return `
-      <div class="dashboard-card dashboard-critical-card">
-        <div class="stock-id">${item.modelo}</div>
-        <div class="meta-line">Série: <span class="meta-value">${item.serie}</span></div>
-        <div class="meta-line">Local: <span class="meta-value">${item.localizacao} (${item.armazem})</span></div>
-        <div class="meta-line">IP: <span class="meta-value">${item.ip}</span></div>
-        <div class="printer-toners-grid" style="margin-top:10px;">${supplyHtml}${residueHtml}</div>
+      <div class="equipment-card dashboard-critical-card">
+        <img
+          src="${obterImagemDashboard(item.modelo)}"
+          class="equipment-real-image"
+          onerror="this.src='../img/printer.png'"
+        >
+
+        <div class="equipment-top-row">
+          <h3>${item.modelo || "Kyocera"}</h3>
+          <span class="status-badge offline">
+            ${percentValue <= 10 ? "Crítico" : "Atenção"}
+          </span>
+        </div>
+
+        <p class="equipment-model">${item.modelo || "-"}</p>
+
+        <p class="equipment-ip">
+          IP: ${item.ip || "-"}
+        </p>
+
+        <p class="equipment-local">
+          Local: ${item.localizacao || "-"}
+        </p>
+
+        <div class="equipment-percent">
+          Toner: ${percentValue}%
+        </div>
+
+        <div class="printer-toners-grid" style="margin-top:10px;">
+          ${supplyHtml}
+          ${residueHtml}
+        </div>
       </div>
     `;
   }).join("");
@@ -1266,7 +1309,7 @@ function guardarImpressorasLocal() {
   try {
     impressorasData.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; });
     localStorage.setItem(IMPRESSORAS_STORAGE_KEY, JSON.stringify(impressorasData.map(i => ({ ...i }))));
-  } catch (e) { console.warn('Nao foi possivel guardar impressoras no localStorage.', e); }
+  } catch (e) { console.warn('Não foi possivel guardar impressoras no localStorage.', e); }
 }
 
 function carregarImpressorasLocal() {
@@ -1277,7 +1320,7 @@ function carregarImpressorasLocal() {
     if (!Array.isArray(parsed) || !parsed.length) return;
     parsed.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; });
     impressorasData.splice(0, impressorasData.length, ...parsed);
-  } catch (e) { console.warn('Nao foi possivel carregar impressoras do localStorage.', e); }
+  } catch (e) { console.warn('Não foi possivel carregar impressoras do localStorage.', e); }
 }
 
 function renderImpressoras(lista = impressorasData) {
@@ -1618,7 +1661,7 @@ function guardarPistolasLocal() {
     const serializavel = window.pistolasData.map(p => ({ ...p }));
     localStorage.setItem(PISTOLAS_STORAGE_KEY, JSON.stringify(serializavel));
   } catch (e) {
-    console.warn('Nao foi possivel guardar pistolas no localStorage.', e);
+    console.warn('Não foi possivel guardar pistolas no localStorage.', e);
   }
 }
 
@@ -1637,7 +1680,7 @@ function carregarPistolasLocal() {
     window.pistolasData.splice(0, window.pistolasData.length, ...parsed);
     prepararRefsPistolas();
   } catch (e) {
-    console.warn('Nao foi possivel carregar pistolas do localStorage.', e);
+    console.warn('Não foi possivel carregar pistolas do localStorage.', e);
     prepararRefsPistolas();
   }
 }
@@ -1653,7 +1696,7 @@ function guardarPortasLocal() {
     const serializavel = window.portasData.map(p => ({ ...p }));
     localStorage.setItem(PORTAS_STORAGE_KEY, JSON.stringify(serializavel));
   } catch (e) {
-    console.warn('Nao foi possivel guardar portas no localStorage.', e);
+    console.warn('Não foi possivel guardar portas no localStorage.', e);
   }
 }
 
@@ -1672,7 +1715,7 @@ function carregarPortasLocal() {
     window.portasData.splice(0, window.portasData.length, ...parsed);
     prepararRefsPortas();
   } catch (e) {
-    console.warn('Nao foi possivel carregar portas do localStorage.', e);
+    console.warn('Não foi possivel carregar portas do localStorage.', e);
     prepararRefsPortas();
   }
 }
@@ -1803,8 +1846,10 @@ function applyAppTheme(mode) {
   const isDark = mode === "dark";
   document.documentElement.classList.toggle("dark", isDark);
   document.documentElement.classList.toggle("app-dark", isDark);
+  document.documentElement.classList.toggle("app-light", !isDark);
   document.body.classList.toggle("dark", isDark);
   document.body.classList.toggle("app-dark", isDark);
+  document.body.classList.toggle("app-light", !isDark);
   localStorage.setItem("modo", isDark ? "dark" : "light");
 
   document.querySelectorAll(".theme-toggle").forEach((button) => {
@@ -1817,7 +1862,7 @@ function applyAppTheme(mode) {
 }
 
 function initGlobalTheme() {
-  const savedMode = localStorage.getItem("modo") === "dark" ? "dark" : "light";
+  const savedMode = localStorage.getItem("modo") === "light" ? "light" : "dark";
   applyAppTheme(savedMode);
 
   const sidebar = document.querySelector(".sidebar");
@@ -1838,6 +1883,19 @@ function initGlobalTheme() {
     }
   }
 
+  if (sidebar && !sidebar.querySelector(".sidebar-user-card")) {
+    const footer = document.createElement("div");
+    footer.className = "sidebar-user-card";
+    footer.innerHTML = `
+      <div class="sidebar-user-avatar">BR</div>
+      <div>
+        <strong>Administrador</strong>
+        <span>admin@appbraga.pt</span>
+      </div>
+    `;
+    sidebar.appendChild(footer);
+  }
+
   const sw = el("darkSwitch");
   if (sw && !sw.dataset.themeBound) {
     sw.dataset.themeBound = "1";
@@ -1846,7 +1904,337 @@ function initGlobalTheme() {
     });
   }
 
-  applyAppTheme(localStorage.getItem("modo") === "dark" ? "dark" : "light");
+  applyAppTheme(localStorage.getItem("modo") === "light" ? "light" : "dark");
+}
+
+function initFullScreenScroll() {
+  if (window.__appBragaFullScrollBound) return;
+  window.__appBragaFullScrollBound = true;
+
+  const forwardWheelToPage = (event) => {
+    const modalOpen = document.querySelector('.modal-overlay[style*="flex"], .modal-overlay.show');
+    if (modalOpen && modalOpen.contains(event.target)) return;
+
+    const interactive = event.target.closest("input, textarea, select, option");
+    if (interactive) return;
+
+    const fixedZone = event.target.closest(".sidebar, .app-menu-toggle, .app-sidebar-overlay");
+    if (!fixedZone) return;
+
+    event.preventDefault();
+    window.scrollBy({
+      top: event.deltaY,
+      left: event.deltaX,
+      behavior: "auto"
+    });
+  };
+
+  document.addEventListener("wheel", forwardWheelToPage, { passive: false, capture: true });
+}
+
+document.addEventListener("DOMContentLoaded", initFullScreenScroll);
+
+const RADIOS_STORAGE_KEY = "appBragaRadios";
+const INFORMACOES_STORAGE_KEY = "appBragaInformacoes";
+let radiosData = [];
+let informacoesData = [];
+let informacaoSelecionada = null;
+
+function nowPt() {
+  return new Date().toLocaleString("pt-PT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+function splitUsersList(value) {
+  return String(value || "")
+    .split(",")
+    .map(item => item.trim())
+    .filter(Boolean);
+}
+
+function safeRefHtml(value) {
+  if (typeof escapeHtmlAppBraga === "function") return escapeHtmlAppBraga(value);
+  return String(value ?? "").replace(/[&<>"]/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;"
+  }[char] || char));
+}
+
+function defaultRadiosData() {
+  return [1, 2, 3, 4, 5].map(numero => ({
+    id: `radio-${numero}`,
+    radio: String(numero),
+    users: "",
+    obs: "",
+    updated: nowPt()
+  }));
+}
+
+function loadRadiosData() {
+  try {
+    const raw = localStorage.getItem(RADIOS_STORAGE_KEY);
+    radiosData = raw ? JSON.parse(raw) : defaultRadiosData();
+  } catch (e) {
+    console.warn("Não foi possivel carregar radios.", e);
+    radiosData = defaultRadiosData();
+  }
+}
+
+function saveRadiosData() {
+  localStorage.setItem(RADIOS_STORAGE_KEY, JSON.stringify(radiosData));
+  try {
+    if (window.db) {
+      window.db.collection("appRadios").doc("lista").set({
+        items: radiosData,
+        updated: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    }
+  } catch (e) {
+    console.warn("Não foi possivel sincronizar radios.", e);
+  }
+}
+
+function renderRadios() {
+  const editor = document.getElementById("radiosEditorRows");
+  const report = document.getElementById("radiosReportRows");
+  if (!editor || !report) return;
+
+  const search = normalizarTexto(document.getElementById("radioSearch")?.value || "");
+  const lista = radiosData.filter(item => {
+    const text = `${item.radio} ${item.users} ${item.obs}`;
+    return !search || normalizarTexto(text).includes(search);
+  });
+
+  editor.innerHTML = lista.map(item => `
+    <div class="radio-editor-grid radio-editor-row" data-radio-id="${item.id}">
+      <input type="text" value="${safeRefHtml(item.radio)}" aria-label="Radio" onchange="atualizarRadioCampo('${item.id}', 'radio', this.value)">
+      <span class="radio-arrow">→</span>
+      <input type="text" value="${safeRefHtml(item.users)}" placeholder="Selecionar users..." onchange="atualizarRadioCampo('${item.id}', 'users', this.value)">
+      <input type="text" value="${safeRefHtml(item.obs)}" placeholder="Observações (opcional)" onchange="atualizarRadioCampo('${item.id}', 'obs', this.value)">
+      <button class="reference-icon danger" type="button" onclick="apagarRadio('${item.id}')" title="Apagar rádio">🗑</button>
+    </div>
+  `).join("");
+
+  report.innerHTML = lista.map(item => {
+    const users = splitUsersList(item.users);
+    const visible = users.slice(0, 3);
+    const extra = users.length - visible.length;
+    return `
+      <tr>
+        <td>${safeRefHtml(item.radio)}</td>
+        <td>
+          <div class="reference-tags">
+            ${visible.map(user => `<span>${safeRefHtml(user)}</span>`).join("")}
+            ${extra > 0 ? `<span>+${extra}</span>` : ""}
+          </div>
+        </td>
+        <td>${safeRefHtml(item.updated || nowPt())}</td>
+        <td>
+          <div class="reference-row-actions">
+            <button class="reference-icon" type="button" onclick="verRadio('${item.id}')" title="Ver detalhes">✎</button>
+            <button class="reference-icon danger" type="button" onclick="apagarRadio('${item.id}')" title="Apagar rádio">🗑</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function initRadiosPage() {
+  if (!document.getElementById("radiosEditorRows")) return;
+  loadRadiosData();
+  renderRadios();
+}
+
+function adicionarRadio() {
+  const nextNumber = radiosData.length ? Math.max(...radiosData.map(item => Number(item.radio) || 0)) + 1 : 1;
+  radiosData.push({
+    id: `radio-${Date.now()}`,
+    radio: String(nextNumber),
+    users: "",
+    obs: "",
+    updated: nowPt()
+  });
+  saveRadiosData();
+  renderRadios();
+}
+
+function atualizarRadioCampo(id, field, value) {
+  const item = radiosData.find(radio => radio.id === id);
+  if (!item) return;
+  item[field] = value;
+  item.updated = nowPt();
+  saveRadiosData();
+  renderRadios();
+}
+
+function apagarRadio(id) {
+  radiosData = radiosData.filter(item => item.id !== id);
+  if (!radiosData.length) radiosData = defaultRadiosData();
+  saveRadiosData();
+  renderRadios();
+}
+
+function verRadio(id) {
+  const item = radiosData.find(radio => radio.id === id);
+  if (!item) return;
+  alert(`Radio: ${item.radio}\nUsers: ${item.users || "-"}\nObservacoes: ${item.obs || "-"}`);
+}
+
+function filtrarRadios() {
+  renderRadios();
+}
+
+function loadInformacoesData() {
+  try {
+    const raw = localStorage.getItem(INFORMACOES_STORAGE_KEY);
+    informacoesData = raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.warn("Não foi possivel carregar informacoes.", e);
+    informacoesData = [];
+  }
+}
+
+function saveInformacoesData() {
+  localStorage.setItem(INFORMACOES_STORAGE_KEY, JSON.stringify(informacoesData));
+  try {
+    if (window.db) {
+      window.db.collection("appInformacoes").doc("lista").set({
+        items: informacoesData,
+        updated: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    }
+  } catch (e) {
+    console.warn("Não foi possivel sincronizar informacoes.", e);
+  }
+}
+
+function renderInformacoes() {
+  const lista = document.getElementById("informacoesLista");
+  if (!lista) return;
+  lista.innerHTML = informacoesData.length ? informacoesData.map(item => `
+    <button class="info-list-item ${informacaoSelecionada === item.id ? "active" : ""}" type="button" onclick="selecionarInformacao('${item.id}')">
+      <strong>${safeRefHtml(item.titulo || "Sem título")}</strong>
+      <span>${safeRefHtml(item.obs || "Sem observações")}</span>
+    </button>
+  `).join("") : `<div class="info-empty">Ainda sem informações guardadas.</div>`;
+}
+
+function initInformacoesPage() {
+  if (!document.getElementById("informacoesLista")) return;
+  loadInformacoesData();
+  renderInformacoes();
+}
+
+function adicionarInformacao() {
+  const titulo = document.getElementById("infoTitulo")?.value || "";
+  const obs = document.getElementById("infoObs")?.value || "";
+  if (!normalizarTexto(titulo) && !normalizarTexto(obs)) {
+    mostrarMensagem("Preenche pelo menos um título ou observação.", "erro");
+    return;
+  }
+  if (informacaoSelecionada) {
+    const item = informacoesData.find(info => info.id === informacaoSelecionada);
+    if (item) {
+      item.titulo = titulo;
+      item.obs = obs;
+      item.updated = nowPt();
+    }
+  } else {
+    informacoesData.unshift({
+      id: `info-${Date.now()}`,
+      titulo,
+      obs,
+      updated: nowPt()
+    });
+  }
+  document.getElementById("infoTitulo").value = "";
+  document.getElementById("infoObs").value = "";
+  informacaoSelecionada = null;
+  saveInformacoesData();
+  renderInformacoes();
+}
+
+function selecionarInformacao(id) {
+  informacaoSelecionada = id;
+  renderInformacoes();
+}
+
+function verInformacaoSelecionada() {
+  const item = informacoesData.find(info => info.id === informacaoSelecionada);
+  if (!item) return mostrarMensagem("Seleciona uma informação primeiro.", "erro");
+  alert(`${item.titulo || "Informação"}\n\n${item.obs || "Sem observacoes"}`);
+}
+
+function editarInformacaoSelecionada() {
+  const item = informacoesData.find(info => info.id === informacaoSelecionada);
+  if (!item) return mostrarMensagem("Seleciona uma informação primeiro.", "erro");
+  document.getElementById("infoTitulo").value = item.titulo || "";
+  document.getElementById("infoObs").value = item.obs || "";
+}
+
+function apagarInformacaoSelecionada() {
+  if (!informacaoSelecionada) return mostrarMensagem("Seleciona uma informação primeiro.", "erro");
+  informacoesData = informacoesData.filter(info => info.id !== informacaoSelecionada);
+  informacaoSelecionada = null;
+  saveInformacoesData();
+  renderInformacoes();
+}
+
+function guardarInformacoes() {
+  const titulo = document.getElementById("infoTitulo")?.value || "";
+  const obs = document.getElementById("infoObs")?.value || "";
+  if (normalizarTexto(titulo) || normalizarTexto(obs)) {
+    adicionarInformacao();
+    return;
+  }
+  saveInformacoesData();
+  mostrarMensagem("Informações guardadas.");
+}
+
+document.addEventListener("DOMContentLoaded", initRadiosPage);
+document.addEventListener("DOMContentLoaded", initInformacoesPage);
+window.adicionarRadio = adicionarRadio;
+window.atualizarRadioCampo = atualizarRadioCampo;
+window.apagarRadio = apagarRadio;
+window.verRadio = verRadio;
+window.filtrarRadios = filtrarRadios;
+window.adicionarInformacao = adicionarInformacao;
+window.selecionarInformacao = selecionarInformacao;
+window.verInformacaoSelecionada = verInformacaoSelecionada;
+window.editarInformacaoSelecionada = editarInformacaoSelecionada;
+window.apagarInformacaoSelecionada = apagarInformacaoSelecionada;
+window.guardarInformacoes = guardarInformacoes;
+
+function updateEnterpriseDashboard() {
+  const totalEquipamentosEl = el("dashTotalEquipamentos");
+  if (!totalEquipamentosEl) return;
+
+  const impressorasTotal = Array.isArray(impressorasData) ? impressorasData.length : 0;
+  const pcsTotal = Array.isArray(pcsGlobal) ? pcsGlobal.length : 0;
+  const pistolasTotal = Array.isArray(window.pistolasData) ? window.pistolasData.length : 0;
+  const portasTotal = Array.isArray(window.portasData) ? window.portasData.length : 0;
+  const stockTotal = Array.isArray(stockGlobal) ? stockGlobal.length : 0;
+  const ticketsAbertos = Array.isArray(manutencoesGlobal)
+    ? manutencoesGlobal.filter(item => item.estado === "Pendente" || item.estado === "Em reparação").length
+    : 0;
+  const impressorasOk = Array.isArray(impressorasData)
+    ? impressorasData.filter(item => obterEstadoImpressora(item.ip) === "OK").length
+    : 0;
+  const totalEquipamentos = impressorasTotal + pcsTotal + pistolasTotal + portasTotal;
+
+  setText("dashTotalEquipamentos", totalEquipamentos);
+  setText("dashStockTotal", stockTotal);
+  setText("dashTicketsAbertos", ticketsAbertos);
+  setText("dashImpressorasOk", impressorasOk);
+  setText("dashDonutTotal", totalEquipamentos);
 }
 
 /* =========================
@@ -3033,7 +3421,7 @@ function mostrarAvisoUpdateObrigatorio(novaVersao) {
       Nova: v${novaVersao} Premium
     </div>
     <div class="update-actions">
-      <button class="primary-btn" onclick="atualizarAppObrigatorio()">Atualizar agora</button>
+      <button class="primary-btn" onclick="atualizarAppObrigatorio()">Descarregar atualização</button>
     </div>
   `;
 
