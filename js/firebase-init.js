@@ -20,14 +20,14 @@ const firebaseConfig = {
   appId: "1:1004492465437:web:6a745933c51fc17b04adf4"
 };
 
-const firebaseApp = initializeApp(firebaseConfig );
+const firebaseApp = initializeApp(firebaseConfig);
 
 window.firebaseApp = firebaseApp;
-window.db = getFirestore(firebaseApp );
-window.auth = getAuth(firebaseApp );
+window.db = getFirestore(firebaseApp);
+window.auth = getAuth(firebaseApp);
 window.firebaseReady = true;
 
-console.log("Firebase ready" );
+console.log("Firebase ready");
 
 
 // ===== APP_BRAGA_THEME_SYSTEM =====
@@ -39,16 +39,16 @@ window.loadTheme = function(){
     const savedTheme =
       localStorage.getItem("app-theme") || "dark";
 
-    document.documentElement.classList.remove("dark" );
-    document.body.classList.remove("dark" );
+    document.documentElement.classList.remove("dark");
+    document.body.classList.remove("dark");
 
     if(savedTheme === "dark"){
-      document.documentElement.classList.add("dark" );
-      document.body.classList.add("dark" );
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     }
 
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -56,9 +56,9 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme );
+    localStorage.setItem("app-theme", theme);
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -66,23 +66,23 @@ window.saveTheme = function(theme){
 window.toggleTheme = function(){
 
   const isDark =
-    document.body.classList.contains("dark" );
+    document.body.classList.contains("dark");
 
   const newTheme =
     isDark ? "light" : "dark";
 
-  window.saveTheme(newTheme );
-  window.loadTheme( );
+  window.saveTheme(newTheme);
+  window.loadTheme();
 
 };
 
 document.addEventListener(
   "DOMContentLoaded",
   window.loadTheme
- );
+);
 
 window.addEventListener(
   "pageshow",
   window.loadTheme
- );
+);
 

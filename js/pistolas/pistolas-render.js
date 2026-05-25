@@ -7,11 +7,11 @@ window.renderPistolas = function(lista = window.pistolasData || []){
 
     const aTxt =
       String(a.nome || a.num || "")
-        .toLowerCase( );
+        .toLowerCase();
 
     const bTxt =
       String(b.nome || b.num || "")
-        .toLowerCase( );
+        .toLowerCase();
 
     return aTxt.localeCompare(
       bTxt,
@@ -20,14 +20,14 @@ window.renderPistolas = function(lista = window.pistolasData || []){
         numeric:true,
         sensitivity:'base'
       }
-     );
+    );
 
-  } );
+  });
 
-  setText("countPistolas", lista.length );
+  setText("countPistolas", lista.length);
 
   const container =
-    document.querySelector("#listaPistolas" );
+    document.querySelector("#listaPistolas");
 
   if(!container) return;
 
@@ -65,7 +65,7 @@ window.renderPistolas = function(lista = window.pistolasData || []){
 
     </div>
 
-  `).join("" );
+  `).join("");
 
 }
 
@@ -79,16 +79,16 @@ window.loadTheme = function(){
     const savedTheme =
       localStorage.getItem("app-theme") || "dark";
 
-    document.documentElement.classList.remove("dark" );
-    document.body.classList.remove("dark" );
+    document.documentElement.classList.remove("dark");
+    document.body.classList.remove("dark");
 
     if(savedTheme === "dark"){
-      document.documentElement.classList.add("dark" );
-      document.body.classList.add("dark" );
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     }
 
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -96,9 +96,9 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme );
+    localStorage.setItem("app-theme", theme);
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -106,23 +106,23 @@ window.saveTheme = function(theme){
 window.toggleTheme = function(){
 
   const isDark =
-    document.body.classList.contains("dark" );
+    document.body.classList.contains("dark");
 
   const newTheme =
     isDark ? "light" : "dark";
 
-  window.saveTheme(newTheme );
-  window.loadTheme( );
+  window.saveTheme(newTheme);
+  window.loadTheme();
 
 };
 
 document.addEventListener(
   "DOMContentLoaded",
   window.loadTheme
- );
+);
 
 window.addEventListener(
   "pageshow",
   window.loadTheme
- );
+);
 

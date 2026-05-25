@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
 
@@ -36,49 +36,31 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
-
-
-
-<link rel="stylesheet" href="../sidebar-enterprise.css">
 </head>
 <body>
-<div class="main-content">
-
 <aside class="sidebar">
-  <div class="sidebar-top">
-    <div class="brand-wrap">
-      <div class="brand-logo">BR</div>
-      <div class="brand-text">
-        <h2>App Braga</h2>
-        <p>Enterprise System</p>
-      </div>
-    </div>
-  </div>
-
-  <nav class="sidebar-menu">
-    <a href="index.html" class="nav-link">Dashboard</a>
-    <a href="add-toner.html" class="nav-link">Adicionar Toner</a>
-    <a href="stock.html" class="nav-link">Stock</a>
-    <a href="historico.html" class="nav-link">Histórico</a>
-    <a href="etiquetas-word.html" class="nav-link">Etiquetas Word</a>
-    <a href="impressoras.html" class="nav-link">Impressoras</a>
-    <a href="manutencao-impressoras.html" class="nav-link">Manutenção</a>
-    <a href="computadores.html" class="nav-link">Computadores</a>
-    <a href="users.html" class="nav-link">Users</a>
-    <a href="pistolas.html" class="nav-link">Pistolas CK65</a>
-    <a href="portas.html" class="nav-link">Portas Rede</a>
-    <a href="config.html" class="nav-link">Configurações</a>
-  </nav>
-
-  <div class="sidebar-footer">
-    <div class="footer-avatar">BR</div>
+  <div class="brand premium-brand">
+    <div class="brand-badge">BR</div>
     <div>
-      <strong>Administrador</strong>
-      <p>admin@appbraga.pt</p>
+      <h2>App Braga</h2>
     </div>
   </div>
-</aside>
 
+<a href="index.html">Dashboard</a>
+<a href="add-toner.html" class="active">Adicionar Toner</a>
+<a href="stock.html">Stock</a>
+<a href="historico.html">Historico</a>
+<a href="etiquetas-word.html">Etiquetas Word</a>
+<a href="impressoras.html">Impressoras</a>
+<a href="manutencao-impressoras.html">Manutenção Impressoras</a>
+<a href="computadores.html">Computadores</a>
+<a href="users.html">Users</a>
+<a href="pistolas.html">Pistolas CK65</a>
+<a href="portas.html">Portas Rede</a>
+<a href="radios.html">Rádios</a>
+<a href="informacoes.html">Informações</a>
+<a href="config.html">Configurações</a>
+</aside>
 
 <main class="main">
 
@@ -95,7 +77,7 @@
     </div>
 
     <div class="card-actions" style="margin-bottom:14px;">
-      <button type="button" class="primary-btn" onclick="abrirOCR()">📷 Ler Folha Toner</button>
+      <button type="button" class="primary-btn" onclick="abrirOCR()">Ler Folha Toner</button>
       <input id="ocrInput" type="file" accept="image/*" capture="environment" style="display:none;" onchange="processarOCRInput(event)">
     </div>
 
@@ -106,20 +88,20 @@
   <div id="serial3Box" class="barcode-learn-box" style="display:none;">
     <div class="section-header">
       <div>
-        <h3>Últimos 3 Dígitos da Série</h3>
-        <p class="section-subtitle">Introduza os 3 últimos dígitos da impressora para selecionar a localização automaticamente.</p>
+        <h3>Ultimos 3 Di­gitos da Serie</h3>
+        <p class="section-subtitle">Introduza os 3 Ultimos di­gitos da impressora para selecionar a localização automaticamente.</p>
       </div>
     </div>
 
     <div class="form-grid">
       <label>
-        <span>Últimos 3 dígitos</span>
+        <span>Ultimos 3 di­gitos</span>
         <input id="serial3Input" type="text" maxlength="3" placeholder="Ex: 805">
       </label>
     </div>
 
     <div class="card-actions" style="margin-top:12px;">
-      <button type="button" class="primary-btn" onclick="confirmarSerie3Digitos()">Confirmar Série</button>
+      <button type="button" class="primary-btn" onclick="confirmarSerie3Digitos()">Confirmar Serie</button>
       <button type="button" class="secondary-btn" onclick="fecharSerie3Digitos()">Cancelar</button>
     </div>
   </div>
@@ -142,16 +124,16 @@
         <option value="R4B1395508 - Braga - Ilha 03">R4B1395508 - Braga - Ilha 03</option>
         <option value="R4B1293179 - Braga - Ilha 04">R4B1293179 - Braga - Ilha 04</option>
         <option value="R4B1293180 - Braga - Ilha 05">R4B1293180 - Braga - Ilha 05</option>
-        <option value="R4B1293183 - Braga - Balcão 01">R4B1293183 - Braga - Balcão 01</option>
-        <option value="R4B1293184 - Braga - Balcão 02">R4B1293184 - Braga - Balcão 02</option>
+        <option value="R4B1293183 - Braga - BalcÃ£o 01">R4B1293183 - Braga - BalcÃ£o 01</option>
+        <option value="R4B1293184 - Braga - BalcÃ£o 02">R4B1293184 - Braga - BalcÃ£o 02</option>
         <option value="R4B2230012 - Braga - Dep. Logistica">R4B2230012 - Braga - Dep. Logistica</option>
         <option value="R4B1293173 - Braga - G/Encomendas">R4B1293173 - Braga - G/Encomendas</option>
-        <option value="R4B1395261 - Braga - Devoluções">R4B1395261 - Braga - Devoluções</option>
+        <option value="R4B1395261 - Braga - DevoluÃ§Ãµes">R4B1395261 - Braga - DevoluÃ§Ãµes</option>
         <option value="RVP0Z03770 - Braga - Escritorio">RVP0Z03770 - Braga - Escritorio</option>
         <option value="R4B1293169 - Vila Real - Ilha 01">R4B1293169 - Vila Real - Ilha 01</option>
         <option value="R4B1293174 - Vila Real - Ilha 02">R4B1293174 - Vila Real - Ilha 02</option>
         <option value="RVP0Z03715 - Vila Real - Ilha 03">RVP0Z03715 - Vila Real - Ilha 03</option>
-        <option value="Sem Localização">Sem Localização</option>
+        <option value="Sem LocalizaÃ§Ã£o">Sem LocalizaÃ§Ã£o</option>
       </select>
     </label>
 
@@ -161,7 +143,7 @@
         <option value="Preto">Preto</option><option value="Amarelo">Amarelo</option><option value="Vermelho">Vermelho</option><option value="Azul">Azul</option>
       </select>
     </label>
-    <label><span>Lote</span><input type="text" id="lote" placeholder="Lote automático / opcional"></label>
+    <label><span>Lote</span><input type="text" id="lote" placeholder="Lote automatico / opcional"></label>
     <label><span>Data da folha</span><input type="text" id="dataFolha" readonly placeholder="Data lida da folha"></label>
     <label><span>Data do scan</span><input type="date" id="data"></label>
     <button class="primary-btn" onclick="disponivel()">Adicionar ao stock</button>
@@ -179,6 +161,5 @@
 
 <script src="../js/app.js"></script>
   <script src="../js/core/helpers.js"></script>
-</div>
 </body>
 </html>

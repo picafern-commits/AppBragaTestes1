@@ -3,13 +3,13 @@ window.portaSelecionada = null;
 
 function renderPortas(lista = []){
 
-    const container = document.getElementById('listaPortas' );
+    const container = document.getElementById('listaPortas');
     if(!container) return;
 
     container.innerHTML = '';
 
     if(!Array.isArray(lista)){
-        console.warn('Lista portas inválida', lista );
+        console.warn('Lista portas inválida', lista);
         lista = [];
     }
 
@@ -31,7 +31,7 @@ function renderPortas(lista = []){
             ...item
         };
 
-    } );
+    });
 
     window.portasData.sort((a,b)=>
         String(a.porta || '').localeCompare(
@@ -39,7 +39,7 @@ function renderPortas(lista = []){
             undefined,
             { numeric:true }
         )
-     );
+    );
 
     const estadoPortaLocal = (porta) => {
         const temIP = String(porta.ip || '').trim() !== '';
@@ -61,9 +61,9 @@ function renderPortas(lista = []){
     const ocupadas = window.portasData.filter(p => estadoPortaLocal(p) === 'ocupado').length;
     const livres = window.portasData.filter(p => estadoPortaLocal(p) === 'livre').length;
 
-    const totalEl = document.getElementById('countPortas' );
-    const usadasEl = document.getElementById('countPortasUsadas' );
-    const livresEl = document.getElementById('countPortasLivres' );
+    const totalEl = document.getElementById('countPortas');
+    const usadasEl = document.getElementById('countPortasUsadas');
+    const livresEl = document.getElementById('countPortasLivres');
 
     if(totalEl) totalEl.textContent = total;
     if(usadasEl) usadasEl.textContent = ocupadas;
@@ -71,8 +71,8 @@ function renderPortas(lista = []){
 
     window.portasData.forEach((porta)=>{
 
-        const card = document.createElement('div' );
-        const estado = estadoPortaLocal(porta );
+        const card = document.createElement('div');
+        const estado = estadoPortaLocal(porta);
 
         card.className = 'pc-card entity-card porta-card';
 
@@ -110,23 +110,23 @@ function renderPortas(lista = []){
             </div>
         `;
 
-        container.appendChild(card );
+        container.appendChild(card);
 
-    } );
+    });
 
-    console.log('PORTAS REALTIME FIX OK' );
+    console.log('PORTAS REALTIME FIX OK');
 
 }
 
 function iniciarPortas(){
 
     if(!window.db){
-        console.error('Firebase DB indisponível' );
+        console.error('Firebase DB indisponível');
         return;
     }
 
-    localStorage.removeItem('portas' );
-    localStorage.removeItem('portasRede' );
+    localStorage.removeItem('portas');
+    localStorage.removeItem('portasRede');
 
     window.db.collection('portas')
     .onSnapshot((snapshot)=>{
@@ -137,14 +137,14 @@ function iniciarPortas(){
             lista.push({
                 firebaseId: doc.id,
                 ...({ firebaseId: doc.id, ...doc.data() })
-            } );
-        } );
+            });
+        });
 
-        renderPortas(lista );
+        renderPortas(lista);
 
     }, (err)=>{
-        console.error(err );
-    } );
+        console.error(err);
+    });
 
 }
 
@@ -152,20 +152,20 @@ window.editarPorta = function(id){
 
     const porta = window.portasData.find(
         p => String(p.firebaseId) === String(id)
-     );
+    );
 
     if(!porta){
-        alert('Porta não encontrada' );
+        alert('Porta não encontrada');
         return;
     }
 
     window.portaSelecionada = porta;
 
-    const a = document.getElementById('editPorta' );
-    const b = document.getElementById('editLocal' );
-    const c = document.getElementById('editUser' );
-    const d = document.getElementById('editEquipamento' );
-    const e = document.getElementById('editIP' );
+    const a = document.getElementById('editPorta');
+    const b = document.getElementById('editLocal');
+    const c = document.getElementById('editUser');
+    const d = document.getElementById('editEquipamento');
+    const e = document.getElementById('editIP');
 
     if(a) a.value = porta.porta || '';
     if(b) b.value = porta.local || '';
@@ -173,7 +173,7 @@ window.editarPorta = function(id){
     if(d) d.value = porta.equipamento || '';
     if(e) e.value = porta.ip || '';
 
-    const modal = document.getElementById('modalEditarPorta' );
+    const modal = document.getElementById('modalEditarPorta');
 
     if(modal){
         modal.style.display = 'flex';
@@ -184,14 +184,10 @@ window.editarPorta = function(id){
 window.guardarEdicaoPorta = async function(){
 
     try{
-
-      if(window.currentEditingPortaId){
-
-
         // NOVA PORTA
         if(!window.portaSelecionada){
 
-            await window.adicionarNovaPorta( );
+            await window.adicionarNovaPorta();
             return;
 
         }
@@ -199,7 +195,7 @@ window.guardarEdicaoPorta = async function(){
         const id = window.portaSelecionada.firebaseId;
 
         if(!id){
-            alert('ID Firebase inválido' );
+            alert('ID Firebase inválido');
             return;
         }
 
@@ -214,22 +210,22 @@ window.guardarEdicaoPorta = async function(){
         await window.db
         .collection('portas')
         .doc(String(id))
-        .update(dados );
+        .update(dados);
 
-        const modal = document.getElementById('modalEditarPorta' );
+        const modal = document.getElementById('modalEditarPorta');
 
         if(modal){
             modal.style.display = 'none';
         }
 
-        console.log('PORTAS SAVE FIX OK' );
+        console.log('PORTAS SAVE FIX OK');
 
-        alert('Porta atualizada com sucesso' );
+        alert('Porta atualizada com sucesso');
 
     }catch(err){
 
-        console.error(err );
-        alert('Erro ao guardar edição' );
+        console.error(err);
+        alert('Erro ao guardar edição');
 
     }
 
@@ -239,10 +235,10 @@ window.verMaisPorta = function(id){
 
     const porta = window.portasData.find(
         p => String(p.firebaseId) === String(id)
-     );
+    );
 
     if(!porta){
-        alert('Porta não encontrada' );
+        alert('Porta não encontrada');
         return;
     }
 
@@ -250,7 +246,7 @@ window.verMaisPorta = function(id){
         'Porta: ' + (porta.porta || '-') + '\n' +
         'IP: ' + (porta.ip || '-') + '\n' +
         'Local: ' + (porta.local || '-')
-     );
+    );
 
 };
 
@@ -265,14 +261,14 @@ window.apagarPorta = async function(id){
         await window.db
         .collection('portas')
         .doc(String(id))
-        .delete( );
+        .delete();
 
-        alert('Porta apagada' );
+        alert('Porta apagada');
 
     }catch(err){
 
-        console.error(err );
-        alert('Erro ao apagar' );
+        console.error(err);
+        alert('Erro ao apagar');
 
     }
 
@@ -301,9 +297,9 @@ window.adicionarNovaPorta = async function(){
 
         };
 
-        await window.db.collection('portas').add(dados );
+        await window.db.collection('portas').add(dados);
 
-        const modal = document.getElementById('modalEditarPorta' );
+        const modal = document.getElementById('modalEditarPorta');
 
         if(modal){
             modal.style.display = 'none';
@@ -311,18 +307,18 @@ window.adicionarNovaPorta = async function(){
 
         window.portaSelecionada = null;
 
-        alert('Porta adicionada com sucesso' );
+        alert('Porta adicionada com sucesso');
 
     }catch(err){
 
-        console.error(err );
-        alert('Erro ao adicionar porta' );
+        console.error(err);
+        alert('Erro ao adicionar porta');
 
     }
 
 };
 
-document.addEventListener('DOMContentLoaded', iniciarPortas );
+document.addEventListener('DOMContentLoaded', iniciarPortas);
 
 
 // ===== APP_BRAGA_THEME_SYSTEM =====
@@ -334,16 +330,16 @@ window.loadTheme = function(){
     const savedTheme =
       localStorage.getItem("app-theme") || "dark";
 
-    document.documentElement.classList.remove("dark" );
-    document.body.classList.remove("dark" );
+    document.documentElement.classList.remove("dark");
+    document.body.classList.remove("dark");
 
     if(savedTheme === "dark"){
-      document.documentElement.classList.add("dark" );
-      document.body.classList.add("dark" );
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     }
 
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -351,9 +347,9 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme );
+    localStorage.setItem("app-theme", theme);
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -361,23 +357,23 @@ window.saveTheme = function(theme){
 window.toggleTheme = function(){
 
   const isDark =
-    document.body.classList.contains("dark" );
+    document.body.classList.contains("dark");
 
   const newTheme =
     isDark ? "light" : "dark";
 
-  window.saveTheme(newTheme );
-  window.loadTheme( );
+  window.saveTheme(newTheme);
+  window.loadTheme();
 
 };
 
 document.addEventListener(
   "DOMContentLoaded",
   window.loadTheme
- );
+);
 
 window.addEventListener(
   "pageshow",
   window.loadTheme
- );
+);
 

@@ -1,30 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
-
 <script id="APP_BRAGA_THEME_LOADER">
 (function(){
-
   try{
-
-    const savedTheme =
-      localStorage.getItem("app-theme") || "dark";
-
+    const savedTheme = localStorage.getItem("app-theme") || "dark";
     if(savedTheme === "dark"){
       document.documentElement.classList.add("dark");
       document.body.classList.add("dark");
     }
-
-  }catch(e){
-    console.log(e);
-  }
-
+  }catch(e){ console.log(e); }
 })();
 </script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Etiquetas Word</title>
+  <title>Informações</title>
   <meta name="theme-color" content="#0f172a">
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
@@ -41,15 +31,13 @@
 <aside class="sidebar">
   <div class="brand premium-brand">
     <div class="brand-badge">BR</div>
-    <div>
-      <h2>App Braga</h2>
-    </div>
+    <div><h2>App Braga</h2></div>
   </div>
 	<a href="index.html">Dashboard</a>
 	<a href="add-toner.html">Adicionar Toner</a>
 	<a href="stock.html">Stock</a>
 	<a href="historico.html">Histórico</a>
-	<a href="etiquetas-word.html" class="active">Etiquetas Word</a>
+	<a href="etiquetas-word.html">Etiquetas Word</a>
 	<a href="impressoras.html">Impressoras</a>
 	<a href="manutencao-impressoras.html">Manutenção Impressoras</a>
 	<a href="computadores.html">Computadores</a>
@@ -57,33 +45,53 @@
 	<a href="pistolas.html">Pistolas CK65</a>
 	<a href="portas.html">Portas Rede</a>
 	<a href="radios.html">Rádios</a>
-	<a href="informacoes.html">Informações</a>
+	<a href="informacoes.html" class="active">Informações</a>
 	<a href="config.html">Configurações</a>
 </aside>
 
-<main class="main">
+<main class="main app-reference-page">
+  <div class="reference-header" data-breadcrumb="Home > InformaÃ§Ãµes">
+    <div>
+      <h1>Informações</h1>
+      <p>Gerencie as informações gerais da aplicação.</p>
+    </div>
+  </div>
 
-	<div class="page-hero">
-		<div class="page-hero-title">Etiquetas Word</div>
-		<span class="status-pill">Sistema Online</span>
-	</div>
+  <section class="reference-panel info-panel">
+    <div class="info-form">
+      <label>
+        <span>Ti­tulo</span>
+        <input id="infoTitulo" type="text" placeholder="">
+      </label>
+      <label>
+        <span>Observações</span>
+        <textarea id="infoObs" placeholder=""></textarea>
+      </label>
+      <button class="secondary-btn reference-outline info-inline-btn" type="button" onclick="adicionarInformacao()">Adicionar Informações</button>
+    </div>
 
-<div class="stats-grid">
-	<div class="stat-card"><span>Total Etiquetas Guardadas</span><strong id="countEtiquetasTotal">0</strong></div>
-	<div class="stat-card"><span>Geradas Hoje</span><strong id="countEtiquetasStock">0</strong></div>
-	<div class="stat-card"><span>Series Unicas</span><strong id="countEtiquetasHistorico">0</strong></div>
-</div>
-	
-	<div id="listaEtiquetasWord" class="cards-grid"></div>
-  </main>
-</div>
-<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+    <div class="info-divider"></div>
+
+    <div class="info-list-head">
+      <strong>Titulos</strong>
+      <div class="info-actions-preview">
+        <button class="secondary-btn reference-outline" type="button" onclick="verInformacaoSelecionada()">Ver Mais</button>
+        <button class="secondary-btn info-edit-btn" type="button" onclick="editarInformacaoSelecionada()">Editar</button>
+        <button class="secondary-btn info-delete-btn" type="button" onclick="apagarInformacaoSelecionada()">Apagar</button>
+      </div>
+    </div>
+
+    <div id="informacoesLista" class="info-list"></div>
+
+    <div class="info-divider"></div>
+    <button class="primary-btn reference-save" type="button" onclick="guardarInformacoes()">Guardar Informações</button>
+  </section>
+</main>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
 <script src="../js/app.js"></script>
-  <script src="../js/core/helpers.js"></script>
+<script src="../js/core/helpers.js"></script>
 </body>
 </html>

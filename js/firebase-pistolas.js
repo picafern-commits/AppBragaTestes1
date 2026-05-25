@@ -4,12 +4,12 @@
   try{
 
     if(!window.db){
-      console.error("Firebase DB indisponível" );
+      console.error("Firebase DB indisponível");
       return;
     }
 
     const pistolasRef =
-      window.db.collection("pistolas" );
+      window.db.collection("pistolas");
 
     // ===== LISTENER FIREBASE =====
     pistolasRef.onSnapshot((snapshot)=>{
@@ -18,18 +18,18 @@
         snapshot.docs.map(doc=>({
           firebaseId: doc.id,
           ...doc.data()
-        }) );
+        }));
 
       console.log(
         "Pistolas Firebase:",
         window.pistolasData.length
-       );
+      );
 
       if(typeof renderPistolas === "function"){
-        renderPistolas(window.pistolasData );
+        renderPistolas(window.pistolasData);
       }
 
-    } );
+    });
 
     // ===== GUARDAR =====
     window.guardarPistola = async function(data){
@@ -41,25 +41,25 @@
 
           await pistolasRef
             .doc(window.currentEditingPistolaId)
-            .update(data );
+            .update(data);
 
         }else{
 
           // NOVA PISTOLA
-          await pistolasRef.add(data );
+          await pistolasRef.add(data);
 
         }
 
         console.log(
           "Pistola guardada"
-         );
+        );
 
       }catch(e){
 
         console.error(
           "Erro guardar pistola:",
           e
-         );
+        );
 
       }
 
@@ -78,7 +78,7 @@
       console.log(
         "Editar pistola:",
         pistola.firebaseId
-       );
+      );
 
     };
 
@@ -87,10 +87,10 @@
     console.error(
       "Erro Firebase Pistolas:",
       error
-     );
+    );
 
   }
 
-})( );
+})();
 
 // ADD/EDIT pistolas fully rebuilt

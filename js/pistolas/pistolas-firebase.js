@@ -10,7 +10,7 @@ window.pistolasData = [];
 document.addEventListener("app-ready", ()=>{
 
   const pistolasRef =
-    collection(window.db, "pistolas" );
+    collection(window.db, "pistolas");
 
   onSnapshot(pistolasRef, (snapshot)=>{
 
@@ -18,19 +18,19 @@ document.addEventListener("app-ready", ()=>{
       snapshot.docs.map(d => ({
         idDoc: d.id,
         ...d.data()
-      }) );
+      }));
 
     if(window.renderPistolas){
       window.renderPistolas(
         window.pistolasData
-       );
+      );
     }
 
-  } );
+  });
 
-  console.log("Pistolas connected" );
+  console.log("Pistolas connected");
 
-} );
+});
 
 window.guardarEdicaoPistola =
 async function(){
@@ -54,7 +54,7 @@ async function(){
     payload[f] =
       el("editP_" + f)?.value || "";
 
-  } );
+  });
 
   await updateDoc(
     doc(
@@ -63,9 +63,9 @@ async function(){
       window.pistolaEditId
     ),
     payload
-   );
+  );
 
-  hide("modalEditarPistola" );
+  hide("modalEditarPistola");
 
 };
 
@@ -79,16 +79,16 @@ window.loadTheme = function(){
     const savedTheme =
       localStorage.getItem("app-theme") || "dark";
 
-    document.documentElement.classList.remove("dark" );
-    document.body.classList.remove("dark" );
+    document.documentElement.classList.remove("dark");
+    document.body.classList.remove("dark");
 
     if(savedTheme === "dark"){
-      document.documentElement.classList.add("dark" );
-      document.body.classList.add("dark" );
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     }
 
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -96,9 +96,9 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme );
+    localStorage.setItem("app-theme", theme);
   }catch(e){
-    console.log(e );
+    console.log(e);
   }
 
 };
@@ -106,25 +106,25 @@ window.saveTheme = function(theme){
 window.toggleTheme = function(){
 
   const isDark =
-    document.body.classList.contains("dark" );
+    document.body.classList.contains("dark");
 
   const newTheme =
     isDark ? "light" : "dark";
 
-  window.saveTheme(newTheme );
-  window.loadTheme( );
+  window.saveTheme(newTheme);
+  window.loadTheme();
 
 };
 
 document.addEventListener(
   "DOMContentLoaded",
   window.loadTheme
- );
+);
 
 window.addEventListener(
   "pageshow",
   window.loadTheme
- );
+);
 
 
 
