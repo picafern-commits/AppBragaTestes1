@@ -2,8 +2,8 @@
 function obterImagemDashboard(modelo = "") {
   const nome = String(modelo).toLowerCase();
 
-  if (nome.includes("p3155")) return "../img/kyocerap3155dn.jpg";
-  if (nome.includes("pa5500")) return "../img/pa5500x.jpg";
+  if (nome.includes("p3155")) return "../img/kyocerap3155dn.png";
+  if (nome.includes("pa5500")) return "../img/pa5500x.png";
   if (nome.includes("2554")) return "../img/taskalfa2554ci.png";
 
   return "../img/kyocera.png";
