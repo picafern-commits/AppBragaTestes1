@@ -2502,3 +2502,58 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 }
+
+/* ENTERPRISE SIDEBAR FINAL FIX */
+body{
+  margin:0!important;
+  overflow-x:hidden;
+}
+
+.main-content,
+.dashboard-content,
+.page-content,
+.content,
+.container{
+  margin-left:260px!important;
+  width:calc(100% - 260px)!important;
+  max-width:none!important;
+  padding:24px!important;
+  box-sizing:border-box!important;
+}
+
+.dashboard-grid,
+.cards-grid,
+.stats-grid,
+.grid{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr))!important;
+  gap:20px!important;
+  width:100%!important;
+}
+
+.card,
+.panel,
+.section{
+  width:100%!important;
+}
+
+.sidebar{
+  position:fixed!important;
+  left:0!important;
+  top:0!important;
+  width:240px!important;
+  height:100vh!important;
+  z-index:9999!important;
+}
+
+@media(max-width:900px){
+  .main-content,
+  .dashboard-content,
+  .page-content,
+  .content,
+  .container{
+    margin-left:0!important;
+    width:100%!important;
+    padding:16px!important;
+  }
+}
