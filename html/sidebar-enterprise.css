@@ -1,0 +1,71 @@
+
+/* =========================
+   ENTERPRISE SIDEBAR
+========================= */
+
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:250px;
+  height:100vh;
+  background:linear-gradient(180deg,#050816 0%,#081224 100%);
+  border-right:1px solid rgba(255,255,255,.05);
+  overflow-y:auto;
+  z-index:9999;
+}
+
+.main-content,
+.main,
+.page-content,
+.dashboard-container{
+  margin-left:250px;
+  width:calc(100% - 250px);
+  min-height:100vh;
+  padding:24px;
+  box-sizing:border-box;
+}
+
+/* Remove sidebar antiga */
+.old-sidebar,
+.legacy-sidebar{
+  display:none !important;
+}
+
+@media(max-width:1100px){
+
+  .sidebar{
+    width:90px;
+  }
+
+  .main-content,
+  .main,
+  .page-content,
+  .dashboard-container{
+    margin-left:90px;
+    width:calc(100% - 90px);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.3s;
+  }
+
+  .sidebar.active{
+    transform:translateX(0);
+  }
+
+  .main-content,
+  .main,
+  .page-content,
+  .dashboard-container{
+    margin-left:0;
+    width:100%;
+    padding:16px;
+  }
+
+}
