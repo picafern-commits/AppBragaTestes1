@@ -1936,7 +1936,7 @@ document.addEventListener("DOMContentLoaded", initFullScreenScroll);
 
 const RADIOS_STORAGE_KEY = "appBragaRadios";
 // Firestore realtime ativo - sem localStorage
-let radiosData = [];
+
 let informacoesData = [];
 let informacaoSelecionada = null;
 
@@ -6599,56 +6599,79 @@ window.apagarInformacao = apagarInformacao;
 
 
 
-// ===== RADIOS FIREBASE REALTIME =====
 
-const radiosCollection = firebase.firestore().collection('radios');
+
+
+
+// ===== ENTERPRISE RADIOS FIREBASE =====
+
+window.radiosRealtime = [];
+
+function abrirModalRadio() {
+
+    const modal = document.getElementById('radioModal');
+
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+    }
+}
+
+function fecharModalRadio() {
+
+    const modal = document.getElementById('radioModal');
+
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+    }
+
+    ['radioNome','radioMac','radioSerial'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+}
 
 async function criarRadioRealtime() {
 
-    const nome = document.getElementById('radioNome')?.value || '';
-    const mac = document.getElementById('radioMac')?.value || '';
-    const serial = document.getElementById('radioSerial')?.value || '';
+    const nome =
+      document.getElementById('radioNome')?.value?.trim() || '';
 
-    if (!nome.trim()) return;
+    const mac =
+      document.getElementById('radioMac')?.value?.trim() || '';
+
+    const serial =
+      document.getElementById('radioSerial')?.value?.trim() || '';
+
+    if (!nome) {
+        alert('Preenche o nome do rádio');
+        return;
+    }
 
     try {
 
-        await radiosCollection.add({
-            nome,
-            mac,
-            serial,
-            createdAt: Date.now()
-        });
+        await firebase.firestore()
+          .collection('radios')
+          .add({
+              nome,
+              mac,
+              serial,
+              createdAt: Date.now()
+          });
 
         fecharModalRadio();
 
     } catch (e) {
         console.error(e);
+        alert('Erro ao criar rádio');
     }
-}
-
-function abrirModalRadio() {
-    document.getElementById('radioModal')
-      ?.classList.remove('hidden');
-}
-
-function fecharModalRadio() {
-
-    document.getElementById('radioModal')
-      ?.classList.add('hidden');
-
-    ['radioNome','radioMac','radioSerial']
-      .forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.value = '';
-      });
 }
 
 function renderRadiosRealtime(radios) {
 
     const tbody =
       document.querySelector('#radiosTable tbody') ||
-      document.querySelector('.radios-table tbody');
+      document.querySelector('tbody');
 
     if (!tbody) return;
 
@@ -6672,7 +6695,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const novoBtn = [...document.querySelectorAll('button')]
       .find(btn =>
-          btn.innerText.toLowerCase().includes('novo radio')
+          btn.innerText.toLowerCase().includes('novo radio') ||
+          btn.innerText.toLowerCase().includes('novo rádio')
       );
 
     if (novoBtn) {
@@ -6682,16 +6706,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('fecharRadioModal')
       ?.addEventListener('click', fecharModalRadio);
 
-    ['radioNome','radioMac','radioSerial']
-      .forEach(id => {
+    document.getElementById('criarRadioBtn')
+      ?.addEventListener('click', criarRadioRealtime);
 
-          document.getElementById(id)
-            ?.addEventListener('change', criarRadioRealtime);
-
-      });
-
-    radiosCollection
-      .orderBy('createdAt','desc')
+    firebase.firestore()
+      .collection('radios')
+      .orderBy('createdAt', 'desc')
       .onSnapshot(snapshot => {
 
           const radios = [];
@@ -6703,9 +6723,10 @@ document.addEventListener('DOMContentLoaded', () => {
               });
           });
 
+          window.radiosRealtime = radios;
+
           renderRadiosRealtime(radios);
       });
 });
 
-// ===== FIM RADIOS FIREBASE REALTIME =====
-
+// ===== FIM ENTERPRISE RADIOS FIREBASE =====
