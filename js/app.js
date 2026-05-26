@@ -6595,3 +6595,71 @@ window.verInformacao = verInformacao;
 window.fecharInfoModal = fecharInfoModal;
 window.editarInformacao = editarInformacao;
 window.apagarInformacao = apagarInformacao;
+
+
+// ===== RADIOS FIREBASE REALTIME =====
+
+const radiosCollection = firebase.firestore().collection('radios');
+
+async function criarRadioRealtime() {
+
+    const nome = document.getElementById('radioNome')?.value || '';
+    const serial = document.getElementById('radioSerial')?.value || '';
+    const modelo = document.getElementById('radioModelo')?.value || '';
+    const estado = document.getElementById('radioEstado')?.value || '';
+    const utilizador = document.getElementById('radioUtilizador')?.value || '';
+
+    if (!nome.trim()) return;
+
+    await radiosCollection.add({
+        nome,
+        serial,
+        modelo,
+        estado,
+        utilizador,
+        createdAt: Date.now()
+    });
+
+    fecharModalRadio();
+}
+
+function abrirModalRadio() {
+    document.getElementById('radioModal')?.classList.remove('hidden');
+}
+
+function fecharModalRadio() {
+    document.getElementById('radioModal')?.classList.add('hidden');
+
+    ['radioNome','radioSerial','radioModelo','radioEstado','radioUtilizador']
+      .forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+      });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const novoBtn = [...document.querySelectorAll('button')]
+      .find(btn => btn.innerText.toLowerCase().includes('novo radio'));
+
+    if (novoBtn) {
+        novoBtn.onclick = abrirModalRadio;
+    }
+
+    document.getElementById('fecharRadioModal')
+      ?.addEventListener('click', fecharModalRadio);
+
+    ['radioNome','radioSerial','radioModelo','radioEstado','radioUtilizador']
+      .forEach(id => {
+          document.getElementById(id)
+            ?.addEventListener('change', criarRadioRealtime);
+      });
+
+    radiosCollection.orderBy('createdAt','desc')
+      .onSnapshot(() => {
+          console.log('Radios realtime ativo');
+      });
+
+});
+
+// ===== FIM RADIOS FIREBASE REALTIME =====

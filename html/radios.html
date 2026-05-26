@@ -100,5 +100,22 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="../js/app.js"></script>
 <script src="../js/core/helpers.js"></script>
+
+<div id="radioModal" class="enterprise-modal hidden">
+  <div class="enterprise-modal-content">
+    <h2>Novo Rádio</h2>
+
+    <input type="text" id="radioNome" placeholder="Nome do Rádio" class="enterprise-input">
+    <input type="text" id="radioSerial" placeholder="Serial Number" class="enterprise-input">
+    <input type="text" id="radioModelo" placeholder="Modelo" class="enterprise-input">
+    <input type="text" id="radioEstado" placeholder="Estado" class="enterprise-input">
+    <input type="text" id="radioUtilizador" placeholder="Utilizador" class="enterprise-input">
+
+    <div class="modal-actions">
+      <button id="fecharRadioModal" class="enterprise-btn delete">Fechar</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
