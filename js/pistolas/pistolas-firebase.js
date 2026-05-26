@@ -129,3 +129,6 @@ window.addEventListener(
 
 
 window.pistolaEditId = null;
+
+
+// AUTO_SAVE_ENTERPRISE ENABLED

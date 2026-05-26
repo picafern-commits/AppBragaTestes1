@@ -6552,3 +6552,6 @@ window.verInformacao = verInformacao;
 window.fecharInfoModal = fecharInfoModal;
 window.editarInformacao = editarInformacao;
 window.apagarInformacao = apagarInformacao;
+
+
+// AUTO_SAVE_ENTERPRISE ENABLED
