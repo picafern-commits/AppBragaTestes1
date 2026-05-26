@@ -6730,3 +6730,153 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== FIM ENTERPRISE RADIOS FIREBASE =====
+
+
+// ===== ENTERPRISE RADIOS UI =====
+
+function renderRadiosRealtime(radios) {
+
+    const container =
+      document.getElementById('radiosRealtimeList');
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    radios.sort((a,b)=>
+      (a.nome || '').localeCompare(b.nome || '')
+    );
+
+    radios.forEach(radio => {
+
+        const card = document.createElement('div');
+
+        card.style.background = '#111827';
+        card.style.border = '1px solid rgba(255,255,255,.08)';
+        card.style.borderRadius = '16px';
+        card.style.padding = '18px';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.gap = '10px';
+
+        card.innerHTML = `
+            <div style="font-size:18px;font-weight:700;color:white;">
+                ${radio.nome || ''}
+            </div>
+
+            <div style="color:#9ca3af;">
+                MAC: ${radio.mac || ''}
+            </div>
+
+            <div style="color:#9ca3af;">
+                Série: ${radio.serial || ''}
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:10px;">
+
+                <button class="enterprise-btn primary"
+                    onclick="editarRadio('${radio.id}')">
+                    Editar
+                </button>
+
+                <button class="enterprise-btn delete"
+                    onclick="apagarRadio('${radio.id}')">
+                    Apagar
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+    renderRelatorioSemanal(radios);
+}
+
+async function apagarRadio(id) {
+
+    const confirmar = confirm('Apagar rádio?');
+
+    if (!confirmar) return;
+
+    await firebase.firestore()
+      .collection('radios')
+      .doc(id)
+      .delete();
+}
+
+function editarRadio(id) {
+
+    const radio =
+      window.radiosRealtime.find(r => r.id === id);
+
+    if (!radio) return;
+
+    abrirModalRadio();
+
+    document.getElementById('radioNome').value =
+      radio.nome || '';
+
+    document.getElementById('radioMac').value =
+      radio.mac || '';
+
+    document.getElementById('radioSerial').value =
+      radio.serial || '';
+
+    window.radioEditarId = id;
+}
+
+function renderRelatorioSemanal(radios) {
+
+    const container =
+      document.getElementById('relatorioSemanalList');
+
+    if (!container) return;
+
+    const hoje = new Date();
+
+    const semana = `Semana 1 - ${hoje.toLocaleDateString()}`;
+
+    container.innerHTML = `
+        <div style="background:#111827;padding:18px;border-radius:16px;">
+
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+
+                <div style="color:white;font-weight:700;">
+                    ${semana}
+                </div>
+
+                <button class="enterprise-btn primary"
+                    onclick="abrirRelatorioSemanal()">
+                    Ver Detalhes
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function abrirRelatorioSemanal() {
+
+    const radios =
+      window.radiosRealtime || [];
+
+    const detalhes = radios.map(r =>
+      `${r.nome} | ${r.user || 'Sem User'}`
+    ).join('\n');
+
+    alert(detalhes || 'Sem rádios');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const novoBtn =
+      document.getElementById('novoRadioBtn');
+
+    if (novoBtn) {
+        novoBtn.onclick = abrirModalRadio;
+    }
+});
+
+// ===== FIM ENTERPRISE RADIOS UI =====
