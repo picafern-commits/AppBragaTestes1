@@ -46,7 +46,7 @@
 	<a href="users.html">Users</a>
 	<a href="pistolas.html">Pistolas CK65</a>
 	<a href="portas.html">Portas Rede</a>
-	<a href="radios.html" class="active">s</a>
+	<a href="radios.html" class="active">Rádios</a>
 	<a href="informacoes.html">Informações</a>
 	<a href="config.html">Configurações</a>
 </aside>
@@ -55,6 +55,16 @@
   <div class="reference-header" data-breadcrumb="Home > RÃ¡dios">
     <div>
       <h1>Radios</h1>
+<div style="margin-top:10px;
+background:#052e16;
+color:#4ade80;
+padding:10px 14px;
+border-radius:12px;
+font-weight:600;
+display:inline-block;">
+Firebase Realtime Ativo
+</div>
+
     </div>
     <div class="reference-actions">
       <div class="reference-search">
@@ -74,51 +84,25 @@
       <span>Ações</span>
     </div>
     <div id="radiosEditorRows" class="radio-editor-rows"></div>
-    <button class="secondary-btn reference-outline" type="button" onclick="adicionarRadio()">Novo </button>
+    <button class="secondary-btn reference-outline" type="button" onclick="adicionarRadio()">Novo Rádio</button>
   </section>
 
   <section class="reference-panel">
     <div class="reference-panel-title">Relatorio Semanal</div>
     <div class="reference-table-wrap">
-      
+      <table class="reference-table">
+        <thead>
+          <tr>
+            <th>Radio</th>
+            <th>Users (Lista)</th>
+            <th>Última Atualização</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="radiosReportRows"></tbody>
+      </table>
     </div>
   </section>
-
-<div class="enterprise-radios-wrapper" style="margin-top:30px;">
-
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-
-    <h2 style="color:white;font-size:28px;">
-      Rádios Criados
-    </h2>
-
-    <button id="novoRadioBtn"
-      class="enterprise-btn primary">
-
-      Novo Rádio
-
-    </button>
-
-  </div>
-
-  <div id="radiosRealtimeList"
-    style="display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-    gap:18px;">
-  </div>
-
-</div>
-
-<div style="margin-top:40px;">
-
-  <h2 style="color:white;margin-bottom:20px;">
-    Relatório Semanal
-  </h2>
-
-  <div id="relatorioSemanalList"></div>
-
-</div>
-
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -136,9 +120,9 @@
 
   <div style="width:95%;max-width:500px;background:#111827;padding:24px;border-radius:18px;display:flex;flex-direction:column;gap:12px;">
 
-    <h2 style="color:white;">Novo </h2>
+    <h2 style="color:white;">Novo Rádio</h2>
 
-    <input type="text" id="radioNome" placeholder="Nome do " class="enterprise-input">
+    <input type="text" id="radioNome" placeholder="Nome do Rádio" class="enterprise-input">
 
     <input type="text" id="radioMac" placeholder="MAC Address" class="enterprise-input">
 
@@ -147,7 +131,7 @@
     <div style="display:flex;gap:10px;">
 
       <button id="criarRadioBtn" class="enterprise-btn primary">
-        Criar 
+        Criar Rádio
       </button>
 
       <button id="fecharRadioModal" class="enterprise-btn delete">

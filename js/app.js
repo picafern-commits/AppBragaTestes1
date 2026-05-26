@@ -2001,7 +2001,14 @@ function saveRadiosData() {
   }
 }
 
- ${item.users} ${item.obs}`;
+function renderRadios() {
+  const editor = document.getElementById("radiosEditorRows");
+  const report = document.getElementById("radiosReportRows");
+  if (!editor || !report) return;
+
+  const search = normalizarTexto(document.getElementById("radioSearch")?.value || "");
+  const lista = radiosData.filter(item => {
+    const text = `${item.radio} ${item.users} ${item.obs}`;
     return !search || normalizarTexto(text).includes(search);
   });
 
@@ -6643,76 +6650,41 @@ async function criarRadioRealtime() {
 
     try {
 
-        await firebase.firestore()
-          .collection('radios')
-          .add({
-              nome,
-              mac,
-              serial,
-              createdAt: Date.now()
-          });
-
-        fecharModalRadio();
-
-    } catch (e) {
-        console.error(e);
-        alert('Erro ao criar rádio');
-    }
-}
-
-</td>
-            <td>${radio.mac || ''}</td>
-            <td>${radio.serial || ''}</td>
-        `;
-
-        tbody.appendChild(tr);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const novoBtn = [...document.querySelectorAll('button')]
-      .find(btn =>
-          btn.innerText.toLowerCase().includes('novo radio') ||
-          btn.innerText.toLowerCase().includes('novo rádio')
-      );
-
-    if (novoBtn) {
-        novoBtn.onclick = abrirModalRadio;
-    }
-
-    document.getElementById('fecharRadioModal')
-      ?.addEventListener('click', fecharModalRadio);
-
-    document.getElementById('criarRadioBtn')
-      ?.addEventListener('click', criarRadioRealtime);
-
-    firebase.firestore()
-      .collection('radios')
-      .orderBy('createdAt', 'desc')
-      .onSnapshot(snapshot => {
-
-          const radios = [];
-
-          snapshot.forEach(doc => {
-              radios.push({
-                  id: doc.id,
-                  ...doc.data()
-              });
-          });
-
-          window.radiosRealtime = radios;
-
-          renderRadiosRealtime(radios);
-      });
-});
+        await 
 
 // ===== FIM ENTERPRISE RADIOS FIREBASE =====
 
 
 // ===== ENTERPRISE RADIOS UI =====
 
+function renderRadiosRealtime(radios) {
 
+    const container =
+      document.getElementById('radiosRealtimeList');
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    radios.sort((a,b)=>
+      (a.nome || '').localeCompare(b.nome || '')
+    );
+
+    radios.forEach(radio => {
+
+        const card = document.createElement('div');
+
+        card.style.background = '#111827';
+        card.style.border = '1px solid rgba(255,255,255,.08)';
+        card.style.borderRadius = '16px';
+        card.style.padding = '18px';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.gap = '10px';
+
+        card.innerHTML = `
+            <div style="font-size:18px;font-weight:700;color:white;">
+                ${radio.nome || ''}
             </div>
 
             <div style="color:#9ca3af;">
@@ -6833,175 +6805,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== FIM ENTERPRISE RADIOS UI =====
 
 
-// ===== FINAL ENTERPRISE RADIOS =====
+// ===== FIREBASE RADIOS RECONNECT =====
 
 window.radiosRealtime = [];
 
-function renderRadiosRealtime(radios) {
+function startRadiosRealtime() {
 
-    const container =
-      document.getElementById('radiosRealtimeList');
-
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    radios.sort((a,b)=>
-      (a.nome || '').localeCompare(b.nome || '')
-    );
-
-    radios.forEach(radio => {
-
-        const card = document.createElement('div');
-
-        card.style.background = '#111827';
-        card.style.borderRadius = '16px';
-        card.style.padding = '18px';
-        card.style.border = '1px solid rgba(255,255,255,.08)';
-
-        card.innerHTML = `
-            <div style="font-size:20px;
-                font-weight:700;
-                color:white;
-                margin-bottom:12px;">
-
-                ${radio.nome || ''}
-
-            </div>
-
-            <div style="color:#9ca3af;margin-bottom:6px;">
-                MAC: ${radio.mac || ''}
-            </div>
-
-            <div style="color:#9ca3af;">
-                Série: ${radio.serial || ''}
-            </div>
-
-            <div style="display:flex;
-                gap:10px;
-                margin-top:16px;">
-
-                <button class="enterprise-btn primary"
-                    onclick="editarRadio('${radio.id}')">
-                    Editar
-                </button>
-
-                <button class="enterprise-btn delete"
-                    onclick="apagarRadio('${radio.id}')">
-                    Apagar
-                </button>
-
-            </div>
-        `;
-
-        container.appendChild(card);
-    });
-
-    renderRelatorioSemanal(radios);
-}
-
-async function apagarRadio(id) {
-
-    const confirmar =
-      confirm('Apagar rádio?');
-
-    if (!confirmar) return;
-
-    await firebase.firestore()
-      .collection('radios')
-      .doc(id)
-      .delete();
-}
-
-function editarRadio(id) {
-
-    const radio =
-      window.radiosRealtime.find(r => r.id === id);
-
-    if (!radio) return;
-
-    abrirModalRadio();
-
-    document.getElementById('radioNome').value =
-      radio.nome || '';
-
-    document.getElementById('radioMac').value =
-      radio.mac || '';
-
-    document.getElementById('radioSerial').value =
-      radio.serial || '';
-}
-
-function renderRelatorioSemanal(radios) {
-
-    const container =
-      document.getElementById('relatorioSemanalList');
-
-    if (!container) return;
-
-    const hoje = new Date();
-
-    container.innerHTML = `
-        <div style="background:#111827;
-            border-radius:16px;
-            padding:18px;">
-
-            <div style="display:flex;
-                justify-content:space-between;
-                align-items:center;">
-
-                <div style="color:white;font-weight:700;">
-
-                    Semana 1 de
-                    ${hoje.toLocaleDateString()}
-
-                </div>
-
-                <button class="enterprise-btn primary"
-                    onclick="abrirRelatorioSemanal()">
-
-                    Ver Detalhes
-
-                </button>
-
-            </div>
-
-        </div>
-    `;
-}
-
-function abrirRelatorioSemanal() {
-
-    const radios =
-      window.radiosRealtime || [];
-
-    const texto = radios.map(r =>
-
-      `Rádio: ${r.nome}
-User: ${r.user || 'Sem User'}`
-
-    ).join('\n\n');
-
-    alert(texto || 'Sem rádios');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const novoBtn =
-      document.getElementById('novoRadioBtn');
-
-    if (novoBtn) {
-        novoBtn.onclick = abrirModalRadio;
+    if (!window.firebase || !firebase.firestore) {
+        console.error('Firebase indisponível');
+        return;
     }
 
-    firebase.firestore()
-      .collection('radios')
+    const db = firebase.firestore();
+
+    db.collection('radios')
       .orderBy('createdAt', 'desc')
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
 
           const radios = [];
 
-          snapshot.forEach(doc => {
+          snapshot.forEach((doc) => {
               radios.push({
                   id: doc.id,
                   ...doc.data()
@@ -7010,8 +6833,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
           window.radiosRealtime = radios;
 
-          renderRadiosRealtime(radios);
+          if (typeof renderRadiosRealtime === 'function') {
+              renderRadiosRealtime(radios);
+          }
+
+      }, (error) => {
+          console.error('Erro Firestore radios:', error);
       });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    setTimeout(() => {
+        startRadiosRealtime();
+    }, 500);
+
 });
 
-// ===== FIM FINAL ENTERPRISE RADIOS =====
+// ===== FIM FIREBASE RADIOS RECONNECT =====
