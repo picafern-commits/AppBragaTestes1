@@ -2119,11 +2119,30 @@ function saveInformacoesData() {
 function renderInformacoes() {
   const lista = document.getElementById("informacoesLista");
   if (!lista) return;
+
   lista.innerHTML = informacoesData.length ? informacoesData.map(item => `
-    <button class="info-list-item ${informacaoSelecionada === item.id ? "active" : ""}" type="button" onclick="selecionarInformacao('${item.id}')">
-      <strong>${safeRefHtml(item.titulo || "Sem título")}</strong>
-      <span>${safeRefHtml(item.obs || "Sem observações")}</span>
-    </button>
+    <div class="info-card-item ${informacaoSelecionada === item.id ? "active" : ""}">
+
+      <button class="info-list-item" type="button" onclick="selecionarInformacao('${item.id}')">
+        <strong>${safeRefHtml(item.titulo || "Sem título")}</strong>
+        <span>${safeRefHtml(item.obs || "Sem observações")}</span>
+      </button>
+
+      <div class="info-card-actions">
+        <button class="secondary-btn reference-outline" type="button" onclick="selecionarInformacao('${item.id}'); verInformacaoSelecionada();">
+          Ver Mais
+        </button>
+
+        <button class="secondary-btn info-edit-btn" type="button" onclick="selecionarInformacao('${item.id}'); editarInformacaoSelecionada();">
+          Editar
+        </button>
+
+        <button class="secondary-btn info-delete-btn" type="button" onclick="selecionarInformacao('${item.id}'); apagarInformacaoSelecionada();">
+          Apagar
+        </button>
+      </div>
+
+    </div>
   `).join("") : `<div class="info-empty">Ainda sem informações guardadas.</div>`;
 }
 

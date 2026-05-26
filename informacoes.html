@@ -101,41 +101,6 @@ padding:24px;
 
 
 <link rel="stylesheet" href="../css/sidebar-enterprise.css">
-
-<style>
-.info-actions{
- display:flex;
- gap:12px;
- margin-top:16px;
-}
-.btn-view,.btn-edit,.btn-delete{
- flex:1;
- border:none;
- border-radius:16px;
- padding:14px;
- font-size:18px;
- font-weight:700;
- cursor:pointer;
-}
-.btn-view{
- background:#2563eb;
- color:white;
-}
-.btn-edit{
- background:#111827;
- color:white;
- border:1px solid #1e3a8a;
-}
-.btn-delete{
- background:#220b15;
- color:#ff4d6d;
-}
-.info-preview,
-.info-description{
- display:none !important;
-}
-</style>
-
 </head>
 
 <body>
@@ -263,61 +228,5 @@ title.includes(value)
 </script>
 
 </div>
-
-<script>
-
-/* FIREBASE INFORMACOES REALTIME */
-
-const db = firebase.firestore();
-
-const listaInformacoes =
-document.getElementById("listaInformacoes");
-
-if(listaInformacoes){
-
- db.collection("informacoes")
- .orderBy("createdAt","desc")
- .onSnapshot((snapshot)=>{
-
-    listaInformacoes.innerHTML = "";
-
-    snapshot.forEach((doc)=>{
-
-        const dados = doc.data();
-
-        const div = document.createElement("div");
-        div.className = "info-card";
-
-        div.innerHTML = `
-            <h3>${dados.titulo || ""}</h3>
-
-            <div class="info-actions">
-                <button class="btn-view">Ver Mais</button>
-                <button class="btn-edit">Editar</button>
-                <button class="btn-delete">Apagar</button>
-            </div>
-        `;
-
-        div.querySelector(".btn-view")
-        .onclick = ()=>{
-
-            alert(
-                (dados.titulo || "") +
-                "\n\n" +
-                (dados.descricao || "")
-            );
-
-        };
-
-        listaInformacoes.appendChild(div);
-
-    });
-
- });
-
-}
-
-</script>
-
 </body>
 </html>

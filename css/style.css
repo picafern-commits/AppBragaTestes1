@@ -1797,7 +1797,7 @@ html.dark .minimo-item, body.dark .minimo-item {
 .diagnostics-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:12px; }
 .diagnostics-card .summary-value.small { font-size: 15px; line-height: 1.35; }
 .diagnostics-status-row { display:flex; align-items:center; gap:10px; margin-top:6px; }
-.diag-dot { width:12px; height:12px; border-radius:999px; display:inline-block; background:#64748b; box-shadow:0 0 0 3px rgba(100,116,139,.18); }
+.diag-dot { width:12px; height:12px; border-radius:999px; display:block !important; background:#64748b; box-shadow:0 0 0 3px rgba(100,116,139,.18); }
 .diag-dot.is-ok { background:#22c55e; box-shadow:0 0 0 3px rgba(34,197,94,.18); }
 .diag-dot.is-warn { background:#f59e0b; box-shadow:0 0 0 3px rgba(245,158,11,.18); }
 .diag-dot.is-error { background:#ef4444; box-shadow:0 0 0 3px rgba(239,68,68,.18); }
@@ -3882,4 +3882,91 @@ body.app-light textarea {
         margin-left:0 !important;
         width:100% !important;
     }
+}
+
+
+/* REAL FINAL WIDTH FIX */
+
+body{
+ overflow-x:hidden !important;
+}
+
+.container,
+.content,
+.dashboard,
+.dashboard-wrapper,
+.dashboard-content,
+.main,
+.main-content,
+.page-content{
+    max-width:none !important;
+    width:calc(100vw - 250px) !important;
+    margin-left:250px !important;
+    margin-right:0 !important;
+    padding:20px !important;
+    box-sizing:border-box !important;
+}
+
+.equipamentos-grid,
+.impressoras-grid,
+.cards-grid,
+.dashboard-grid{
+    display:grid !important;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr)) !important;
+    width:100% !important;
+    gap:18px !important;
+}
+
+
+/* FEATURED EQUIPMENT FULL WIDTH FIX */
+
+.featured-equipment,
+.highlight-section,
+.dashboard-panel,
+.equipamentos-destaque{
+    width:100% !important;
+    max-width:none !important;
+    display:block !important;
+    box-sizing:border-box !important;
+}
+
+.featured-equipment .cards-grid,
+.featured-equipment .equipamentos-grid,
+.highlight-section .cards-grid,
+.highlight-section .equipamentos-grid,
+.dashboard-panel .cards-grid,
+.dashboard-panel .equipamentos-grid{
+    display:grid !important;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr)) !important;
+    width:100% !important;
+    gap:18px !important;
+    align-items:start !important;
+}
+
+
+.info-card-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.info-card-item.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.4);
+}
+
+.info-card-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.info-card-actions button {
+  flex: 1;
+  min-width: 90px;
 }
