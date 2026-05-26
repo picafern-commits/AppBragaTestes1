@@ -6597,6 +6597,8 @@ window.editarInformacao = editarInformacao;
 window.apagarInformacao = apagarInformacao;
 
 
+
+
 // ===== RADIOS FIREBASE REALTIME =====
 
 const radiosCollection = firebase.firestore().collection('radios');
@@ -6604,43 +6606,74 @@ const radiosCollection = firebase.firestore().collection('radios');
 async function criarRadioRealtime() {
 
     const nome = document.getElementById('radioNome')?.value || '';
+    const mac = document.getElementById('radioMac')?.value || '';
     const serial = document.getElementById('radioSerial')?.value || '';
-    const modelo = document.getElementById('radioModelo')?.value || '';
-    const estado = document.getElementById('radioEstado')?.value || '';
-    const utilizador = document.getElementById('radioUtilizador')?.value || '';
 
     if (!nome.trim()) return;
 
-    await radiosCollection.add({
-        nome,
-        serial,
-        modelo,
-        estado,
-        utilizador,
-        createdAt: Date.now()
-    });
+    try {
 
-    fecharModalRadio();
+        await radiosCollection.add({
+            nome,
+            mac,
+            serial,
+            createdAt: Date.now()
+        });
+
+        fecharModalRadio();
+
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function abrirModalRadio() {
-    document.getElementById('radioModal')?.classList.remove('hidden');
+    document.getElementById('radioModal')
+      ?.classList.remove('hidden');
 }
 
 function fecharModalRadio() {
-    document.getElementById('radioModal')?.classList.add('hidden');
 
-    ['radioNome','radioSerial','radioModelo','radioEstado','radioUtilizador']
+    document.getElementById('radioModal')
+      ?.classList.add('hidden');
+
+    ['radioNome','radioMac','radioSerial']
       .forEach(id => {
           const el = document.getElementById(id);
           if (el) el.value = '';
       });
 }
 
+function renderRadiosRealtime(radios) {
+
+    const tbody =
+      document.querySelector('#radiosTable tbody') ||
+      document.querySelector('.radios-table tbody');
+
+    if (!tbody) return;
+
+    tbody.innerHTML = '';
+
+    radios.forEach(radio => {
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td>${radio.nome || ''}</td>
+            <td>${radio.mac || ''}</td>
+            <td>${radio.serial || ''}</td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const novoBtn = [...document.querySelectorAll('button')]
-      .find(btn => btn.innerText.toLowerCase().includes('novo radio'));
+      .find(btn =>
+          btn.innerText.toLowerCase().includes('novo radio')
+      );
 
     if (novoBtn) {
         novoBtn.onclick = abrirModalRadio;
@@ -6649,17 +6682,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('fecharRadioModal')
       ?.addEventListener('click', fecharModalRadio);
 
-    ['radioNome','radioSerial','radioModelo','radioEstado','radioUtilizador']
+    ['radioNome','radioMac','radioSerial']
       .forEach(id => {
+
           document.getElementById(id)
             ?.addEventListener('change', criarRadioRealtime);
+
       });
 
-    radiosCollection.orderBy('createdAt','desc')
-      .onSnapshot(() => {
-          console.log('Radios realtime ativo');
-      });
+    radiosCollection
+      .orderBy('createdAt','desc')
+      .onSnapshot(snapshot => {
 
+          const radios = [];
+
+          snapshot.forEach(doc => {
+              radios.push({
+                  id: doc.id,
+                  ...doc.data()
+              });
+          });
+
+          renderRadiosRealtime(radios);
+      });
 });
 
 // ===== FIM RADIOS FIREBASE REALTIME =====
+
