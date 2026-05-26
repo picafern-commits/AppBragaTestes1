@@ -77,7 +77,7 @@ window.loadTheme = function(){
   try{
 
     const savedTheme =
-      // localStorage removido - Firestore realtime ativo || "dark";
+      localStorage.getItem("app-theme") || "dark";
 
     document.documentElement.classList.remove("dark");
     document.body.classList.remove("dark");
@@ -96,7 +96,7 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    // localStorage removido - Firestore realtime ativo
+    localStorage.setItem("app-theme", theme);
   }catch(e){
     console.log(e);
   }
@@ -129,6 +129,3 @@ window.addEventListener(
 
 
 window.pistolaEditId = null;
-
-
-// AUTO_SAVE_ENTERPRISE ENABLED

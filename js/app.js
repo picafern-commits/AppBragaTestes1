@@ -47,7 +47,7 @@ const BACKUP_KEYS_APP_BRAGA = {
 function saveBackupAppBraga(key, data) {
 
   try {
-    // localStorage removido - Firestore realtime ativo);
+    localStorage.setItem(key, JSON.stringify(data || []));
   } catch (e) {
     console.error("Erro backup local:", e);
   }
@@ -55,7 +55,7 @@ function saveBackupAppBraga(key, data) {
 
 function loadBackupAppBraga(key) {
   try {
-    const raw = // localStorage removido - Firestore realtime ativo
+    const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
     console.error("Erro a ler backup local:", e);
@@ -167,7 +167,7 @@ function prepararRefsUsers() {
 function guardarUsersLocal() {
   try {
     const serializavel = window.usersData.map(u => ({ ...u }));
-    // localStorage removido - Firestore realtime ativo);
+    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(serializavel));
   } catch (e) {
     console.warn('Não foi possivel guardar users no localStorage.', e);
   }
@@ -175,7 +175,7 @@ function guardarUsersLocal() {
 
 function carregarUsersLocal() {
   try {
-    const raw = // localStorage removido - Firestore realtime ativo
+    const raw = localStorage.getItem(USERS_STORAGE_KEY);
     if (!raw) {
       prepararRefsUsers();
       return;
@@ -215,7 +215,7 @@ function abrirIP(ip) {
 }
 
 function abrirManutencaoDireta(item) {
-  // localStorage removido - Firestore realtime ativo);
+  localStorage.setItem("manutencaoPreenchida", JSON.stringify(item));
   window.location.href = "manutencao-impressoras.html";
 }
 
@@ -285,7 +285,7 @@ function preencherLocaisManutencao() {
 }
 
 function preencherFormularioManutencao() {
-  const dados = // localStorage removido - Firestore realtime ativo
+  const dados = localStorage.getItem("manutencaoPreenchida");
   if (!dados) return;
 
   try {
@@ -298,7 +298,7 @@ function preencherFormularioManutencao() {
     if (el("manutencaoIP")) el("manutencaoIP").value = item.ip || "";
     if (el("manutencaoEstado")) el("manutencaoEstado").value = "Pendente";
 
-    // localStorage removido - Firestore realtime ativo
+    localStorage.removeItem("manutencaoPreenchida");
   } catch (e) {
     console.error(e);
   }
@@ -751,7 +751,7 @@ function editar(id) {
   const t = stockGlobal.find(x => x.idDoc === id);
   if (!t) return;
 
-  // localStorage removido - Firestore realtime ativo);
+  localStorage.setItem("editarToner", JSON.stringify(t));
   window.location.href = "add-toner.html";
 }
 
@@ -1002,7 +1002,7 @@ async function apagarManutencao(id) {
 }
 
 function carregarEdicaoToner() {
-  const item = // localStorage removido - Firestore realtime ativo
+  const item = localStorage.getItem("editarToner");
   if (!item || !el("equipamento")) return;
 
   try {
@@ -1308,13 +1308,13 @@ function abrirHistoricoImpressora(item) {
 function guardarImpressorasLocal() {
   try {
     impressorasData.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; });
-    // localStorage removido - Firestore realtime ativo)));
+    localStorage.setItem(IMPRESSORAS_STORAGE_KEY, JSON.stringify(impressorasData.map(i => ({ ...i }))));
   } catch (e) { console.warn('Não foi possivel guardar impressoras no localStorage.', e); }
 }
 
 function carregarImpressorasLocal() {
   try {
-    const raw = // localStorage removido - Firestore realtime ativo
+    const raw = localStorage.getItem(IMPRESSORAS_STORAGE_KEY);
     if (!raw) return;
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed) || !parsed.length) return;
@@ -1659,7 +1659,7 @@ function prepararRefsPistolas() {
 function guardarPistolasLocal() {
   try {
     const serializavel = window.pistolasData.map(p => ({ ...p }));
-    // localStorage removido - Firestore realtime ativo);
+    localStorage.setItem(PISTOLAS_STORAGE_KEY, JSON.stringify(serializavel));
   } catch (e) {
     console.warn('Não foi possivel guardar pistolas no localStorage.', e);
   }
@@ -1667,7 +1667,7 @@ function guardarPistolasLocal() {
 
 function carregarPistolasLocal() {
   try {
-    const raw = // localStorage removido - Firestore realtime ativo
+    const raw = localStorage.getItem(PISTOLAS_STORAGE_KEY);
     if (!raw) {
       prepararRefsPistolas();
       return;
@@ -1694,7 +1694,7 @@ function prepararRefsPortas() {
 function guardarPortasLocal() {
   try {
     const serializavel = window.portasData.map(p => ({ ...p }));
-    // localStorage removido - Firestore realtime ativo);
+    localStorage.setItem(PORTAS_STORAGE_KEY, JSON.stringify(serializavel));
   } catch (e) {
     console.warn('Não foi possivel guardar portas no localStorage.', e);
   }
@@ -1702,7 +1702,7 @@ function guardarPortasLocal() {
 
 function carregarPortasLocal() {
   try {
-    const raw = // localStorage removido - Firestore realtime ativo
+    const raw = localStorage.getItem(PORTAS_STORAGE_KEY);
     if (!raw) {
       prepararRefsPortas();
       return;
@@ -1850,7 +1850,7 @@ function applyAppTheme(mode) {
   document.body.classList.toggle("dark", isDark);
   document.body.classList.toggle("app-dark", isDark);
   document.body.classList.toggle("app-light", !isDark);
-  // localStorage removido - Firestore realtime ativo
+  localStorage.setItem("modo", isDark ? "dark" : "light");
 
   document.querySelectorAll(".theme-toggle").forEach((button) => {
     button.textContent = isDark ? "Modo claro" : "Modo escuro";
@@ -1862,7 +1862,7 @@ function applyAppTheme(mode) {
 }
 
 function initGlobalTheme() {
-  const savedMode = // localStorage removido - Firestore realtime ativo === "light" ? "light" : "dark";
+  const savedMode = localStorage.getItem("modo") === "light" ? "light" : "dark";
   applyAppTheme(savedMode);
 
   const sidebar = document.querySelector(".sidebar");
@@ -1904,7 +1904,7 @@ function initGlobalTheme() {
     });
   }
 
-  applyAppTheme(// localStorage removido - Firestore realtime ativo === "light" ? "light" : "dark");
+  applyAppTheme(localStorage.getItem("modo") === "light" ? "light" : "dark");
 }
 
 function initFullScreenScroll() {
@@ -1935,7 +1935,7 @@ function initFullScreenScroll() {
 document.addEventListener("DOMContentLoaded", initFullScreenScroll);
 
 const RADIOS_STORAGE_KEY = "appBragaRadios";
-const INFORMACOES_STORAGE_KEY = "appBragaInformacoes";
+// Firestore realtime ativo - sem localStorage
 let radiosData = [];
 let informacoesData = [];
 let informacaoSelecionada = null;
@@ -1979,7 +1979,7 @@ function defaultRadiosData() {
 
 function loadRadiosData() {
   try {
-    const raw = // localStorage removido - Firestore realtime ativo
+    const raw = localStorage.getItem(RADIOS_STORAGE_KEY);
     radiosData = raw ? JSON.parse(raw) : defaultRadiosData();
   } catch (e) {
     console.warn("Não foi possivel carregar radios.", e);
@@ -1988,7 +1988,7 @@ function loadRadiosData() {
 }
 
 function saveRadiosData() {
-  // localStorage removido - Firestore realtime ativo);
+  localStorage.setItem(RADIOS_STORAGE_KEY, JSON.stringify(radiosData));
   try {
     if (window.db) {
       window.db.collection("appRadios").doc("lista").set({
@@ -2092,29 +2092,38 @@ function filtrarRadios() {
   renderRadios();
 }
 
+
 function loadInformacoesData() {
-  try {
-    const raw = // localStorage removido - Firestore realtime ativo
-    informacoesData = raw ? JSON.parse(raw) : [];
-  } catch (e) {
-    console.warn("Não foi possivel carregar informacoes.", e);
-    informacoesData = [];
+  if (!window.db) {
+    console.warn("Firestore não inicializado.");
+    return;
   }
+
+  window.db.collection("informacoes")
+    .orderBy("createdAt", "desc")
+    .onSnapshot((snapshot) => {
+
+      informacoesData = [];
+
+      snapshot.forEach((doc) => {
+        informacoesData.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+
+      renderInformacoes(
+        document.getElementById("pesquisaInfo")?.value || ""
+      );
+    });
 }
 
+
+
 function saveInformacoesData() {
-  // localStorage removido - Firestore realtime ativo);
-  try {
-    if (window.db) {
-      window.db.collection("appInformacoes").doc("lista").set({
-        items: informacoesData,
-        updated: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-    }
-  } catch (e) {
-    console.warn("Não foi possivel sincronizar informacoes.", e);
-  }
+  // Firestore realtime ativo
 }
+
 
 function renderInformacoes(filtro = "") {
   const lista = document.getElementById("informacoesLista");
@@ -2143,34 +2152,55 @@ function initInformacoesPage() {
   }
 }
 
-function adicionarInformacao() {
+
+async function adicionarInformacao() {
   const titulo = document.getElementById("infoTitulo")?.value || "";
   const obs = document.getElementById("infoObs")?.value || "";
+
   if (!normalizarTexto(titulo) && !normalizarTexto(obs)) {
     mostrarMensagem("Preenche pelo menos um título ou observação.", "erro");
     return;
   }
-  if (informacaoSelecionada) {
-    const item = informacoesData.find(info => info.id === informacaoSelecionada);
-    if (item) {
-      item.titulo = titulo;
-      item.obs = obs;
-      item.updated = nowPt();
-    }
-  } else {
-    informacoesData.unshift({
-      id: `info-${Date.now()}`,
-      titulo,
-      obs,
-      updated: nowPt()
-    });
+
+  if (!window.db) {
+    mostrarMensagem("Firebase indisponível.", "erro");
+    return;
   }
-  document.getElementById("infoTitulo").value = "";
-  document.getElementById("infoObs").value = "";
-  informacaoSelecionada = null;
-  saveInformacoesData();
-  renderInformacoes();
+
+  try {
+
+    if (informacaoSelecionada) {
+
+      await window.db.collection("informacoes")
+        .doc(informacaoSelecionada)
+        .update({
+          titulo,
+          obs,
+          updated: nowPt()
+        });
+
+    } else {
+
+      await window.db.collection("informacoes")
+        .add({
+          titulo,
+          obs,
+          createdAt: Date.now(),
+          updated: nowPt()
+        });
+    }
+
+    document.getElementById("infoTitulo").value = "";
+    document.getElementById("infoObs").value = "";
+
+    informacaoSelecionada = null;
+
+  } catch (e) {
+    console.error(e);
+    mostrarMensagem("Erro ao guardar informação.", "erro");
+  }
 }
+
 
 function selecionarInformacao(id) {
   informacaoSelecionada = id;
@@ -2190,13 +2220,26 @@ function editarInformacaoSelecionada() {
   document.getElementById("infoObs").value = item.obs || "";
 }
 
-function apagarInformacaoSelecionada() {
-  if (!informacaoSelecionada) return mostrarMensagem("Seleciona uma informação primeiro.", "erro");
-  informacoesData = informacoesData.filter(info => info.id !== informacaoSelecionada);
-  informacaoSelecionada = null;
-  saveInformacoesData();
-  renderInformacoes();
+
+async function apagarInformacaoSelecionada() {
+  if (!informacaoSelecionada) {
+    return mostrarMensagem("Seleciona uma informação primeiro.", "erro");
+  }
+
+  try {
+
+    await window.db.collection("informacoes")
+      .doc(informacaoSelecionada)
+      .delete();
+
+    informacaoSelecionada = null;
+
+  } catch (e) {
+    console.error(e);
+    mostrarMensagem("Erro ao apagar informação.", "erro");
+  }
 }
+
 
 function guardarInformacoes() {
   const titulo = document.getElementById("infoTitulo")?.value || "";
@@ -4471,7 +4514,7 @@ function tryRenderAppBraga(fn) {
 
 function loadStockMinConfig() {
   try {
-    const saved = JSON.parse(// localStorage removido - Firestore realtime ativo || "{}");
+    const saved = JSON.parse(localStorage.getItem("stockMinConfig") || "{}");
     return { ...STOCK_MIN_DEFAULTS, ...saved };
   } catch (e) {
     console.error(e);
@@ -4480,7 +4523,7 @@ function loadStockMinConfig() {
 }
 
 function saveStockMinConfig(cfg) {
-  // localStorage removido - Firestore realtime ativo);
+  localStorage.setItem("stockMinConfig", JSON.stringify(cfg || {}));
 }
 
 function normalizeLocMin(loc) {
@@ -4548,7 +4591,7 @@ function resetStockMinimoConfig() {
 }
 
 function ensureLoteFieldOnEdit() {
-  const item = // localStorage removido - Firestore realtime ativo
+  const item = localStorage.getItem("editarToner");
   if (!item || !el("lote")) return;
   try {
     const toner = JSON.parse(item);
@@ -6476,7 +6519,7 @@ window.loadTheme = function(){
   try{
 
     const savedTheme =
-      // localStorage removido - Firestore realtime ativo || "dark";
+      localStorage.getItem("app-theme") || "dark";
 
     document.documentElement.classList.remove("dark");
     document.body.classList.remove("dark");
@@ -6495,7 +6538,7 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    // localStorage removido - Firestore realtime ativo
+    localStorage.setItem("app-theme", theme);
   }catch(e){
     console.log(e);
   }
@@ -6552,6 +6595,3 @@ window.verInformacao = verInformacao;
 window.fecharInfoModal = fecharInfoModal;
 window.editarInformacao = editarInformacao;
 window.apagarInformacao = apagarInformacao;
-
-
-// AUTO_SAVE_ENTERPRISE ENABLED
