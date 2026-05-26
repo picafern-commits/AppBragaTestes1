@@ -6851,3 +6851,253 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== FIM FIREBASE RADIOS RECONNECT =====
+
+
+// ===== RADIOS ENTERPRISE FINAL =====
+
+window.radiosRealtime = [];
+window.radioEditarId = null;
+
+function abrirModalRadio() {
+    const modal = document.getElementById('radioModal');
+    if(modal) modal.style.display = 'flex';
+}
+
+function fecharModalRadio() {
+    const modal = document.getElementById('radioModal');
+    if(modal) modal.style.display = 'none';
+
+    ['radioNome','radioMac','radioSerial']
+    .forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.value = '';
+    });
+
+    window.radioEditarId = null;
+}
+
+async function guardarRadioRealtime(){
+
+    const nome =
+      document.getElementById('radioNome').value.trim();
+
+    const mac =
+      document.getElementById('radioMac').value.trim();
+
+    const serial =
+      document.getElementById('radioSerial').value.trim();
+
+    if(!nome) return alert('Preenche o nome do rádio');
+
+    const db = firebase.firestore();
+
+    if(window.radioEditarId){
+
+        await db.collection('radios')
+        .doc(window.radioEditarId)
+        .update({
+            nome,
+            mac,
+            serial
+        });
+
+    }else{
+
+        await db.collection('radios')
+        .add({
+            nome,
+            mac,
+            serial,
+            createdAt: Date.now()
+        });
+    }
+
+    fecharModalRadio();
+}
+
+async function apagarRadio(id){
+
+    const confirmar = confirm('Apagar rádio?');
+
+    if(!confirmar) return;
+
+    await firebase.firestore()
+    .collection('radios')
+    .doc(id)
+    .delete();
+}
+
+function editarRadio(id){
+
+    const radio =
+      window.radiosRealtime.find(r=>r.id===id);
+
+    if(!radio) return;
+
+    window.radioEditarId = id;
+
+    abrirModalRadio();
+
+    document.getElementById('radioNome').value =
+      radio.nome || '';
+
+    document.getElementById('radioMac').value =
+      radio.mac || '';
+
+    document.getElementById('radioSerial').value =
+      radio.serial || '';
+}
+
+function renderRelatorio(radios){
+
+    const div =
+      document.getElementById('relatorioSemanal');
+
+    if(!div) return;
+
+    const hoje = new Date();
+
+    div.innerHTML = `
+        <div style="background:#111827;
+            padding:18px;
+            border-radius:18px;">
+
+            <div style="display:flex;
+                justify-content:space-between;
+                align-items:center;">
+
+                <div>
+                    Semana 1 de
+                    ${hoje.toLocaleDateString()}
+                </div>
+
+                <button class="enterprise-btn primary"
+                    onclick="verRelatorioDetalhes()">
+
+                    Ver Detalhes
+
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function verRelatorioDetalhes(){
+
+    const radios = window.radiosRealtime || [];
+
+    const texto = radios.map(r=>`
+Rádio: ${r.nome}
+MAC: ${r.mac}
+Série: ${r.serial}
+User: ${r.user || 'Sem User'}
+    `).join('\n');
+
+    alert(texto || 'Sem rádios');
+}
+
+function renderRadiosRealtime(radios){
+
+    const container =
+      document.getElementById('radiosList');
+
+    if(!container) return;
+
+    container.innerHTML = '';
+
+    radios.sort((a,b)=>
+      (a.nome || '').localeCompare(b.nome || '')
+    );
+
+    radios.forEach(radio=>{
+
+        const card = document.createElement('div');
+
+        card.className = 'radio-card';
+
+        card.innerHTML = `
+            <div style="font-size:20px;
+                font-weight:700;
+                margin-bottom:10px;">
+
+                ${radio.nome || ''}
+
+            </div>
+
+            <div style="margin-bottom:6px;">
+                MAC: ${radio.mac || ''}
+            </div>
+
+            <div>
+                Série: ${radio.serial || ''}
+            </div>
+
+            <div style="display:flex;
+                gap:10px;
+                margin-top:16px;">
+
+                <button class="enterprise-btn edit"
+                    onclick="editarRadio('${radio.id}')">
+
+                    Editar
+
+                </button>
+
+                <button class="enterprise-btn delete"
+                    onclick="apagarRadio('${radio.id}')">
+
+                    Apagar
+
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+
+    renderRelatorio(radios);
+}
+
+function startRadiosRealtime(){
+
+    firebase.firestore()
+    .collection('radios')
+    .orderBy('createdAt','desc')
+    .onSnapshot(snapshot=>{
+
+        const radios = [];
+
+        snapshot.forEach(doc=>{
+            radios.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+
+        window.radiosRealtime = radios;
+
+        renderRadiosRealtime(radios);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+
+    document.getElementById('novoRadioBtn')
+    ?.addEventListener('click', abrirModalRadio);
+
+    document.getElementById('fecharModalBtn')
+    ?.addEventListener('click', fecharModalRadio);
+
+    document.getElementById('guardarRadioBtn')
+    ?.addEventListener('click', guardarRadioRealtime);
+
+    setTimeout(()=>{
+        startRadiosRealtime();
+    },500);
+
+});
+
+// ===== FIM RADIOS ENTERPRISE FINAL =====
