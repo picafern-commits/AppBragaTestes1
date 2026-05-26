@@ -47,7 +47,7 @@ const BACKUP_KEYS_APP_BRAGA = {
 function saveBackupAppBraga(key, data) {
 
   try {
-    localStorage.setItem(key, JSON.stringify(data || []));
+    // localStorage removido - Firestore realtime ativo);
   } catch (e) {
     console.error("Erro backup local:", e);
   }
@@ -55,7 +55,7 @@ function saveBackupAppBraga(key, data) {
 
 function loadBackupAppBraga(key) {
   try {
-    const raw = localStorage.getItem(key);
+    const raw = // localStorage removido - Firestore realtime ativo
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
     console.error("Erro a ler backup local:", e);
@@ -167,7 +167,7 @@ function prepararRefsUsers() {
 function guardarUsersLocal() {
   try {
     const serializavel = window.usersData.map(u => ({ ...u }));
-    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(serializavel));
+    // localStorage removido - Firestore realtime ativo);
   } catch (e) {
     console.warn('Não foi possivel guardar users no localStorage.', e);
   }
@@ -175,7 +175,7 @@ function guardarUsersLocal() {
 
 function carregarUsersLocal() {
   try {
-    const raw = localStorage.getItem(USERS_STORAGE_KEY);
+    const raw = // localStorage removido - Firestore realtime ativo
     if (!raw) {
       prepararRefsUsers();
       return;
@@ -215,7 +215,7 @@ function abrirIP(ip) {
 }
 
 function abrirManutencaoDireta(item) {
-  localStorage.setItem("manutencaoPreenchida", JSON.stringify(item));
+  // localStorage removido - Firestore realtime ativo);
   window.location.href = "manutencao-impressoras.html";
 }
 
@@ -285,7 +285,7 @@ function preencherLocaisManutencao() {
 }
 
 function preencherFormularioManutencao() {
-  const dados = localStorage.getItem("manutencaoPreenchida");
+  const dados = // localStorage removido - Firestore realtime ativo
   if (!dados) return;
 
   try {
@@ -298,7 +298,7 @@ function preencherFormularioManutencao() {
     if (el("manutencaoIP")) el("manutencaoIP").value = item.ip || "";
     if (el("manutencaoEstado")) el("manutencaoEstado").value = "Pendente";
 
-    localStorage.removeItem("manutencaoPreenchida");
+    // localStorage removido - Firestore realtime ativo
   } catch (e) {
     console.error(e);
   }
@@ -751,7 +751,7 @@ function editar(id) {
   const t = stockGlobal.find(x => x.idDoc === id);
   if (!t) return;
 
-  localStorage.setItem("editarToner", JSON.stringify(t));
+  // localStorage removido - Firestore realtime ativo);
   window.location.href = "add-toner.html";
 }
 
@@ -1002,7 +1002,7 @@ async function apagarManutencao(id) {
 }
 
 function carregarEdicaoToner() {
-  const item = localStorage.getItem("editarToner");
+  const item = // localStorage removido - Firestore realtime ativo
   if (!item || !el("equipamento")) return;
 
   try {
@@ -1308,13 +1308,13 @@ function abrirHistoricoImpressora(item) {
 function guardarImpressorasLocal() {
   try {
     impressorasData.forEach((item, i) => { if (!item._ref) item._ref = item.idDoc || `local-impressora-${i}`; });
-    localStorage.setItem(IMPRESSORAS_STORAGE_KEY, JSON.stringify(impressorasData.map(i => ({ ...i }))));
+    // localStorage removido - Firestore realtime ativo)));
   } catch (e) { console.warn('Não foi possivel guardar impressoras no localStorage.', e); }
 }
 
 function carregarImpressorasLocal() {
   try {
-    const raw = localStorage.getItem(IMPRESSORAS_STORAGE_KEY);
+    const raw = // localStorage removido - Firestore realtime ativo
     if (!raw) return;
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed) || !parsed.length) return;
@@ -1659,7 +1659,7 @@ function prepararRefsPistolas() {
 function guardarPistolasLocal() {
   try {
     const serializavel = window.pistolasData.map(p => ({ ...p }));
-    localStorage.setItem(PISTOLAS_STORAGE_KEY, JSON.stringify(serializavel));
+    // localStorage removido - Firestore realtime ativo);
   } catch (e) {
     console.warn('Não foi possivel guardar pistolas no localStorage.', e);
   }
@@ -1667,7 +1667,7 @@ function guardarPistolasLocal() {
 
 function carregarPistolasLocal() {
   try {
-    const raw = localStorage.getItem(PISTOLAS_STORAGE_KEY);
+    const raw = // localStorage removido - Firestore realtime ativo
     if (!raw) {
       prepararRefsPistolas();
       return;
@@ -1694,7 +1694,7 @@ function prepararRefsPortas() {
 function guardarPortasLocal() {
   try {
     const serializavel = window.portasData.map(p => ({ ...p }));
-    localStorage.setItem(PORTAS_STORAGE_KEY, JSON.stringify(serializavel));
+    // localStorage removido - Firestore realtime ativo);
   } catch (e) {
     console.warn('Não foi possivel guardar portas no localStorage.', e);
   }
@@ -1702,7 +1702,7 @@ function guardarPortasLocal() {
 
 function carregarPortasLocal() {
   try {
-    const raw = localStorage.getItem(PORTAS_STORAGE_KEY);
+    const raw = // localStorage removido - Firestore realtime ativo
     if (!raw) {
       prepararRefsPortas();
       return;
@@ -1850,7 +1850,7 @@ function applyAppTheme(mode) {
   document.body.classList.toggle("dark", isDark);
   document.body.classList.toggle("app-dark", isDark);
   document.body.classList.toggle("app-light", !isDark);
-  localStorage.setItem("modo", isDark ? "dark" : "light");
+  // localStorage removido - Firestore realtime ativo
 
   document.querySelectorAll(".theme-toggle").forEach((button) => {
     button.textContent = isDark ? "Modo claro" : "Modo escuro";
@@ -1862,7 +1862,7 @@ function applyAppTheme(mode) {
 }
 
 function initGlobalTheme() {
-  const savedMode = localStorage.getItem("modo") === "light" ? "light" : "dark";
+  const savedMode = // localStorage removido - Firestore realtime ativo === "light" ? "light" : "dark";
   applyAppTheme(savedMode);
 
   const sidebar = document.querySelector(".sidebar");
@@ -1904,7 +1904,7 @@ function initGlobalTheme() {
     });
   }
 
-  applyAppTheme(localStorage.getItem("modo") === "light" ? "light" : "dark");
+  applyAppTheme(// localStorage removido - Firestore realtime ativo === "light" ? "light" : "dark");
 }
 
 function initFullScreenScroll() {
@@ -1979,7 +1979,7 @@ function defaultRadiosData() {
 
 function loadRadiosData() {
   try {
-    const raw = localStorage.getItem(RADIOS_STORAGE_KEY);
+    const raw = // localStorage removido - Firestore realtime ativo
     radiosData = raw ? JSON.parse(raw) : defaultRadiosData();
   } catch (e) {
     console.warn("Não foi possivel carregar radios.", e);
@@ -1988,7 +1988,7 @@ function loadRadiosData() {
 }
 
 function saveRadiosData() {
-  localStorage.setItem(RADIOS_STORAGE_KEY, JSON.stringify(radiosData));
+  // localStorage removido - Firestore realtime ativo);
   try {
     if (window.db) {
       window.db.collection("appRadios").doc("lista").set({
@@ -2094,7 +2094,7 @@ function filtrarRadios() {
 
 function loadInformacoesData() {
   try {
-    const raw = localStorage.getItem(INFORMACOES_STORAGE_KEY);
+    const raw = // localStorage removido - Firestore realtime ativo
     informacoesData = raw ? JSON.parse(raw) : [];
   } catch (e) {
     console.warn("Não foi possivel carregar informacoes.", e);
@@ -2103,7 +2103,7 @@ function loadInformacoesData() {
 }
 
 function saveInformacoesData() {
-  localStorage.setItem(INFORMACOES_STORAGE_KEY, JSON.stringify(informacoesData));
+  // localStorage removido - Firestore realtime ativo);
   try {
     if (window.db) {
       window.db.collection("appInformacoes").doc("lista").set({
@@ -4471,7 +4471,7 @@ function tryRenderAppBraga(fn) {
 
 function loadStockMinConfig() {
   try {
-    const saved = JSON.parse(localStorage.getItem("stockMinConfig") || "{}");
+    const saved = JSON.parse(// localStorage removido - Firestore realtime ativo || "{}");
     return { ...STOCK_MIN_DEFAULTS, ...saved };
   } catch (e) {
     console.error(e);
@@ -4480,7 +4480,7 @@ function loadStockMinConfig() {
 }
 
 function saveStockMinConfig(cfg) {
-  localStorage.setItem("stockMinConfig", JSON.stringify(cfg || {}));
+  // localStorage removido - Firestore realtime ativo);
 }
 
 function normalizeLocMin(loc) {
@@ -4548,7 +4548,7 @@ function resetStockMinimoConfig() {
 }
 
 function ensureLoteFieldOnEdit() {
-  const item = localStorage.getItem("editarToner");
+  const item = // localStorage removido - Firestore realtime ativo
   if (!item || !el("lote")) return;
   try {
     const toner = JSON.parse(item);
@@ -6476,7 +6476,7 @@ window.loadTheme = function(){
   try{
 
     const savedTheme =
-      localStorage.getItem("app-theme") || "dark";
+      // localStorage removido - Firestore realtime ativo || "dark";
 
     document.documentElement.classList.remove("dark");
     document.body.classList.remove("dark");
@@ -6495,7 +6495,7 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme);
+    // localStorage removido - Firestore realtime ativo
   }catch(e){
     console.log(e);
   }

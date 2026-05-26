@@ -125,8 +125,8 @@ function iniciarPortas(){
         return;
     }
 
-    localStorage.removeItem('portas');
-    localStorage.removeItem('portasRede');
+    // localStorage removido - Firestore realtime ativo
+    // localStorage removido - Firestore realtime ativo
 
     window.db.collection('portas')
     .onSnapshot((snapshot)=>{
@@ -328,7 +328,7 @@ window.loadTheme = function(){
   try{
 
     const savedTheme =
-      localStorage.getItem("app-theme") || "dark";
+      // localStorage removido - Firestore realtime ativo || "dark";
 
     document.documentElement.classList.remove("dark");
     document.body.classList.remove("dark");
@@ -347,7 +347,7 @@ window.loadTheme = function(){
 window.saveTheme = function(theme){
 
   try{
-    localStorage.setItem("app-theme", theme);
+    // localStorage removido - Firestore realtime ativo
   }catch(e){
     console.log(e);
   }
