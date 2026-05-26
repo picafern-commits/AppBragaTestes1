@@ -2116,32 +2116,19 @@ function saveInformacoesData() {
   }
 }
 
-function renderInformacoes() {
+function renderInformacoes(filtro = "") {
   const lista = document.getElementById("informacoesLista");
   if (!lista) return;
-
-  lista.innerHTML = informacoesData.length ? informacoesData.map(item => `
-    <div class="info-card-item ${informacaoSelecionada === item.id ? "active" : ""}">
-
-      <button class="info-list-item" type="button" onclick="selecionarInformacao('${item.id}')">
-        <strong>${safeRefHtml(item.titulo || "Sem título")}</strong>
-        <span>${safeRefHtml(item.obs || "Sem observações")}</span>
-      </button>
-
+  const dados = informacoesData.filter(item => (item.titulo || "").toLowerCase().includes(filtro.toLowerCase()));
+  lista.innerHTML = dados.length ? dados.map(item => `
+    <div class="info-list-item ${informacaoSelecionada === item.id ? "active" : ""}">
+      <strong>${safeRefHtml(item.titulo || "Sem título")}</strong>
+      <span>${safeRefHtml(item.obs || "Sem observações")}</span>
       <div class="info-card-actions">
-        <button class="secondary-btn reference-outline" type="button" onclick="selecionarInformacao('${item.id}'); verInformacaoSelecionada();">
-          Ver Mais
-        </button>
-
-        <button class="secondary-btn info-edit-btn" type="button" onclick="selecionarInformacao('${item.id}'); editarInformacaoSelecionada();">
-          Editar
-        </button>
-
-        <button class="secondary-btn info-delete-btn" type="button" onclick="selecionarInformacao('${item.id}'); apagarInformacaoSelecionada();">
-          Apagar
-        </button>
+        <button class="secondary-btn reference-outline" type="button" onclick="verInformacao('${item.id}')">Ver Mais</button>
+        <button class="secondary-btn info-edit-btn" type="button" onclick="editarInformacao('${item.id}')">Editar</button>
+        <button class="secondary-btn info-delete-btn" type="button" onclick="apagarInformacao('${item.id}')">Apagar</button>
       </div>
-
     </div>
   `).join("") : `<div class="info-empty">Ainda sem informações guardadas.</div>`;
 }
@@ -2150,6 +2137,10 @@ function initInformacoesPage() {
   if (!document.getElementById("informacoesLista")) return;
   loadInformacoesData();
   renderInformacoes();
+  const pesquisa = document.getElementById("pesquisaInfo");
+  if (pesquisa) {
+    pesquisa.addEventListener("input", e => renderInformacoes(e.target.value || ""));
+  }
 }
 
 function adicionarInformacao() {
@@ -6534,3 +6525,30 @@ window.addEventListener(
   window.loadTheme
 );
 
+
+function verInformacao(id) {
+  const item = informacoesData.find(info => info.id === id);
+  if (!item) return;
+  document.getElementById("modalInfoTitulo").innerText = item.titulo || "Informação";
+  document.getElementById("modalInfoDescricao").innerText = item.obs || "Sem observações";
+  document.getElementById("infoModal").classList.remove("hidden");
+}
+
+function fecharInfoModal() {
+  document.getElementById("infoModal")?.classList.add("hidden");
+}
+
+function editarInformacao(id) {
+  informacaoSelecionada = id;
+  editarInformacaoSelecionada();
+}
+
+function apagarInformacao(id) {
+  informacaoSelecionada = id;
+  apagarInformacaoSelecionada();
+}
+
+window.verInformacao = verInformacao;
+window.fecharInfoModal = fecharInfoModal;
+window.editarInformacao = editarInformacao;
+window.apagarInformacao = apagarInformacao;

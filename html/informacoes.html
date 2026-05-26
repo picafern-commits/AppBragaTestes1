@@ -75,12 +75,8 @@
     <div class="info-divider"></div>
 
     <div class="info-list-head">
-      <strong>Titulos</strong>
-      <div class="info-actions-preview">
-        <button class="secondary-btn reference-outline" type="button" onclick="verInformacaoSelecionada()">Ver Mais</button>
-        <button class="secondary-btn info-edit-btn" type="button" onclick="editarInformacaoSelecionada()">Editar</button>
-        <button class="secondary-btn info-delete-btn" type="button" onclick="apagarInformacaoSelecionada()">Apagar</button>
-      </div>
+      <strong>Títulos</strong>
+      <input id="pesquisaInfo" class="info-search" type="text" placeholder="Pesquisar por título...">
     </div>
 
     <div id="informacoesLista" class="info-list"></div>
@@ -89,6 +85,17 @@
     <button class="primary-btn reference-save" type="button" onclick="guardarInformacoes()">Guardar Informações</button>
   </section>
 </main>
+
+<div id="infoModal" class="info-modal hidden">
+  <div class="info-modal-content">
+    <div class="info-modal-header">
+      <h2 id="modalInfoTitulo">Informação</h2>
+      <button class="info-close-btn" onclick="fecharInfoModal()">✕</button>
+    </div>
+    <div id="modalInfoDescricao" class="info-modal-body"></div>
+  </div>
+</div>
+
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
