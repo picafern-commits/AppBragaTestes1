@@ -1,0 +1,125 @@
+/* App Braga Classic Design Override v1.38.0 */
+html.app-design-classic,
+body.app-design-classic {
+  --pro-radius: 18px;
+  --pro-shadow: none;
+}
+
+body.app-design-classic {
+  background: var(--app-bg, #151515) !important;
+}
+
+body.app-design-classic .main,
+body.app-design-classic main,
+body.app-design-classic .main-content,
+body.app-design-classic .dashboard-container,
+body.app-design-classic .dashboard-shell {
+  background: transparent !important;
+  max-width: none !important;
+}
+
+body.app-design-classic .app-pro-commandbar {
+  display: none !important;
+}
+
+body.app-design-classic .page-hero,
+body.app-design-classic .dashboard-header {
+  background: var(--app-surface, #1c1c1e) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 24px !important;
+  box-shadow: none !important;
+}
+
+body.app-design-classic .page-hero::after,
+body.app-design-classic .dashboard-header::after {
+  display: none !important;
+}
+
+body.app-design-classic .panel,
+body.app-design-classic .dashboard-panel,
+body.app-design-classic .personal-panel,
+body.app-design-classic .config-section,
+body.app-design-classic .stock-card,
+body.app-design-classic .history-card,
+body.app-design-classic .pc-card,
+body.app-design-classic .dashboard-card,
+body.app-design-classic .card,
+body.app-design-classic .box,
+body.app-design-classic .printer-card,
+body.app-design-classic .network-card,
+body.app-design-classic .pistol-card,
+body.app-design-classic .equipment-detail-card,
+body.app-design-classic .equipment-result-card,
+body.app-design-classic .equipment-type-card,
+body.app-design-classic .modal-content,
+body.app-design-classic .modal-card {
+  background: var(--app-surface, #1c1c1e) !important;
+  border: 1px solid rgba(255,255,255,.11) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+}
+
+body.app-design-classic .sidebar {
+  background: rgba(18,18,20,.98) !important;
+  border-right: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: none !important;
+}
+
+body.app-design-classic .brand-badge {
+  background: var(--app-primary, #ef4444) !important;
+  border-radius: 14px !important;
+}
+
+body.app-design-classic .sidebar a::before {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+body.app-design-classic .sidebar a.active,
+body.app-design-classic .sidebar a:hover,
+body.app-design-classic .sidebar-group-toggle:hover {
+  background: rgba(255,255,255,.075) !important;
+  border-color: rgba(255,255,255,.08) !important;
+}
+
+body.app-design-classic .primary-btn,
+body.app-design-classic button.primary-btn {
+  background: var(--app-primary, #ef4444) !important;
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow: none !important;
+}
+
+body.app-design-classic .secondary-btn,
+body.app-design-classic button.secondary-btn,
+body.app-design-classic .small-btn,
+body.app-design-classic .action-btn,
+body.app-design-classic .btn-edit {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+body.app-design-classic input,
+body.app-design-classic select,
+body.app-design-classic textarea {
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.13) !important;
+  border-radius: 14px !important;
+}
+
+body.app-design-classic #personalToolsDashboard {
+  display: none !important;
+}
+
+body.app-design-classic .metric-card,
+body.app-design-classic .stat-card,
+body.app-design-classic .personal-card {
+  background: var(--app-surface, #1c1c1e) !important;
+  border: 1px solid rgba(255,255,255,.11) !important;
+  box-shadow: none !important;
+}

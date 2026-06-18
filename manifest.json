@@ -1,16 +1,17 @@
 {
   "name": "App Braga",
   "short_name": "App Braga",
-  "start_url": "./index.html",
+  "start_url": "./html/index.html",
   "scope": "./",
   "display": "fullscreen",
   "display_override": [
     "fullscreen",
     "standalone"
   ],
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#101114",
+  "theme_color": "#101114",
   "orientation": "any",
+  "gcm_sender_id": "103953800507",
   "icons": [
     {
       "src": "./icon-192.png",

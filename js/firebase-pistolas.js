@@ -16,6 +16,7 @@
 
       window.pistolasData =
         snapshot.docs.map(doc=>({
+          idDoc: doc.id,
           firebaseId: doc.id,
           ...doc.data()
         }));
@@ -66,20 +67,10 @@
     };
 
     // ===== EDITAR =====
-    window.editarPistola =
-      function(pistola){
-
-      window.currentEditingPistolaId =
-        pistola.firebaseId;
-
-      window.currentEditingPistola =
-        pistola;
-
-      console.log(
-        "Editar pistola:",
-        pistola.firebaseId
-      );
-
+    // Desativado: esta versão recebia o objeto inteiro e quebrava os botões que enviam ID.
+    window.editarPistolaFirebaseLegacy = function(pistola){
+      window.currentEditingPistolaId = pistola?.firebaseId || pistola?.idDoc;
+      window.currentEditingPistola = pistola;
     };
 
   }catch(error){

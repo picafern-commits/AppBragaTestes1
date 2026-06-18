@@ -1,0 +1,405 @@
+.personal-dashboard {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.personal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.personal-panel,
+.personal-card {
+  border: 1px solid var(--app-border, rgba(148,163,184,.18));
+  border-radius: var(--app-radius, 18px);
+  background:
+    linear-gradient(135deg, rgb(var(--app-primary-rgb, 239 68 68) / .10), transparent 58%),
+    rgba(255,255,255,.045);
+  box-shadow: 0 18px 52px rgba(0,0,0,.24);
+  color: var(--app-text, #f8fafc);
+}
+
+.personal-panel {
+  padding: 18px;
+}
+
+.personal-card {
+  min-height: 132px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.personal-card span,
+.personal-card small,
+.personal-panel p,
+.personal-row small {
+  color: var(--app-muted, #a8b0bd);
+}
+
+.personal-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+}
+
+.personal-card.is-ok {
+  border-color: color-mix(in srgb, #22c55e 42%, var(--app-border, #334155));
+}
+
+.personal-card.is-warn {
+  border-color: color-mix(in srgb, #f59e0b 48%, var(--app-border, #334155));
+}
+
+.personal-card button {
+  margin-top: 12px;
+}
+
+.personal-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.personal-panel-head h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.personal-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.personal-shortcuts a,
+.personal-shortcuts button {
+  min-height: 64px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--app-primary-line, rgba(239,68,68,.45));
+  border-radius: 16px;
+  background: var(--app-gradient, linear-gradient(135deg, #ef4444, #f97316));
+  color: var(--app-button-text, #fff);
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 14px 34px var(--app-primary-glow, rgba(239,68,68,.22));
+}
+
+.personal-list {
+  display: grid;
+  gap: 10px;
+}
+
+.personal-tasks-board {
+  min-height: 420px;
+}
+
+.personal-task-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.personal-task-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, .8fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.personal-task-side {
+  display: grid;
+  gap: 16px;
+}
+
+.personal-task-composer,
+.personal-task-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(130px, 180px) auto;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.personal-task-toolbar {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.personal-task-composer input,
+.personal-task-composer select,
+.personal-task-toolbar input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--app-border, rgba(148,163,184,.18));
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  color: var(--app-text, #f8fafc);
+  padding: 0 14px;
+  font-weight: 800;
+}
+
+.personal-task-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid var(--app-border, rgba(148,163,184,.18));
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+}
+
+.personal-task-tabs button {
+  min-height: 36px;
+  min-width: 82px;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.personal-task-tabs button.active {
+  background: var(--app-gradient, linear-gradient(135deg, #ef4444, #f97316));
+  color: var(--app-button-text, #fff);
+}
+
+.personal-task-list {
+  gap: 12px;
+}
+
+.personal-task-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  min-height: 72px;
+  align-items: center;
+}
+
+.personal-task-actions button {
+  min-width: 88px;
+}
+
+.personal-task-row.is-done strong {
+  text-decoration: line-through;
+  color: var(--app-muted, #a8b0bd);
+}
+
+.personal-task-priority {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  min-height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--app-text, #f8fafc);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.personal-task-priority.high {
+  background: rgba(239,68,68,.18);
+  border-color: rgba(248,113,113,.38);
+}
+
+.personal-task-priority.urgent {
+  background: rgba(127,29,29,.32);
+  border-color: rgba(248,113,113,.55);
+  color: #fecaca;
+}
+
+.personal-task-priority.normal {
+  background: rgba(59,130,246,.16);
+  border-color: rgba(96,165,250,.34);
+}
+
+.personal-task-priority.low {
+  background: rgba(34,197,94,.14);
+  border-color: rgba(74,222,128,.30);
+}
+
+.personal-priority-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--app-border, rgba(148,163,184,.18));
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+  text-decoration: none;
+}
+
+.personal-priority-row strong,
+.personal-priority-row small {
+  display: block;
+}
+
+.personal-priority-row small {
+  margin-top: 4px;
+}
+
+.personal-priority-row span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.personal-priority-row.urgent {
+  border-color: rgba(239,68,68,.42);
+  background: rgba(239,68,68,.12);
+}
+
+.personal-priority-row.urgent span {
+  color: #fecaca;
+  border-color: rgba(239,68,68,.42);
+  background: rgba(239,68,68,.18);
+}
+
+.personal-priority-row.high {
+  border-color: rgba(245,158,11,.36);
+  background: rgba(245,158,11,.10);
+}
+
+.personal-priority-row.high span {
+  color: #fde68a;
+  border-color: rgba(245,158,11,.36);
+  background: rgba(245,158,11,.14);
+}
+
+.personal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--app-border, rgba(148,163,184,.18));
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+}
+
+.personal-row strong,
+.personal-row small {
+  display: block;
+}
+
+.personal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: none;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0,0,0,.66);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.personal-modal.is-open {
+  display: grid;
+}
+
+.personal-modal-card {
+  position: relative;
+  width: min(760px, 100%);
+  max-height: min(760px, calc(100svh - 28px));
+  overflow: auto;
+  padding: 22px;
+  border: 1px solid var(--app-primary-line, rgba(239,68,68,.45));
+  border-radius: 22px;
+  background: var(--app-surface, #1c1c1e);
+  color: var(--app-text, #f8fafc);
+  box-shadow: 0 34px 90px rgba(0,0,0,.55);
+}
+
+.personal-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  min-height: 40px;
+  border-radius: 14px;
+}
+
+.personal-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.personal-field span {
+  color: var(--app-muted, #a8b0bd);
+  font-weight: 800;
+}
+
+.personal-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.personal-history-item {
+  padding: 12px;
+  border: 1px solid var(--app-border, rgba(148,163,184,.18));
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+}
+
+.personal-history-item p {
+  margin: 6px 0 0;
+  color: var(--app-muted, #a8b0bd);
+}
+
+.personal-history-item img {
+  display: block;
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  margin-top: 10px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.2);
+}
+
+@media (max-width: 768px) {
+  .personal-grid,
+  .personal-shortcuts,
+  .personal-task-metrics,
+  .personal-task-layout,
+  .personal-task-side,
+  .personal-task-composer,
+  .personal-task-toolbar,
+  .personal-task-row {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-task-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .personal-task-tabs button,
+  .personal-task-composer button {
+    width: 100%;
+  }
+
+  .personal-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .personal-row button,
+  .personal-actions button {
+    width: 100%;
+  }
+}
