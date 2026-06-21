@@ -9,30 +9,15 @@
   let encodingRepairRunning = false;
 
   function fixTextoDiretorio(v){
-    let txt = String(v ?? '');
-    if(!txt) return txt;
+    let txt = String(v ?? "");
+    if (!txt) return txt;
 
-    // Corrige variações comuns de encoding/importação para Autozitânia.
-    // Exemplos vistos: Autozit�nia, AutozitÃ¢nia, Autozitania.
     txt = txt
-      .replace(/Autozit\uFFFDnia/gi, 'Autozitânia')
-      .replace(/AutozitÃ¢nia/gi, 'Autozitânia')
-      .replace(/AutozitÃ£nia/gi, 'Autozitânia')
-      .replace(/Autozit(?:a|â|ã)nia/gi, 'Autozitânia')
-      .replace(/Autozit\?nia/gi, 'Autozitânia');
+      .replace(/Autozit\uFFFDnia/gi, "Autozitânia")
+      .replace(/Autozit[aâã]?nia/gi, "Autozitânia")
+      .replace(/Autozit\?nia/gi, "Autozitânia");
 
-    // Pequenas correções genéricas de mojibake que costumam vir de Excel/CSV.
-    txt = txt
-      .replace(/Ã¡/g, 'á').replace(/Ã /g, 'à').replace(/Ã¢/g, 'â').replace(/Ã£/g, 'ã')
-      .replace(/Ã©/g, 'é').replace(/Ãª/g, 'ê')
-      .replace(/Ã­/g, 'í').replace(/Ã³/g, 'ó').replace(/Ã´/g, 'ô').replace(/Ãµ/g, 'õ')
-      .replace(/Ãº/g, 'ú').replace(/Ã§/g, 'ç')
-      .replace(/Ã/g, 'Á').replace(/Ã€/g, 'À').replace(/Ã‚/g, 'Â').replace(/Ãƒ/g, 'Ã')
-      .replace(/Ã‰/g, 'É').replace(/ÃŠ/g, 'Ê').replace(/Ã/g, 'Í')
-      .replace(/Ã“/g, 'Ó').replace(/Ã”/g, 'Ô').replace(/Ã•/g, 'Õ')
-      .replace(/Ãš/g, 'Ú').replace(/Ã‡/g, 'Ç');
-
-    return txt;
+    return txt.normalize("NFC");
   }
 
   const $ = (id) => document.getElementById(id);
@@ -462,7 +447,7 @@
         const buffer = await file.arrayBuffer();
         let text = new TextDecoder('utf-8').decode(buffer);
         // Se vier com caracteres inválidos, tenta Windows-1252, muito comum em CSV exportado pelo Excel.
-        if(text.includes('�')){
+        if(text.includes('\uFFFD')){
           try{ text = new TextDecoder('windows-1252').decode(buffer); }catch(e){}
         }
         rows = parseCSV(text);

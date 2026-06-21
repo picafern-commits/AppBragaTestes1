@@ -11,6 +11,8 @@
 ## Sistemas organizados
 
 - `js/systems/backup/local-backup.js` - backup local automatico no Electron.
+- `js/systems/equipment/equipment-models.js` - catalogo modular dos tipos de ficha de equipamento.
+- `js/systems/equipment/equipment-detail.js` - pagina/ficha unica de equipamento.
 - `js/systems/global-search/global-search.js` - pesquisa global aberta por botao no topo das paginas.
 - `js/enterprise/ops.js` - camada operacional: sidebar, pesquisa, notificacoes e integracoes visuais globais.
 - `css/enterprise/ops.css` - camada CSS global de estabilidade, layout e fixes.

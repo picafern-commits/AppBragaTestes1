@@ -64,28 +64,65 @@
   function forceFullscreenLayout() {
     if (!isMobile()) return;
 
-    document.documentElement.style.setProperty("width", "100vw", "important");
-    document.body.style.setProperty("width", "100vw", "important");
+    document.documentElement.classList.remove("sidebar-collapsed");
+    document.body.classList.remove("sidebar-collapsed", "app-mobile-actions-on");
+    document.documentElement.classList.add("iphone-fit-locked");
+    document.body.classList.add("iphone-fit-locked");
+
+    document.querySelectorAll(".app-mobile-action-dock").forEach(function (dock) {
+      dock.remove();
+    });
+
+    document.documentElement.style.setProperty("width", "100%", "important");
+    document.documentElement.style.setProperty("max-width", "100%", "important");
+    document.documentElement.style.setProperty("overflow-x", "hidden", "important");
+    document.body.style.setProperty("width", "100%", "important");
+    document.body.style.setProperty("max-width", "100%", "important");
     document.body.style.setProperty("margin", "0", "important");
-    document.body.style.setProperty("padding", "0", "important");
+    document.body.style.setProperty("padding-left", "0", "important");
+    document.body.style.setProperty("padding-right", "0", "important");
+    document.body.style.setProperty("padding-bottom", "0", "important");
     document.body.style.setProperty("display", "block", "important");
     document.body.style.setProperty("overflow-x", "hidden", "important");
 
-    var main = document.querySelector(".main, main, .main-content, .page-content, .dashboard-container, .content-area, .dashboard-shell");
-    if (main) {
+    var nodes = document.querySelectorAll(".app, .main, main, .main-content, .page-content, .dashboard-container, .content-area, .dashboard-shell, .content, .page, .page-shell");
+    nodes.forEach(function (main) {
       main.style.setProperty("margin-left", "0", "important");
+      main.style.setProperty("margin-right", "0", "important");
       main.style.setProperty("left", "0", "important");
-      main.style.setProperty("width", "100vw", "important");
-      main.style.setProperty("max-width", "100vw", "important");
-      main.style.setProperty("padding-left", "12px", "important");
-      main.style.setProperty("padding-right", "12px", "important");
+      main.style.setProperty("right", "auto", "important");
+      main.style.setProperty("width", "100%", "important");
+      main.style.setProperty("max-width", "100%", "important");
+      main.style.setProperty("min-width", "0", "important");
+      main.style.setProperty("padding-left", "max(12px, env(safe-area-inset-left, 0px))", "important");
+      main.style.setProperty("padding-right", "max(12px, env(safe-area-inset-right, 0px))", "important");
       main.style.setProperty("box-sizing", "border-box", "important");
-    }
+      main.style.setProperty("overflow-x", "hidden", "important");
+    });
+
+    document.querySelectorAll(".panel, .card, .premium-card, .stat-card, .metric-card, .stock-card, .config-card, .table-wrap, .scanner-panel, .personal-panel").forEach(function (node) {
+      node.style.setProperty("max-width", "100%", "important");
+      node.style.setProperty("min-width", "0", "important");
+      node.style.setProperty("box-sizing", "border-box", "important");
+    });
   }
 
   function setupMenu() {
     var sidebar = document.querySelector(".sidebar");
     if (!sidebar) return;
+
+    if (!isMobile()) {
+      document.body.classList.remove("sidebar-open", "iphone-fit-locked", "app-mobile-actions-on");
+      document.documentElement.classList.remove("iphone-fit-locked");
+      document.querySelectorAll(".app-menu-toggle, .app-sidebar-overlay, .app-mobile-action-dock").forEach(function (node) {
+        node.remove();
+      });
+      sidebar.classList.remove("app-open");
+      sidebar.style.removeProperty("transform");
+      sidebar.style.removeProperty("pointer-events");
+      sidebar.style.removeProperty("visibility");
+      return;
+    }
 
     normalizeSidebarLinks(sidebar);
     forceFullscreenLayout();
@@ -170,6 +207,10 @@
       setupMenu();
       forceFullscreenLayout();
     }, 1000);
+    setTimeout(function () {
+      setupMenu();
+      forceFullscreenLayout();
+    }, 2200);
   }
 
   if (document.readyState === "loading") {
@@ -195,5 +236,24 @@
     sidebar.style.removeProperty("transform");
     sidebar.style.removeProperty("pointer-events");
     sidebar.style.removeProperty("visibility");
+    forceFullscreenLayout();
   });
+
+  if (window.MutationObserver) {
+    var fitTimer = null;
+    new MutationObserver(function () {
+      if (!isMobile()) return;
+      clearTimeout(fitTimer);
+      fitTimer = setTimeout(forceFullscreenLayout, 40);
+    }).observe(document.documentElement, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      attributeFilter: ["class", "style"]
+    });
+  }
+
+  setInterval(function () {
+    if (isMobile()) forceFullscreenLayout();
+  }, 1500);
 })();

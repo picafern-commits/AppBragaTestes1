@@ -10,6 +10,7 @@ admin.initializeApp();
 
 const db = admin.firestore();
 const DEVICE_COLLECTION = "notificationDevices";
+const LEGACY_TOKEN_COLLECTION = "notificationTokens";
 const INBOX_COLLECTION = "notificationInbox";
 const HISTORY_COLLECTION = "notificationHistory";
 const REGION = "europe-west1";
@@ -67,6 +68,47 @@ function hasWebPush(device = {}) {
 
 function webPushSubscription(device = {}) {
   return device.webPush || device.standardWebPush || device.pushSubscription || null;
+}
+
+function isDeviceEnabled(device = {}) {
+  return device.enabled === true || device.active === true;
+}
+
+function normalizeDeviceDoc(doc) {
+  const data = doc.data() || {};
+  return {
+    id: doc.id,
+    ...data,
+    enabled: isDeviceEnabled(data),
+    deviceId: String(data.deviceId || data.deviceKey || doc.id),
+    deviceName: data.deviceName || data.name || data.label || data.deviceKey || doc.id,
+    fcmToken: data.fcmToken || data.firebaseToken || data.token || "",
+    webPush: data.webPush || data.standardWebPush || data.pushSubscription || null,
+    desktopInbox: data.desktopInbox === true || data.electron === true || data.deviceType === "pc-electron"
+  };
+}
+
+async function loadActiveDevices() {
+  const map = new Map();
+  const addDocs = (snap) => {
+    snap.forEach((doc) => {
+      const device = normalizeDeviceDoc(doc);
+      if (!device.enabled) return;
+      const key = device.deviceId || device.fcmToken || doc.id;
+      if (!map.has(key)) map.set(key, { ref: doc.ref, device });
+    });
+  };
+
+  const primary = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).get();
+  addDocs(primary);
+
+  const legacyActive = await db.collection(LEGACY_TOKEN_COLLECTION).where("active", "==", true).get().catch(() => null);
+  if (legacyActive) addDocs(legacyActive);
+
+  const legacyEnabled = await db.collection(LEGACY_TOKEN_COLLECTION).where("enabled", "==", true).get().catch(() => null);
+  if (legacyEnabled) addDocs(legacyEnabled);
+
+  return Array.from(map.values());
 }
 
 async function writeInbox(deviceId, payload, requestId) {
@@ -160,11 +202,12 @@ async function sendNotificationToDevices(payloadInput = {}, options = {}) {
   };
 
   getVapid();
-  const snap = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).get();
-  result.totalDevices = snap.size;
+  const devices = await loadActiveDevices();
+  result.totalDevices = devices.length;
 
-  for (const doc of snap.docs) {
-    const device = { id: doc.id, ...doc.data() };
+  for (const entry of devices) {
+    const doc = entry.ref;
+    const device = entry.device;
     const deviceId = String(device.deviceId || doc.id);
     if (targetDeviceId && deviceId !== targetDeviceId && doc.id !== targetDeviceId) {
       result.ignored += 1;
@@ -253,11 +296,12 @@ exports.notificationHealth = onRequest(PUBLIC_HTTP_OPTIONS, async (req, res) => 
     const publicKey = envValue("APP_BRAGA_VAPID_PUBLIC_KEY", "WEB_PUSH_PUBLIC_KEY", "VAPID_PUBLIC_KEY");
     const privateKey = envValue("APP_BRAGA_VAPID_PRIVATE_KEY", "WEB_PUSH_PRIVATE_KEY", "VAPID_PRIVATE_KEY");
     const subject = envValue("APP_BRAGA_VAPID_SUBJECT", "WEB_PUSH_SUBJECT", "VAPID_SUBJECT") || "mailto:admin@appbraga.pt";
-    const snap = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).limit(50).get();
+    const devices = await loadActiveDevices();
     return res.json({
       ok: true,
       collection: DEVICE_COLLECTION,
-      activeDevices: snap.size,
+      legacyCollection: LEGACY_TOKEN_COLLECTION,
+      activeDevices: devices.length,
       vapidPublicReady: !!publicKey,
       vapidPrivateReady: !!privateKey,
       subject
@@ -304,11 +348,12 @@ async function handleNotificationBroadcast(req, res) {
 
   try {
     getVapid();
-    const snap = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).get();
-    result.totalDevices = snap.size;
+    const devices = await loadActiveDevices();
+    result.totalDevices = devices.length;
 
-    for (const doc of snap.docs) {
-      const device = { id: doc.id, ...doc.data() };
+    for (const entry of devices) {
+      const doc = entry.ref;
+      const device = entry.device;
       const deviceId = String(device.deviceId || doc.id);
       if (targetDeviceId && deviceId !== targetDeviceId && doc.id !== targetDeviceId) {
         result.ignored += 1;

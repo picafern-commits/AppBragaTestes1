@@ -1,4 +1,4 @@
-* {
+﻿* {
   box-sizing: border-box;
 }
 
@@ -166,7 +166,7 @@ td, th, a, div {
 
 .stats-grid {
   display: grid;
-  
+
   gap: 18px;
   margin-bottom: 22px;
 }
@@ -198,7 +198,7 @@ select {
   color: #ffffff !important;
   background: #1e293b !important;
 }
- 
+
 select option {
   color: #ffffff !important;
   background: #1e293b !important;
@@ -775,7 +775,7 @@ body.dark .app-version-mini {
     flex-direction: column;
   }
 
-  
+
 
   .table-actions {
     flex-direction: column;
@@ -1815,7 +1815,7 @@ html.dark .minimo-item, body.dark .minimo-item {
 
 
 /* =========================================================
-   APP BRAGA — DESIGN BRINKA / FINAL 3 DISPOSITIVOS
+   APP BRAGA - DESIGN BRINKA / FINAL 3 DISPOSITIVOS
    Sidebar nova + Dashboard clean + visual premium
    ========================================================= */
 :root{
@@ -2756,15 +2756,15 @@ body.app-light {
 
 .sidebar a[href$="index.html"]::before { content: "⌂"; }
 .sidebar a[href$="add-toner.html"]::before { content: "+"; }
-.sidebar a[href$="stock.html"]::before { content: "□"; }
-.sidebar a[href$="historico.html"]::before { content: "↗"; }
-.sidebar a[href$="etiquetas-word.html"]::before { content: "▤"; }
-.sidebar a[href$="impressoras.html"]::before { content: "▣"; }
-.sidebar a[href$="manutencao-impressoras.html"]::before { content: "◇"; }
-.sidebar a[href$="computadores.html"]::before { content: "▭"; }
-.sidebar a[href$="users.html"]::before { content: "○"; }
-.sidebar a[href$="pistolas.html"]::before { content: "⌁"; }
-.sidebar a[href$="portas.html"]::before { content: "▧"; }
+.sidebar a[href$="stock.html"]::before { content: "ST"; }
+.sidebar a[href$="historico.html"]::before { content: "HT"; }
+.sidebar a[href$="etiquetas-word.html"]::before { content: "ET"; }
+.sidebar a[href$="impressoras.html"]::before { content: "IP"; }
+.sidebar a[href$="manutencao-impressoras.html"]::before { content: "MN"; }
+.sidebar a[href$="computadores.html"]::before { content: "PC"; }
+.sidebar a[href$="users.html"]::before { content: "US"; }
+.sidebar a[href$="pistolas.html"]::before { content: "CK"; }
+.sidebar a[href$="portas.html"]::before { content: "PR"; }
 .sidebar a[href$="config.html"]::before { content: "⚙"; }
 
 .main {
@@ -3120,7 +3120,7 @@ body.app-light .entity-card {
 
   .stats-grid,
   .form-grid,
-  
+
 
   .page-hero {
     padding: 20px !important;
@@ -3214,17 +3214,17 @@ body {
 
 .sidebar a[href$="index.html"]::before { content: "⌂" !important; }
 .sidebar a[href$="add-toner.html"]::before { content: "+" !important; }
-.sidebar a[href$="stock.html"]::before { content: "□" !important; }
-.sidebar a[href$="historico.html"]::before { content: "↗" !important; }
-.sidebar a[href$="etiquetas-word.html"]::before { content: "▤" !important; }
-.sidebar a[href$="impressoras.html"]::before { content: "▣" !important; }
-.sidebar a[href$="manutencao-impressoras.html"]::before { content: "◇" !important; }
-.sidebar a[href$="computadores.html"]::before { content: "▭" !important; }
-.sidebar a[href$="users.html"]::before { content: "○" !important; }
-.sidebar a[href$="pistolas.html"]::before { content: "⌁" !important; }
-.sidebar a[href$="portas.html"]::before { content: "▧" !important; }
-.sidebar a[href$="radios.html"]::before { content: "⌁" !important; }
-.sidebar a[href$="informacoes.html"]::before { content: "ⓘ" !important; }
+.sidebar a[href$="stock.html"]::before { content: "ST" !important; }
+.sidebar a[href$="historico.html"]::before { content: "HT" !important; }
+.sidebar a[href$="etiquetas-word.html"]::before { content: "ET" !important; }
+.sidebar a[href$="impressoras.html"]::before { content: "IP" !important; }
+.sidebar a[href$="manutencao-impressoras.html"]::before { content: "MN" !important; }
+.sidebar a[href$="computadores.html"]::before { content: "PC" !important; }
+.sidebar a[href$="users.html"]::before { content: "US" !important; }
+.sidebar a[href$="pistolas.html"]::before { content: "CK" !important; }
+.sidebar a[href$="portas.html"]::before { content: "PR" !important; }
+.sidebar a[href$="radios.html"]::before { content: "RD" !important; }
+.sidebar a[href$="informacoes.html"]::before { content: "IN" !important; }
 .sidebar a[href$="config.html"]::before { content: "⚙" !important; }
 
 .sidebar a:hover,
@@ -6339,15 +6339,15 @@ body.app-role-consulta .danger {
 }
 
 .sidebar a[href$="tarefas.html"]::before {
-  content: "✅" !important;
+  content: attr(data-icon) !important;
 }
 
 .sidebar a[href$="scanner-ia.html"]::before {
-  content: "📄" !important;
+  content: attr(data-icon) !important;
 }
 
 .sidebar a[href$="diagnostico.html"]::before {
-  content: "🩺" !important;
+  content: attr(data-icon) !important;
 }
 
 .config-actions-row.compact {
@@ -6380,9 +6380,10 @@ body.app-role-consulta .danger {
 
 /* v1.30.3 clean dashboard/sidebar */
 #personalToolsDashboard{display:none!important;}
+.sidebar a[href="equipamento.html"]{display:flex!important;}
 
 
-/* ===== APP BRAGA v1.31.8 — Dashboard tarefas + equipamentos abaixo dos contadores ===== */
+/* ===== APP BRAGA v1.31.8 - Dashboard tarefas + equipamentos abaixo dos contadores ===== */
 .dashboard-shell .enterprise-metrics{
   margin-bottom:18px;
 }
@@ -6991,27 +6992,51 @@ input:focus,select:focus,textarea:focus{outline:0!important;border-color:rgba(56
 .sidebar a.active,.sidebar a:hover,.sidebar-group-toggle:hover{background:linear-gradient(135deg,rgba(239,68,68,.14),rgba(56,189,248,.10))!important;border-color:rgba(255,255,255,.10)!important;}
 .sidebar a.active::before{background:rgba(239,68,68,.16)!important;border-color:rgba(239,68,68,.32)!important;color:#fecaca!important;}
 .sidebar a[href$="index.html"]::before{content:"⌂"!important;}
-.sidebar a[href$="stock.html"]::before{content:"▦"!important;}
-.sidebar a[href$="diretorio.html"]::before{content:"☎"!important;}
-.sidebar a[href$="impressoras.html"]::before{content:"▤"!important;}
+.sidebar a[href$="stock.html"]::before{content:"ST"!important;}
+.sidebar a[href$="diretorio.html"]::before{content:"DR"!important;}
+.sidebar a[href$="impressoras.html"]::before{content:"IP"!important;}
 .sidebar a[href$="add-toner.html"]::before{content:"+"!important;}
 .sidebar a[href$="historico.html"]::before{content:"↗"!important;}
-.sidebar a[href$="tarefas.html"]::before{content:"✓"!important;}
-.sidebar a[href$="scanner-ia.html"]::before{content:"⌗"!important;}
+.sidebar a[href$="tarefas.html"]::before {
+  content: attr(data-icon) !important;
+}
+.sidebar a[href$="scanner-ia.html"]::before {
+  content: attr(data-icon) !important;
+}
 .sidebar a[href$="etiquetas-word.html"]::before{content:"⌑"!important;}
 .sidebar a[href$="manutencao-impressoras.html"]::before{content:"⚙"!important;}
-.sidebar a[href$="computadores.html"]::before{content:"▣"!important;}
+.sidebar a[href$="computadores.html"]::before{content:"PC"!important;}
 .sidebar a[href$="pistolas.html"]::before{content:"▥"!important;}
 .sidebar a[href$="radios.html"]::before{content:"≋"!important;}
-.sidebar a[href$="portas.html"]::before{content:"⌁"!important;}
+.sidebar a[href$="portas.html"]::before{content:"PR"!important;}
 .sidebar a[href$="informacoes.html"]::before{content:"i"!important;}
 .sidebar a[href$="users.html"]::before{content:"◉"!important;}
-.sidebar a[href$="diagnostico.html"]::before{content:"◆"!important;}
+.sidebar a[href$="diagnostico.html"]::before {
+  content: attr(data-icon) !important;
+}
+.sidebar a[href$="equipamento.html"]::before{content:"EQ"!important;}
+.sidebar a[href$="zonas.html"]::before{content:"ZN"!important;}
 .sidebar a[href$="config.html"]::before{content:"⚙"!important;}
 
 /* ===== App Braga v1.42: sidebar uniforme e modo tablet mais leve ===== */
+.sidebar a[href$="equipamento.html"]{
+  display:flex!important;
+}
+.sidebar a[href$="equipamento.html"]::before{
+  content:"EQ"!important;
+}
+.sidebar a[href$="zonas.html"]::before{
+  content:"ZN"!important;
+}
 .sidebar a[href$="notificacoes.html"]::before{
   content:"!"!important;
+}
+.sidebar a[href$="equipamento.html"]::before,
+.sidebar a[href$="zonas.html"]::before,
+.sidebar a[href$="notificacoes.html"]::before{
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-weight:900!important;
+  line-height:1!important;
 }
 
 @media (max-width:1180px), (pointer:coarse){
@@ -7450,6 +7475,7 @@ body.app-design-pro .personal-task-priority.normal{
   border-color:var(--app-primary-line, rgba(239,68,68,.30))!important;
   color:color-mix(in srgb,var(--app-primary, #ef4444) 55%,#fff)!important;
 }
+
 body.app-design-pro .diag-dot.is-running,
 body.app-design-pro .scanner-step span:first-child,
 body.app-design-pro .scanner-btn.primary{
@@ -7464,6 +7490,7 @@ body.app-design-pro .scanner-badge,
 body.app-design-pro .radio-status-pill.assigned{
   color:color-mix(in srgb,var(--app-primary, #ef4444) 60%,#fff)!important;
 }
+
 body.app-design-pro .scanner-input-wrap,
 body.app-design-pro .scanner-badge,
 body.app-design-pro .radio-status-pill.assigned{
@@ -8287,497 +8314,238 @@ body.app-design-pro .personal-task-priority.normal{
   border-color:var(--app-primary-line, rgba(239,68,68,.30))!important;
   color:color-mix(in srgb,var(--app-primary, #ef4444) 55%,#fff)!important;
 }
+/* ===== APP BRAGA v1.54.5 - RESTAURAR SIDEBAR ANTIGA ===== */
+@media (min-width:769px){
+  :root{
+    --app-sidebar-expanded:250px;
+    --app-sidebar-collapsed:88px;
+  }
 
+  html body aside.sidebar,
+  html body .sidebar.sidebar-pro-groups,
+  html body .sidebar.sidebar-collapsible-pro,
+  html body #sidebar,
+  html body .enterprise-sidebar{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    bottom:0!important;
+    height:100vh!important;
+    max-height:100vh!important;
+    width:var(--app-sidebar-expanded)!important;
+    min-width:var(--app-sidebar-expanded)!important;
+    max-width:var(--app-sidebar-expanded)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    z-index:1000!important;
+  }
 
-/* v1.55.5 - Sidebar emoji icons uniformizados */
-.sidebar.sidebar-pro-groups .sidebar-section-title > span,
-.sidebar.sidebar-pro-groups .sidebar-nav-pro a[data-icon]::before,
-.sidebar.sidebar-pro-groups .sidebar-group-icon {
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-  font-weight: 700 !important;
+  html body aside.sidebar .sidebar-nav-pro,
+  html body .sidebar.sidebar-pro-groups .sidebar-nav-pro,
+  html body .sidebar.sidebar-collapsible-pro .sidebar-nav-pro{
+    display:block!important;
+    overflow:visible!important;
+    min-height:0!important;
+  }
+
+  html body:not(.sidebar-collapsed) .main,
+  html body:not(.sidebar-collapsed) main,
+  html body:not(.sidebar-collapsed) .main-content,
+  html body:not(.sidebar-collapsed) .page-content,
+  html body:not(.sidebar-collapsed) .dashboard-container,
+  html body:not(.sidebar-collapsed) .content,
+  html body:not(.sidebar-collapsed) .content-area{
+    margin-left:var(--app-sidebar-expanded)!important;
+    width:calc(100vw - var(--app-sidebar-expanded))!important;
+    max-width:calc(100vw - var(--app-sidebar-expanded))!important;
+  }
+
+  html body.sidebar-collapsed aside.sidebar,
+  html body.sidebar-collapsed .sidebar.sidebar-pro-groups,
+  html body.sidebar-collapsed .sidebar.sidebar-collapsible-pro,
+  html body.sidebar-collapsed #sidebar,
+  html body.sidebar-collapsed .enterprise-sidebar{
+    width:var(--app-sidebar-collapsed)!important;
+    min-width:var(--app-sidebar-collapsed)!important;
+    max-width:var(--app-sidebar-collapsed)!important;
+  }
+
+  html body.sidebar-collapsed .main,
+  html body.sidebar-collapsed main,
+  html body.sidebar-collapsed .main-content,
+  html body.sidebar-collapsed .page-content,
+  html body.sidebar-collapsed .dashboard-container,
+  html body.sidebar-collapsed .content,
+  html body.sidebar-collapsed .content-area{
+    margin-left:var(--app-sidebar-collapsed)!important;
+    width:calc(100vw - var(--app-sidebar-collapsed))!important;
+    max-width:calc(100vw - var(--app-sidebar-collapsed))!important;
+  }
+}
+/* ===== END APP BRAGA v1.54.5 - RESTAURAR SIDEBAR ANTIGA ===== */
+
+/* ===== APP BRAGA v1.54.6 - DASHBOARD SEM BLOCOS VAZIOS ===== */
+body.dashboard-clean #personalToolsDashboard.is-empty-dashboard-block,
+#personalToolsDashboard.dashboard-tasks-only.is-empty-dashboard-block{
+  display:none!important;
+  min-height:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+
+.dashboard-fullwidth:has(#listaDashboardStock:empty),
+.dashboard-fullwidth:has(#listaDashboardStock .empty-state:only-child){
+  display:none!important;
+  min-height:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+/* ===== END APP BRAGA v1.54.6 - DASHBOARD SEM BLOCOS VAZIOS ===== */
+
+/* ===== APP BRAGA v1.54.8 - CORRECAO SIDEBAR ===== */
+.sidebar .sidebar-nav-pro a[href$="tarefas.html"]::before,
+.sidebar .sidebar-nav-pro a[href$="scanner-ia.html"]::before,
+.sidebar .sidebar-nav-pro a[href$="diagnostico.html"]::before{
+  content:attr(data-icon)!important;
+  width:28px!important;
+  min-width:28px!important;
+  height:28px!important;
+  border-radius:10px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  letter-spacing:0!important;
+  line-height:1!important;
+}
+/* ===== END APP BRAGA v1.54.8 - CORRECAO SIDEBAR ===== */
+
+/* ===== APP BRAGA v1.55.0 - SIDEBAR SEM FUGAS ===== */
+html body aside.sidebar,
+html body .sidebar.sidebar-pro-groups,
+html body .sidebar.sidebar-collapsible-pro{
+  overflow-x:hidden!important;
+  clip-path:inset(0)!important;
+  contain:paint!important;
+}
+
+html body aside.sidebar .sidebar-nav-pro,
+html body aside.sidebar .sidebar-favorites,
+html body aside.sidebar .sidebar-fav-list,
+html body aside.sidebar .sidebar-group,
+html body aside.sidebar .sidebar-group-links,
+html body .sidebar.sidebar-pro-groups .sidebar-nav-pro,
+html body .sidebar.sidebar-pro-groups .sidebar-favorites,
+html body .sidebar.sidebar-pro-groups .sidebar-fav-list,
+html body .sidebar.sidebar-pro-groups .sidebar-group,
+html body .sidebar.sidebar-pro-groups .sidebar-group-links{
+  max-width:100%!important;
+  overflow-x:hidden!important;
+}
+
+html body aside.sidebar a,
+html body .sidebar.sidebar-pro-groups a,
+html body .sidebar.sidebar-collapsible-pro a{
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+
+body > .sidebar-nav-pro,
+body > .sidebar-group,
+body > .sidebar-group-links,
+body > .sidebar-fav-list,
+main .sidebar-nav-pro,
+.main .sidebar-nav-pro,
+.dashboard-shell .sidebar-nav-pro,
+.dashboard-container .sidebar-nav-pro{
+  display:none!important;
+}
+/* ===== END APP BRAGA v1.55.0 - SIDEBAR SEM FUGAS ===== */
+
+/* ===== APP BRAGA v1.55.3 - SIDEBAR FINAL LIMPA ===== */
+html body .app-pro-commandbar,
+html body > .app-pro-commandbar,
+html body main .app-pro-commandbar,
+html body .main .app-pro-commandbar,
+html body .dashboard-shell .app-pro-commandbar,
+html body .dashboard-container .app-pro-commandbar{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  width:0!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+
+html body > a[data-icon][href*=".html"],
+html body main > a[data-icon][href*=".html"],
+html body .main > a[data-icon][href*=".html"],
+html body .dashboard-shell > a[data-icon][href*=".html"],
+html body .dashboard-container > a[data-icon][href*=".html"]{
+  display:none!important;
+}
+
+html body aside.sidebar .sidebar-nav-pro a[data-icon]::before,
+html body .sidebar.sidebar-pro-groups .sidebar-nav-pro a[data-icon]::before,
+html body .sidebar.sidebar-collapsible-pro .sidebar-nav-pro a[data-icon]::before{
+  content:attr(data-icon)!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  letter-spacing:0!important;
+  line-height:1!important;
+}
+
+html body aside.sidebar .sidebar-group-icon,
+html body .sidebar.sidebar-pro-groups .sidebar-group-icon,
+html body .sidebar.sidebar-collapsible-pro .sidebar-group-icon{
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  letter-spacing:0!important;
+  line-height:1!important;
+}
+
+@media (min-width:769px){
+  html body.sidebar-collapsed aside.sidebar .sidebar-group-links,
+  html body.sidebar-collapsed .sidebar.sidebar-pro-groups .sidebar-group-links,
+  html body.sidebar-collapsed .sidebar.sidebar-collapsible-pro .sidebar-group-links{
+    display:none!important;
+    max-height:0!important;
+    height:0!important;
+    opacity:0!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+  }
+}
+/* ===== END APP BRAGA v1.55.3 - SIDEBAR FINAL LIMPA ===== */
+
+/* ===== App Braga v1.58.4 - Sidebar emojis finais sem piscar letras ===== */
+.sidebar a[href]::before,
+aside.sidebar a[href]::before,
+.sidebar-pro-groups a[href]::before{
+  content: attr(data-icon) !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", system-ui, sans-serif !important;
+  font-size: 17px !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
 }
-.sidebar.sidebar-pro-groups .sidebar-nav-pro a[data-icon]::before {
-  content: attr(data-icon) !important;
-  font-size: 16px !important;
+.sidebar-section-title > span,
+.sidebar-group-icon{
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", system-ui, sans-serif !important;
+  text-transform: none !important;
 }
-.sidebar.sidebar-pro-groups .sidebar-group-icon {
-  font-size: 16px !important;
-}
-.sidebar.sidebar-pro-groups .sidebar-section-title > span {
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px !important;
-  border-radius: 10px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035)) !important;
-  border: 1px solid rgba(255,255,255,.12) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.10) !important;
-}
-
-/* v1.55.7 - Sidebar funcional depois do refresh */
-aside.sidebar.sidebar-ready-final,
-.sidebar.sidebar-ready-final,
-aside.sidebar.sidebar-pro-groups,
-.sidebar.sidebar-pro-groups{
-  pointer-events:auto!important;
-  touch-action:auto!important;
-  user-select:none!important;
-}
-aside.sidebar.sidebar-ready-final *,
-.sidebar.sidebar-ready-final *,
-aside.sidebar.sidebar-pro-groups *,
-.sidebar.sidebar-pro-groups *{
-  pointer-events:auto!important;
-}
-body:not(.sidebar-open) .app-sidebar-overlay,
-.app-sidebar-overlay:not(.show){
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-}
-body.sidebar-open .app-sidebar-overlay.show{
-  opacity:1!important;
-  visibility:visible!important;
-}
-.sidebar-ready-final .sidebar-group-links{
-  overflow:hidden!important;
-  max-height:0!important;
-  opacity:.01!important;
-  transition:max-height .22s ease, opacity .18s ease!important;
-}
-.sidebar-ready-final .sidebar-group.is-open > .sidebar-group-links{
-  max-height:680px!important;
-  opacity:1!important;
-}
-.sidebar-ready-final .sidebar-group-toggle,
-.sidebar-ready-final .sidebar-collapse-toggle,
-.sidebar-ready-final a[href]{
-  cursor:pointer!important;
-}
-@media (min-width:769px){
-  aside.sidebar.sidebar-ready-final,
-  .sidebar.sidebar-ready-final{
-    z-index:5000!important;
-  }
-  .app-sidebar-overlay{display:none!important;pointer-events:none!important;}
-}
-
-
-/* v1.56.1 - Zonas e Fichas Equipamento removidas */
-.sidebar a[href$="zonas.html"], .sidebar a[href$="equipamento.html"]{display:none!important;}
-
-
-/* v1.56.1 - Ícones internos da sidebar sem quadrado emoji por cima */
-.sidebar.sidebar-pro-groups .sidebar-nav-pro a[href="tarefas.html"]::before,
-.sidebar.sidebar-pro-groups .sidebar-nav-pro a[href="scanner-ia.html"]::before,
-.sidebar.sidebar-pro-groups .sidebar-nav-pro a[href="notificacoes.html"]::before{
-  font-family: Inter, "Segoe UI", system-ui, sans-serif !important;
-  font-weight: 900 !important;
-  color: var(--app-primary, #22d3ee) !important;
-  background: transparent !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  filter: none !important;
-  text-shadow: 0 0 12px color-mix(in srgb, var(--app-primary, #22d3ee) 45%, transparent) !important;
-}
-
-/* v1.56.1 - fix app.js syntax + force cache refresh */
-
-/* v1.56.2 - Equipas Semanais */
-.equipas-hero{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-.page-hero-kicker{
-  color:var(--accent, #00e6a8);
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  font-size:.74rem;
-}
-.page-hero-subtitle{
-  margin:.25rem 0 0;
-  color:var(--muted, #9fb0c6);
-}
-.equipas-hero-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
-.equipas-week-panel{
-  display:grid;
-  grid-template-columns:1fr 1fr minmax(280px,.9fr);
-  gap:14px;
-  margin:16px 0;
-}
-.equipas-week-current,
-.equipas-week-next,
-.equipas-week-config,
-.equipa-card,
-.equipas-toolbar,
-.equipas-empty{
-  background:linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
-  border:1px solid color-mix(in srgb, var(--primary, #00d084) 22%, rgba(255,255,255,.12));
-  border-radius:18px;
-  box-shadow:0 18px 45px rgba(0,0,0,.25);
-}
-.equipas-week-current,
-.equipas-week-next,
-.equipas-week-config{padding:18px;}
-.equipas-week-current span,
-.equipas-week-next span,
-.equipas-week-config label,
-.equipa-card-label{
-  color:var(--accent, #00e6a8);
-  font-weight:900;
-  font-size:.82rem;
-}
-.equipas-week-current strong,
-.equipas-week-next strong{
-  display:block;
-  margin:8px 0 5px;
-  font-size:1.35rem;
-  color:var(--text, #fff);
-}
-.equipas-week-current small,
-.equipas-week-next small{color:var(--muted, #9fb0c6);}
-.equipas-inline-control{display:flex;gap:10px;margin-top:10px;}
-.equipas-inline-control input{flex:1;}
-.equipas-toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  padding:18px;
-  margin:0 0 16px;
-}
-.equipas-toolbar h3{margin:0 0 4px;color:var(--text,#fff);}
-.equipas-toolbar p{margin:0;color:var(--muted,#9fb0c6);}
-.equipas-toolbar .toolbar-search{min-width:280px;max-width:460px;width:38%;}
-.equipas-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(285px, 1fr));
-  gap:16px;
-}
-.equipa-card{
-  position:relative;
-  overflow:hidden;
-  padding:18px;
-  min-height:230px;
-}
-.equipa-card::before{
-  content:"";
-  position:absolute;
-  inset:0 auto 0 0;
-  width:4px;
-  background:linear-gradient(180deg, var(--primary,#00d084), var(--secondary,#2e6bff));
-  opacity:.8;
-}
-.equipa-card.is-current{
-  border-color:color-mix(in srgb, var(--primary,#00d084) 72%, #fff 8%);
-  box-shadow:0 0 0 1px color-mix(in srgb, var(--primary,#00d084) 55%, transparent), 0 22px 60px rgba(0,0,0,.34);
-}
-.equipa-card.is-current::after{
-  content:"Esta semana";
-  position:absolute;
-  top:14px;
-  right:14px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:color-mix(in srgb, var(--primary,#00d084) 28%, rgba(0,0,0,.45));
-  color:var(--text,#fff);
-  font-size:.72rem;
-  font-weight:900;
-}
-.equipa-card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px;}
-.equipa-card h3{margin:4px 0 0;font-size:1.25rem;color:var(--text,#fff);padding-right:70px;}
-.equipa-order{font-weight:950;color:var(--accent,#00e6a8);opacity:.85;}
-.equipa-members{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;margin:14px 0;}
-.member-pill,
-.equipas-empty-pill,
-.member-chip{
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.065);
-  color:var(--text,#fff);
-  border-radius:999px;
-  padding:8px 10px;
-  font-weight:800;
-  font-size:.82rem;
-}
-.member-chip{cursor:pointer;}
-.member-chip span{color:#ff7b7b;margin-left:6px;}
-.equipa-meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted,#9fb0c6);font-size:.85rem;margin-top:8px;}
-.equipa-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
-.equipa-actions .secondary-btn{padding:10px 12px;}
-.danger-btn{
-  border:1px solid rgba(255,92,92,.35);
-  background:rgba(255,70,70,.10);
-  color:#ff9a9a;
-  border-radius:12px;
-  padding:10px 14px;
-  font-weight:900;
-  cursor:pointer;
-}
-.modal-equipa-card{max-width:820px;width:min(820px, calc(100vw - 28px));}
-.equipa-members-selected-wrap{
-  margin:16px 0;
-  padding:14px;
-  border-radius:16px;
-  background:rgba(0,0,0,.18);
-  border:1px solid rgba(255,255,255,.10);
-}
-.equipa-members-header{display:flex;justify-content:space-between;margin-bottom:10px;color:var(--text,#fff);}
-.equipa-members-header span{color:var(--accent,#00e6a8);font-weight:900;}
-.equipa-members-selected{display:flex;flex-wrap:wrap;gap:8px;min-height:42px;align-items:center;}
-.equipa-members-selected.empty{color:var(--muted,#9fb0c6);}
-.equipa-user-picker{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;}
-.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;}
-.equipas-empty{grid-column:1 / -1;padding:28px;text-align:center;color:var(--muted,#9fb0c6);}
-.equipas-empty strong{display:block;color:var(--text,#fff);font-size:1.1rem;margin-bottom:8px;}
-@media (max-width: 900px){
-  .equipas-hero{align-items:flex-start;flex-direction:column;}
-  .equipas-week-panel{grid-template-columns:1fr;}
-  .equipas-toolbar{align-items:stretch;flex-direction:column;}
-  .equipas-toolbar .toolbar-search{width:100%;max-width:none;min-width:0;}
-  .equipa-user-picker{grid-template-columns:1fr;}
-}
-
-
-/* v1.56.3 - Equipas Semanais: botão de adicionar visível + ícone limpo */
-.equipas-hero-actions .primary-btn,
-.equipas-add-big{
-  min-width: 220px !important;
-  min-height: 46px !important;
-  border-radius: 16px !important;
-  background: linear-gradient(135deg, var(--app-primary, #22d3ee), color-mix(in srgb, var(--app-secondary, #2563eb) 75%, var(--app-primary, #22d3ee))) !important;
-  color: var(--app-button-text, #fff) !important;
-  font-weight: 950 !important;
-  box-shadow: 0 14px 32px color-mix(in srgb, var(--app-primary, #22d3ee) 28%, transparent) !important;
-}
-.equipas-add-panel{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:18px !important;
-  margin:18px 0 !important;
-  padding:20px !important;
-}
-.equipas-add-panel h3{margin:0 0 6px!important;color:var(--app-text,#fff)!important;}
-.equipas-add-panel p{margin:0!important;color:var(--app-muted,#9fb3c8)!important;}
-.sidebar.sidebar-pro-groups .sidebar-nav-pro a[href="equipas-semanais.html"]::before,
-.sidebar a[href$="equipas-semanais.html"]::before{
-  content: "👥" !important;
-  background: transparent !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  filter: none !important;
-}
-@media (max-width: 760px){
-  .equipas-hero-actions{width:100%!important;display:grid!important;grid-template-columns:1fr!important;gap:10px!important;}
-  .equipas-add-panel{display:grid!important;}
-  .equipas-add-big{width:100%!important;}
-}
-
-/* v1.56.4 - Equipas Semanais: rotação simples e limpa */
-.equipas-overview-grid{
-  display:grid;
-  grid-template-columns:minmax(320px, 1.35fr) minmax(280px, .85fr);
-  gap:16px;
-  margin:16px 0;
-}
-.equipa-current-card,
-.equipa-next-card,
-.equipas-rotation-card{
-  position:relative;
-  overflow:hidden;
-  border-radius:22px;
-  border:1px solid color-mix(in srgb, var(--app-primary, #22d3ee) 22%, rgba(255,255,255,.14));
-  background:
-    radial-gradient(circle at 14% 12%, color-mix(in srgb, var(--app-primary, #22d3ee) 20%, transparent), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.03));
-  box-shadow:0 20px 55px rgba(0,0,0,.28);
-}
-.equipa-current-card{padding:24px;min-height:245px;}
-.equipa-next-card{padding:22px;min-height:245px;}
-.equipa-status-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:8px 12px;
-  border-radius:999px;
-  background:color-mix(in srgb, var(--app-primary, #22d3ee) 22%, rgba(0,0,0,.35));
-  border:1px solid color-mix(in srgb, var(--app-primary, #22d3ee) 35%, rgba(255,255,255,.14));
-  color:var(--app-text,#fff);
-  font-weight:950;
-  font-size:.82rem;
-  margin-bottom:16px;
-}
-.equipa-card-kicker{
-  display:block;
-  color:var(--app-primary,#22d3ee);
-  font-weight:950;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  font-size:.72rem;
-  margin-bottom:8px;
-}
-.equipa-current-card h2,
-.equipa-next-card h3{
-  margin:0 0 8px!important;
-  color:var(--app-text,#fff)!important;
-  letter-spacing:-.02em;
-}
-.equipa-current-card h2{font-size:2rem!important;}
-.equipa-next-card h3{font-size:1.45rem!important;}
-.equipa-current-card p,
-.equipa-next-card p{margin:0 0 16px!important;color:var(--app-muted,#9fb3c8)!important;}
-.equipa-current-members{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
-.equipa-current-members.compact .member-pill{font-size:.78rem;padding:7px 9px;}
-.equipas-rotation-card{
-  display:grid;
-  grid-template-columns:minmax(260px, .8fr) minmax(320px, 1.2fr);
-  gap:18px;
-  align-items:end;
-  padding:20px!important;
-  margin:0 0 16px!important;
-}
-.equipas-rotation-copy h3{margin:0 0 6px!important;color:var(--app-text,#fff)!important;}
-.equipas-rotation-copy p{margin:0!important;color:var(--app-muted,#9fb3c8)!important;line-height:1.45;}
-.equipas-rotation-controls{
-  display:grid;
-  grid-template-columns:1fr 1fr auto;
-  gap:12px;
-  align-items:end;
-}
-.equipas-rotation-controls label{display:grid;gap:7px;color:var(--app-muted,#9fb3c8);font-weight:850;font-size:.84rem;}
-.equipas-toolbar-actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;min-width:360px;}
-.equipas-toolbar-actions input{min-width:240px;}
-.equipas-grid.clean-rotation{grid-template-columns:repeat(auto-fill, minmax(310px, 1fr));}
-.equipas-grid.clean-rotation .equipa-card{min-height:210px;}
-.equipas-grid.clean-rotation .equipa-card h3{padding-right:0!important;}
-.equipas-grid.clean-rotation .equipa-actions .secondary-btn,
-.equipas-grid.clean-rotation .equipa-actions .danger-btn{padding:9px 11px;font-size:.82rem;}
-@media (max-width: 980px){
-  .equipas-overview-grid,
-  .equipas-rotation-card{grid-template-columns:1fr;}
-  .equipas-rotation-controls{grid-template-columns:1fr;}
-  .equipas-toolbar-actions{min-width:0;width:100%;display:grid;grid-template-columns:1fr;}
-  .equipas-toolbar-actions input{min-width:0;width:100%;}
-}
-
-/* v1.56.5 - Equipas Semanais: escolha direta da equipa desta semana */
-.equipa-current-btn{
-  background: linear-gradient(135deg, var(--app-primary,#22d3ee), color-mix(in srgb, var(--app-primary,#22d3ee) 55%, var(--app-secondary,#2563eb))) !important;
-  color: var(--app-button-text,#fff) !important;
-  border: 1px solid color-mix(in srgb, var(--app-primary,#22d3ee) 45%, rgba(255,255,255,.18)) !important;
-  box-shadow: 0 10px 22px color-mix(in srgb, var(--app-primary,#22d3ee) 20%, transparent) !important;
-}
-.equipa-current-btn:disabled{
-  opacity:.72 !important;
-  cursor:default !important;
-  filter:saturate(.8) !important;
-}
-.equipas-rotation-controls .primary-btn{white-space:normal !important;}
-
-/* ===== App Braga v1.56.8 - Editor da Sidebar ===== */
-.sidebar-layout-custom-ready .sidebar-nav-pro [data-icon]::before,
-.sidebar-layout-custom-ready .sidebar [data-icon]::before{
-  content: attr(data-icon) !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  width:1.65rem !important;
-  min-width:1.65rem !important;
-  height:1.65rem !important;
-  margin-right:.72rem !important;
-  background: transparent !important;
-  box-shadow:none !important;
-  border:0 !important;
-  border-radius:0 !important;
-  color:inherit !important;
-  font-size:1.05rem !important;
-  line-height:1 !important;
-  filter:none !important;
-}
-.sidebar-editor-toolbar{display:flex;gap:.75rem;flex-wrap:wrap;margin:0 0 1rem;}
-.sidebar-editor-grid{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(420px,1.4fr);gap:1rem;align-items:start;}
-.sidebar-editor-card{border:1px solid color-mix(in srgb,var(--line,#334155) 75%,transparent);background:color-mix(in srgb,var(--card,#111827) 88%,transparent);border-radius:20px;padding:1rem;box-shadow:0 16px 40px rgba(0,0,0,.14);}
-.sidebar-editor-card h4{margin:.15rem 0 .85rem;font-size:1.05rem;letter-spacing:.02em;color:var(--text,#f8fafc);}
-.sidebar-editor-hint{margin:-.35rem 0 1rem;color:var(--muted,#94a3b8);font-size:.9rem;}
-.sidebar-editor-list{display:flex;flex-direction:column;gap:.72rem;}
-.sidebar-editor-row{display:grid;grid-template-columns:auto 1fr auto;gap:.65rem;align-items:center;padding:.75rem;border-radius:16px;background:color-mix(in srgb,var(--surface,#1f2937) 74%,transparent);border:1px solid color-mix(in srgb,var(--line,#334155) 68%,transparent);}
-.sidebar-editor-page-row{grid-template-columns:auto auto minmax(150px,1fr) minmax(170px,.9fr) auto;}
-.sidebar-editor-emoji{width:3.2rem;text-align:center;font-size:1.15rem;font-family:system-ui,Apple Color Emoji,Segoe UI Emoji,sans-serif;}
-.sidebar-editor-name,.sidebar-editor-row input,.sidebar-editor-row select{min-height:40px;border-radius:12px;border:1px solid color-mix(in srgb,var(--line,#334155) 80%,transparent);background:color-mix(in srgb,var(--bg2,#0f172a) 82%,transparent);color:var(--text,#f8fafc);padding:.45rem .7rem;}
-.sidebar-editor-visible{display:inline-flex;gap:.4rem;align-items:center;color:var(--muted,#94a3b8);font-size:.86rem;white-space:nowrap;}
-.sidebar-editor-visible input{min-height:auto;accent-color:var(--primary,#ef4444);}
-.sidebar-editor-page-title{display:flex;flex-direction:column;gap:.15rem;min-width:0;}
-.sidebar-editor-page-title strong{color:var(--text,#f8fafc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sidebar-editor-page-title small{color:var(--muted,#94a3b8);font-size:.78rem;}
-.sidebar-editor-row-actions{display:flex;gap:.35rem;align-items:center;justify-content:flex-end;}
-.sidebar-editor-row-actions button{min-width:36px;min-height:36px;border:0;border-radius:11px;background:color-mix(in srgb,var(--primary,#ef4444) 16%,transparent);color:var(--text,#f8fafc);font-weight:800;cursor:pointer;}
-.sidebar-editor-row-actions button:hover:not(:disabled){background:color-mix(in srgb,var(--primary,#ef4444) 34%,transparent);}
-.sidebar-editor-row-actions button:disabled{opacity:.35;cursor:not-allowed;}
-.sidebar-editor-row-actions .danger{background:rgba(239,68,68,.14);color:#fecaca;}
-@media(max-width:980px){.sidebar-editor-grid{grid-template-columns:1fr}.sidebar-editor-page-row{grid-template-columns:auto auto 1fr}.sidebar-editor-page-row select{grid-column:1/-1}.sidebar-editor-page-row .sidebar-editor-row-actions{grid-column:1/-1;justify-content:flex-start}}
-/* ===== END App Braga v1.56.8 - Editor da Sidebar ===== */
-
-/* ===== App Braga v1.56.8 - Fix Editor Sidebar Criar Aba ===== */
-.sidebar-editor-modal-backdrop{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  background:rgba(2,6,23,.68);
-  backdrop-filter:blur(10px);
-}
-.sidebar-editor-modal{
-  width:min(440px,94vw);
-  border-radius:24px;
-  border:1px solid color-mix(in srgb,var(--line,#334155) 72%,transparent);
-  background:linear-gradient(180deg,color-mix(in srgb,var(--card,#111827) 96%,transparent),color-mix(in srgb,var(--bg2,#0f172a) 94%,transparent));
-  color:var(--text,#f8fafc);
-  box-shadow:0 28px 80px rgba(0,0,0,.42);
-  padding:1.1rem;
-}
-.sidebar-editor-modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;}
-.sidebar-editor-modal-head h3{margin:0;font-size:1.15rem;}
-.sidebar-editor-modal-close{width:38px;height:38px;border:0;border-radius:14px;background:color-mix(in srgb,var(--surface,#1f2937) 82%,transparent);color:var(--text,#f8fafc);font-size:1.4rem;line-height:1;cursor:pointer;}
-.sidebar-editor-modal label{display:flex;flex-direction:column;gap:.45rem;margin:.85rem 0;color:var(--muted,#94a3b8);font-weight:800;}
-.sidebar-editor-modal input{min-height:46px;border-radius:15px;border:1px solid color-mix(in srgb,var(--line,#334155) 78%,transparent);background:color-mix(in srgb,var(--bg,#0b1120) 84%,transparent);color:var(--text,#f8fafc);font-size:1rem;padding:.6rem .8rem;}
-.sidebar-editor-modal-actions{display:flex;justify-content:flex-end;gap:.7rem;margin-top:1.1rem;flex-wrap:wrap;}
-/* ===== END App Braga v1.56.8 - Fix Editor Sidebar Criar Aba ===== */
-
-/* ===== App Braga v1.56.9 - Sidebar guardada na Firebase ===== */
-.sidebar-editor-status{
-  min-height:34px;
-  margin:10px 0 16px;
-  padding:10px 12px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.055);
-  color:var(--text,#f8fafc);
-  font-weight:800;
-  font-size:.92rem;
-}
-.sidebar-editor-status:empty{display:none}
-.sidebar-editor-status[data-type="success"]{
-  border-color:rgba(34,197,94,.35);
-  background:rgba(34,197,94,.12);
-}
-.sidebar-editor-status[data-type="warn"]{
-  border-color:rgba(245,158,11,.38);
-  background:rgba(245,158,11,.13);
-}
-.sidebar-editor-status[data-type="error"]{
-  border-color:rgba(239,68,68,.4);
-  background:rgba(239,68,68,.13);
-}
-.sidebar-editor-toolbar{gap:10px; flex-wrap:wrap;}
-/* ===== END App Braga v1.56.9 ===== */
+/* ===== END App Braga v1.58.4 ===== */

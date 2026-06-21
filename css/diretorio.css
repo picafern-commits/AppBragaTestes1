@@ -134,6 +134,132 @@
 }
 /* ===== END APP BRAGA V1.33.3 ===== */
 
+/* ===== APP BRAGA V1.53 - DIRETORIO IPHONE FIT ===== */
+@media (max-width: 768px) {
+  html,
+  body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .diretorio-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+    padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .diretorio-hero,
+  .diretorio-actions,
+  .diretorio-filtros,
+  .diretorio-stats,
+  .diretorio-lista,
+  .diretorio-warehouse,
+  .diretorio-section,
+  .diretorio-warehouse-body,
+  .diretorio-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .diretorio-actions,
+  .diretorio-filtros,
+  .diretorio-stats.stats-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .diretorio-actions button,
+  .diretorio-filtros input,
+  .diretorio-filtros select,
+  .diretorio-filtros button {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .diretorio-warehouse-head,
+  .diretorio-subsection-head,
+  .diretorio-section-head,
+  .diretorio-warehouse-title,
+  .diretorio-section-title,
+  .diretorio-warehouse-meta {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .diretorio-table {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .diretorio-table thead {
+    display: none !important;
+  }
+
+  .diretorio-table tbody,
+  .diretorio-table tr,
+  .diretorio-table td {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .diretorio-table tr {
+    margin: 10px 0 !important;
+    padding: 12px !important;
+    border-radius: 16px !important;
+    background: rgba(15, 23, 42, .74) !important;
+    border: 1px solid rgba(148, 163, 184, .16) !important;
+  }
+
+  .diretorio-table td {
+    padding: 7px 0 !important;
+    border: 0 !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+  }
+
+  .diretorio-table td:nth-child(1) {
+    color: #fff !important;
+    font-weight: 950 !important;
+    font-size: 16px !important;
+  }
+
+  .diretorio-table td:nth-child(2)::before { content: "Extensao: "; color: #7dd3fc; font-weight: 950; }
+  .diretorio-table td:nth-child(3)::before { content: "Telefone: "; color: #7dd3fc; font-weight: 950; }
+  .diretorio-table td:nth-child(4)::before { content: "Telemovel: "; color: #7dd3fc; font-weight: 950; }
+  .diretorio-table td:nth-child(5)::before { content: "Email: "; color: #7dd3fc; font-weight: 950; }
+  .diretorio-table td:nth-child(6)::before { content: "Local: "; color: #7dd3fc; font-weight: 950; }
+
+  .diretorio-row-actions {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .diretorio-row-actions button {
+    width: 100% !important;
+  }
+
+  .diretorio-modal {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+}
+
 
 /* ===== APP BRAGA V1.33.3 - DIRETORIO ARMAZEM VISUAL + ENCODING FIX ===== */
 .diretorio-warehouse-head{

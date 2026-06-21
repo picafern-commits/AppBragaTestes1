@@ -36,7 +36,7 @@
   }
 
   function models() {
-    const list = []; // Fichas Equipamento removido
+    const list = window.AppBragaEquipmentModels?.list || [];
     return list.filter((item) => item.collection && item.key);
   }
 
@@ -104,7 +104,7 @@
       <div class="global-search-head">
         <div>
           <h3>Pesquisa global</h3>
-          <p class="section-subtitle">Pesquisa global desativada para fichas removidas.</p>
+          <p class="section-subtitle">Procura users, impressoras, IPs, portas, pistolas, radios e toners.</p>
         </div>
         <button class="secondary-btn global-search-close" type="button" id="globalSearchClose">Fechar</button>
       </div>
@@ -171,7 +171,7 @@
             typeLabel: model.label,
             title: titleFor(model, data),
             subtitle: subtitleFor(model, data),
-            href: "#",
+            href: `equipamento.html?tipo=${encodeURIComponent(model.key)}&id=${encodeURIComponent(doc.id)}`,
             haystack: buildHaystack(model, data)
           });
         });
@@ -182,7 +182,7 @@
           typeLabel: model.label,
           title: `${model.label} indisponivel`,
           subtitle: "Nao foi possivel pesquisar esta colecao.",
-          href: "#",
+          href: `equipamento.html?tipo=${encodeURIComponent(model.key)}`,
           haystack: normalize(`${model.label} ${model.plural}`)
         });
       }

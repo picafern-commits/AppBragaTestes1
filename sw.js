@@ -1,35 +1,30 @@
-const APP_BRAGA_SW = "app-braga-runtime-v95";
+const APP_BRAGA_SW = "app-braga-runtime-v93";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./html/index.html",
   "./html/notificacoes.html",
   "./html/computadores.html",
+  "./html/equipamento.html",
   "./html/impressoras.html",
   "./html/radios.html",
-  "./html/tarefas.html",
-  "./html/equipas-semanais.html",
+  "./html/scanner-ia.html",
   "./html/stock.html",
   "./manifest.json",
   "./css/style.css",
   "./css/autozitania-bragalis.css",
   "./css/app-theme-pro.css",
   "./css/enterprise/ops.css",
+  "./css/systems/equipment.css",
   "./css/systems/global-search.css",
   "./css/systems/personal-tools.css",
   "./css/iphone-force-final.css",
   "./css/iphone-sidebar-final.css",
-  "./css/dashboard-widgets.css",
-  "./css/app-clean-pages.css",
-  "./css/operational-improvements.css",
-  "./css/premium-polish.css",
   "./js/app.js",
-  "./js/sidebar-editor.js",
-  "./js/dashboard-widgets.js",
-  "./js/operational-improvements.js",
-  "./js/equipas-semanais.js",
   "./js/app-theme-pro.js",
   "./js/enterprise/ops.js",
+  "./js/systems/equipment/equipment-models.js",
+  "./js/systems/equipment/equipment-detail.js",
   "./js/systems/global-search/global-search.js",
   "./js/systems/backup/local-backup.js",
   "./js/systems/personal-tools.js",
@@ -124,4 +119,4 @@ self.addEventListener("notificationclick", (event) => {
   );
 });
 
-// APP BRAGA V1.51.0 iphone-fit-update
+// APP BRAGA V1.54.5 old-sidebar-fixed-scroll
