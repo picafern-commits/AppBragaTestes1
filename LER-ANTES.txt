@@ -1,4 +1,4 @@
-AppBraga v1.58.43 — Adicionar Toner sem barra superior e hero igual ao bloco da página Impressoras.
+AppBraga v1.58.45 — Adicionar Toner: fundo do hero igual ao da página Impressoras.
 
 Ficheiros completos para substituir diretamente:
 - html/add-toner.html
