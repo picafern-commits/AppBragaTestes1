@@ -771,7 +771,7 @@ body.add-toner-futurista::after {
 }
 
 
-/* v1.58.39 layout hardening */
+/* v1.58.48 layout hardening */
 body.add-toner-futurista {
   min-width: 1280px;
 }
@@ -871,7 +871,7 @@ body.add-toner-futurista {
 }
 
 
-/* v1.58.40 — fullscreen + sem barra superior */
+/* v1.58.48 — fullscreen + sem barra superior */
 body.add-toner-futurista {
   min-width: 0 !important;
   width: 100% !important;
@@ -941,7 +941,7 @@ body.add-toner-futurista .toner-form-body {
 }
 
 
-/* v1.58.41 — ajustes Adicionar Toner */
+/* v1.58.48 — ajustes Adicionar Toner */
 body.add-toner-futurista .toner-inline-scan {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -1052,7 +1052,7 @@ body.add-toner-futurista .warning-list div {
 }
 
 
-/* v1.58.42 — barra superior + fundo igual à página Impressoras */
+/* v1.58.48 — barra superior + fundo igual à página Impressoras */
 html,
 body.add-toner-futurista {
   background:
@@ -1226,7 +1226,7 @@ body.add-toner-futurista .toner-main-grid {
 }
 
 
-/* v1.58.43 — sem barra superior; hero igual ao bloco Impressoras */
+/* v1.58.48 — sem barra superior; hero igual ao bloco Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1352,7 +1352,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.44 — hero Adicionar Toner com proporções iguais ao hero Impressoras */
+/* v1.58.48 — hero Adicionar Toner com proporções iguais ao hero Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1480,7 +1480,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.45 — fundo do hero igual ao da página Impressoras */
+/* v1.58.48 — fundo do hero igual ao da página Impressoras */
 body.add-toner-futurista .toner-hero-card {
   width: 760px !important;
   max-width: calc(100vw - 48px) !important;
@@ -1540,7 +1540,7 @@ body.add-toner-futurista .toner-hero-icon {
 }
 
 
-/* v1.58.46 — hero com tamanho igual ao da página Impressoras */
+/* v1.58.48 — hero com tamanho igual ao da página Impressoras */
 body.add-toner-futurista .toner-hero {
   margin: 0 0 18px !important;
 }
@@ -1587,7 +1587,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.47 — alinhar o design de Adicionar Toner com Impressoras */
+/* v1.58.48 — alinhar o design de Adicionar Toner com Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }

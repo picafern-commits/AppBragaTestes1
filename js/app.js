@@ -32,7 +32,7 @@ if (typeof firebase !== "undefined") {
   }
 }
 
-const APP_VERSION = "1.58.30";
+const APP_VERSION = "1.58.48";
 const APP_NOTIFICATIONS_REBUILD_MODE = true;
 const APP_BRAGA_DEFAULT_VAPID_PUBLIC_KEY = "";
 const APP_BRAGA_NOTIFICATION_CLOUD_DOC = "";
@@ -8076,7 +8076,8 @@ async function atualizarAppObrigatorio(novaVersao = "") {
 
 window.addEventListener("load", () => {
   atualizarVersaoUI(APP_VERSION);
-  verificarAtualizacao();
+  // v1.58.48: não verificar/forçar atualização automaticamente.
+  // Evita refresh/navegação quando o utilizador está a editar ou guardar dados.
 });
 
 /* ===== App Braga Firebase Notifications Rebuild v1.40.0 ===== */
@@ -13398,3 +13399,40 @@ async function carregarHistoricoNotificacoesCloudApp(showMessage = false) {
   } catch(e) {}
 })();
 /* ===== END APP BRAGA v1.56.1 - SIDEBAR OPERACIONAL FINAL ===== */
+
+
+/* v1.58.48 — proteção contra refresh automático durante edição/guardar */
+window.__APP_BRAGA_DISABLE_AUTO_UPDATE_REFRESH__ = true;
+
+(function protegerContraRefreshAutomaticoAppBraga() {
+  const originalReplace = window.location.replace.bind(window.location);
+  let allowProgrammaticNavigation = false;
+
+  window.appBragaPermitirNavegacaoAutomatica = function appBragaPermitirNavegacaoAutomatica(callback) {
+    allowProgrammaticNavigation = true;
+    try { return callback && callback(); }
+    finally { setTimeout(() => { allowProgrammaticNavigation = false; }, 0); }
+  };
+
+  // Marca cliques reais em links/botões como navegação intencional.
+  document.addEventListener("click", (event) => {
+    const target = event.target?.closest?.("a[href], button[onclick]");
+    if (!target) return;
+    allowProgrammaticNavigation = true;
+    setTimeout(() => { allowProgrammaticNavigation = false; }, 1200);
+  }, true);
+
+  // Neutraliza apenas o fluxo de atualização automática, não a navegação normal da app.
+  const oldAtualizar = window.atualizarAppObrigatorio;
+  window.atualizarAppObrigatorio = async function atualizarAppObrigatorioSemAutoRefresh(novaVersao = "") {
+    if (!allowProgrammaticNavigation) {
+      try {
+        if (typeof fecharAvisoAtualizacao === "function") fecharAvisoAtualizacao();
+        if (typeof mostrarMensagem === "function") mostrarMensagem("Atualização disponível. Reabre a app quando quiseres atualizar.", "info");
+      } catch (e) {}
+      return false;
+    }
+    if (typeof oldAtualizar === "function") return oldAtualizar(novaVersao);
+    return false;
+  };
+})();

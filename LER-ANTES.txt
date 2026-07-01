@@ -1,7 +1,9 @@
-Substituir estes ficheiros completos:
-- html/add-toner.html
-- css/add-toner-futurista.css
-- js/add-toner-futurista.js
-- version.json
+AppBraga v1.58.48 — correção de refresh automático.
 
-Objetivo: página Adicionar Toner com design alinhado à página Impressoras.
+Este ZIP contém ficheiros completos para substituir diretamente.
+Objetivo:
+- atualizar APP_VERSION para 1.58.48;
+- impedir verificação/refresh automático da app enquanto estás a editar/guardar;
+- atualizar cache/version para evitar carregar JS antigo.
+
+Depois de substituir, faz commit/deploy e abre com Ctrl+F5.
