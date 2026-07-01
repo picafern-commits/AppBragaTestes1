@@ -1,4 +1,4 @@
-AppBraga v1.58.41 — Adicionar Toner ajustes.
+AppBraga v1.58.42 — Adicionar Toner com barra superior e fundo igual à página Impressoras.
 
 Ficheiros completos para substituir diretamente:
 - html/add-toner.html
