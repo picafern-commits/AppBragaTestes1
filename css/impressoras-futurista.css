@@ -134,3 +134,197 @@ body.impressoras-futurista::after{background:
 @media (max-width:1500px){.imp-kpis{grid-template-columns:repeat(3,minmax(0,1fr));}.imp-main-grid{grid-template-columns:1fr;}.imp-bottom-grid{grid-template-columns:1fr;}.imp-side{grid-template-columns:1fr 1fr;}}
 @media (max-width:1100px){.imp-search-row{grid-template-columns:1fr 1fr;min-width:0}.imp-side{grid-template-columns:1fr}.imp-hero-inner{padding:22px 20px}.imp-hero h1{font-size:2.2rem}.imp-hero p{font-size:1.05rem}.imp-hero-orbit{display:none;}}
 @media (max-width:760px){.imp-page{padding:14px}.imp-top{gap:12px;flex-wrap:wrap}.imp-kpis{grid-template-columns:1fr}.imp-kpi strong{font-size:2.4rem}.imp-search-row{grid-template-columns:1fr}.imp-table-wrap{overflow:auto}.imp-quick-grid{grid-template-columns:1fr}.imp-hero-inner{display:grid;gap:16px;justify-items:center;text-align:center}.imp-brand span:last-child{font-size:1rem}.imp-bottom-grid,.imp-main-grid{gap:12px}}
+
+
+/* v1.58.32 — fullscreen real + scroll na página Impressoras */
+html,
+body {
+  height: auto !important;
+  min-height: 100% !important;
+}
+
+body.impressoras-futurista {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+body.impressoras-futurista * {
+  box-sizing: border-box;
+}
+
+body.impressoras-futurista .imp-page {
+  width: 100vw !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 22px clamp(16px, 1.6vw, 34px) 76px !important;
+  overflow: visible !important;
+}
+
+body.impressoras-futurista .imp-top,
+body.impressoras-futurista .imp-hero,
+body.impressoras-futurista .imp-kpis,
+body.impressoras-futurista .imp-main-grid,
+body.impressoras-futurista .imp-bottom-grid {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+body.impressoras-futurista .imp-top {
+  margin: 0 0 18px !important;
+}
+
+body.impressoras-futurista .imp-hero {
+  margin: 18px 0 18px !important;
+}
+
+body.impressoras-futurista .imp-hero-inner {
+  width: min(100%, 1120px) !important;
+}
+
+body.impressoras-futurista .imp-kpis {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(150px, 1fr)) !important;
+  gap: 14px !important;
+}
+
+body.impressoras-futurista .imp-main-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 2.05fr) minmax(390px, .95fr) !important;
+  gap: 14px !important;
+  align-items: start !important;
+}
+
+body.impressoras-futurista .imp-printers-panel,
+body.impressoras-futurista .imp-side,
+body.impressoras-futurista .imp-panel {
+  min-width: 0 !important;
+}
+
+body.impressoras-futurista .imp-table-wrap {
+  width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-height: none !important;
+}
+
+body.impressoras-futurista .imp-table {
+  width: 100% !important;
+  min-width: 980px !important;
+}
+
+body.impressoras-futurista .imp-bottom-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 14px !important;
+  margin-top: 14px !important;
+  padding-bottom: 24px !important;
+}
+
+body.impressoras-futurista .imp-back {
+  position: fixed !important;
+  left: 18px !important;
+  bottom: 18px !important;
+  z-index: 9999 !important;
+}
+
+@media (min-width: 1800px) {
+  body.impressoras-futurista .imp-page {
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+  }
+  body.impressoras-futurista .imp-main-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(520px, .85fr) !important;
+  }
+}
+
+@media (max-width: 1350px) {
+  body.impressoras-futurista .imp-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  body.impressoras-futurista .imp-main-grid {
+    grid-template-columns: 1fr !important;
+  }
+  body.impressoras-futurista .imp-side {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  body.impressoras-futurista .imp-bottom-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body.impressoras-futurista .imp-kpis,
+  body.impressoras-futurista .imp-side {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* v1.58.33 — percentagem visível nas barras de toner */
+body.impressoras-futurista .imp-toner-cell {
+  min-width: 170px !important;
+  display: grid !important;
+  gap: 6px !important;
+}
+
+body.impressoras-futurista .imp-toner-meta {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  font-size: .82rem !important;
+  color: #dbeafe !important;
+  line-height: 1 !important;
+}
+
+body.impressoras-futurista .imp-toner-meta span {
+  color: #c8d7ee !important;
+  font-weight: 700 !important;
+}
+
+body.impressoras-futurista .imp-toner-meta strong {
+  color: #ffffff !important;
+  font-weight: 950 !important;
+  font-size: .9rem !important;
+  min-width: 42px !important;
+  text-align: right !important;
+}
+
+body.impressoras-futurista .imp-toner-track {
+  height: 9px !important;
+  width: 100% !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.07) !important;
+  overflow: hidden !important;
+  box-shadow: inset 0 0 8px rgba(0,0,0,.45) !important;
+}
+
+body.impressoras-futurista .imp-toner-fill {
+  height: 100% !important;
+  min-width: 4px !important;
+  border-radius: 999px !important;
+  transition: width .25s ease !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.ok {
+  background: linear-gradient(90deg, #38d96f, #72f28d) !important;
+  box-shadow: 0 0 10px rgba(56,217,111,.45) !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.low {
+  background: linear-gradient(90deg, #ff9f2f, #ffd24f) !important;
+  box-shadow: 0 0 10px rgba(255,159,47,.45) !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.critical {
+  background: linear-gradient(90deg, #ff465a, #ff7b86) !important;
+  box-shadow: 0 0 10px rgba(255,70,90,.45) !important;
+}

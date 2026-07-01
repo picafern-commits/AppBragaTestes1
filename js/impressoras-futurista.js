@@ -26,9 +26,29 @@
     return {label:'Online', cls:'online'};
   }
   function tonerSeed(item, idx){
-    const possible = [item.toner, item.tonerPreto, item.percentagem, item.nivel, item.black, item.preto, item.percent];
-    for (const p of possible){ const n = num(p); if (n !== null) return Math.max(0, Math.min(100, n)); }
-    const seeds = [5,20,25,65,85,10,90,15,77,68];
+    const candidates = [
+      item.toner, item.tonerPreto, item.percentagem, item.nivel, item.black, item.preto, item.percent,
+      item.tonerPercent, item.tonerLevel, item.nivelToner, item.pretoPercent, item.pretoNivel
+    ];
+
+    try {
+      const info = (typeof tonerInfoState !== 'undefined') ? tonerInfoState : window.tonerInfoState;
+      const keys = [item.ip, item.serie, item.serial, item.id, item.idDoc, item._ref].filter(Boolean).map(String);
+      for (const key of keys) {
+        const t = info && (info[key] || info[key.replaceAll('.', '_')]);
+        if (t) {
+          candidates.push(t.preto, t.black, t.toner, t.percentagem, t.nivel, t.value);
+          if (t.toners) candidates.push(t.toners.preto, t.toners.black, t.toners.K);
+        }
+      }
+    } catch(e) {}
+
+    for (const p of candidates){
+      const n = num(p);
+      if (n !== null) return Math.max(0, Math.min(100, n));
+    }
+
+    const seeds = [68,28,77,99,23,20,80,15,70,90];
     return seeds[idx % seeds.length];
   }
   function printerImage(item){
