@@ -1538,3 +1538,50 @@ body.add-toner-futurista .toner-hero-icon {
     0 0 28px rgba(37,160,255,.38),
     inset 0 0 18px rgba(255,255,255,.08) !important;
 }
+
+
+/* v1.58.46 — hero com tamanho igual ao da página Impressoras */
+body.add-toner-futurista .toner-hero {
+  margin: 0 0 18px !important;
+}
+
+body.add-toner-futurista .toner-hero-card {
+  width: 900px !important;
+  max-width: calc(100vw - 48px) !important;
+  min-height: 116px !important;
+  padding: 20px 44px !important;
+  gap: 28px !important;
+}
+
+body.add-toner-futurista .toner-hero-orbit {
+  left: 150px !important;
+  width: 154px !important;
+  height: 154px !important;
+}
+
+body.add-toner-futurista .toner-hero-icon {
+  width: 88px !important;
+  height: 88px !important;
+  min-width: 88px !important;
+  font-size: 2.32rem !important;
+}
+
+body.add-toner-futurista .toner-hero h1 {
+  font-size: 2.65rem !important;
+}
+
+body.add-toner-futurista .toner-hero p {
+  font-size: 1.13rem !important;
+}
+
+@media (min-width: 1700px) {
+  body.add-toner-futurista .toner-hero-card {
+    width: 920px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.add-toner-futurista .toner-hero-card {
+    width: 100% !important;
+  }
+}
