@@ -1,5 +1,6 @@
-// ===== DIRETORIO TELEFONICO APP BRAGA V1.33.3 - ARMAZEM > SECCAO + ENCODING FIX =====
+// ===== DIRETORIO TELEFONICO APP BRAGA V1.35.9 - DIRETORIO FIX DISPLAY + IMPORT =====
 (function(){
+  const $ = (id) => document.getElementById(id);
   const COLLECTION = 'diretorioTelefonico';
   let contactos = [];
   let contactoEditId = null;
@@ -9,18 +10,22 @@
   let encodingRepairRunning = false;
 
   function fixTextoDiretorio(v){
-    let txt = String(v ?? "");
-    if (!txt) return txt;
+    let txt = String(v ?? '');
+    if(!txt) return txt;
 
-    txt = txt
-      .replace(/Autozit\uFFFDnia/gi, "Autozitânia")
-      .replace(/Autozit[aâã]?nia/gi, "Autozitânia")
-      .replace(/Autozit\?nia/gi, "Autozitânia");
-
-    return txt.normalize("NFC");
+    const fixes = [
+      ['Autozit\uFFFDnia', 'Autozitânia'],
+      ['Autozitânia', 'Autozitânia'],
+      ['Autozitânia', 'Autozitânia'],
+      ['\u00c3\u00a1', '?'], ['\u00c3\u00a0', '?'], ['\u00c3\u00a2', '?'], ['\u00c3\u00a3', '?'], ['\u00c3\u00a7', '?'],
+      ['\u00c3\u00a9', '?'], ['\u00c3\u00aa', '?'], ['\u00c3\u00ad', '?'], ['\u00c3\u00b3', '?'], ['\u00c3\u00b4', '?'], ['\u00c3\u00b5', '?'], ['\u00c3\u00ba', '?'],
+      ['\u00c3\u0081', '?'], ['\u00c3\u0080', '?'], ['\u00c3\u0082', '?'], ['\u00c3\u0192', '?'], ['\u00c3\u0087', '?'],
+      ['\u00c3\u0089', '?'], ['\u00c3\u008a', '?'], ['\u00c3\u008d', '?'], ['\u00c3\u0093', '?'], ['\u00c3\u0094', '?'], ['\u00c3\u0095', '?'], ['\u00c3\u009a', '?']
+    ];
+    fixes.forEach(([bad, good]) => { txt = txt.split(bad).join(good); });
+    return txt.trim();
   }
 
-  const $ = (id) => document.getElementById(id);
   const norm = (v) => fixTextoDiretorio(String(v || '').trim());
   const lower = (v) => norm(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   const esc = (v) => String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));

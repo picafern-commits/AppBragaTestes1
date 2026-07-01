@@ -133,117 +133,6 @@
   gap: 18px;
 }
 
-.equipment-printer-panel {
-  margin-bottom: 18px;
-}
-
-.equipment-printer-panel[hidden] {
-  display: none !important;
-}
-
-.equipment-printer-insights {
-  display: grid;
-  gap: 14px;
-}
-
-.equipment-printer-kpis {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.equipment-printer-kpi {
-  min-height: 82px;
-  display: grid;
-  align-content: center;
-  gap: 6px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: rgba(255,255,255,.045);
-}
-
-.equipment-printer-kpi span,
-.equipment-printer-foot {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.equipment-printer-kpi strong {
-  color: var(--text);
-  font-size: 18px;
-  overflow-wrap: anywhere;
-}
-
-.equipment-printer-kpi strong.ok,
-.equipment-toner-mini em.ok { color: #22c55e; }
-.equipment-printer-kpi strong.warn,
-.equipment-toner-mini em.warn { color: #f59e0b; }
-.equipment-printer-kpi strong.bad,
-.equipment-toner-mini em.bad { color: #ef4444; }
-
-.equipment-printer-toners {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 10px;
-}
-
-.equipment-toner-mini {
-  display: grid;
-  gap: 9px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: rgba(255,255,255,.04);
-}
-
-.equipment-toner-mini > div:first-child {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  color: var(--text);
-  font-weight: 900;
-}
-
-.equipment-toner-track {
-  height: 8px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(148,163,184,.20);
-}
-
-.equipment-toner-track span {
-  display: block;
-  height: 100%;
-  min-width: 4px;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--primary), var(--primary-hover));
-}
-
-.equipment-toner-mini em {
-  font-style: normal;
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.equipment-printer-actions,
-.equipment-printer-foot {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.equipment-printer-actions .equipment-action-link {
-  width: auto;
-}
-
-.equipment-printer-empty {
-  padding: 12px;
-  color: var(--muted);
-  border: 1px dashed var(--border);
-  border-radius: 14px;
-}
-
 .equipment-fields-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -375,52 +264,6 @@
 }
 
 @media print {
-  body.printing-equipment-qr > *:not(#equipmentQrPrintArea) {
-    display: none !important;
-  }
-
-  body.printing-equipment-qr #equipmentQrPrintArea {
-    display: grid !important;
-    place-items: center !important;
-    min-height: 100vh !important;
-    background: #fff !important;
-  }
-
-  .equipment-qr-label {
-    width: 96mm;
-    min-height: 120mm;
-    padding: 8mm;
-    display: grid;
-    align-content: center;
-    justify-items: center;
-    gap: 4mm;
-    color: #000 !important;
-    background: #fff !important;
-    border: 2px solid #000;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .equipment-qr-label img {
-    width: 58mm;
-    height: 58mm;
-  }
-
-  .equipment-qr-label strong {
-    color: #000 !important;
-    font-size: 18pt;
-    font-weight: 900;
-    overflow-wrap: anywhere;
-  }
-
-  .equipment-qr-label span,
-  .equipment-qr-label small {
-    color: #000 !important;
-    font-size: 11pt;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-  }
-
   .sidebar,
   .app-menu-toggle,
   .app-sidebar-overlay,
@@ -449,10 +292,6 @@
     grid-template-columns: 1fr;
   }
 
-  .equipment-printer-kpis {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .equipment-identity {
     flex-direction: column;
   }
@@ -463,15 +302,5 @@
 
   .equipment-qr-card {
     min-height: auto;
-  }
-}
-
-@media (max-width: 560px) {
-  .equipment-printer-kpis {
-    grid-template-columns: 1fr;
-  }
-
-  .equipment-printer-actions .equipment-action-link {
-    width: 100%;
   }
 }

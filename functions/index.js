@@ -10,11 +10,10 @@ admin.initializeApp();
 
 const db = admin.firestore();
 const DEVICE_COLLECTION = "notificationDevices";
-const LEGACY_TOKEN_COLLECTION = "notificationTokens";
 const INBOX_COLLECTION = "notificationInbox";
 const HISTORY_COLLECTION = "notificationHistory";
 const REGION = "europe-west1";
-const APP_URL = "https://picafern-commits.github.io/App-Tablet/html/";
+const APP_URL = "https://toner-manager-756c4.web.app/html/";
 const PUBLIC_HTTP_OPTIONS = {
   region: REGION,
   cors: true,
@@ -45,11 +44,10 @@ function getVapid() {
   const publicKey = envValue("APP_BRAGA_VAPID_PUBLIC_KEY", "WEB_PUSH_PUBLIC_KEY", "VAPID_PUBLIC_KEY");
   const privateKey = envValue("APP_BRAGA_VAPID_PRIVATE_KEY", "WEB_PUSH_PRIVATE_KEY", "VAPID_PRIVATE_KEY");
   const subject = envValue("APP_BRAGA_VAPID_SUBJECT", "WEB_PUSH_SUBJECT", "VAPID_SUBJECT") || "mailto:admin@appbraga.pt";
-  if (!publicKey || !privateKey) {
-    throw new Error("Faltam APP_BRAGA_VAPID_PUBLIC_KEY e APP_BRAGA_VAPID_PRIVATE_KEY nas variaveis da Firebase Function.");
+  if (publicKey && privateKey) {
+    webpush.setVapidDetails(subject, publicKey, privateKey);
   }
-  webpush.setVapidDetails(subject, publicKey, privateKey);
-  return { publicKey, privateKey, subject };
+  return { publicKey, privateKey, subject, ready: !!(publicKey && privateKey) };
 }
 
 function cleanText(value, fallback) {
@@ -68,47 +66,6 @@ function hasWebPush(device = {}) {
 
 function webPushSubscription(device = {}) {
   return device.webPush || device.standardWebPush || device.pushSubscription || null;
-}
-
-function isDeviceEnabled(device = {}) {
-  return device.enabled === true || device.active === true;
-}
-
-function normalizeDeviceDoc(doc) {
-  const data = doc.data() || {};
-  return {
-    id: doc.id,
-    ...data,
-    enabled: isDeviceEnabled(data),
-    deviceId: String(data.deviceId || data.deviceKey || doc.id),
-    deviceName: data.deviceName || data.name || data.label || data.deviceKey || doc.id,
-    fcmToken: data.fcmToken || data.firebaseToken || data.token || "",
-    webPush: data.webPush || data.standardWebPush || data.pushSubscription || null,
-    desktopInbox: data.desktopInbox === true || data.electron === true || data.deviceType === "pc-electron"
-  };
-}
-
-async function loadActiveDevices() {
-  const map = new Map();
-  const addDocs = (snap) => {
-    snap.forEach((doc) => {
-      const device = normalizeDeviceDoc(doc);
-      if (!device.enabled) return;
-      const key = device.deviceId || device.fcmToken || doc.id;
-      if (!map.has(key)) map.set(key, { ref: doc.ref, device });
-    });
-  };
-
-  const primary = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).get();
-  addDocs(primary);
-
-  const legacyActive = await db.collection(LEGACY_TOKEN_COLLECTION).where("active", "==", true).get().catch(() => null);
-  if (legacyActive) addDocs(legacyActive);
-
-  const legacyEnabled = await db.collection(LEGACY_TOKEN_COLLECTION).where("enabled", "==", true).get().catch(() => null);
-  if (legacyEnabled) addDocs(legacyEnabled);
-
-  return Array.from(map.values());
 }
 
 async function writeInbox(deviceId, payload, requestId) {
@@ -170,6 +127,57 @@ async function sendStandardWebPush(device, payload) {
   return { sent: true };
 }
 
+function safeStateId(value = "") {
+  return Buffer.from(String(value || "notification")).toString("base64url").slice(0, 180);
+}
+
+function stableNotificationTag(payload = {}) {
+  const rawEvent = cleanText(payload.event, "");
+  const rawTag = cleanText(payload.tag || payload.requestId, "");
+  let tag = rawTag
+    .replace(/-\d{10,}$/, "")
+    .replace(/-\d{4}-\d{2}-\d{2}t.*$/i, "");
+
+  // Só forçar anti-duplicado nos avisos automáticos/sistema.
+  // Testes manuais continuam livres.
+  const event = rawEvent || (tag.startsWith("toner-") || tag.startsWith("stock-") || tag.startsWith("printer-") ? "system-notification" : "");
+  if (!event.startsWith("system-")) return "";
+
+  if (!tag) {
+    tag = `${cleanText(payload.title, "App Braga")}::${cleanText(payload.body, "")}`;
+  }
+  return `${event}::${tag}`;
+}
+
+async function reserveAutomaticNotificationOnce(payload = {}) {
+  const stableKey = stableNotificationTag(payload);
+  if (!stableKey) return true;
+  const ref = db.collection("notificationEventLocks").doc(safeStateId(stableKey));
+  let reserved = false;
+  await db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    if (snap.exists) {
+      reserved = false;
+      return;
+    }
+    tx.set(ref, {
+      stableKey,
+      event: cleanText(payload.event, "system-notification"),
+      tag: cleanText(payload.tag || payload.requestId, "system-notification"),
+      requestId: cleanText(payload.requestId, "system-notification"),
+      title: cleanText(payload.title, "App Braga"),
+      body: cleanText(payload.body, "Novo aviso da App Braga."),
+      createdAt: admin.firestore.FieldValue.serverTimestamp()
+    });
+    reserved = true;
+  });
+  return reserved;
+}
+
+async function reserveSystemNotificationOnce(payload = {}) {
+  return reserveAutomaticNotificationOnce(payload);
+}
+
 async function sendNotificationToDevices(payloadInput = {}, options = {}) {
   const startedAt = Date.now();
   const requestId = cleanText(payloadInput.requestId, `system-${startedAt}`);
@@ -201,13 +209,33 @@ async function sendNotificationToDevices(payloadInput = {}, options = {}) {
     errors: []
   };
 
-  getVapid();
-  const devices = await loadActiveDevices();
-  result.totalDevices = devices.length;
+  if (options.system === true && options.skipDedup !== true) {
+    const reserved = await reserveSystemNotificationOnce(payload);
+    if (!reserved) {
+      result.ok = true;
+      result.skippedDuplicate = true;
+      await db.collection(HISTORY_COLLECTION).add({
+        ...result,
+        title: payload.title,
+        body: payload.body,
+        event: payload.event,
+        senderDeviceId,
+        targetDeviceId,
+        system: true,
+        duplicateOfTag: payload.tag,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        durationMs: Date.now() - startedAt
+      }).catch(() => null);
+      return result;
+    }
+  }
 
-  for (const entry of devices) {
-    const doc = entry.ref;
-    const device = entry.device;
+  const vapid = getVapid();
+  const snap = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).get();
+  result.totalDevices = snap.size;
+
+  for (const doc of snap.docs) {
+    const device = { id: doc.id, ...doc.data() };
     const deviceId = String(device.deviceId || doc.id);
     if (targetDeviceId && deviceId !== targetDeviceId && doc.id !== targetDeviceId) {
       result.ignored += 1;
@@ -234,7 +262,10 @@ async function sendNotificationToDevices(payloadInput = {}, options = {}) {
 
     if (!delivered && hasWebPush(device)) {
       result.webPushTargets += 1;
-      try {
+      if (!vapid.ready) {
+        result.webPushFailed += 1;
+        result.errors.push({ deviceId, device: deviceLabel(device, deviceId), channel: "webpush", error: "VAPID privada nao configurada nas Functions" });
+      } else try {
         await sendStandardWebPush(device, payload);
         result.webPushSent += 1;
         delivered = true;
@@ -296,12 +327,11 @@ exports.notificationHealth = onRequest(PUBLIC_HTTP_OPTIONS, async (req, res) => 
     const publicKey = envValue("APP_BRAGA_VAPID_PUBLIC_KEY", "WEB_PUSH_PUBLIC_KEY", "VAPID_PUBLIC_KEY");
     const privateKey = envValue("APP_BRAGA_VAPID_PRIVATE_KEY", "WEB_PUSH_PRIVATE_KEY", "VAPID_PRIVATE_KEY");
     const subject = envValue("APP_BRAGA_VAPID_SUBJECT", "WEB_PUSH_SUBJECT", "VAPID_SUBJECT") || "mailto:admin@appbraga.pt";
-    const devices = await loadActiveDevices();
+    const snap = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).limit(50).get();
     return res.json({
       ok: true,
       collection: DEVICE_COLLECTION,
-      legacyCollection: LEGACY_TOKEN_COLLECTION,
-      activeDevices: devices.length,
+      activeDevices: snap.size,
       vapidPublicReady: !!publicKey,
       vapidPrivateReady: !!privateKey,
       subject
@@ -325,6 +355,7 @@ async function handleNotificationBroadcast(req, res) {
     requestId,
     title: cleanText(body.title, "App Braga"),
     body: cleanText(body.body, "Alerta App Braga"),
+    event: cleanText(body.event, ""),
     url: cleanText(body.url, "https://picafern-commits.github.io/App-Tablet/html/index.html"),
     tag: cleanText(body.tag, requestId)
   };
@@ -347,13 +378,30 @@ async function handleNotificationBroadcast(req, res) {
   };
 
   try {
-    getVapid();
-    const devices = await loadActiveDevices();
-    result.totalDevices = devices.length;
+    const reserved = await reserveAutomaticNotificationOnce(payload);
+    if (!reserved) {
+      result.ok = true;
+      result.skippedDuplicate = true;
+      await db.collection(HISTORY_COLLECTION).add({
+        ...result,
+        title: payload.title,
+        body: payload.body,
+        event: payload.event,
+        senderDeviceId,
+        targetDeviceId,
+        duplicateOfTag: payload.tag,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        durationMs: Date.now() - startedAt
+      }).catch(() => null);
+      return res.json(result);
+    }
 
-    for (const entry of devices) {
-      const doc = entry.ref;
-      const device = entry.device;
+    const vapid = getVapid();
+    const snap = await db.collection(DEVICE_COLLECTION).where("enabled", "==", true).get();
+    result.totalDevices = snap.size;
+
+    for (const doc of snap.docs) {
+      const device = { id: doc.id, ...doc.data() };
       const deviceId = String(device.deviceId || doc.id);
       if (targetDeviceId && deviceId !== targetDeviceId && doc.id !== targetDeviceId) {
         result.ignored += 1;
@@ -380,7 +428,10 @@ async function handleNotificationBroadcast(req, res) {
 
       if (!delivered && hasWebPush(device)) {
         result.webPushTargets += 1;
-        try {
+        if (!vapid.ready) {
+          result.webPushFailed += 1;
+          result.errors.push({ deviceId, device: deviceLabel(device, deviceId), channel: "webpush", error: "VAPID privada nao configurada nas Functions" });
+        } else try {
           await sendStandardWebPush(device, payload);
           result.webPushSent += 1;
           delivered = true;
@@ -425,6 +476,7 @@ async function handleNotificationBroadcast(req, res) {
       ...result,
       title: payload.title,
       body: payload.body,
+      event: payload.event,
       senderDeviceId,
       targetDeviceId,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -439,6 +491,7 @@ async function handleNotificationBroadcast(req, res) {
       ...result,
       title: payload.title,
       body: payload.body,
+      event: payload.event,
       senderDeviceId,
       targetDeviceId,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -453,7 +506,11 @@ exports.sendNotificationBroadcast = onRequest(PUBLIC_HTTP_OPTIONS, handleNotific
 exports.sendPushAlert = onRequest(PUBLIC_HTTP_OPTIONS, handleNotificationBroadcast);
 
 function percentValue(value) {
-  const number = Number(value);
+  let number = Number(value);
+  if (!Number.isFinite(number) && typeof value === "string") {
+    const match = value.replace(",", ".").match(/\d{1,3}(?:\.\d+)?/);
+    number = match ? Number(match[0]) : NaN;
+  }
   if (!Number.isFinite(number)) return null;
   return Math.max(0, Math.min(100, Math.round(number)));
 }
@@ -517,32 +574,47 @@ function changedTonerEvents(beforeData = {}, afterData = {}, printerId = "") {
     const beforePercent = before ? before.percent : null;
     const afterPercent = after.percent;
 
-    if ((beforePercent === null || beforePercent > 0) && afterPercent <= 0) {
+    // 0% = aviso crítico/importante. Só avisa na transição, não em leituras repetidas a 0%.
+    if (afterPercent === 0 && beforePercent !== 0) {
       events.push({
         event: "system-toner-zero",
-        title: "Toner a 0%",
-        body: `${label}: ${after.label} ficou a 0%.`,
+        title: "🚨 IMPORTANTE: Toner a 0%",
+        body: `${label}: ${after.label} chegou a 0%. Trocar toner assim que possível.`,
         tag: `toner-zero-${printerId}-${after.key}-${afterPercent}`,
         url: `${APP_URL}impressoras.html`
       });
       return;
     }
 
-    if ((beforePercent === null || beforePercent > 25) && afterPercent > 0 && afterPercent <= 25) {
+    // 10% = aviso importante, diferente do aviso de 25%.
+    if (afterPercent === 10 && beforePercent !== 10) {
+      events.push({
+        event: "system-toner-10",
+        title: "🔶 Toner a 10%",
+        body: `${label}: ${after.label} está com apenas 10%.`,
+        tag: `toner-10-${printerId}-${after.key}-${afterPercent}`,
+        url: `${APP_URL}impressoras.html`
+      });
+      return;
+    }
+
+    // 25% = só exatamente 25%, para não confundir 6%, 7%, etc.
+    if (afterPercent === 25 && beforePercent !== 25) {
       events.push({
         event: "system-toner-25",
-        title: "Toner a 25%",
-        body: `${label}: ${after.label} está a ${afterPercent}%.`,
+        title: "⚠️ Toner a 25%",
+        body: `${label}: ${after.label} chegou a 25%.`,
         tag: `toner-25-${printerId}-${after.key}-${afterPercent}`,
         url: `${APP_URL}impressoras.html`
       });
       return;
     }
 
-    if (beforePercent !== null && beforePercent <= 0 && afterPercent >= 95) {
+    // Reposição = só quando vinha de 0% e volta para 99% ou 100%.
+    if (beforePercent === 0 && (afterPercent === 99 || afterPercent === 100)) {
       events.push({
         event: "system-toner-replaced",
-        title: "Toner trocado",
+        title: "✅ Toner reposto",
         body: `${label}: ${after.label} passou de ${beforePercent}% para ${afterPercent}%.`,
         tag: `toner-replaced-${printerId}-${after.key}-${beforePercent}-${afterPercent}`,
         url: `${APP_URL}impressoras.html`
@@ -553,28 +625,205 @@ function changedTonerEvents(beforeData = {}, afterData = {}, printerId = "") {
   return events;
 }
 
+function normalizePrinterOnlineState(data = {}) {
+  const raw = data.online ?? data.isOnline ?? data.connected ?? data.ligada ?? data.comunicacao ?? data.estadoComunicacao ?? data.statusComunicacao ?? data.status ?? data.estado;
+  if (typeof raw === "boolean") return raw ? "online" : "offline";
+  const text = String(raw ?? "").trim().toLowerCase();
+  if (!text) return "unknown";
+  if (["online", "ok", "ativo", "activa", "ativa", "ligada", "comunica", "comunicando", "up", "true"].includes(text)) return "online";
+  if (["offline", "erro", "avaria", "inativo", "inativa", "desligada", "sem comunicacao", "sem comunicação", "down", "false"].includes(text)) return "offline";
+  if (/offline|sem\s+comunica|desligad|down|erro|avaria/i.test(text)) return "offline";
+  if (/online|comunica|ligad|ok|ativo|ativa|up/i.test(text)) return "online";
+  return "unknown";
+}
+
+function changedPrinterOnlineEvent(beforeData = {}, afterData = {}, printerId = "") {
+  const before = normalizePrinterOnlineState(beforeData);
+  const after = normalizePrinterOnlineState(afterData);
+  if (after === "unknown" || before === after) return null;
+  const label = printerName(afterData, printerId);
+  if (after === "offline") {
+    return {
+      event: "system-printer-offline",
+      title: "🔴 Impressora offline",
+      body: `${label} deixou de comunicar.`,
+      tag: `printer-offline-${printerId}`,
+      url: `${APP_URL}impressoras.html`
+    };
+  }
+  if (after === "online" && before === "offline") {
+    return {
+      event: "system-printer-online",
+      title: "🟢 Impressora online",
+      body: `${label} voltou a comunicar.`,
+      tag: `printer-online-${printerId}`,
+      url: `${APP_URL}impressoras.html`
+    };
+  }
+  return null;
+}
+async function handlePrinterTonerNotification(event, sourceCollection) {
+  const beforeData = event.data?.before?.exists ? event.data.before.data() || {} : {};
+  const afterData = event.data?.after?.exists ? event.data.after.data() || {} : null;
+  if (!afterData) return null;
+
+  const printerId = event.params.printerId || event.params.impressoraId || "";
+  const events = changedTonerEvents(beforeData, afterData, printerId);
+  const onlineEvent = changedPrinterOnlineEvent(beforeData, afterData, printerId);
+  if (onlineEvent) events.push(onlineEvent);
+  logger.info("printer toner check", {
+    sourceCollection,
+    printerId,
+    events: events.map((item) => item.event),
+    before: printerTonerLevels(beforeData),
+    after: printerTonerLevels(afterData)
+  });
+
+  for (const item of events) {
+    try {
+      const result = await sendNotificationToDevices({
+        requestId: `${item.event}-${printerId}-${Date.now()}`,
+        title: item.title,
+        body: item.body,
+        event: item.event,
+        tag: item.tag,
+        url: item.url
+      }, { system: true });
+      logger.info("system printer notification", { sourceCollection, event: item.event, printerId, result });
+    } catch (error) {
+      logger.error("system printer notification failed", { sourceCollection, printerId, event: item.event, error: error.message });
+    }
+  }
+  return null;
+}
+
 exports.onPrinterTonerNotification = onDocumentWritten(
   { ...BACKGROUND_OPTIONS, document: "printers/{printerId}" },
+  (event) => handlePrinterTonerNotification(event, "printers")
+);
+
+exports.onImpressoraTonerNotification = onDocumentWritten(
+  { ...BACKGROUND_OPTIONS, document: "impressoras/{impressoraId}" },
+  (event) => handlePrinterTonerNotification(event, "impressoras")
+);
+
+
+function stockGroupFrom(data = {}) {
+  const equipamento = cleanText(data.equipamento || data.modelo || data.model || data.printerModel, "Toner");
+  const cor = cleanText(data.cor || data.color || data.colour, "Sem cor");
+  return { equipamento, cor, key: `${equipamento}::${cor}`.toLowerCase() };
+}
+
+async function stockCountForGroup(group) {
+  let query = db.collection("stock").where("equipamento", "==", group.equipamento).where("cor", "==", group.cor);
+  const snap = await query.get();
+  return snap.size;
+}
+
+async function markStockAlertState(group, count) {
+  const safeId = Buffer.from(group.key).toString("base64url").slice(0, 120);
+  const ref = db.collection("notificationState").doc(`stock-${safeId}`);
+  const stateSnap = await ref.get().catch(() => null);
+  const state = stateSnap?.exists ? stateSnap.data() || {} : {};
+  const previousLevel = state.level || "ok";
+  const nextLevel = count <= 0 ? "empty" : (count === 1 ? "low" : "ok");
+
+  if (nextLevel === "ok") {
+    if (previousLevel !== "ok") {
+      await ref.set({ level: "ok", count, group, updatedAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: true });
+    }
+    return null;
+  }
+
+  if (previousLevel === nextLevel) return null;
+  await ref.set({ level: nextLevel, count, group, updatedAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: true });
+
+  if (nextLevel === "empty") {
+    return {
+      event: "system-stock-empty",
+      title: "🚨 Stock esgotado",
+      body: `${group.equipamento} ${group.cor}: stock esgotado.`,
+      tag: `stock-empty-${safeId}`,
+      url: `${APP_URL}stock.html`
+    };
+  }
+  return {
+    event: "system-stock-low",
+    title: "📦 Stock baixo",
+    body: `${group.equipamento} ${group.cor}: só resta 1 toner em stock.`,
+    tag: `stock-low-${safeId}`,
+    url: `${APP_URL}stock.html`
+  };
+}
+
+exports.onStockNotification = onDocumentWritten(
+  { ...BACKGROUND_OPTIONS, document: "stock/{stockId}" },
   async (event) => {
-    const beforeData = event.data?.before?.exists ? event.data.before.data() || {} : {};
+    const beforeData = event.data?.before?.exists ? event.data.before.data() || {} : null;
+    const afterData = event.data?.after?.exists ? event.data.after.data() || {} : null;
+    const groups = new Map();
+    if (beforeData) {
+      const group = stockGroupFrom(beforeData);
+      groups.set(group.key, group);
+    }
+    if (afterData) {
+      const group = stockGroupFrom(afterData);
+      groups.set(group.key, group);
+    }
+
+    for (const group of groups.values()) {
+      try {
+        const count = await stockCountForGroup(group);
+        const alert = await markStockAlertState(group, count);
+        if (!alert) continue;
+        const result = await sendNotificationToDevices({
+          requestId: `${alert.event}-${group.key}-${Date.now()}`,
+          title: alert.title,
+          body: alert.body,
+          event: alert.event,
+          tag: alert.tag,
+          url: alert.url
+        }, { system: true });
+        logger.info("system stock notification", { group, count, event: alert.event, result });
+      } catch (error) {
+        logger.error("system stock notification failed", { group, error: error.message });
+      }
+    }
+    return null;
+  }
+);
+
+function userIsPendingApproval(data = {}) {
+  const status = String(data.status || data.estado || data.approvalStatus || "").trim().toLowerCase();
+  if (["pending", "pendente", "a aprovar", "aguarda aprovacao", "aguarda aprovação"].includes(status)) return true;
+  if (data.approved === false || data.aprovado === false || data.isApproved === false) return true;
+  if (data.needsApproval === true || data.precisaAprovacao === true || data.pendingApproval === true) return true;
+  return false;
+}
+
+exports.onUserApprovalNotification = onDocumentWritten(
+  { ...BACKGROUND_OPTIONS, document: "users/{userId}" },
+  async (event) => {
+    const beforeData = event.data?.before?.exists ? event.data.before.data() || {} : null;
     const afterData = event.data?.after?.exists ? event.data.after.data() || {} : null;
     if (!afterData) return null;
+    const wasPending = beforeData ? userIsPendingApproval(beforeData) : false;
+    const isPending = userIsPendingApproval(afterData);
+    if (!isPending || wasPending) return null;
 
-    const events = changedTonerEvents(beforeData, afterData, event.params.printerId);
-    for (const item of events) {
-      try {
-        const result = await sendNotificationToDevices({
-          requestId: `${item.event}-${event.params.printerId}-${Date.now()}`,
-          title: item.title,
-          body: item.body,
-          event: item.event,
-          tag: item.tag,
-          url: item.url
-        }, { system: true });
-        logger.info("system printer notification", { event: item.event, printerId: event.params.printerId, result });
-      } catch (error) {
-        logger.error("system printer notification failed", { printerId: event.params.printerId, event: item.event, error: error.message });
-      }
+    const name = cleanText(afterData.nome || afterData.name || afterData.displayName || afterData.email, "Novo utilizador");
+    try {
+      const result = await sendNotificationToDevices({
+        requestId: `user-approval-${event.params.userId}-${Date.now()}`,
+        title: "👤 Novo utilizador a aprovar",
+        body: `${name} aguarda aprovação na App Braga.`,
+        event: "system-user-approval",
+        tag: `user-approval-${event.params.userId}`,
+        url: `${APP_URL}users.html`
+      }, { system: true });
+      logger.info("system user approval notification", { userId: event.params.userId, result });
+    } catch (error) {
+      logger.error("system user approval notification failed", { userId: event.params.userId, error: error.message });
     }
     return null;
   }

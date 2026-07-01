@@ -20,8 +20,8 @@
 
   const ICONS = {
     "index.html": "\u2302",
-    "add-toner.html": "➕",
-    "stock.html": "📦",
+    "add-toner.html": "+",
+    "stock.html": "\u25A3",
     "historico.html": "\u2197",
     "etiquetas-word.html": "\u25A4",
     "impressoras.html": "\u25A6",

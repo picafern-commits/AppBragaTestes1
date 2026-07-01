@@ -28,7 +28,7 @@
 
   const PRESETS = {
     autozitania: {
-      name: "Autozitania",
+      name: "Autozitânia",
       primary: "#ef4444",
       secondary: "#f97316",
       background: "#151515",
@@ -132,79 +132,72 @@
   }
 
   const TEXT_FIXES = [
-    ["Nao", "Não"],
-    ["nao", "não"],
-    ["possivel", "possível"],
-    ["Possivel", "Possível"],
-    ["notificacao", "notificação"],
-    ["Notificacao", "Notificação"],
-    ["notificacoes", "notificações"],
-    ["Notificacoes", "Notificações"],
-    ["Navegacao", "Navegação"],
-    ["Operacao", "Operação"],
-    ["Administracao", "Administração"],
-    ["Manutencao", "Manutenção"],
-    ["manutencao", "manutenção"],
-    ["Configuracoes", "Configurações"],
-    ["Informacoes", "Informações"],
-    ["Diretorio", "Diretório"],
-    ["Historico", "Histórico"],
-    ["historico", "histórico"],
-    ["Diagnostico", "Diagnóstico"],
-    ["Radios", "Rádios"],
-    ["Visao", "Visão"],
-    ["visao", "visão"],
-    ["pagina", "página"],
-    ["paginas", "páginas"],
-    ["Pagina", "Página"],
-    ["Paginas", "Páginas"],
-    ["rapida", "rápida"],
-    ["Rapida", "Rápida"],
-    ["rapido", "rápido"],
-    ["Rapido", "Rápido"],
-    ["tecnica", "técnica"],
-    ["Tecnica", "Técnica"],
-    ["relacoes", "relações"],
-    ["Relacoes", "Relações"],
-    ["seguranca", "segurança"],
-    ["Seguranca", "Segurança"],
-    ["aparencia", "aparência"],
-    ["Aparencia", "Aparência"],
-    ["Preferencias", "Preferências"],
-    ["preferencias", "preferências"],
-    ["Organizacao", "Organização"],
-    ["organizacao", "organização"],
-    ["Responsavel", "Responsável"],
-    ["responsavel", "responsável"],
-    ["padrao", "padrão"],
-    ["Padrao", "Padrão"],
-    ["Toners disponiveis", "Toners disponíveis"],
-    ["Manutencoes", "Manutenções"],
-    ["classico", "clássico"],
-    ["botoes", "botões"],
-    ["camara", "câmara"],
-    ["Camara", "Câmara"],
-    ["Serie", "Série"],
-    ["Codigo", "Código"],
-    ["Localizacao", "Localização"],
-    ["Referencia", "Referência"],
-    ["Ultimos", "Últimos"],
-    ["ultimos", "últimos"]
+    ["Navegação", "Navegacao"],
+    ["Operação", "Operacao"],
+    ["Administração", "Administracao"],
+    ["Manutenção", "Manutencao"],
+    ["Configurações", "Configuracoes"],
+    ["Informações", "Informacoes"],
+    ["Diretório", "Diretorio"],
+    ["Histórico", "Historico"],
+    ["Diagnóstico", "Diagnostico"],
+    ["Rádios", "Radios"],
+    ["página", "pagina"],
+    ["Toners disponíveis", "Toners disponiveis"],
+    ["Manutenções", "Manutencoes"],
+    ["clássico", "classico"],
+    ["botoes", "botoes"],
+    ["‹", "<"],
+    ["›", ">"],
+    ["⭐", "*"],
+    ["⚡", "OP"],
+    ["✅", "OK"],
+    ["➕", "+"],
+    ["⚙️", "CFG"],
+    ["🏠", "DB"],
+    ["📦", "ST"],
+    ["🖨️", "IMP"],
+    ["🧾", "HIS"],
+    ["📄", "IA"],
+    ["🏷️", "ETQ"],
+    ["🧰", "EQP"],
+    ["🛠️", "MAN"],
+    ["💻", "PC"],
+    ["📟", "CK"],
+    ["📡", "RAD"],
+    ["🌐", "INF"],
+    ["🔌", "NET"],
+    ["ℹ️", "INFO"],
+    ["👥", "USR"],
+    ["🩺", "DIA"]
   ];
 
   const SIDEBAR_CODES = [
-    ["index.html", "🏠"], ["stock.html", "📦"], ["diretorio.html", "📇"],
-    ["impressoras.html", "🖨️"], ["add-toner.html", "➕"], ["historico.html", "🕒"],
-    ["tarefas.html", "✅"], ["scanner-ia.html", "📄"], ["etiquetas-word.html", "🏷️"],
-    ["manutencao-impressoras.html", "🛠️"], ["zonas.html", "📍"], ["computadores.html", "💻"],
-    ["pistolas.html", "📱"], ["radios.html", "📡"], ["portas.html", "🌐"],
-    ["informacoes.html", "ℹ️"], ["users.html", "👥"], ["diagnostico.html", "🩺"],
+    ["index.html", "🏠"],
+    ["stock.html", "📦"],
+    ["diretorio.html", "☎️"],
+    ["impressoras.html", "🖨️"],
+    ["add-toner.html", "➕"],
+    ["historico.html", "🧾"],
+    ["tarefas.html", "✓"],
+    ["equipas-semanais.html", "👥"],
+    ["scanner-ia.html", "▣"],
+    ["etiquetas-word.html", "🏷️"],
+    ["manutencao-impressoras.html", "🛠️"],
+    ["computadores.html", "💻"],
+    ["pistolas.html", "📟"],
+    ["radios.html", "📡"],
+    ["portas.html", "🔌"],
+    ["informacoes.html", "ℹ️"],
+    ["notificacoes.html", "◉"],
+    ["users.html", "👥"],
+    ["diagnostico.html", "🩺"],
     ["config.html", "⚙️"]
   ];
 
   const SIDEBAR_GROUP_CODES = {
-    "opera-o": "🧰",
-    "equipamentos": "🖨️",
+    "opera-o": "⚡",
+    "equipamentos": "🧰",
     "infraestrutura": "🌐",
     "administra-o": "⚙️"
   };
@@ -229,6 +222,9 @@
     TEXT_FIXES.forEach(([bad, good]) => {
       text = text.split(bad).join(good);
     });
+    if (/[\u00c3\u00c2\u00e2\u00f0\ufffd]/.test(original)) {
+      text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
     return text;
   }
 
@@ -273,57 +269,86 @@
   }
 
   function ensureSidebarPageLinks() {
-    return;
-  }
+    if (!document.body) return;
+    const nav = document.querySelector(".sidebar-nav-pro, .sidebar nav");
+    if (!nav) return;
 
-  function normalizeSidebarLabel(value) {
-    return String(value || "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
-      .toLowerCase();
-  }
-
-  function removeOrphanSidebarLinks() {
-    const pageLabels = new Set([
-      "Dashboard", "Stock", "Diretorio", "Directorio", "Adicionar Toner", "Historico",
-      "Tarefas", "Scanner IA", "Etiquetas Word", "Impressoras", "Manutencao Impressoras",
-      "Computadores", "Pistolas CK65", "Radios", "Zonas", "Portas Rede", "Informacoes",
-      "Users", "Diagnostico", "Configuracoes"
-    ].map((value) => normalizeSidebarLabel(value)));
-    document.querySelectorAll(".sidebar-nav-pro, .sidebar-group, .sidebar-group-links, .sidebar-fav-list").forEach((node) => {
-      if (!node.closest(".sidebar, aside.sidebar, .app-mobile-sidebar-new")) node.remove();
-    });
-    document.querySelectorAll(".app-pro-commandbar, body > .personal-dashboard-actions").forEach((node) => node.remove());
-    document.querySelectorAll('a[href*=".html"]').forEach((link) => {
-      if (link.closest(".sidebar, aside.sidebar, .app-mobile-sidebar-new, .personal-dashboard-actions, .dashboard-task-panel")) return;
-      const text = normalizeSidebarLabel(link.textContent || "");
-      const href = String(link.getAttribute("href") || "");
-      const looksLikeSidebarLink = pageLabels.has(text) || /^(index|stock|diretorio|add-toner|historico|tarefas|scanner-ia|etiquetas-word|impressoras|manutencao-impressoras|computadores|pistolas|radios|zonas|portas|informacoes|users|diagnostico|config)\.html$/i.test(href.split("/").pop() || "");
-      if (!looksLikeSidebarLink) return;
-      const parent = link.parentElement;
-      link.remove();
-      if (parent && !parent.closest(".sidebar") && parent.children.length === 0 && !String(parent.textContent || "").trim()) {
-        parent.remove();
+    const ensureGroup = (key, icon, label) => {
+      let group = nav.querySelector(`.sidebar-group[data-sidebar-group="${key}"]`);
+      if (!group) {
+        group = document.createElement("section");
+        group.className = "sidebar-group";
+        group.setAttribute("data-sidebar-group", key);
+        group.innerHTML = `
+          <button class="sidebar-group-toggle" type="button">
+            <span class="sidebar-group-icon">${icon}</span>
+            <span class="sidebar-group-title">${label}</span>
+            <span class="sidebar-group-chevron">›</span>
+          </button>
+          <div class="sidebar-group-links"></div>
+        `;
+        nav.appendChild(group);
       }
-    });
+      let links = group.querySelector(".sidebar-group-links");
+      if (!links) {
+        links = document.createElement("div");
+        links.className = "sidebar-group-links";
+        group.appendChild(links);
+      }
+      return links;
+    };
+
+    const addSidebarLink = (host, href, icon, text, beforeHref = "") => {
+      if (!host || host.querySelector(`a[href="${href}"]`)) return;
+      const link = document.createElement("a");
+      link.href = href;
+      link.setAttribute("data-icon", icon);
+      link.innerHTML = `<span class="sidebar-link-text">${text}</span>`;
+      const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+      if (currentPage === href.toLowerCase()) {
+        link.classList.add("active");
+        host.closest(".sidebar-group")?.classList.add("is-open");
+      }
+      const before = beforeHref ? host.querySelector(`a[href="${beforeHref}"]`) : null;
+      if (before) before.insertAdjacentElement("beforebegin", link);
+      else host.appendChild(link);
+    };
   }
 
-  function watchOrphanSidebarLinks() {
-    if (!document.body || !window.MutationObserver || document.body.dataset.sidebarOrphanWatch === "1") return;
-    document.body.dataset.sidebarOrphanWatch = "1";
-    let timer = null;
-    const schedule = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(() => {
-        sanitizeVisibleText();
-        removeOrphanSidebarLinks();
-      }, 90);
+  function applyLayoutData(data = {}) {
+    const nextTheme = data.themePro || {
+      primary: data.accentColor,
+      secondary: data.accentColor2,
+      buttonTextMode: data.buttonTextMode
     };
-    const observer = new MutationObserver(schedule);
-    observer.observe(document.body, { childList: true, subtree: true });
-    window.setTimeout(() => observer.disconnect(), 30000);
+
+    // Guarda também em cache local o layout vindo da Firebase.
+    // Assim, ao trocar de página, o Modo Clássico é aplicado logo no <head>
+    // e não aparece aquele flash rápido do Modo Pro enquanto espera pela Firebase.
+    apply({ ...getCachedTheme(), ...nextTheme }, { persist: true });
+    applyVisualDesign(data.visualDesign || getCachedVisualDesign(), { persist: true });
+    applyWorkspace(data.workspaceMode || getCachedWorkspace(), { persist: true });
+    window.dispatchEvent(new CustomEvent("appbraga:layout", { detail: data }));
+  }
+
+  function isConfigPage() {
+    const page = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+    return page === "config.html";
+  }
+
+  function ensureClassicStylesheet(active) {
+    const id = "appDesignClassicStylesheet";
+    const existing = document.getElementById(id);
+    if (!active) {
+      existing?.remove();
+      return;
+    }
+    if (existing) return;
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "stylesheet";
+    link.href = designAssetPath("app-design-classic.css");
+    (document.head || document.documentElement).appendChild(link);
   }
 
   function currentPageTitle() {
@@ -334,16 +359,44 @@
 
   function currentPageSubtitle() {
     const page = currentPageTitle().toLowerCase();
-    if (page.includes("dashboard")) return "Visão operacional, tarefas e equipamentos importantes.";
+    if (page.includes("dashboard")) return "Visao operacional, tarefas e equipamentos importantes.";
     if (page.includes("tarefas")) return "Planeamento do trabalho em aberto, prioridades e prazos.";
-    if (page.includes("toner")) return "Entrada rápida de movimentos e referências.";
-    if (page.includes("equipamento")) return "Ficha técnica, relações e histórico.";
-    if (page.includes("config")) return "Preferências, segurança, aparência e tema.";
+    if (page.includes("equipas-semanais")) return "Rotacao semanal das equipas e membros de trabalho.";
+    if (page.includes("toner")) return "Entrada rapida de movimentos e referencias.";
+    if (page.includes("equipamento")) return "Ficha tecnica, relacoes e historico.";
+    if (page.includes("config")) return "Preferencias, seguranca, aparencia e tema.";
     return "Centro operacional App Braga.";
   }
 
-  function ensureProCommandBar() {
-    document.querySelectorAll(".app-pro-commandbar").forEach((node) => node.remove());
+  function ensureProCommandBar(mode) {
+    if (mode !== "pro" || !document.body) {
+      document.querySelector(".app-pro-commandbar")?.remove();
+      return;
+    }
+    const main = document.querySelector("main, .main, .main-content");
+    if (!main) return;
+    let bar = main.querySelector(":scope > .app-pro-commandbar");
+    if (!bar) {
+      bar = document.createElement("section");
+      bar.className = "app-pro-commandbar";
+      main.prepend(bar);
+    }
+    bar.innerHTML = `
+      <div class="app-pro-command-title">
+        <span class="app-pro-kicker">App Braga Pro</span>
+        <strong>${currentPageTitle()}</strong>
+        <small>${currentPageSubtitle()}</small>
+      </div>
+      <nav class="app-pro-command-actions" aria-label="Acoes rapidas">
+        <a href="index.html">Dashboard</a>
+        <a href="tarefas.html">Tarefas</a>
+        <a href="equipas-semanais.html">Equipas</a>
+        <a href="add-toner.html">Toner</a>
+        <a href="notificacoes.html">Notificacoes</a>
+        <a href="config.html">Design</a>
+      </nav>
+    `;
+    sanitizeVisibleText();
   }
 
   function normalizeWorkspace(input = {}) {
@@ -391,8 +444,29 @@
     });
   }
 
-  function ensureMobileActionDock() {
-    document.querySelectorAll(".app-mobile-action-dock").forEach((node) => node.remove());
+  function ensureMobileActionDock(workspaceInput) {
+    const workspace = normalizeWorkspace(workspaceInput || getCachedWorkspace());
+    let dock = document.querySelector(".app-mobile-action-dock");
+    const isPhoneSize = window.matchMedia?.("(max-width: 767px)")?.matches;
+    const isTouchOnly = window.matchMedia?.("(hover: none) and (pointer: coarse)")?.matches;
+    if (workspace.mobileActions === "off" || getCachedVisualDesign() !== "pro" || isPhoneSize || isTouchOnly) {
+      dock?.remove();
+      return;
+    }
+    if (!document.body) return;
+    if (!dock) {
+      dock = document.createElement("nav");
+      dock.className = "app-mobile-action-dock";
+      dock.setAttribute("aria-label", "Acoes rapidas mobile");
+      document.body.appendChild(dock);
+    }
+    dock.innerHTML = `
+      <a href="index.html">Hoje</a>
+      <a href="tarefas.html">Tarefas</a>
+      <a href="equipas-semanais.html">Equipas</a>
+      <a href="add-toner.html">Toner</a>
+      <a href="notificacoes.html">Avisos</a>
+    `;
   }
 
   function applyWorkspace(workspaceInput = getCachedWorkspace(), options = {}) {
@@ -704,11 +778,6 @@
     });
   }
 
-  function isConfigPage() {
-    const page = String(location.pathname || "").split("/").pop().toLowerCase();
-    return page === "config.html";
-  }
-
   function connectFirestore() {
     if (!window.db?.collection || window.__appThemeProFirestoreBound) return;
     window.__appThemeProFirestoreBound = true;
@@ -760,17 +829,12 @@
       applyWorkspace(getCachedWorkspace(), { persist: false });
       ensureSidebarPageLinks();
       sanitizeVisibleText();
-      removeOrphanSidebarLinks();
       bindControls();
       setTimeout(connectFirestore, 300);
       setTimeout(() => {
         ensureSidebarPageLinks();
         sanitizeVisibleText();
-        removeOrphanSidebarLinks();
       }, 900);
-      setTimeout(removeOrphanSidebarLinks, 1800);
-      setTimeout(removeOrphanSidebarLinks, 3200);
-      watchOrphanSidebarLinks();
     });
   } else {
     apply(getCachedTheme(), { persist: false });
@@ -778,16 +842,11 @@
     applyWorkspace(getCachedWorkspace(), { persist: false });
     ensureSidebarPageLinks();
     sanitizeVisibleText();
-    removeOrphanSidebarLinks();
     bindControls();
     setTimeout(connectFirestore, 300);
     setTimeout(() => {
       ensureSidebarPageLinks();
       sanitizeVisibleText();
-      removeOrphanSidebarLinks();
     }, 900);
-    setTimeout(removeOrphanSidebarLinks, 1800);
-    setTimeout(removeOrphanSidebarLinks, 3200);
-    watchOrphanSidebarLinks();
   }
 })();

@@ -19,9 +19,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
   writeLocalBackup: (payload) => ipcRenderer.invoke("backup:write", payload),
   openBackupFolder: () => ipcRenderer.invoke("backup:open-folder"),
   showNotification: (payload) => ipcRenderer.invoke("app:notify", payload),
-  getNotificationStatus: () => ipcRenderer.invoke("app:notification-status"),
-  startPushWatcher: () => ipcRenderer.invoke("app:push-watcher-start"),
-  getPushWatcherStatus: () => ipcRenderer.invoke("app:push-watcher-status"),
-  sendWebPushBroadcast: (payload) => ipcRenderer.invoke("app:send-web-push-broadcast", payload),
-  setPushVapidKeys: (payload) => ipcRenderer.invoke("app:set-push-vapid-keys", payload)
+  getNotificationStatus: () => ipcRenderer.invoke("app:notification-status")
 });

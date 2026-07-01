@@ -2,7 +2,7 @@
   'use strict';
   const $=(s,r=document)=>r.querySelector(s);
   const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
-  const esc=(v)=>String(v??'').replace(/[&<>"']/g,(m)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  const esc=(v)=>String(v ?? '').replace(/[&<>"']/g,(m)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const db=()=>{try{return window.db || (window.firebase?.apps?.length ? firebase.firestore() : null);}catch{return null;}};
 
   function isPage(name){return (location.pathname||'').toLowerCase().endsWith('/'+name.toLowerCase()) || (location.pathname||'').toLowerCase().endsWith(name.toLowerCase());}
@@ -55,8 +55,8 @@
         const snap=await database.collection('personalTasks').doc(id).get();
         const t=snap.data()||{};
         const title=prompt('Título da tarefa',t.title||''); if(title===null) return;
-        const owner=(prompt('Responsável',t.owner||'') ?? (t.owner || ''));
-        const dueDate=(prompt('Data limite (AAAA-MM-DD)',t.dueDate||'') ?? (t.dueDate || ''));
+        const owner=prompt('Responsável',t.owner||''); if(owner===null) return;
+        const dueDate=prompt('Data limite (AAAA-MM-DD)',t.dueDate||''); if(dueDate===null) return;
         const priority=prompt('Prioridade: urgente, alta, normal, baixa',t.priority||'normal') || 'normal';
         await database.collection('personalTasks').doc(id).set({title:title.trim(),owner:String(owner).trim(),dueDate:String(dueDate).trim(),priority:String(priority).trim(),updatedAt:Date.now()},{merge:true});
       }catch(e){console.error(e); alert('Não consegui editar a tarefa: '+(e.message||e));}
@@ -129,7 +129,7 @@
       try{
         const {teams,cfg}=await loadTeamData();
         const weeks=buildRotation(teams,cfg,8);
-        grid.innerHTML=weeks.length?weeks.map(w=>`<article class="equipas-week-card ${w.current?'is-current':''}"><span class="week-label">${w.current?'Esta semana':'Semana'}</span><strong>${esc(teamName(w.team))}</strong><small>${esc(fmt(w.weekStart))} a ${esc(fmt(w.weekEnd))}</small><span class="week-status">${w.current?'A trabalhar agora':'Rotação futura'}</span></article>`).join(''):'<div class="empty-state mini">Cria equipas para gerar o calendário.</div>';
+        grid.innerHTML=weeks.length ? weeks.map(w=>`<article class="equipas-week-card ${w.current?'is-current':''}"><span class="week-label">${w.current?'Esta semana':'Semana'}</span><strong>${esc(teamName(w.team))}</strong><small>${esc(fmt(w.weekStart))} a ${esc(fmt(w.weekEnd))}</small><span class="week-status">${w.current?'A trabalhar agora':'Rotação futura'}</span></article>`).join(''):'<div class="empty-state mini">Cria equipas para gerar o calendário.</div>';
       }catch(e){grid.innerHTML='<div class="empty-state mini">Erro ao carregar calendário: '+esc(e.message||e)+'</div>';}
     }
     $('#refreshEquipasCalendar')?.addEventListener('click',refresh);

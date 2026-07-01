@@ -35,11 +35,11 @@
   }
 
   function userId(user){
-    return String(user?.idDoc || user?._ref || user?.id || user?.nome || user?.email_bragalis || "");
+    return String(user.idDoc || user._ref || user.id || user.nome || user.email_bragalis || "");
   }
 
   function userName(user){
-    return String(user?.nome || user?.name || user?.displayName || user?.email_bragalis || userId(user) || "Sem nome");
+    return String(user.nome || user.name || user.displayName || user.email_bragalis || userId(user) || "Sem nome");
   }
 
   function memberKey(member){

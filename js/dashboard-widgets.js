@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const VERSION='1.57.9';
+  const VERSION='1.58.21';
   const LS_KEY='appBragaDashboardLayout.v2';
   const widgetDefs={
     metrics:{title:'Contadores',emoji:'📊',subtitle:'Resumo rápido da app',w:12,h:2},
@@ -195,7 +195,7 @@
       const cur=info.current||teams[0];
       const next=info.next||teams[0];
       const members=dashboardMembers(cur);
-      mount.innerHTML=`<div class="widget-team-card is-current"><div class="widget-team-top"><span>⭐ Equipa desta semana</span><small>${escapeHtml(dashboardFmtDate(info.weekStart))} a ${escapeHtml(dashboardFmtDate(info.weekEnd))}</small></div><strong>${escapeHtml(dashboardTeamName(cur))}</strong><p>Próxima: <b>${escapeHtml(dashboardTeamName(next))}</b></p><div class="widget-team-members">${members.length?members.map(m=>`<span>${escapeHtml(typeof m==='string'?m:(m.nome||m.name||m.email||'User'))}</span>`).join(''):'<span>Sem membros</span>'}</div></div>`;
+      mount.innerHTML=`<div class="widget-team-card is-current"><div class="widget-team-top"><span>⭐ Equipa desta semana</span><small>${escapeHtml(dashboardFmtDate(info.weekStart))} a ${escapeHtml(dashboardFmtDate(info.weekEnd))}</small></div><strong>${escapeHtml(dashboardTeamName(cur))}</strong><p>Próxima: <b>${escapeHtml(dashboardTeamName(next))}</b></p><div class="widget-team-members">${members.length ? members.map(m=>`<span>${escapeHtml(typeof m==='string'?m:(m.nome||m.name||m.email||'User'))}</span>`).join(''):'<span>Sem membros</span>'}</div></div>`;
     }catch(e){mount.innerHTML='<div class="widget-team-card"><strong>Erro ao carregar</strong><p>'+escapeHtml(e.message||String(e))+'</p></div>';}
   }
   function templateButtons(){return `<div class="dashboard-template-bar"><button type="button" data-template="operacional">⚡ Operacional</button><button type="button" data-template="equipamentos">🖨️ Equipamentos</button><button type="button" data-template="tarefas">✅ Tarefas</button><button type="button" data-template="minimalista">✨ Minimalista</button></div>`;}

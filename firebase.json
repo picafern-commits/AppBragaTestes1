@@ -5,5 +5,24 @@
       "codebase": "default",
       "runtime": "nodejs22"
     }
-  ]
+  ],
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "functions/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/html/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/html/index.html"
+      }
+    ]
+  }
 }

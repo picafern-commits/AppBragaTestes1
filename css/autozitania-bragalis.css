@@ -1,7 +1,7 @@
 
 
 
-/* App Braga brand layer: Autozitania / Bragalis */
+/* App Braga brand layer: Autozitânia / Bragalis */
 :root {
   --az-bg: #101114;
   --az-bg-2: #17181c;
@@ -83,7 +83,7 @@ body::before {
 
 .brand::after,
 .premium-brand::after {
-  content: "Autozitania / Bragalis";
+  content: "Autozitânia / Bragalis";
   position: absolute;
   left: 70px;
   bottom: 12px;

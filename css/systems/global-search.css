@@ -93,23 +93,6 @@
   overflow-wrap: anywhere;
 }
 
-.equipment-inline-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.item-actions a.secondary-btn,
-.card-actions a.small-btn,
-.table-actions a.action-btn,
-.equipment-inline-actions a.secondary-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
 @media (max-width: 760px) {
   .page-hero .global-search-button {
     width: 100%;
