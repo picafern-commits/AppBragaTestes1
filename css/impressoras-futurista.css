@@ -328,3 +328,90 @@ body.impressoras-futurista .imp-toner-fill.critical {
   background: linear-gradient(90deg, #ff465a, #ff7b86) !important;
   box-shadow: 0 0 10px rgba(255,70,90,.45) !important;
 }
+
+
+/* v1.58.34 — scroll corrigido + toner % real + stock por quantidade */
+html,
+body.impressoras-futurista {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  max-height: none !important;
+}
+
+body.impressoras-futurista .imp-page {
+  height: auto !important;
+  min-height: 100vh !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-bottom: 96px !important;
+}
+
+body.impressoras-futurista .imp-main-grid,
+body.impressoras-futurista .imp-bottom-grid,
+body.impressoras-futurista .imp-panel,
+body.impressoras-futurista .imp-table-wrap {
+  max-height: none !important;
+}
+
+body.impressoras-futurista .imp-table-wrap {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+
+body.impressoras-futurista .imp-toner-cell {
+  min-width: 170px !important;
+  display: grid !important;
+  gap: 6px !important;
+}
+
+body.impressoras-futurista .imp-toner-meta {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  color: #dbeafe !important;
+  font-size: .82rem !important;
+}
+
+body.impressoras-futurista .imp-toner-meta strong {
+  color: #ffffff !important;
+  font-weight: 950 !important;
+  min-width: 70px !important;
+  text-align: right !important;
+}
+
+body.impressoras-futurista .imp-toner-track {
+  height: 9px !important;
+  width: 100% !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.07) !important;
+  overflow: hidden !important;
+}
+
+body.impressoras-futurista .imp-toner-fill {
+  height: 100% !important;
+  border-radius: 999px !important;
+  transition: width .25s ease !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.ok {
+  background: linear-gradient(90deg, #38d96f, #72f28d) !important;
+  box-shadow: 0 0 10px rgba(56,217,111,.45) !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.low {
+  background: linear-gradient(90deg, #ff9f2f, #ffd24f) !important;
+  box-shadow: 0 0 10px rgba(255,159,47,.45) !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.critical {
+  background: linear-gradient(90deg, #ff465a, #ff7b86) !important;
+  box-shadow: 0 0 10px rgba(255,70,90,.45) !important;
+}
+
+body.impressoras-futurista .imp-toner-fill.unknown {
+  background: rgba(130,150,180,.45) !important;
+}
