@@ -939,3 +939,114 @@ body.add-toner-futurista .toner-form-body {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* v1.58.41 — ajustes Adicionar Toner */
+body.add-toner-futurista .toner-inline-scan {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+  padding: 14px 22px 0 !important;
+}
+
+body.add-toner-futurista .toner-reader-inline {
+  margin: 12px 22px 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+body.add-toner-futurista .toner-reader-inline:not(:empty) {
+  min-height: 190px !important;
+  max-height: none !important;
+  padding: 12px !important;
+  border: 1px dashed rgba(90,145,220,.25) !important;
+  border-radius: 12px !important;
+  background: rgba(3,13,29,.34) !important;
+}
+
+body.add-toner-futurista .toner-ocr-status-inline {
+  margin: 12px 22px 0 !important;
+}
+
+body.add-toner-futurista .toner-cartridge {
+  width: 138px !important;
+  height: 64px !important;
+  display: block !important;
+  position: relative !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(135deg, rgba(26,42,65,.95), rgba(7,13,25,.98)) !important;
+  border: 1px solid rgba(89,143,210,.32) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 18px 22px rgba(0,0,0,.34),
+    0 0 18px rgba(20,140,255,.12) !important;
+  transform: rotate(8deg) !important;
+  overflow: hidden !important;
+  color: transparent !important;
+}
+
+body.add-toner-futurista .toner-cartridge::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 14px !important;
+  top: 18px !important;
+  width: 72px !important;
+  height: 26px !important;
+  border-radius: 7px !important;
+  background: linear-gradient(180deg, #111b2d, #050b15) !important;
+  border: 1px solid rgba(255,255,255,.05) !important;
+}
+
+body.add-toner-futurista .toner-cartridge::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 18px !important;
+  top: 18px !important;
+  width: 36px !important;
+  height: 25px !important;
+  border-radius: 4px !important;
+  background: linear-gradient(180deg, #aebbd1, #6f809b) !important;
+  transform: skewX(-12deg) !important;
+  box-shadow: 0 0 10px rgba(130,160,210,.18) !important;
+}
+
+body.add-toner-futurista .toner-cartridge span {
+  display: none !important;
+}
+
+body.add-toner-futurista .side-two {
+  grid-template-columns: 1fr 1fr !important;
+  align-items: stretch !important;
+}
+
+body.add-toner-futurista .side-two > .toner-panel {
+  min-height: 222px !important;
+  height: 100% !important;
+}
+
+body.add-toner-futurista .donut-row {
+  min-height: 112px !important;
+}
+
+body.add-toner-futurista .warning-list {
+  min-height: 112px !important;
+}
+
+body.add-toner-futurista .warning-list div {
+  grid-template-columns: minmax(0,1fr) auto !important;
+}
+
+@media (max-width: 980px) {
+  body.add-toner-futurista .toner-inline-scan {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.add-toner-futurista .side-two {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -11,7 +11,7 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/add-toner-futurista.css?v=1.58.40">
+  <link rel="stylesheet" href="../css/add-toner-futurista.css?v=1.58.41">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -83,6 +83,14 @@
               </div>
             </div>
           </div>
+
+          <div class="toner-inline-scan">
+            <button type="button" class="toner-btn primary" onclick="abrirOCR()">📄 Ler Folha Toner</button>
+            <button type="button" class="toner-btn" onclick="startScanner()">📷 Ler QR / Câmara</button>
+            <input id="ocrInput" type="file" accept="image/*" capture="environment" style="display:none;" onchange="processarOCRInput(event)">
+          </div>
+          <div id="reader" class="scanner-box toner-reader-inline"></div>
+          <div id="ocrStatus" class="ocr-status toner-ocr-status-inline" style="display:none;"></div>
 
           <div class="toner-form-body">
             <div class="toner-form-fields">
@@ -184,7 +192,7 @@
                 <h3>👁️ Pré-visualização do registo</h3>
                 <span>Novo registo</span>
               </div>
-              <div class="toner-cartridge" aria-hidden="true">▰</div>
+              <div class="toner-cartridge" aria-hidden="true"><span></span></div>
               <dl>
                 <dt>Equipamento</dt><dd id="previewEquipamento">-</dd>
                 <dt>Localização / Nº de série</dt><dd id="previewLocalizacao">-</dd>
@@ -272,20 +280,7 @@
             </div>
           </article>
         </div>
-
-        <article class="toner-panel toner-scan-panel">
-          <div class="toner-panel-head">
-            <div class="panel-title"><span>📷</span><div><h2>Leitura automática</h2><p>OCR ou QR/câmara.</p></div></div>
-          </div>
-          <div class="toner-scan-actions">
-            <button type="button" class="toner-btn primary" onclick="abrirOCR()">📄 Ler Folha Toner</button>
-            <button type="button" class="toner-btn" onclick="startScanner()">📷 Ler QR / Câmara</button>
-            <input id="ocrInput" type="file" accept="image/*" capture="environment" style="display:none;" onchange="processarOCRInput(event)">
-          </div>
-          <div id="reader" class="scanner-box toner-reader"></div>
-          <div id="ocrStatus" class="ocr-status toner-ocr-status" style="display:none;"></div>
-        </article>
-      </aside>
+</aside>
     </section>
   </div>
 
@@ -294,8 +289,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.40"></script>
-  <script src="../js/helpers.js?v=1.58.40"></script>
-  <script src="../js/add-toner-futurista.js?v=1.58.40"></script>
+  <script src="../js/app.js?v=1.58.41"></script>
+  <script src="../js/helpers.js?v=1.58.41"></script>
+  <script src="../js/add-toner-futurista.js?v=1.58.41"></script>
 </body>
 </html>
