@@ -1,225 +1,314 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<script src="../js/app-theme-pro.js?v=theme-pro-6"></script>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
   <title>Adicionar Toner</title>
-  <meta name="theme-color" content="#101114">
+  <meta name="theme-color" content="#020817">
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.30">
-  <link rel="stylesheet" href="../css/autozitania-bragalis.css">
-  <link rel="stylesheet" href="../css/app-theme-pro.css?v=theme-pro-6">
-  <link rel="stylesheet" href="../css/enterprise/ops.css?v=ops-13">
-  <link rel="stylesheet" href="../css/systems/personal-tools.css?v=personal-6">
-  <link rel="stylesheet" href="../css/systems/global-search.css?v=global-search-2">
-    <link rel="stylesheet" href="../css/app-clean-pages.css?v=1.58.30">
-<meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="../css/style.css?v=1.58.38">
+  <link rel="stylesheet" href="../css/add-toner-futurista.css?v=1.58.38">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <link rel="stylesheet" href="../css/iphone-force-final.css?v=1.58.30">
-  <link rel="stylesheet" href="../css/iphone-sidebar-final.css?v=1.58.30">
-
-  <link rel="stylesheet" href="../css/operational-improvements.css?v=1.58.30">
-  <link rel="stylesheet" href="../css/premium-polish.css?v=1.58.30">
-  <link rel="stylesheet" href="../css/appbraga-light-redesign.css?v=1.58.30">
-  <link rel="stylesheet" href="../css/appbraga-mockup-pages.css?v=1.58.30">
 </head>
-<body>
-<aside class="sidebar sidebar-pro-groups sidebar-collapsible-pro">
-  <div class="brand premium-brand">
-    <div class="brand-badge">BR</div>
-    <div><h2>App Braga</h2><small class="sidebar-brand-subtitle">Centro operacional</small></div>
-    <button class="sidebar-collapse-toggle" type="button" title="Colapsar/expandir sidebar" aria-label="Colapsar sidebar">‹</button>
-  </div>
-  <nav class="sidebar-nav-pro" aria-label="Navegação principal">
-    <section class="sidebar-favorites" data-sidebar-section="favorites">
-      <div class="sidebar-section-title"><span>⭐</span><strong>Favoritos</strong></div>
-      <a href="dashboard.html" data-icon="🏠"><span class="sidebar-link-text">Dashboard</span></a>
-      <a href="stock.html" data-icon="📦"><span class="sidebar-link-text">Stock</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-    </section>
-    <div class="sidebar-divider"></div>
-    <section class="sidebar-group" data-sidebar-group="operacao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚡</span><span>Operação</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="add-toner.html" data-icon="➕" class="active"><span class="sidebar-link-text">Adicionar Toner</span></a>
-      <a href="historico.html" data-icon="🧾"><span class="sidebar-link-text">Histórico</span></a>
-      <a href="tarefas.html" data-icon="✅"><span class="sidebar-link-text">Tarefas</span></a>
-      <a href="equipas-semanais.html" data-icon="👥"><span class="sidebar-link-text">Equipas Semanais</span></a>
-      <a href="scanner-ia.html" data-icon="📷"><span class="sidebar-link-text">Scanner IA</span></a>
-      <a href="etiquetas-word.html" data-icon="🏷️"><span class="sidebar-link-text">Etiquetas Word</span></a>
+
+<body class="add-toner-futurista">
+  <div class="toner-page">
+    <header class="toner-topbar">
+      <a class="toner-brand" href="index.html" aria-label="Voltar ao Portal">
+        <span class="toner-logo">A</span>
+        <span>APPBRAGA</span>
+      </a>
+      <div class="toner-top-actions">
+        <a class="toner-round has-badge" href="notificacoes.html" title="Notificações">🔔</a>
+        <a class="toner-round" href="diagnostico.html" title="Ajuda">?</a>
+        <div class="toner-profile"><span class="toner-user-icon">👤</span><span>Administrador</span><span class="chev">⌄</span></div>
+      </div>
+    </header>
+
+    <section class="toner-hero">
+      <div class="toner-hero-card">
+        <div class="toner-hero-orbit" aria-hidden="true"></div>
+        <div class="toner-hero-icon">🖨️</div>
+        <div>
+          <h1>Adicionar Toner</h1>
+          <p>Registo de toners e associação ao equipamento.</p>
+        </div>
       </div>
     </section>
-    <section class="sidebar-group" data-sidebar-group="equipamentos">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🧰</span><span>Equipamentos</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-      <a href="manutencao-impressoras.html" data-icon="🛠️"><span class="sidebar-link-text">Manutenção Impressoras</span></a>
-      <a href="computadores.html" data-icon="💻"><span class="sidebar-link-text">Computadores</span></a>
-      <a href="pistolas.html" data-icon="📟"><span class="sidebar-link-text">Pistolas CK65</span></a>
-      <a href="radios.html" data-icon="📡"><span class="sidebar-link-text">Rádios</span></a>
-      </div>
+
+    <section class="toner-kpis" aria-label="Resumo">
+      <article class="toner-kpi">
+        <span class="kpi-icon blue">📅</span>
+        <div>
+          <span>Registos hoje</span>
+          <strong id="kpiRegistosHoje">12</strong>
+          <small>vs. ontem (10)</small>
+        </div>
+        <em class="trend up">↗ +20%</em>
+      </article>
+      <article class="toner-kpi">
+        <span class="kpi-icon orange">⌛</span>
+        <div>
+          <span>Toners por validar</span>
+          <strong id="kpiPorValidar">8</strong>
+          <small>vs. ontem (9)</small>
+        </div>
+        <em class="trend down">↘ -11%</em>
+      </article>
+      <article class="toner-kpi">
+        <span class="kpi-icon green">🖨️</span>
+        <div>
+          <span>Equipamentos afetados</span>
+          <strong id="kpiEquipamentos">5</strong>
+          <small>vs. ontem (4)</small>
+        </div>
+        <em class="trend up">↗ +25%</em>
+      </article>
+      <article class="toner-kpi">
+        <span class="kpi-icon purple">📄</span>
+        <div>
+          <span>Etiquetas pendentes</span>
+          <strong id="kpiEtiquetas">18</strong>
+          <small>vs. ontem (17)</small>
+        </div>
+        <em class="trend up">↗ +5%</em>
+      </article>
     </section>
-    <section class="sidebar-group" data-sidebar-group="infraestrutura">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🌐</span><span>Infraestrutura</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="portas.html" data-icon="🔌"><span class="sidebar-link-text">Portas Rede</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="informacoes.html" data-icon="ℹ️"><span class="sidebar-link-text">Informações</span></a>
-      </div>
+
+    <section class="toner-main-grid">
+      <main class="toner-left">
+        <article class="toner-panel toner-form-panel">
+          <div class="toner-panel-head">
+            <div class="panel-title">
+              <span>🖨️</span>
+              <div>
+                <h2>Novo registo de toner</h2>
+                <p>Preenche os dados para adicionar o toner ao stock disponível.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="toner-form-body">
+            <div class="toner-form-fields">
+              <label>
+                <span>Equipamento <b>*</b></span>
+                <select id="equipamento">
+                  <option value="">Selecione o equipamento</option>
+                  <option value="P3155DN">P3155DN</option>
+                  <option value="TASKalfa_255ci">TASKalfa_255ci</option>
+                  <option value="PA5500x">PA5500x</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Localização / Nº de série <b>*</b></span>
+                <select id="localizacao">
+                  <option value="">Selecione a localização</option>
+                  <option value="R4B2229805 - Braga - Ilha 01">R4B2229805 - Braga - Ilha 01</option>
+                  <option value="WD44336210 - Braga - Ilha 02">WD44336210 - Braga - Ilha 02</option>
+                  <option value="R4B1395508 - Braga - Ilha 03">R4B1395508 - Braga - Ilha 03</option>
+                  <option value="R4B1293179 - Braga - Ilha 04">R4B1293179 - Braga - Ilha 04</option>
+                  <option value="R4B1293180 - Braga - Ilha 05">R4B1293180 - Braga - Ilha 05</option>
+                  <option value="R4B1293183 - Braga - Balcão 01">R4B1293183 - Braga - Balcão 01</option>
+                  <option value="R4B1293184 - Braga - Balcão 02">R4B1293184 - Braga - Balcão 02</option>
+                  <option value="R4B2230012 - Braga - Dep. Logistica">R4B2230012 - Braga - Dep. Logistica</option>
+                  <option value="R4B1293173 - Braga - G/Encomendas">R4B1293173 - Braga - G/Encomendas</option>
+                  <option value="R4B1395261 - Braga - Devoluções">R4B1395261 - Braga - Devoluções</option>
+                  <option value="RVP0Z03770 - Braga - Escritorio">RVP0Z03770 - Braga - Escritorio</option>
+                  <option value="R4B1293169 - Vila Real - Ilha 01">R4B1293169 - Vila Real - Ilha 01</option>
+                  <option value="R4B1293174 - Vila Real - Ilha 02">R4B1293174 - Vila Real - Ilha 02</option>
+                  <option value="RVP0Z03715 - Vila Real - Ilha 03">RVP0Z03715 - Vila Real - Ilha 03</option>
+                  <option value="Sem Localização">Sem Localização</option>
+                </select>
+              </label>
+
+              <div class="toner-two-cols">
+                <label>
+                  <span>Cor <b>*</b></span>
+                  <select id="cor">
+                    <option value="">Selecione a cor</option>
+                    <option value="Preto">Preto</option>
+                    <option value="Amarelo">Amarelo</option>
+                    <option value="Azul">Ciano / Azul</option>
+                    <option value="Vermelho">Magenta / Vermelho</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>Data <b>*</b></span>
+                  <input type="date" id="data">
+                </label>
+              </div>
+
+              <div class="toner-two-cols">
+                <label>
+                  <span>Lote</span>
+                  <input type="text" id="lote" placeholder="Lote automático / opcional">
+                </label>
+                <label>
+                  <span>SDS Ref</span>
+                  <input type="text" id="sdsRef" placeholder="Referência SDS">
+                </label>
+              </div>
+
+              <div class="toner-two-cols">
+                <label>
+                  <span>Código etiqueta</span>
+                  <input type="text" id="codigoEtiqueta" readonly placeholder="Gerado automaticamente">
+                </label>
+                <label>
+                  <span>Data da folha</span>
+                  <input type="text" id="dataFolha" readonly placeholder="Data lida da folha">
+                </label>
+              </div>
+
+              <label>
+                <span>Quantidade</span>
+                <div class="quantity-line">
+                  <input type="number" id="quantidade" min="1" placeholder="Ex.: 1, 2, 5..." value="1">
+                  <select id="unidade">
+                    <option value="Unidades">Unidades</option>
+                    <option value="Caixas">Caixas</option>
+                  </select>
+                </div>
+              </label>
+
+              <label>
+                <span>Observações</span>
+                <textarea id="observacoes" maxlength="200" placeholder="Informações adicionais (opcional)"></textarea>
+                <small class="counter"><span id="obsCounter">0</span> / 200</small>
+              </label>
+
+              <button class="toner-save-btn" type="button" onclick="disponivel()">🔒 Guardar Registo</button>
+              <p class="save-note">🔒 Os dados são guardados com segurança.</p>
+            </div>
+
+            <aside class="toner-preview">
+              <div class="preview-head">
+                <h3>👁️ Pré-visualização do registo</h3>
+                <span>Novo registo</span>
+              </div>
+              <div class="toner-cartridge" aria-hidden="true">▰</div>
+              <dl>
+                <dt>Equipamento</dt><dd id="previewEquipamento">-</dd>
+                <dt>Localização / Nº de série</dt><dd id="previewLocalizacao">-</dd>
+                <dt>Cor</dt><dd><span id="previewColorDot" class="color-dot black"></span> <span id="previewCor">-</span></dd>
+                <dt>Data</dt><dd id="previewData">-</dd>
+                <dt>Quantidade</dt><dd id="previewQtd">1 Unidade</dd>
+                <dt>Observações</dt><dd id="previewObs">-</dd>
+              </dl>
+              <p class="preview-info">ⓘ A pré-visualização será atualizada conforme os dados forem preenchidos.</p>
+            </aside>
+          </div>
+        </article>
+
+        <article id="serial3Box" class="toner-panel serial-panel" style="display:none;">
+          <div class="toner-panel-head">
+            <div class="panel-title">
+              <span>🔢</span>
+              <div>
+                <h2>Últimos 3 dígitos da série</h2>
+                <p>Introduza os 3 últimos dígitos para selecionar a localização automaticamente.</p>
+              </div>
+            </div>
+          </div>
+          <div class="serial-row">
+            <input id="serial3Input" type="text" maxlength="3" placeholder="Ex: 805">
+            <button type="button" class="toner-btn primary" onclick="confirmarSerie3Digitos()">Confirmar série</button>
+            <button type="button" class="toner-btn" onclick="fecharSerie3Digitos()">Cancelar</button>
+          </div>
+        </article>
+
+        <article class="toner-tip">
+          <strong>ⓘ Dica:</strong>
+          <span>Após guardar o registo, poderá gerar etiquetas, consultar o histórico ou verificar o stock atualizado.</span>
+          <button type="button" onclick="this.closest('.toner-tip').remove()">×</button>
+        </article>
+      </main>
+
+      <aside class="toner-right">
+        <article class="toner-panel">
+          <div class="toner-panel-head">
+            <div class="panel-title"><span>⚡</span><div><h2>Ações rápidas</h2><p>Atalhos principais.</p></div></div>
+          </div>
+          <div class="quick-actions">
+            <button type="button" onclick="location.href='stock.html'">🛢️ Ver Stock</button>
+            <button type="button" onclick="location.href='historico.html'">↩ Histórico</button>
+            <button type="button" onclick="location.href='etiquetas-word.html'">📝 Etiquetas Word</button>
+          </div>
+        </article>
+
+        <article class="toner-panel">
+          <div class="toner-panel-head">
+            <div class="panel-title"><span>📅</span><div><h2>Últimos registos</h2></div></div>
+            <a href="historico.html">Ver todos →</a>
+          </div>
+          <div class="recent-list" id="recentTonerList"></div>
+        </article>
+
+        <div class="side-two">
+          <article class="toner-panel">
+            <div class="toner-panel-head compact">
+              <div class="panel-title"><span>🎨</span><div><h2>Cores mais usadas</h2><p>Últimos 7 dias</p></div></div>
+            </div>
+            <div class="donut-row">
+              <div class="donut-chart"></div>
+              <ul class="color-legend">
+                <li><span class="dot preto"></span>Preto <b>58%</b></li>
+                <li><span class="dot ciano"></span>Ciano <b>20%</b></li>
+                <li><span class="dot magenta"></span>Magenta <b>12%</b></li>
+                <li><span class="dot amarelo"></span>Amarelo <b>10%</b></li>
+              </ul>
+            </div>
+            <p class="total-units">Total: 90 unidades</p>
+          </article>
+
+          <article class="toner-panel">
+            <div class="toner-panel-head compact">
+              <div class="panel-title"><span>△</span><div><h2>Avisos de toner baixo</h2></div></div>
+              <a href="notificacoes.html">Ver todos →</a>
+            </div>
+            <div class="warning-list" id="tonerWarnings">
+              <div><span class="warn-dot red"></span>Kyocera P3155dn (Preto)<b>Crítico</b></div>
+              <div><span class="warn-dot orange"></span>Kyocera P3260dn (Preto)<b>Baixo</b></div>
+              <div><span class="warn-dot orange"></span>TASKalfa 255ci (Magenta)<b>Baixo</b></div>
+              <div><span class="warn-dot orange"></span>Kyocera ECOSYS M5526cdw (Preto)<b>Baixo</b></div>
+            </div>
+          </article>
+        </div>
+
+        <article class="toner-panel toner-scan-panel">
+          <div class="toner-panel-head">
+            <div class="panel-title"><span>📷</span><div><h2>Leitura automática</h2><p>OCR ou QR/câmara.</p></div></div>
+          </div>
+          <div class="toner-scan-actions">
+            <button type="button" class="toner-btn primary" onclick="abrirOCR()">📄 Ler Folha Toner</button>
+            <button type="button" class="toner-btn" onclick="startScanner()">📷 Ler QR / Câmara</button>
+            <input id="ocrInput" type="file" accept="image/*" capture="environment" style="display:none;" onchange="processarOCRInput(event)">
+          </div>
+          <div id="reader" class="scanner-box toner-reader"></div>
+          <div id="ocrStatus" class="ocr-status toner-ocr-status" style="display:none;"></div>
+        </article>
+      </aside>
     </section>
-    <section class="sidebar-group" data-sidebar-group="administracao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚙️</span><span>Administração</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="users.html" data-icon="👥"><span class="sidebar-link-text">Users</span></a>
-      <a href="diagnostico.html" data-icon="🩺"><span class="sidebar-link-text">Diagnóstico</span></a>
-      <a href="notificacoes.html" data-icon="🔔"><span class="sidebar-link-text">Notificações</span></a>
-      <a href="config.html" data-icon="⚙️"><span class="sidebar-link-text">Configurações</span></a>
-      </div>
-    </section>
-  </nav>
-</aside>
-
-<main class="main">
-
-  <div class="page-hero">
-    <div class="page-hero-title">Adicionar Toner</div>
-	<span class="status-pill">Sistema Online</span>
-  </div>
-  
-  <div class="panel">
-    <div class="section-header">
-      <div>
-        <h3>Leitura Folha Toner</h3>
-      </div>
-    </div>
-
-    <div class="card-actions" style="margin-bottom:14px;">
-      <button type="button" class="primary-btn" onclick="abrirOCR()">Ler Folha Toner</button>
-      <button type="button" class="secondary-btn" onclick="startScanner()">Ler QR / Câmara</button>
-      <input id="ocrInput" type="file" accept="image/*" capture="environment" style="display:none;" onchange="processarOCRInput(event)">
-    </div>
-
-    <div id="reader" class="scanner-box"></div>
-    <div id="ocrStatus" class="ocr-status" style="display:none;"></div>
-
   </div>
 
-  <div id="serial3Box" class="barcode-learn-box" style="display:none;">
-    <div class="section-header">
-      <div>
-        <h3>Últimos 3 Dígitos da Série</h3>
-        <p class="section-subtitle">Introduza os 3 últimos dígitos da impressora para selecionar a localização automaticamente.</p>
-      </div>
-    </div>
-
-    <div class="form-grid">
-      <label>
-        <span>Últimos 3 dígitos</span>
-        <input id="serial3Input" type="text" maxlength="3" placeholder="Ex: 805">
-      </label>
-    </div>
-
-    <div class="card-actions" style="margin-top:12px;">
-      <button type="button" class="primary-btn" onclick="confirmarSerie3Digitos()">Confirmar Serie</button>
-      <button type="button" class="secondary-btn" onclick="fecharSerie3Digitos()">Cancelar</button>
-    </div>
-  </div>
-
-  <div class="panel form-grid">
-    <label><span>Equipamento</span>
-      <select id="equipamento">
-        <option value="">Selecionar equipamento</option>
-        <option value="P3155DN">P3155DN</option>
-        <option value="TASKalfa_255ci">TASKalfa_255ci</option>
-        <option value="PA5500x">PA5500x</option>
-      </select>
-    </label>
-
-    <label><span>Localização</span>
-      <select id="localizacao">
-        <option value="">Selecionar localização</option>
-        <option value="R4B2229805 - Braga - Ilha 01">R4B2229805 - Braga - Ilha 01</option>
-        <option value="WD44336210 - Braga - Ilha 02">WD44336210 - Braga - Ilha 02</option>
-        <option value="R4B1395508 - Braga - Ilha 03">R4B1395508 - Braga - Ilha 03</option>
-        <option value="R4B1293179 - Braga - Ilha 04">R4B1293179 - Braga - Ilha 04</option>
-        <option value="R4B1293180 - Braga - Ilha 05">R4B1293180 - Braga - Ilha 05</option>
-        <option value="R4B1293183 - Braga - Balcão 01">R4B1293183 - Braga - Balcão 01</option>
-        <option value="R4B1293184 - Braga - Balcão 02">R4B1293184 - Braga - Balcão 02</option>
-        <option value="R4B2230012 - Braga - Dep. Logistica">R4B2230012 - Braga - Dep. Logistica</option>
-        <option value="R4B1293173 - Braga - G/Encomendas">R4B1293173 - Braga - G/Encomendas</option>
-        <option value="R4B1395261 - Braga - Devoluções">R4B1395261 - Braga - Devoluções</option>
-        <option value="RVP0Z03770 - Braga - Escritorio">RVP0Z03770 - Braga - Escritorio</option>
-        <option value="R4B1293169 - Vila Real - Ilha 01">R4B1293169 - Vila Real - Ilha 01</option>
-        <option value="R4B1293174 - Vila Real - Ilha 02">R4B1293174 - Vila Real - Ilha 02</option>
-        <option value="RVP0Z03715 - Vila Real - Ilha 03">RVP0Z03715 - Vila Real - Ilha 03</option>
-        <option value="Sem Localização">Sem Localização</option>
-      </select>
-    </label>
-
-    <label><span>Cor</span>
-      <select id="cor">
-        <option value="">Selecionar cor</option>
-        <option value="Preto">Preto</option><option value="Amarelo">Amarelo</option><option value="Vermelho">Vermelho</option><option value="Azul">Azul</option>
-      </select>
-    </label>
-    <label><span>Lote</span><input type="text" id="lote" placeholder="Lote automatico / opcional"></label>
-    <label><span>SDS Ref</span><input type="text" id="sdsRef" placeholder="Referência SDS lida da folha"></label>
-    <label><span>Código etiqueta</span><input type="text" id="codigoEtiqueta" readonly placeholder="Gerado automaticamente"></label>
-    <label><span>Data da folha</span><input type="text" id="dataFolha" readonly placeholder="Data lida da folha"></label>
-    <label><span>Data do scan</span><input type="date" id="data"></label>
-    <button class="primary-btn" onclick="disponivel()">Adicionar ao stock</button>
-  </div>
-
-</main>
-<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script src="../js/app.js?v=1.58.30"></script>
-<script src="../js/sidebar-editor.js?v=1.58.30"></script>
-<script src="../js/systems/global-search/global-search.js?v=global-search-2"></script>
-  <script src="../js/core/helpers.js"></script>
-  <script src="../js/iphone-force-final.js?v=1.58.30"></script>
-<script src="../js/enterprise/ops.js?v=ops-13"></script>
-<script src="../js/systems/backup/local-backup.js?v=backup-2"></script>
-<script src="../js/systems/personal-tools.js?v=personal-8"></script>
-
-<script src="../js/iphone-sidebar-final.js?v=1.58.30"></script>
-<script src="../js/operational-improvements.js?v=1.58.30"></script>
-<script src="../js/appbraga-mockup-pages.js?v=1.58.30"></script>
+  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="../js/app.js?v=1.58.38"></script>
+  <script src="../js/helpers.js?v=1.58.38"></script>
+  <script src="../js/add-toner-futurista.js?v=1.58.38"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

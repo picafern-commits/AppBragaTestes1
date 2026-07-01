@@ -1,0 +1,10 @@
+AppBraga v1.58.38 — Adicionar Toner
+
+Este ZIP contém ficheiros completos para substituir diretamente:
+- html/add-toner.html
+- css/add-toner-futurista.css
+- js/add-toner-futurista.js
+- version.json
+
+Não é diff/patch parcial.
+Copiar para as mesmas pastas do projeto atual.
