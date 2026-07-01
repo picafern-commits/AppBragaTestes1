@@ -4,6 +4,38 @@
   function text(id,v){const el=$(id); if(el) el.textContent = v}
   function num(v){const n=Number(v||0); return Number.isFinite(n)?n:0}
   function readInt(id){const el=$(id); return el?num(String(el.textContent).replace(/[^0-9.-]/g,'')):0}
+
+  function navigateTo(href){
+    if (!href) return;
+    window.location.href = href;
+  }
+  function bindNavigation(){
+    document.querySelectorAll('[data-href]').forEach((node) => {
+      if (node.dataset.dashNavBound === '1') return;
+      node.dataset.dashNavBound = '1';
+      node.addEventListener('click', (event) => {
+        if (event.target.closest('a,button,input,select,textarea')) return;
+        navigateTo(node.dataset.href);
+      });
+      node.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        navigateTo(node.dataset.href);
+      });
+    });
+    document.querySelectorAll('.dash-panel-footer a').forEach((link)=>{
+      if (link.dataset.dashStopBound === '1') return;
+      link.dataset.dashStopBound = '1';
+      link.addEventListener('click', (event)=>event.stopPropagation());
+    });
+  }
+  function cleanupInjectedDashboardChrome(){
+    document.querySelectorAll('.app-pro-commandbar,.app-mobile-action-dock,.pro-commandbar,.mockup-topbar').forEach((node)=>node.remove());
+    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowY = 'auto';
+    document.body.style.height = 'auto';
+  }
+
   function updateDerived(){
     const totalEq = readInt('dashTotalEquipamentos');
     const stock = readInt('dashStockTotal');
@@ -41,7 +73,11 @@
     hidden.style.cssText = 'position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;';
     hidden.innerHTML = '<span id="dashTotalEquipamentos">0</span><span id="dashStockTotal">0</span><span id="dashTicketsAbertos">0</span><span id="dashImpressorasOk">0</span><div id="dashboardActivityLog"></div>';
     document.body.appendChild(hidden);
+    cleanupInjectedDashboardChrome();
+    bindNavigation();
+    setTimeout(()=>{ cleanupInjectedDashboardChrome(); bindNavigation(); tick(); },300);
+    setTimeout(()=>{ cleanupInjectedDashboardChrome(); bindNavigation(); tick(); },1200);
     setTimeout(tick,600);
-    setInterval(tick,1800);
+    setInterval(()=>{ cleanupInjectedDashboardChrome(); bindNavigation(); tick(); },1800);
   });
 })();

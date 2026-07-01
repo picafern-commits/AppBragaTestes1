@@ -1,4 +1,4 @@
-/* AppBraga v1.58.26 — Redesign estrutural inspirado nos mockups claros.
+/* AppBraga v1.58.27 — Redesign estrutural inspirado nos mockups claros.
    Camada visual/DOM-safe: mantém IDs, handlers JS e Firebase existentes. */
 :root{
   --ab-bg:#f6f9fe;
@@ -159,7 +159,7 @@ tbody tr:last-child td{border-bottom:0!important;}
   .primary-btn,.secondary-btn,.action-btn{width:100%!important;}
 }
 
-/* AppBraga v1.58.26 — Dark mode correction
+/* AppBraga v1.58.27 — Dark mode correction
    Reverte o redesign claro para um painel dark premium, mantendo a estrutura/JS. */
 :root,
 html,

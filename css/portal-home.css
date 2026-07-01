@@ -107,7 +107,7 @@ body.portal-home{
 .portal-brand:visited{color:#fff;}
 
 
-/* v1.58.26 — navegação por seleção: primeiro clique só seleciona o card.
+/* v1.58.27 — navegação por seleção: primeiro clique só seleciona o card.
    As opções internas só ficam clicáveis no card ativo. */
 .portal-card:not(.is-selected) .portal-links a,
 .portal-card:not(.is-selected) .portal-action{

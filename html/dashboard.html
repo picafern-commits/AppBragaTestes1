@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<script src="../js/app-theme-pro.js?v=theme-pro-7"></script>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -12,8 +11,8 @@
 <link rel="manifest" href="../manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
 <link rel="apple-touch-icon" href="../icon-192.png">
-<link rel="stylesheet" href="../css/style.css?v=1.58.26">
-<link rel="stylesheet" href="../css/dashboard-futurista.css?v=1.58.26">
+<link rel="stylesheet" href="../css/style.css?v=1.58.27">
+<link rel="stylesheet" href="../css/dashboard-futurista.css?v=1.58.27">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -42,34 +41,34 @@
   </section>
 
   <section class="dash-kpis" aria-label="Indicadores principais">
-    <article class="dash-kpi">
+    <article class="dash-kpi dash-clickable" data-href="impressoras.html" tabindex="0" role="button" aria-label="Abrir Impressoras">
       <div class="dash-kpi-icon">🖨️</div>
       <div><div class="dash-kpi-title">Impressoras</div><div class="dash-kpi-value" id="dashKpiImpressoras">128</div><div class="dash-kpi-sub" id="dashKpiImpressorasSub">Online</div></div>
     </article>
-    <article class="dash-kpi green">
+    <article class="dash-kpi green dash-clickable" data-href="pistolas.html" tabindex="0" role="button" aria-label="Abrir Equipamentos">
       <div class="dash-kpi-icon">📱</div>
       <div><div class="dash-kpi-title">Equipamentos</div><div class="dash-kpi-value" id="dashKpiEquipamentos">—</div><div class="dash-kpi-sub">Registados</div></div>
     </article>
-    <article class="dash-kpi purple">
+    <article class="dash-kpi purple dash-clickable" data-href="tarefas.html" tabindex="0" role="button" aria-label="Abrir Tarefas">
       <div class="dash-kpi-icon">✅</div>
       <div><div class="dash-kpi-title">Tarefas abertas</div><div class="dash-kpi-value" id="dashKpiTarefas">0</div><div class="dash-kpi-sub">Em acompanhamento</div></div>
     </article>
-    <article class="dash-kpi orange">
+    <article class="dash-kpi orange dash-clickable" data-href="notificacoes.html" tabindex="0" role="button" aria-label="Abrir Notificações">
       <div class="dash-kpi-icon">🔔</div>
       <div><div class="dash-kpi-title">Alertas / Notificações</div><div class="dash-kpi-value" id="dashKpiAlertas">8</div><div class="dash-kpi-sub">Ver notificações</div></div>
     </article>
-    <article class="dash-kpi cyan">
+    <article class="dash-kpi cyan dash-clickable" data-href="users.html" tabindex="0" role="button" aria-label="Abrir Utilizadores">
       <div class="dash-kpi-icon">👥</div>
       <div><div class="dash-kpi-title">Utilizadores</div><div class="dash-kpi-value" id="dashKpiUsers">24</div><div class="dash-kpi-sub">Ativos</div></div>
     </article>
-    <article class="dash-kpi orange">
+    <article class="dash-kpi orange dash-clickable" data-href="stock.html" tabindex="0" role="button" aria-label="Abrir Stock de Toners">
       <div class="dash-kpi-icon">📦</div>
       <div><div class="dash-kpi-title">Stock Toners</div><div class="dash-kpi-value" id="dashKpiStock">—</div><div class="dash-kpi-sub">Em stock</div></div>
     </article>
   </section>
 
   <section class="dash-main-grid" aria-label="Resumo por sistemas">
-    <article class="dash-panel dash-printers">
+    <article class="dash-panel dash-printers dash-clickable-panel" data-href="impressoras.html">
       <h2>🖨️ Impressoras e Toners</h2>
       <small>Alertas de toner, stock e manutenção de impressoras.</small>
       <div class="dash-toner-grid">
@@ -92,46 +91,46 @@
       </div>
     </article>
 
-    <article class="dash-panel">
+    <article class="dash-panel dash-clickable-panel" data-href="pistolas.html">
       <h2>📱 Equipamentos</h2>
       <small>Pistolas, rádios e computadores.</small>
       <div class="dash-list">
-        <div class="dash-mini-row"><div><strong>Pistolas CK65</strong><span>Leitores de código</span></div><span class="dash-badge info">Ver</span></div>
-        <div class="dash-mini-row"><div><strong>Rádios</strong><span>Comunicação interna</span></div><span class="dash-badge">Online</span></div>
-        <div class="dash-mini-row"><div><strong>Computadores</strong><span>Postos e acessos</span></div><span class="dash-badge">Ativos</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="pistolas.html" tabindex="0" role="button"><div><strong>Pistolas CK65</strong><span>Leitores de código</span></div><span class="dash-badge info">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="radios.html" tabindex="0" role="button"><div><strong>Rádios</strong><span>Comunicação interna</span></div><span class="dash-badge">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="computadores.html" tabindex="0" role="button"><div><strong>Computadores</strong><span>Postos e acessos</span></div><span class="dash-badge">Abrir</span></div>
       </div>
       <div class="dash-panel-footer"><a class="dash-link" href="pistolas.html">Ver equipamentos ›</a></div>
     </article>
 
-    <article class="dash-panel">
+    <article class="dash-panel dash-clickable-panel" data-href="tarefas.html">
       <h2>🌐 Infraestrutura</h2>
       <small>Tarefas, informações e portas de rede.</small>
       <div class="dash-list">
-        <div class="dash-mini-row"><div><strong>Tarefas</strong><span>Gestão operacional</span></div><span class="dash-badge warn">Abertas</span></div>
-        <div class="dash-mini-row"><div><strong>Informações</strong><span>Notas internas</span></div><span class="dash-badge">Atualizado</span></div>
-        <div class="dash-mini-row"><div><strong>Portas Rede</strong><span>Mapa de ligações</span></div><span class="dash-badge info">Ativas</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="tarefas.html" tabindex="0" role="button"><div><strong>Tarefas</strong><span>Gestão operacional</span></div><span class="dash-badge warn">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="informacoes.html" tabindex="0" role="button"><div><strong>Informações</strong><span>Notas internas</span></div><span class="dash-badge">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="portas.html" tabindex="0" role="button"><div><strong>Portas Rede</strong><span>Mapa de ligações</span></div><span class="dash-badge info">Abrir</span></div>
       </div>
       <div class="dash-panel-footer"><a class="dash-link" href="portas.html">Ver infraestrutura ›</a></div>
     </article>
 
-    <article class="dash-panel">
+    <article class="dash-panel dash-clickable-panel" data-href="users.html">
       <h2>⚙️ Administração</h2>
       <small>Users, diretório, equipas e scanner IA.</small>
       <div class="dash-list">
-        <div class="dash-mini-row"><div><strong>Users</strong><span>Perfis e permissões</span></div><span class="dash-badge" id="dashAdminUsersBadge">Ativos</span></div>
-        <div class="dash-mini-row"><div><strong>Diretório</strong><span>Contactos internos</span></div><span class="dash-badge">Sync</span></div>
-        <div class="dash-mini-row"><div><strong>Scanner IA</strong><span>Leituras e análise</span></div><span class="dash-badge info">Ativo</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="users.html" tabindex="0" role="button"><div><strong>Users</strong><span>Perfis e permissões</span></div><span class="dash-badge" id="dashAdminUsersBadge">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="diretorio.html" tabindex="0" role="button"><div><strong>Diretório</strong><span>Contactos internos</span></div><span class="dash-badge">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="scanner-ia.html" tabindex="0" role="button"><div><strong>Scanner IA</strong><span>Leituras e análise</span></div><span class="dash-badge info">Abrir</span></div>
       </div>
       <div class="dash-panel-footer"><a class="dash-link" href="users.html">Ver administração ›</a></div>
     </article>
 
-    <article class="dash-panel">
+    <article class="dash-panel dash-clickable-panel" data-href="diagnostico.html">
       <h2>⚙️ Configurações e Sistema</h2>
       <small>Diagnóstico, notificações e configurações.</small>
       <div class="dash-system-list">
-        <div class="dash-mini-row"><div><strong>Diagnóstico</strong><span>Estado geral</span></div><span class="dash-badge">Sem erros</span></div>
-        <div class="dash-mini-row"><div><strong>Notificações</strong><span>Push e alertas</span></div><span class="dash-badge warn">Ver</span></div>
-        <div class="dash-mini-row"><div><strong>Configurações</strong><span>Preferências da app</span></div><span class="dash-badge">Atualizado</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="diagnostico.html" tabindex="0" role="button"><div><strong>Diagnóstico</strong><span>Estado geral</span></div><span class="dash-badge">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="notificacoes.html" tabindex="0" role="button"><div><strong>Notificações</strong><span>Push e alertas</span></div><span class="dash-badge warn">Abrir</span></div>
+        <div class="dash-mini-row dash-clickable" data-href="config.html" tabindex="0" role="button"><div><strong>Configurações</strong><span>Preferências da app</span></div><span class="dash-badge">Abrir</span></div>
       </div>
       <div class="dash-panel-footer"><a class="dash-link" href="diagnostico.html">Ver configurações ›</a></div>
     </article>
@@ -180,12 +179,12 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="../js/app.js?v=1.58.26"></script>
-<script src="../js/sidebar-editor.js?v=1.58.26"></script>
-<script src="../js/core/helpers.js?v=1.58.26"></script>
+<script src="../js/app.js?v=1.58.27"></script>
+<script src="../js/sidebar-editor.js?v=1.58.27"></script>
+<script src="../js/core/helpers.js?v=1.58.27"></script>
 <script src="../js/enterprise/ops.js?v=ops-13"></script>
 <script src="../js/systems/backup/local-backup.js?v=backup-2"></script>
 <script src="../js/systems/personal-tools.js?v=personal-9"></script>
-<script src="../js/dashboard-futurista.js?v=1.58.26"></script>
+<script src="../js/dashboard-futurista.js?v=1.58.27"></script>
 </body>
 </html>

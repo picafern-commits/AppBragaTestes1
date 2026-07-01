@@ -5,7 +5,7 @@
   const LEGACY_STORAGE_KEYS = ['appBraga.sidebar.customLayout.v1568','appBraga.sidebar.customLayout.v1567','appBraga.sidebar.customLayout.v1566'];
   const FIRESTORE_COLLECTION = 'config';
   const FIRESTORE_DOC = 'sidebarLayout';
-  const CURRENT_VERSION = '1.58.26';
+  const CURRENT_VERSION = '1.58.27';
 
   const DEFAULT_PAGES = [
     { id:'dashboard', label:'Dashboard', href:'index.html', icon:'🏠', group:'favoritos', locked:true },
