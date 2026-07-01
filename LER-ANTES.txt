@@ -1,7 +1,7 @@
-AppBraga v1.58.46 — Adicionar Toner: hero com tamanho igual ao da página Impressoras.
-
-Ficheiros completos para substituir diretamente:
+Substituir estes ficheiros completos:
 - html/add-toner.html
 - css/add-toner-futurista.css
 - js/add-toner-futurista.js
 - version.json
+
+Objetivo: página Adicionar Toner com design alinhado à página Impressoras.

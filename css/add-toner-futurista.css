@@ -1585,3 +1585,303 @@ body.add-toner-futurista .toner-hero p {
     width: 100% !important;
   }
 }
+
+
+/* v1.58.47 — alinhar o design de Adicionar Toner com Impressoras */
+body.add-toner-futurista .toner-topbar {
+  display: none !important;
+}
+
+body.add-toner-futurista .toner-page {
+  width: 100vw !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 22px clamp(16px, 1.6vw, 34px) 36px !important;
+}
+
+body.add-toner-futurista .toner-hero {
+  display: flex !important;
+  justify-content: center !important;
+  margin: 18px 0 18px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+body.add-toner-futurista .toner-hero-card {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 26px !important;
+  width: min(100%, 1120px) !important;
+  min-height: 0 !important;
+  padding: 24px 42px !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  background: linear-gradient(90deg, rgba(8,31,66,.98), rgba(8,24,49,.92)) !important;
+  border: 1px solid rgba(72,143,255,.46) !important;
+  box-shadow: 0 0 0 1px rgba(14,61,139,.35) inset, 0 0 24px rgba(36,120,255,.28) !important;
+}
+
+body.add-toner-futurista .toner-hero-card::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(90deg, transparent 0, rgba(42,146,255,.08) 30%, rgba(42,146,255,.03) 60%, transparent 100%),
+    radial-gradient(circle at 82% 28%, rgba(26,151,255,.12), transparent 22%) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+body.add-toner-futurista .toner-hero-card::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 0 !important;
+  transform: translateX(-50%) !important;
+  width: 240px !important;
+  height: 3px !important;
+  background: radial-gradient(circle, rgba(69,181,255,.95), rgba(69,181,255,.15) 70%, transparent 100%) !important;
+  filter: blur(.2px) !important;
+}
+
+body.add-toner-futurista .toner-hero-orbit {
+  position: absolute !important;
+  left: 140px !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 170px !important;
+  height: 170px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(64,130,255,.25) !important;
+  box-shadow: 0 0 0 20px rgba(17,47,97,.18), 0 0 0 40px rgba(17,47,97,.08) !important;
+  background: transparent !important;
+}
+
+body.add-toner-futurista .toner-hero-icon {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 108px !important;
+  height: 108px !important;
+  min-width: 108px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background: radial-gradient(circle at 30% 30%, #24c7ff, #1746ff 70%) !important;
+  box-shadow: 0 0 30px rgba(34,159,255,.38) !important;
+  font-size: 2.9rem !important;
+}
+
+body.add-toner-futurista .toner-hero-copy,
+body.add-toner-futurista .toner-hero-card > div:not(.toner-hero-orbit):not(.toner-hero-icon) {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+body.add-toner-futurista .toner-hero h1 {
+  margin: 0 0 6px !important;
+  font-size: 3rem !important;
+  line-height: 1 !important;
+  letter-spacing: -.02em !important;
+  color: #f5f9ff !important;
+}
+
+body.add-toner-futurista .toner-hero p {
+  margin: 0 !important;
+  color: #d2def2 !important;
+  font-size: 1.4rem !important;
+}
+
+body.add-toner-futurista .toner-kpis {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 0 14px !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(150px, 1fr)) !important;
+  gap: 14px !important;
+}
+
+body.add-toner-futurista .toner-kpi {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  min-height: 96px !important;
+  padding: 18px 20px !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(78,146,255,.34) !important;
+  background: linear-gradient(180deg, rgba(7,25,54,.98), rgba(5,18,37,.96)) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 12px 26px rgba(0,0,0,.25) !important;
+}
+
+body.add-toner-futurista .kpi-icon {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 18px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 1.7rem !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02) !important;
+}
+body.add-toner-futurista .kpi-icon.blue { color:#1ea3ff !important; box-shadow:0 0 0 1px rgba(51,212,255,.25) inset, 0 0 20px rgba(51,212,255,.18) !important; }
+body.add-toner-futurista .kpi-icon.orange { color:#ff9f2f !important; box-shadow:0 0 0 1px rgba(255,159,47,.25) inset, 0 0 20px rgba(255,159,47,.18) !important; }
+body.add-toner-futurista .kpi-icon.green { color:#57df72 !important; box-shadow:0 0 0 1px rgba(87,223,114,.25) inset, 0 0 20px rgba(87,223,114,.18) !important; }
+body.add-toner-futurista .kpi-icon.purple { color:#a45cff !important; box-shadow:0 0 0 1px rgba(164,92,255,.25) inset, 0 0 20px rgba(164,92,255,.18) !important; }
+
+body.add-toner-futurista .toner-kpi strong {
+  display: block !important;
+  font-size: 3rem !important;
+  line-height: 1 !important;
+  margin-top: 2px !important;
+  letter-spacing: -.03em !important;
+}
+
+body.add-toner-futurista .toner-kpi > div > span {
+  display: block !important;
+  font-weight: 700 !important;
+  font-size: 1.12rem !important;
+}
+
+body.add-toner-futurista .toner-kpi small {
+  color: #9ab3d8 !important;
+  font-size: .9rem !important;
+}
+
+body.add-toner-futurista .trend {
+  right: 18px !important;
+  top: 18px !important;
+  font-weight: 900 !important;
+  font-size: .9rem !important;
+}
+
+body.add-toner-futurista .toner-main-grid {
+  width: 100% !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 2.05fr) minmax(390px, .95fr) !important;
+  gap: 14px !important;
+  align-items: start !important;
+}
+
+body.add-toner-futurista .toner-panel {
+  background: linear-gradient(180deg, rgba(7,25,54,.97), rgba(5,18,37,.96)) !important;
+  border: 1px solid rgba(77,151,255,.28) !important;
+  border-radius: 18px !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.025), 0 12px 26px rgba(0,0,0,.24) !important;
+}
+
+body.add-toner-futurista .toner-panel-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 14px !important;
+  padding: 16px 20px 12px !important;
+  border-bottom: 1px solid rgba(255,255,255,.05) !important;
+}
+
+body.add-toner-futurista .panel-title > span {
+  font-size: 1.35rem !important;
+  line-height: 1 !important;
+  padding-top: 2px !important;
+}
+
+body.add-toner-futurista .toner-panel h2,
+body.add-toner-futurista .toner-panel h3 {
+  margin: 0 !important;
+  font-size: 1.08rem !important;
+}
+
+body.add-toner-futurista .toner-panel p {
+  margin: 2px 0 0 !important;
+  color: #9ab3d8 !important;
+  font-size: .8rem !important;
+}
+
+body.add-toner-futurista .quick-actions,
+body.add-toner-futurista .toner-inline-scan {
+  gap: 10px !important;
+}
+
+body.add-toner-futurista .quick-actions button,
+body.add-toner-futurista .toner-btn {
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 0 14px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(85,143,216,.28) !important;
+  background: rgba(4,15,32,.66) !important;
+  color: #f7fbff !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+}
+
+body.add-toner-futurista .toner-btn.primary,
+body.add-toner-futurista .toner-save-btn {
+  background: linear-gradient(180deg,#0c98f4,#1274ff) !important;
+  border: 1px solid rgba(110,190,255,.45) !important;
+  box-shadow: 0 10px 22px rgba(19,115,255,.26) !important;
+  color: #fff !important;
+}
+
+body.add-toner-futurista .toner-save-btn {
+  height: 46px !important;
+  border-radius: 10px !important;
+  font-size: 1rem !important;
+}
+
+body.add-toner-futurista .toner-form-body {
+  grid-template-columns: minmax(0, 1.16fr) minmax(300px, .84fr) !important;
+  gap: 18px !important;
+  padding: 18px 22px 20px !important;
+}
+
+body.add-toner-futurista .toner-preview {
+  background: rgba(4,18,39,.56) !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(90,145,220,.22) !important;
+}
+
+@media (max-width: 1500px) {
+  body.add-toner-futurista .toner-main-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  body.add-toner-futurista .toner-hero-card {
+    padding: 22px 20px !important;
+  }
+  body.add-toner-futurista .toner-hero h1 { font-size: 2.2rem !important; }
+  body.add-toner-futurista .toner-hero p { font-size: 1.05rem !important; }
+  body.add-toner-futurista .toner-hero-orbit { display: none !important; }
+  body.add-toner-futurista .toner-kpis {
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.add-toner-futurista .toner-page { padding: 14px !important; }
+  body.add-toner-futurista .toner-hero-card {
+    width: 100% !important;
+    display: grid !important;
+    gap: 16px !important;
+    justify-items: center !important;
+    text-align: center !important;
+  }
+  body.add-toner-futurista .toner-hero h1,
+  body.add-toner-futurista .toner-hero p { text-align: center !important; }
+  body.add-toner-futurista .toner-kpis,
+  body.add-toner-futurista .toner-two-cols,
+  body.add-toner-futurista .quick-actions,
+  body.add-toner-futurista .toner-inline-scan,
+  body.add-toner-futurista .side-two {
+    grid-template-columns: 1fr !important;
+  }
+  body.add-toner-futurista .toner-form-body {
+    grid-template-columns: 1fr !important;
+  }
+}
