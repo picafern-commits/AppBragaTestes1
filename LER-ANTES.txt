@@ -1,2 +1,7 @@
-Ficheiros completos para substituir diretamente.
-Inclui html/add-toner.html, css/add-toner-futurista.css, js/add-toner-futurista.js e version.json.
+AppBraga v1.58.40 — Adicionar Toner fullscreen sem barra superior.
+
+Ficheiros completos para substituir diretamente:
+- html/add-toner.html
+- css/add-toner-futurista.css
+- js/add-toner-futurista.js
+- version.json

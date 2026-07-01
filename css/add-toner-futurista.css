@@ -869,3 +869,73 @@ body.add-toner-futurista {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* v1.58.40 — fullscreen + sem barra superior */
+body.add-toner-futurista {
+  min-width: 0 !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+body.add-toner-futurista .toner-topbar {
+  display: none !important;
+}
+
+body.add-toner-futurista .toner-page {
+  width: 100vw !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 18px clamp(16px, 1.45vw, 28px) 28px !important;
+}
+
+body.add-toner-futurista .toner-hero {
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+body.add-toner-futurista .toner-hero-card {
+  width: min(100%, 940px) !important;
+}
+
+body.add-toner-futurista .toner-kpis,
+body.add-toner-futurista .toner-main-grid {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+body.add-toner-futurista .toner-main-grid {
+  grid-template-columns: minmax(0, 1.55fr) minmax(390px, .95fr) !important;
+  align-items: start !important;
+}
+
+body.add-toner-futurista .toner-left,
+body.add-toner-futurista .toner-right,
+body.add-toner-futurista .toner-panel,
+body.add-toner-futurista .toner-form-panel,
+body.add-toner-futurista .toner-form-body {
+  min-width: 0 !important;
+}
+
+body.add-toner-futurista .toner-form-body {
+  grid-template-columns: minmax(0, 1.16fr) minmax(300px, .84fr) !important;
+}
+
+@media (min-width: 1750px) {
+  body.add-toner-futurista .toner-main-grid {
+    grid-template-columns: minmax(0, 1.65fr) minmax(470px, .9fr) !important;
+  }
+}
+
+@media (max-width: 1350px) {
+  body.add-toner-futurista .toner-main-grid {
+    grid-template-columns: 1fr !important;
+  }
+  body.add-toner-futurista .toner-form-body {
+    grid-template-columns: 1fr !important;
+  }
+}
