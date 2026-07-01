@@ -3,153 +3,189 @@
 <head>
 <script src="../js/app-theme-pro.js?v=theme-pro-7"></script>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Dashboard</title>
-  <meta name="theme-color" content="#101114">
-  <link rel="manifest" href="../manifest.json">
-  <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
-  <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.24">
-  <link rel="stylesheet" href="../css/autozitania-bragalis.css">
-  <link rel="stylesheet" href="../css/app-theme-pro.css?v=theme-pro-7">
-  <link rel="stylesheet" href="../css/enterprise/ops.css?v=ops-13">
-  <link rel="stylesheet" href="../css/systems/personal-tools.css?v=personal-9">
-  <link rel="stylesheet" href="../css/systems/global-search.css?v=global-search-2">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="App Braga">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <link rel="stylesheet" href="../css/iphone-force-final.css?v=1.58.24">
-  <link rel="stylesheet" href="../css/iphone-sidebar-final.css?v=1.58.24">
-  <link rel="stylesheet" href="../css/dashboard-widgets.css?v=1.58.24">
-
-  <link rel="stylesheet" href="../css/operational-improvements.css?v=1.58.24">
-  <link rel="stylesheet" href="../css/premium-polish.css?v=1.58.24">
-  <link rel="stylesheet" href="../css/appbraga-light-redesign.css?v=1.58.24">
-  <link rel="stylesheet" href="../css/appbraga-mockup-pages.css?v=1.58.24">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>Dashboard AppBraga</title>
+<meta name="theme-color" content="#020914">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+<link rel="apple-touch-icon" href="../icon-192.png">
+<link rel="stylesheet" href="../css/style.css?v=1.58.26">
+<link rel="stylesheet" href="../css/dashboard-futurista.css?v=1.58.26">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="App Braga">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
 </head>
-<body>
-<aside class="sidebar sidebar-pro-groups sidebar-collapsible-pro">
-  <div class="brand premium-brand">
-    <div class="brand-badge">BR</div>
-    <div><h2>App Braga</h2><small class="sidebar-brand-subtitle">Centro operacional</small></div>
-    <button class="sidebar-collapse-toggle" type="button" title="Colapsar/expandir sidebar" aria-label="Colapsar sidebar">‹</button>
+<body class="dashboard-futurista-body">
+<div class="dash-net" aria-hidden="true"></div>
+<header class="dash-top">
+  <a class="dash-brand" href="index.html" aria-label="Voltar ao Portal AppBraga">
+    <span class="dash-logo" aria-hidden="true"></span>
+    <span>AppBraga</span>
+  </a>
+  <div class="dash-user" aria-label="Utilizador atual">
+    <div class="dash-user-avatar">A</div>
+    <div><div class="dash-user-main">Administrador</div><div class="dash-user-sub">App Braga</div></div>
+    <div class="dash-user-chevron">⌄</div>
   </div>
-  <nav class="sidebar-nav-pro" aria-label="Navegação principal">
-    <section class="sidebar-favorites" data-sidebar-section="favorites">
-      <div class="sidebar-section-title"><span>⭐</span><strong>Favoritos</strong></div>
-      <a href="dashboard.html" data-icon="🏠" class="active"><span class="sidebar-link-text">Dashboard</span></a>
-      <a href="stock.html" data-icon="📦"><span class="sidebar-link-text">Stock</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-    </section>
-    <div class="sidebar-divider"></div>
-    <section class="sidebar-group" data-sidebar-group="operacao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚡</span><span>Operação</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="add-toner.html" data-icon="➕"><span class="sidebar-link-text">Adicionar Toner</span></a>
-      <a href="historico.html" data-icon="🧾"><span class="sidebar-link-text">Histórico</span></a>
-      <a href="tarefas.html" data-icon="✅"><span class="sidebar-link-text">Tarefas</span></a>
-      <a href="equipas-semanais.html" data-icon="👥"><span class="sidebar-link-text">Equipas Semanais</span></a>
-      <a href="scanner-ia.html" data-icon="📷"><span class="sidebar-link-text">Scanner IA</span></a>
-      <a href="etiquetas-word.html" data-icon="🏷️"><span class="sidebar-link-text">Etiquetas Word</span></a>
-      </div>
-    </section>
-    <section class="sidebar-group" data-sidebar-group="equipamentos">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🧰</span><span>Equipamentos</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-      <a href="manutencao-impressoras.html" data-icon="🛠️"><span class="sidebar-link-text">Manutenção Impressoras</span></a>
-      <a href="computadores.html" data-icon="💻"><span class="sidebar-link-text">Computadores</span></a>
-      <a href="pistolas.html" data-icon="📟"><span class="sidebar-link-text">Pistolas CK65</span></a>
-      <a href="radios.html" data-icon="📡"><span class="sidebar-link-text">Rádios</span></a>
-      </div>
-    </section>
-    <section class="sidebar-group" data-sidebar-group="infraestrutura">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🌐</span><span>Infraestrutura</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="portas.html" data-icon="🔌"><span class="sidebar-link-text">Portas Rede</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="informacoes.html" data-icon="ℹ️"><span class="sidebar-link-text">Informações</span></a>
-      </div>
-    </section>
-    <section class="sidebar-group" data-sidebar-group="administracao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚙️</span><span>Administração</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="users.html" data-icon="👥"><span class="sidebar-link-text">Users</span></a>
-      <a href="diagnostico.html" data-icon="🩺"><span class="sidebar-link-text">Diagnóstico</span></a>
-      <a href="notificacoes.html" data-icon="🔔"><span class="sidebar-link-text">Notificações</span></a>
-      <a href="config.html" data-icon="⚙️"><span class="sidebar-link-text">Configurações</span></a>
-      </div>
-    </section>
-  </nav>
-</aside>
+</header>
 
-<main class="main dashboard-shell">
-  <div class="page-hero">
-    <div class="page-hero-title">Dashboard</div>
-	<span class="status-pill">Sistema Online</span>
-  </div>
-
-  <section class="dashboard-widget-toolbar">
-    <div>
-      <h2>Dashboard personalizável</h2>
-      <p>Ativa o modo editar, escolhe templates rápidos e ajusta os widgets como num telemóvel.</p>
-    </div>
-    <div class="dashboard-widget-actions">
-      <button type="button" id="dashboardEditModeBtn">⚙️ Editar Dashboard</button>
-    </div>
+<main class="dashboard-futurista">
+  <section class="dash-hero">
+    <div class="dash-hero-logo"><span></span></div>
+    <h1>Dashboard</h1>
+    <p>Visão geral da operação e dos sistemas da AppBraga.</p>
   </section>
 
-  <section id="dashboardWidgetGrid" class="dashboard-widget-grid" aria-label="Widgets do Dashboard"></section>
+  <section class="dash-kpis" aria-label="Indicadores principais">
+    <article class="dash-kpi">
+      <div class="dash-kpi-icon">🖨️</div>
+      <div><div class="dash-kpi-title">Impressoras</div><div class="dash-kpi-value" id="dashKpiImpressoras">128</div><div class="dash-kpi-sub" id="dashKpiImpressorasSub">Online</div></div>
+    </article>
+    <article class="dash-kpi green">
+      <div class="dash-kpi-icon">📱</div>
+      <div><div class="dash-kpi-title">Equipamentos</div><div class="dash-kpi-value" id="dashKpiEquipamentos">—</div><div class="dash-kpi-sub">Registados</div></div>
+    </article>
+    <article class="dash-kpi purple">
+      <div class="dash-kpi-icon">✅</div>
+      <div><div class="dash-kpi-title">Tarefas abertas</div><div class="dash-kpi-value" id="dashKpiTarefas">0</div><div class="dash-kpi-sub">Em acompanhamento</div></div>
+    </article>
+    <article class="dash-kpi orange">
+      <div class="dash-kpi-icon">🔔</div>
+      <div><div class="dash-kpi-title">Alertas / Notificações</div><div class="dash-kpi-value" id="dashKpiAlertas">8</div><div class="dash-kpi-sub">Ver notificações</div></div>
+    </article>
+    <article class="dash-kpi cyan">
+      <div class="dash-kpi-icon">👥</div>
+      <div><div class="dash-kpi-title">Utilizadores</div><div class="dash-kpi-value" id="dashKpiUsers">24</div><div class="dash-kpi-sub">Ativos</div></div>
+    </article>
+    <article class="dash-kpi orange">
+      <div class="dash-kpi-icon">📦</div>
+      <div><div class="dash-kpi-title">Stock Toners</div><div class="dash-kpi-value" id="dashKpiStock">—</div><div class="dash-kpi-sub">Em stock</div></div>
+    </article>
+  </section>
+
+  <section class="dash-main-grid" aria-label="Resumo por sistemas">
+    <article class="dash-panel dash-printers">
+      <h2>🖨️ Impressoras e Toners</h2>
+      <small>Alertas de toner, stock e manutenção de impressoras.</small>
+      <div class="dash-toner-grid">
+        <div class="dash-toner-alerts">
+          <h3>Alertas de toners</h3>
+          <div id="listaDashboardStock"></div>
+        </div>
+        <div class="dash-stock-mini">
+          <h3>Stock por cor</h3>
+          <div class="dash-stock-line"><span>Preto</span><div class="dash-bar"><span style="width:72%"></span></div><b>8</b></div>
+          <div class="dash-stock-line"><span>Ciano</span><div class="dash-bar cyan"><span style="width:52%"></span></div><b>6</b></div>
+          <div class="dash-stock-line"><span>Magenta</span><div class="dash-bar purple"><span style="width:38%"></span></div><b>4</b></div>
+          <div class="dash-stock-line"><span>Amarelo</span><div class="dash-bar orange"><span style="width:45%"></span></div><b>5</b></div>
+        </div>
+      </div>
+      <div class="dash-panel-footer">
+        <a class="dash-link" href="etiquetas-word.html">🏷️ Etiquetas Word</a>
+        <a class="dash-link" href="manutencao-impressoras.html">🛠️ Manutenção Impressoras</a>
+        <a class="dash-link" href="historico.html">🧾 Histórico</a>
+      </div>
+    </article>
+
+    <article class="dash-panel">
+      <h2>📱 Equipamentos</h2>
+      <small>Pistolas, rádios e computadores.</small>
+      <div class="dash-list">
+        <div class="dash-mini-row"><div><strong>Pistolas CK65</strong><span>Leitores de código</span></div><span class="dash-badge info">Ver</span></div>
+        <div class="dash-mini-row"><div><strong>Rádios</strong><span>Comunicação interna</span></div><span class="dash-badge">Online</span></div>
+        <div class="dash-mini-row"><div><strong>Computadores</strong><span>Postos e acessos</span></div><span class="dash-badge">Ativos</span></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="pistolas.html">Ver equipamentos ›</a></div>
+    </article>
+
+    <article class="dash-panel">
+      <h2>🌐 Infraestrutura</h2>
+      <small>Tarefas, informações e portas de rede.</small>
+      <div class="dash-list">
+        <div class="dash-mini-row"><div><strong>Tarefas</strong><span>Gestão operacional</span></div><span class="dash-badge warn">Abertas</span></div>
+        <div class="dash-mini-row"><div><strong>Informações</strong><span>Notas internas</span></div><span class="dash-badge">Atualizado</span></div>
+        <div class="dash-mini-row"><div><strong>Portas Rede</strong><span>Mapa de ligações</span></div><span class="dash-badge info">Ativas</span></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="portas.html">Ver infraestrutura ›</a></div>
+    </article>
+
+    <article class="dash-panel">
+      <h2>⚙️ Administração</h2>
+      <small>Users, diretório, equipas e scanner IA.</small>
+      <div class="dash-list">
+        <div class="dash-mini-row"><div><strong>Users</strong><span>Perfis e permissões</span></div><span class="dash-badge" id="dashAdminUsersBadge">Ativos</span></div>
+        <div class="dash-mini-row"><div><strong>Diretório</strong><span>Contactos internos</span></div><span class="dash-badge">Sync</span></div>
+        <div class="dash-mini-row"><div><strong>Scanner IA</strong><span>Leituras e análise</span></div><span class="dash-badge info">Ativo</span></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="users.html">Ver administração ›</a></div>
+    </article>
+
+    <article class="dash-panel">
+      <h2>⚙️ Configurações e Sistema</h2>
+      <small>Diagnóstico, notificações e configurações.</small>
+      <div class="dash-system-list">
+        <div class="dash-mini-row"><div><strong>Diagnóstico</strong><span>Estado geral</span></div><span class="dash-badge">Sem erros</span></div>
+        <div class="dash-mini-row"><div><strong>Notificações</strong><span>Push e alertas</span></div><span class="dash-badge warn">Ver</span></div>
+        <div class="dash-mini-row"><div><strong>Configurações</strong><span>Preferências da app</span></div><span class="dash-badge">Atualizado</span></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="diagnostico.html">Ver configurações ›</a></div>
+    </article>
+  </section>
+
+  <section class="dash-bottom-grid" aria-label="Atividade e estado">
+    <article class="dash-panel">
+      <h2>🕘 Atividade recente</h2>
+      <small>Últimas ações realizadas no sistema.</small>
+      <div id="dashActivityClone" class="dash-list">
+        <div class="dash-activity-item"><div><strong>Sistema pronto</strong><span>Firebase e dados a carregar.</span></div><small>Agora</small></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="notificacoes.html">Ver todas as atividades ›</a></div>
+    </article>
+
+    <article class="dash-panel">
+      <h2>☑️ Tarefas em andamento</h2>
+      <small>Prioridades do dia e trabalhos em progresso.</small>
+      <div class="dash-list" id="personalTaskList">
+        <div class="dash-progress-row"><strong>Atualizar firmware das pistolas CK65</strong><span class="dash-badge info">Em progresso</span><div class="dash-progress"><span style="width:60%"></span></div><b>60%</b></div>
+        <div class="dash-progress-row"><strong>Auditoria de portas de rede</strong><span class="dash-badge info">Em progresso</span><div class="dash-progress"><span style="width:40%"></span></div><b>40%</b></div>
+        <div class="dash-progress-row"><strong>Relatório de utilização de impressoras</strong><span class="dash-badge warn">Pendente</span><div class="dash-progress"><span style="width:0%"></span></div><b>0%</b></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="tarefas.html">Ver todas as tarefas ›</a></div>
+    </article>
+
+    <article class="dash-panel">
+      <h2>🛡️ Estado do sistema</h2>
+      <small>Disponibilidade dos serviços principais.</small>
+      <div class="dash-health">
+        <div class="dash-system-list">
+          <div class="dash-mini-row"><div><strong>Servidor</strong><span>GitHub / Firebase</span></div><span class="dash-badge">Online</span></div>
+          <div class="dash-mini-row"><div><strong>Base de dados</strong><span>Firestore</span></div><span class="dash-badge">Online</span></div>
+          <div class="dash-mini-row"><div><strong>Serviços</strong><span>Notificações e leituras</span></div><span class="dash-badge">Online</span></div>
+          <div class="dash-mini-row"><div><strong>Backup</strong><span>Último estado</span></div><span class="dash-badge">Sucesso</span></div>
+        </div>
+        <div class="dash-health-ring"><div><span><strong id="dashSistemaDisponibilidade">99.7%</strong><br><small>Disponibilidade<br>últimos 30 dias</small></span></div></div>
+      </div>
+      <div class="dash-panel-footer"><a class="dash-link" href="diagnostico.html">Ver diagnóstico ›</a></div>
+    </article>
+  </section>
 </main>
+
+<a class="dashboard-back" href="index.html">← Portal</a>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script src="../js/dashboard-widgets.js?v=1.58.24"></script>
-<script src="../js/app.js?v=1.58.24"></script>
-<script src="../js/sidebar-editor.js?v=1.58.24"></script>
-<script src="../js/systems/global-search/global-search.js?v=global-search-2"></script>
-
-<!-- FIREBASE -->
-
-  <script src="../js/core/helpers.js"></script>
-  <script src="../js/iphone-force-final.js?v=1.58.24"></script>
+<script src="../js/app.js?v=1.58.26"></script>
+<script src="../js/sidebar-editor.js?v=1.58.26"></script>
+<script src="../js/core/helpers.js?v=1.58.26"></script>
 <script src="../js/enterprise/ops.js?v=ops-13"></script>
 <script src="../js/systems/backup/local-backup.js?v=backup-2"></script>
 <script src="../js/systems/personal-tools.js?v=personal-9"></script>
-
-<script src="../js/iphone-sidebar-final.js?v=1.58.24"></script>
-<script src="../js/operational-improvements.js?v=1.58.24"></script>
-<script src="../js/appbraga-mockup-pages.js?v=1.58.24"></script>
+<script src="../js/dashboard-futurista.js?v=1.58.26"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
