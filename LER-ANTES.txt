@@ -1,9 +1,9 @@
-AppBraga v1.58.48 — correção de refresh automático.
+AppBraga v1.58.49 — filtro persistente na página Impressoras.
 
-Este ZIP contém ficheiros completos para substituir diretamente.
-Objetivo:
-- atualizar APP_VERSION para 1.58.48;
-- impedir verificação/refresh automático da app enquanto estás a editar/guardar;
-- atualizar cache/version para evitar carregar JS antigo.
+Correção:
+- ao escolher Braga/Vila Real/outro armazém, os renders automáticos já respeitam o filtro;
+- a lista não deve voltar para todas as impressoras passado alguns segundos;
+- atualiza APP_VERSION, version.json e cache busters.
 
-Depois de substituir, faz commit/deploy e abre com Ctrl+F5.
+Substituir os ficheiros completos nas mesmas pastas.
+Depois fazer commit/deploy e Ctrl+F5.

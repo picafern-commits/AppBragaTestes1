@@ -32,7 +32,7 @@ if (typeof firebase !== "undefined") {
   }
 }
 
-const APP_VERSION = "1.58.48";
+const APP_VERSION = "1.58.49";
 const APP_NOTIFICATIONS_REBUILD_MODE = true;
 const APP_BRAGA_DEFAULT_VAPID_PUBLIC_KEY = "";
 const APP_BRAGA_NOTIFICATION_CLOUD_DOC = "";
@@ -8076,7 +8076,7 @@ async function atualizarAppObrigatorio(novaVersao = "") {
 
 window.addEventListener("load", () => {
   atualizarVersaoUI(APP_VERSION);
-  // v1.58.48: não verificar/forçar atualização automaticamente.
+  // v1.58.49: não verificar/forçar atualização automaticamente.
   // Evita refresh/navegação quando o utilizador está a editar ou guardar dados.
 });
 
@@ -13401,7 +13401,7 @@ async function carregarHistoricoNotificacoesCloudApp(showMessage = false) {
 /* ===== END APP BRAGA v1.56.1 - SIDEBAR OPERACIONAL FINAL ===== */
 
 
-/* v1.58.48 — proteção contra refresh automático durante edição/guardar */
+/* v1.58.49 — proteção contra refresh automático durante edição/guardar */
 window.__APP_BRAGA_DISABLE_AUTO_UPDATE_REFRESH__ = true;
 
 (function protegerContraRefreshAutomaticoAppBraga() {

@@ -1,6 +1,6 @@
 {
-  "version": "1.58.48",
-  "build": "no-auto-refresh",
+  "version": "1.58.49",
+  "build": "impressoras-filtro-persistente",
   "updatedAt": "2026-07-01T18:10:00+01:00",
-  "cache": "1.58.48"
+  "cache": "1.58.49"
 }
