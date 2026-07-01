@@ -11,8 +11,8 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.30">
-  <link rel="stylesheet" href="../css/impressoras-futurista.css?v=1.58.30">
+  <link rel="stylesheet" href="../css/style.css?v=1.58.31">
+  <link rel="stylesheet" href="../css/impressoras-futurista.css?v=1.58.31">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -35,6 +35,7 @@
 
     <section class="imp-hero" aria-labelledby="impTitle">
       <div class="imp-hero-inner">
+        <div class="imp-hero-orbit" aria-hidden="true"></div>
         <div class="imp-hero-icon" aria-hidden="true">🖨️</div>
         <div>
           <h1 id="impTitle">Impressoras</h1>
@@ -96,11 +97,7 @@
 
         <article class="imp-panel">
           <div class="imp-panel-head"><div class="imp-panel-title"><span>⚠️</span><div><h3>Alertas de toner</h3><p>Prioridades detetadas pelas leituras.</p></div></div><a class="imp-btn small" href="notificacoes.html">Ver todos →</a></div>
-          <div class="imp-list" id="impAlertsList">
-            <div class="imp-alert crit"><span class="imp-alert-dot"></span><strong>Impressoras críticas</strong><small id="impCriticalBadge">Auto</small></div>
-            <div class="imp-alert"><span class="imp-alert-dot"></span><span>Toners baixos e manutenção pendente</span><small>Ativo</small></div>
-            <div class="imp-alert"><span class="imp-alert-dot"></span><span>Histórico de leituras sincronizado</span><small>OK</small></div>
-          </div>
+          <div class="imp-list" id="impAlertsList"></div>
         </article>
 
         <article class="imp-panel">
@@ -115,11 +112,7 @@
 
         <article class="imp-panel">
           <div class="imp-panel-head"><div class="imp-panel-title"><span>📄</span><div><h3>Etiquetas Word</h3><p>Últimos documentos gerados.</p></div></div><a class="imp-btn small" href="etiquetas-word.html">Ver todas →</a></div>
-          <div class="imp-mini-table">
-            <div class="imp-mini-row"><span>Hoje</span><strong>Etiquetas Toners</strong><span class="tag">Criado</span></div>
-            <div class="imp-mini-row"><span>Ontem</span><strong>Etiquetas Impressoras</strong><span class="tag">Criado</span></div>
-            <div class="imp-mini-row"><span>Arquivo</span><strong>Histórico de etiquetas</strong><span class="tag warn">Ver</span></div>
-          </div>
+          <div class="imp-mini-table" id="impWordList"></div>
         </article>
       </aside>
     </section>
@@ -127,19 +120,11 @@
     <section class="imp-bottom-grid">
       <article class="imp-panel">
         <div class="imp-panel-head"><div class="imp-panel-title"><span>🕘</span><div><h3>Histórico recente</h3><p>Eventos mais recentes da área.</p></div></div><a class="imp-btn small" href="historico.html">Ver tudo</a></div>
-        <div class="imp-mini-table">
-          <div class="imp-mini-row"><span>Hoje</span><strong>Leitura realizada</strong><span class="tag">Sucesso</span></div>
-          <div class="imp-mini-row"><span>Hoje</span><strong>Toner substituído</strong><span class="tag">Sucesso</span></div>
-          <div class="imp-mini-row"><span>Hoje</span><strong>Alerta crítico</strong><span class="tag bad">Crítico</span></div>
-        </div>
+        <div class="imp-mini-table" id="impHistoryList"></div>
       </article>
       <article class="imp-panel">
         <div class="imp-panel-head"><div class="imp-panel-title"><span>🔧</span><div><h3>Manutenção</h3><p>Intervenções previstas.</p></div></div><a class="imp-btn small" href="manutencao-impressoras.html">Ver todas</a></div>
-        <div class="imp-mini-table">
-          <div class="imp-mini-row"><span>Atrasada</span><strong>Intervenção técnica</strong><span class="tag bad">Alta</span></div>
-          <div class="imp-mini-row"><span>Hoje</span><strong>Limpeza e calibração</strong><span class="tag warn">Hoje</span></div>
-          <div class="imp-mini-row"><span>Planeada</span><strong>Revisão preventiva</strong><span class="tag">OK</span></div>
-        </div>
+        <div class="imp-mini-table" id="impMaintenanceList"></div>
       </article>
       <article class="imp-panel">
         <div class="imp-panel-head"><div class="imp-panel-title"><span>🩺</span><div><h3>Diagnóstico</h3><p>Teste de leituras e ligação.</p></div></div><button class="imp-btn small" type="button" onclick="window.testarSistemaToner && window.testarSistemaToner()">Testar</button></div>
@@ -184,8 +169,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.30"></script>
-  <script src="../js/core/helpers.js?v=1.58.30"></script>
-  <script src="../js/impressoras-futurista.js?v=1.58.30"></script>
+  <script src="../js/app.js?v=1.58.31"></script>
+  <script src="../js/helpers.js?v=1.58.31"></script>
+  <script src="../js/impressoras-futurista.js?v=1.58.31"></script>
 </body>
 </html>

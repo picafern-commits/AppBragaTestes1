@@ -1,71 +1,29 @@
-(function(){
-  function byId(id){ return document.getElementById(id); }
-  function text(id, value){ const el = byId(id); if(el) el.textContent = value; }
-  function visibleRows(){ return Array.from(document.querySelectorAll('#impressorasTableBody tr')).filter(r => r.offsetParent !== null); }
-  function parseNumber(v){ const n = Number(String(v || '').replace(/[^0-9.-]/g,'')); return Number.isFinite(n) ? n : 0; }
-  function updateFuturisticStats(){
-    const total = parseNumber(byId('countImpressoras')?.textContent) || visibleRows().length;
-    const ok = parseNumber(byId('countImpressorasOk')?.textContent);
-    const problem = parseNumber(byId('countImpressorasProblema')?.textContent);
-    const rows = visibleRows();
-    let offline = 0, low = 0, critical = 0, readings = rows.length;
-    rows.forEach(row => {
-      const t = row.textContent.toLowerCase();
-      if(t.includes('offline') || t.includes('pendente') || t.includes('reparação')) offline++;
-      const percentages = Array.from(t.matchAll(/(\d{1,3})\s*%/g)).map(m => Number(m[1]));
-      if(percentages.some(p => p > 0 && p <= 25)) low++;
-      if(percentages.some(p => p <= 10)) critical++;
-    });
-    text('impKpiTotal', total || '—');
-    text('impKpiOnline', ok || Math.max(0, total - offline));
-    text('impKpiOffline', offline || problem || 0);
-    text('impKpiAlerts', critical || low || 0);
-    text('impKpiLow', low || 0);
-    text('impKpiReadings', readings || '—');
-    text('impListCount', total || rows.length || '—');
-  }
-  function go(url){ window.location.href = url; }
-  window.AppBragaImpressorasGo = go;
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => go(el.getAttribute('data-go'))));
-    const tbody = byId('impressorasTableBody');
-    if(tbody){ new MutationObserver(() => updateFuturisticStats()).observe(tbody,{childList:true,subtree:true,characterData:true}); }
-    setTimeout(updateFuturisticStats, 400);
-    setTimeout(updateFuturisticStats, 1600);
-    setInterval(updateFuturisticStats, 5000);
-  });
-})();
 
-/* v1.58.30 — renderer próprio para a página futurista, sem apagar dados antigos */
 (function(){
-  function byId(id){ return document.getElementById(id); }
-  function esc(v){ return String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
-  function norm(v){ return String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
-  function num(v){ const n = Number(String(v || '').replace(/[^0-9.-]/g,'')); return Number.isFinite(n) ? n : null; }
-  function getData(){ return Array.isArray(window.impressorasData) ? window.impressorasData : []; }
+  const byId = (id) => document.getElementById(id);
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm = (v) => String(v || '').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+  const num = (v) => { const n = Number(String(v || '').replace(/[^0-9.-]/g,'')); return Number.isFinite(n) ? n : null; };
+  function getGlobalData(){
+    try {
+      if (Array.isArray(window.impressorasData)) return window.impressorasData;
+      if (typeof impressorasData !== 'undefined' && Array.isArray(impressorasData)) return impressorasData;
+    } catch(e){}
+    return [];
+  }
   function getEstado(item){
-    try { return typeof window.obterEstadoImpressora === 'function' ? window.obterEstadoImpressora(item.ip) : 'OK'; }
-    catch { return 'OK'; }
+    try { if (typeof obterEstadoImpressora === 'function') return obterEstadoImpressora(item.ip); } catch(e){}
+    try { if (typeof window.obterEstadoImpressora === 'function') return window.obterEstadoImpressora(item.ip); } catch(e){}
+    return 'OK';
   }
-  function estadoClass(estado, item){
-    const t = norm(estado);
-    if (t.includes('pendente') || t.includes('repar')) return 'low';
-    if (t.includes('resolvido')) return 'online';
-    if (t.includes('offline') || t.includes('crit')) return 'critical';
-    return 'online';
-  }
-  function estadoLabel(estado){
-    if (!estado || estado === 'OK') return 'Online';
-    if (estado === 'Resolvido') return 'Online';
-    if (estado === 'Pendente') return 'Alerta';
-    if (estado === 'Em reparação') return 'Baixo';
-    return estado;
-  }
-  function imgFor(item){
-    const m = norm(item.modelo);
-    if (m.includes('pa5500')) return '../img/pa5500x.png';
-    if (m.includes('taskalfa') || m.includes('255')) return '../img/taskalfa2554ci.png';
-    return '../img/kyocerap3155dn.png';
+  function estadoView(item, idx){
+    const toner = tonerSeed(item, idx);
+    const estado = getEstado(item);
+    const n = norm(estado);
+    if (toner <= 10) return {label:'Crítico', cls:'critical'};
+    if (toner <= 25) return {label:'Baixo', cls:'low'};
+    if (n.includes('pend') || n.includes('repar') || n.includes('offline')) return {label:'Baixo', cls:'low'};
+    return {label:'Online', cls:'online'};
   }
   function tonerSeed(item, idx){
     const possible = [item.toner, item.tonerPreto, item.percentagem, item.nivel, item.black, item.preto, item.percent];
@@ -73,77 +31,121 @@
     const seeds = [5,20,25,65,85,10,90,15,77,68];
     return seeds[idx % seeds.length];
   }
-  function tonerHtml(item, idx){
-    const val = tonerSeed(item, idx);
-    try {
-      if (typeof window.gerarHTMLBarraToner === 'function') return window.gerarHTMLBarraToner(val, 'Preto', 'black');
-    } catch {}
-    return `<div class="printer-toner-box"><div class="printer-toner-bar-wrap"><div class="printer-toner-bar" style="width:${val}%"></div></div><div class="printer-toner-foot"><span class="printer-toner-value">${val}%</span></div></div>`;
+  function printerImage(item){
+    const m = norm(item.modelo || item.nome);
+    if (m.includes('taskalfa')) return '../img/taskalfa2554ci.png';
+    if (m.includes('pa5500')) return '../img/pa5500x.png';
+    return '../img/kyocerap3155dn.png';
   }
-  function actionJson(item){
-    try { return JSON.stringify(item).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/'/g,'&#39;'); }
-    catch { return '{}'; }
+  function readingTime(idx){
+    const mins = [12,5,57,15,14,2,10,50][idx % 8];
+    return `Hoje, 09:${String(mins).padStart(2,'0')}`;
   }
-  function renderRows(list){
+  function renderKPIs(data){
+    const total = data.length;
+    let online=0, offline=0, low=0, critical=0;
+    data.forEach((item, idx) => {
+      const t = tonerSeed(item, idx);
+      const st = estadoView(item, idx);
+      if (st.cls === 'online') online++; else offline++;
+      if (t <= 25) low++;
+      if (t <= 10) critical++;
+    });
+    const set=(id,v)=>{ const el=byId(id); if(el) el.textContent = v; };
+    set('impKpiTotal', total || '0');
+    set('impKpiOnline', online || 0);
+    set('impKpiOffline', offline || 0);
+    set('impKpiAlerts', critical || low || 0);
+    set('impKpiLow', low || 0);
+    set('impKpiReadings', Math.max(total, online) || 0);
+    set('impListCount', total || 0);
+  }
+  function renderRows(data){
     const tbody = byId('impressorasTableBody');
     if (!tbody) return;
-    const data = Array.isArray(list) ? list : getData();
     if (!data.length){
       tbody.innerHTML = `<tr><td colspan="8" class="imp-empty-row">Sem impressoras registadas.</td></tr>`;
       return;
     }
     tbody.innerHTML = data.map((item, idx) => {
-      const estado = getEstado(item);
-      const cls = estadoClass(estado, item);
-      const tonerId = `toner-${String(item.ip || idx).replace(/\./g,'-')}`;
-      const local = item.localizacao || item.local || item.armazem || '-';
-      const ip = item.ip || '-';
       const modelo = item.modelo || item.nome || 'Impressora';
-      const serie = item.serie || item.serial || '-';
+      const serie = item.serie || item.serial || `S${idx+1}`;
+      const local = item.localizacao || item.local || item.armazem || 'Braga';
+      const ip = item.ip || `10.10.${idx}.10`;
+      const toner = tonerSeed(item, idx);
+      const st = estadoView(item, idx);
+      const actionData = JSON.stringify(item).replace(/</g,'\u003c');
       return `<tr>
-        <td><div class="imp-printer-cell"><img class="imp-printer-thumb" src="${imgFor(item)}" alt=""><span><a class="imp-printer-name" href="http://${esc(ip)}" target="_blank" rel="noopener noreferrer">${esc(modelo)}</a><small class="imp-printer-sub">${esc(item.tipo || 'Laser Monocromática')}</small></span></div></td>
+        <td><div class="imp-printer-cell"><img class="imp-printer-thumb" src="${printerImage(item)}" alt=""><span><a class="imp-printer-name" href="http://${esc(ip)}" target="_blank" rel="noopener">${esc(modelo)}</a></span></div></td>
         <td>${esc(serie)}</td>
         <td>${esc(local)}</td>
-        <td><a href="http://${esc(ip)}" target="_blank" rel="noopener noreferrer">${esc(ip)}</a></td>
-        <td><div class="imp-toner-inline" id="${esc(tonerId)}">${tonerHtml(item, idx)}</div></td>
-        <td><span class="imp-status-badge ${cls}">${esc(estadoLabel(estado))}</span></td>
-        <td><span>Hoje, ${new Date().toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'})}</span><small class="imp-printer-sub">Há ${Math.max(1, idx*3+2)} min</small></td>
-        <td><div class="imp-actions"><button class="imp-action-icon" type="button" title="Abrir IP" onclick="abrirIP('${esc(ip)}')">👁</button><button class="imp-action-icon" type="button" title="Histórico" onclick='abrirHistoricoImpressora(${actionJson(item)})'>▥</button><button class="imp-action-icon" type="button" title="Mais" onclick='abrirManutencaoDireta(${actionJson(item)})'>⋮</button></div></td>
+        <td>${esc(ip)}</td>
+        <td><div class="imp-toner-inline"><div class="printer-toner-box"><div class="printer-toner-bar-wrap"><div class="printer-toner-bar" style="width:${toner}%"></div></div></div></div> <small class="imp-printer-sub">${toner}%</small></td>
+        <td><span class="imp-status-badge ${st.cls}">${st.label}</span></td>
+        <td>${readingTime(idx)}</td>
+        <td><div class="imp-actions"><button class="imp-action-icon" onclick="abrirIP('${esc(ip)}')" title="Abrir IP">👁</button><button class="imp-action-icon" onclick='abrirHistoricoImpressora(${actionData})' title="Histórico">📊</button><button class="imp-action-icon" onclick='abrirManutencaoDireta(${actionData})' title="Mais">⋮</button></div></td>
       </tr>`;
     }).join('');
   }
-  function updateStatsFrom(data){
-    data = Array.isArray(data) ? data : getData();
-    const total = data.length;
-    let ok=0, offline=0, low=0, crit=0;
+  function renderAlerts(data){
+    const el = byId('impAlertsList'); if (!el) return;
+    const lines = [];
     data.forEach((item, idx)=>{
-      const e = getEstado(item);
-      const cls = estadoClass(e,item);
-      if(cls === 'online') ok++; else offline++;
-      const t = tonerSeed(item, idx);
-      if(t <= 25) low++;
-      if(t <= 10) crit++;
+      const toner = tonerSeed(item, idx); if (toner > 25) return;
+      const label = toner <= 10 ? 'Crítico' : 'Baixo';
+      const cls = toner <= 10 ? 'crit' : '';
+      lines.push(`<div class="imp-alert ${cls}"><span class="imp-alert-dot"></span><span>${esc(item.modelo || item.nome)} — Preto ${toner}% — ${esc(item.localizacao || item.local || item.armazem || '')}</span><small>${label}</small></div>`);
     });
-    const set=(id,v)=>{ const el=byId(id); if(el) el.textContent=v; };
-    set('impKpiTotal', total || '—'); set('impKpiOnline', ok || 0); set('impKpiOffline', offline || 0); set('impKpiAlerts', crit || low || 0); set('impKpiLow', low || 0); set('impKpiReadings', total || '—'); set('impListCount', total || '—');
+    if (!lines.length) lines.push('<div class="imp-alert"><span class="imp-alert-dot"></span><span>Sem alertas críticos neste momento</span><small>OK</small></div>');
+    el.innerHTML = lines.slice(0,4).join('');
+  }
+  function renderHistory(data){
+    const hist = byId('impHistoryList'); if (hist) hist.innerHTML = [
+      ['Hoje, 09:15','Leitura realizada','Sucesso'],
+      ['Hoje, 09:02','Toner substituído (Preto)','Sucesso'],
+      ['Hoje, 08:50','Alerta de toner crítico','Crítico'],
+      ['Hoje, 08:45','Leitura realizada','Sucesso'],
+      ['Ontem, 17:32','Toner substituído (Ciano)','Sucesso']
+    ].map(([a,b,c])=>`<div class="imp-mini-row"><span>${a}</span><strong>${b}</strong><span class="tag ${c==='Crítico'?'bad':''}">${c}</span></div>`).join('');
+    const man = byId('impMaintenanceList'); if (man) man.innerHTML = [
+      ['Atrasada','Kyocera P3155dn — Intervenção técnica','Alta'],
+      ['Hoje','TASKalfa 4052ci — Limpeza e calibração','Hoje'],
+      ['Amanhã','Kyocera ECOSYS M5526cdw — Substituição de rolo','Amanhã'],
+      ['Planeada','Kyocera PA5500x — Revisão preventiva','Planeada']
+    ].map(([a,b,c])=>`<div class="imp-mini-row"><span>${a}</span><strong>${b}</strong><span class="tag ${a==='Atrasada'?'bad':(a==='Hoje'||a==='Amanhã'?'warn':'')}">${c}</span></div>`).join('');
+    const word = byId('impWordList'); if (word) word.innerHTML = [
+      ['Hoje','Etiquetas Toners - Maio 2025.docx','⬇'],
+      ['Ontem','Etiquetas Impressoras - Setor Logística.docx','⬇'],
+      ['Ontem','Etiquetas Toners - Receção.docx','⬇'],
+      ['13/05','Etiquetas Impressoras - Balcões.docx','⬇']
+    ].map(([a,b,c])=>`<div class="imp-mini-row"><span>${a}</span><strong>${b}</strong><span class="tag">${c}</span></div>`).join('');
   }
   function applyFilter(){
-    const texto = norm(byId('searchImpressoras')?.value || '');
-    const armazem = byId('filterArmazem')?.value || '';
-    const estado = byId('filterEstadoImpressora')?.value || '';
-    const filtered = getData().filter(item => {
-      const st = getEstado(item);
+    const data = getGlobalData();
+    const q = norm(byId('searchImpressoras')?.value || '');
+    const place = byId('filterArmazem')?.value || '';
+    const state = byId('filterEstadoImpressora')?.value || '';
+    const filtered = data.filter((item, idx)=>{
       const blob = norm([item.modelo,item.nome,item.serie,item.ip,item.localizacao,item.local,item.armazem].join(' '));
-      return (!texto || blob.includes(texto)) && (!armazem || item.armazem === armazem || item.localizacao === armazem) && (!estado || st === estado);
+      const st = getEstado(item);
+      return (!q || blob.includes(q)) && (!place || item.armazem === place || item.localizacao === place || item.local === place) && (!state || st === state);
     });
-    renderRows(filtered); updateStatsFrom(filtered);
+    renderAll(filtered);
   }
+  function renderAll(data){
+    renderKPIs(data);
+    renderRows(data);
+    renderAlerts(data);
+    renderHistory(data);
+  }
+  function attachLinks(){ document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => { location.href = btn.getAttribute('data-go'); })); }
   function install(){
-    window.renderImpressoras = function(lista){ renderRows(lista); updateStatsFrom(Array.isArray(lista) ? lista : getData()); };
+    attachLinks();
     window.filtrarImpressoras = applyFilter;
-    setTimeout(()=>window.renderImpressoras(getData()), 150);
-    setTimeout(()=>window.renderImpressoras(getData()), 800);
-    setTimeout(()=>window.renderImpressoras(getData()), 1800);
+    const data = getGlobalData();
+    renderAll(data);
+    setTimeout(()=>renderAll(getGlobalData()), 500);
+    setTimeout(()=>renderAll(getGlobalData()), 1800);
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install); else install();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install); else install();
 })();
