@@ -11,8 +11,8 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.34">
-  <link rel="stylesheet" href="../css/impressoras-futurista.css?v=1.58.34">
+  <link rel="stylesheet" href="../css/style.css?v=1.58.35">
+  <link rel="stylesheet" href="../css/impressoras-futurista.css?v=1.58.35">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -20,157 +20,129 @@
   <meta name="format-detection" content="telephone=no">
 </head>
 <body class="impressoras-futurista">
-  <div class="imp-page">
-    <header class="imp-top">
+  <div class="imp-shell">
+    <header class="imp-topbar">
       <a class="imp-brand" href="index.html" aria-label="Voltar ao Portal AppBraga">
-        <span class="imp-logo" aria-hidden="true">A</span>
-        <span>APPBRAGA</span>
+        <span class="imp-brand-mark">A</span>
+        <span class="imp-brand-text">APPBRAGA</span>
       </a>
-      <div class="imp-top-actions">
-        <a class="imp-round" href="notificacoes.html" title="Notificações">🔔</a>
-        <a class="imp-round" href="diagnostico.html" title="Ajuda / Diagnóstico">?</a>
-        <div class="imp-profile"><span class="imp-avatar">A</span><span>Administrador</span><span>⌄</span></div>
+      <div class="imp-topbar-actions">
+        <a class="imp-top-icon has-badge" href="notificacoes.html" title="Notificações">🔔</a>
+        <a class="imp-top-icon" href="diagnostico.html" title="Ajuda / Diagnóstico">?</a>
+        <div class="imp-profile-pill"><span class="imp-profile-avatar">A</span><span>Administrador</span><span class="imp-profile-caret">⌄</span></div>
       </div>
     </header>
 
-    <section class="imp-hero" aria-labelledby="impTitle">
-      <div class="imp-hero-inner">
-        <div class="imp-hero-orbit" aria-hidden="true"></div>
-        <div class="imp-hero-icon" aria-hidden="true">🖨️</div>
-        <div>
-          <h1 id="impTitle">Impressoras</h1>
-          <p>Gestão de impressoras, toners, leituras e manutenção.</p>
-        </div>
+    <section class="imp-hero-panel" aria-labelledby="impTitle">
+      <div class="imp-hero-orbit"></div>
+      <div class="imp-hero-logo">A</div>
+      <div class="imp-hero-copy">
+        <h1 id="impTitle">Impressoras</h1>
+        <p>Gestão de impressoras, toners, leituras e manutenção.</p>
       </div>
     </section>
 
-    <section class="imp-kpis" aria-label="Resumo das impressoras">
-      <button class="imp-kpi" type="button" data-go="impressoras.html"><span class="imp-kpi-icon">🖨️</span><span>Impressoras<strong id="impKpiTotal">—</strong><small>Total registadas</small></span></button>
-      <button class="imp-kpi green" type="button" data-go="impressoras.html"><span class="imp-kpi-icon">📶</span><span>Online<strong id="impKpiOnline">—</strong><small class="ok">A comunicar</small></span></button>
-      <button class="imp-kpi red" type="button" data-go="diagnostico.html"><span class="imp-kpi-icon">⏻</span><span>Offline<strong id="impKpiOffline">—</strong><small class="bad">Verificar</small></span></button>
-      <button class="imp-kpi orange" type="button" data-go="notificacoes.html"><span class="imp-kpi-icon">⚠️</span><span>Alertas<strong id="impKpiAlerts">—</strong><small class="warn">Requer atenção</small></span></button>
-      <button class="imp-kpi yellow" type="button" data-go="stock.html"><span class="imp-kpi-icon">💧</span><span>Toners baixos<strong id="impKpiLow">—</strong><small class="low">Abaixo do limite</small></span></button>
-      <button class="imp-kpi imp-kpi-cyan" type="button" data-go="historico.html"><span class="imp-kpi-icon">📈</span><span>Leituras hoje<strong id="impKpiReadings">—</strong><small>Atualizações</small></span></button>
+    <section class="imp-stats-grid" aria-label="Resumo das impressoras">
+      <button class="imp-stat-card" type="button" data-go="impressoras.html"><span class="imp-stat-icon">🖨</span><div class="imp-stat-text"><span>Impressoras</span><strong id="impKpiTotal">0</strong><small>Total registadas</small></div></button>
+      <button class="imp-stat-card is-green" type="button" data-go="impressoras.html"><span class="imp-stat-icon">📶</span><div class="imp-stat-text"><span>Online</span><strong id="impKpiOnline">0</strong><small>A comunicar</small></div></button>
+      <button class="imp-stat-card is-red" type="button" data-go="diagnostico.html"><span class="imp-stat-icon">⏻</span><div class="imp-stat-text"><span>Offline</span><strong id="impKpiOffline">0</strong><small>Verificar</small></div></button>
+      <button class="imp-stat-card is-orange" type="button" data-go="notificacoes.html"><span class="imp-stat-icon">⚠</span><div class="imp-stat-text"><span>Alertas</span><strong id="impKpiAlerts">0</strong><small>Requer atenção</small></div></button>
+      <button class="imp-stat-card is-yellow" type="button" data-go="stock.html"><span class="imp-stat-icon">💧</span><div class="imp-stat-text"><span>Toners baixos</span><strong id="impKpiLow">0</strong><small>Abaixo do limite</small></div></button>
+      <button class="imp-stat-card is-cyan" type="button" data-go="historico.html"><span class="imp-stat-icon">📈</span><div class="imp-stat-text"><span>Leituras hoje</span><strong id="impKpiReadings">0</strong><small>Atualizações</small></div></button>
     </section>
 
-    <section class="imp-main-grid">
-      <article class="imp-panel imp-printers-panel">
-        <div class="imp-panel-head">
-          <div class="imp-panel-title"><span>🖨️</span><div><h2>Lista de Impressoras <span id="impListCount" class="mini-count">—</span></h2><p>Monitorização das impressoras registadas.</p></div></div>
-          <div class="imp-search-row">
-            <input id="searchImpressoras" type="text" placeholder="Pesquisar impressora..." oninput="filtrarImpressoras()">
-            <select id="filterArmazem" onchange="filtrarImpressoras()"><option value="">Todos os locais</option><option value="Braga">Braga</option><option value="Vila Real">Vila Real</option></select>
-            <select id="filterEstadoImpressora" onchange="filtrarImpressoras()"><option value="">Todos os estados</option><option value="OK">Online</option><option value="Pendente">Pendente</option><option value="Em reparação">Em reparação</option><option value="Resolvido">Resolvido</option></select>
-            <button class="imp-btn small" type="button" onclick="document.getElementById('searchImpressoras').value='';document.getElementById('filterArmazem').value='';document.getElementById('filterEstadoImpressora').value='';filtrarImpressoras();">☰ Limpar</button>
+    <section class="imp-workspace">
+      <div class="imp-left-col">
+        <article class="imp-panel imp-table-panel">
+          <div class="imp-panel-head imp-panel-head-tight">
+            <div class="imp-panel-title-main">
+              <span class="imp-panel-glyph">🖨</span>
+              <div>
+                <h2>Lista de Impressoras</h2>
+                <p>Monitorização das impressoras registadas.</p>
+              </div>
+            </div>
+            <div class="imp-toolbar">
+              <div class="imp-search-box"><span>⌕</span><input id="searchImpressoras" type="text" placeholder="Pesquisar impressora..."></div>
+              <select id="filterArmazem"><option value="">Todos os locais</option></select>
+              <select id="filterEstadoImpressora"><option value="">Todos os estados</option><option value="online">Online</option><option value="baixo">Baixo</option><option value="crítico">Crítico</option></select>
+              <button class="imp-filter-btn" type="button" id="impApplyFilters" title="Aplicar filtros">☷</button>
+              <button class="imp-clear-btn" type="button" id="impClearFilters">Limpar</button>
+            </div>
           </div>
+          <div class="imp-table-wrap">
+            <table class="imp-table">
+              <thead>
+                <tr>
+                  <th>Modelo</th>
+                  <th>Série</th>
+                  <th>Local</th>
+                  <th>IP</th>
+                  <th>Toner</th>
+                  <th>Estado</th>
+                  <th>Última leitura</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="impressorasTableBody"></tbody>
+            </table>
+          </div>
+          <div class="imp-table-footer">
+            <div class="imp-table-count" id="impTableCountText">Mostrando 0 a 0 de 0 impressoras</div>
+            <div class="imp-pagination" id="impPagination"></div>
+          </div>
+        </article>
+
+        <div class="imp-bottom-panels">
+          <article class="imp-panel">
+            <div class="imp-panel-head"><div class="imp-panel-title-main"><span class="imp-panel-glyph">🕘</span><div><h3>Histórico recente</h3></div></div><a class="imp-link-action" href="historico.html">Ver tudo <span>→</span></a></div>
+            <div class="imp-list-table" id="impHistoryList"></div>
+          </article>
+
+          <article class="imp-panel">
+            <div class="imp-panel-head"><div class="imp-panel-title-main"><span class="imp-panel-glyph">🛠</span><div><h3>Manutenção</h3></div></div><a class="imp-link-action" href="manutencao-impressoras.html">Ver todas <span>→</span></a></div>
+            <div class="imp-list-table" id="impMaintenanceList"></div>
+          </article>
         </div>
-        <div class="imp-table-wrap">
-          <table class="imp-table printers-table">
-            <thead>
-              <tr>
-                <th>Modelo</th>
-                <th>Série</th>
-                <th>Local</th>
-                <th>IP</th>
-                <th>Toner</th>
-                <th>Estado</th>
-                <th>Última leitura</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody id="impressorasTableBody"></tbody>
-          </table>
-        </div>
-      </article>
+      </div>
 
-      <aside class="imp-side">
+      <aside class="imp-right-col">
         <article class="imp-panel">
-          <div class="imp-panel-head"><div class="imp-panel-title"><span>⚡</span><div><h3>Ações rápidas</h3><p>Atalhos da área Impressoras.</p></div></div></div>
-          <div class="imp-quick-grid">
-            <button class="imp-btn primary" type="button" data-go="add-toner.html">➕ Adicionar Toner</button>
-            <button class="imp-btn" type="button" data-go="stock.html">📦 Stock</button>
-            <button class="imp-btn" type="button" data-go="historico.html">↩ Histórico</button>
-            <button class="imp-btn" type="button" data-go="etiquetas-word.html">🏷️ Etiquetas Word</button>
-            <button class="imp-btn" type="button" data-go="manutencao-impressoras.html">🔧 Manutenção Impressoras</button>
+          <div class="imp-panel-head"><div class="imp-panel-title-main"><span class="imp-panel-glyph">⚡</span><div><h3>Ações rápidas</h3><p>Atalhos da área Impressoras.</p></div></div></div>
+          <div class="imp-actions-grid">
+            <button class="imp-quick-btn primary" type="button" data-go="add-toner.html">➕ Adicionar Toner</button>
+            <button class="imp-quick-btn" type="button" data-go="stock.html">📦 Stock</button>
+            <button class="imp-quick-btn" type="button" data-go="historico.html">↩ Histórico</button>
+            <button class="imp-quick-btn" type="button" data-go="etiquetas-word.html">📝 Etiquetas Word</button>
+            <button class="imp-quick-btn wide" type="button" data-go="manutencao-impressoras.html">🔧 Manutenção Impressoras</button>
           </div>
         </article>
 
         <article class="imp-panel">
-          <div class="imp-panel-head"><div class="imp-panel-title"><span>⚠️</span><div><h3>Alertas de toner</h3><p>Prioridades detetadas pelas leituras.</p></div></div><a class="imp-btn small" href="notificacoes.html">Ver todos →</a></div>
-          <div class="imp-list" id="impAlertsList"></div>
+          <div class="imp-panel-head"><div class="imp-panel-title-main"><span class="imp-panel-glyph">△</span><div><h3>Alertas de toner</h3></div></div><a class="imp-link-action" href="notificacoes.html">Ver todos <span>→</span></a></div>
+          <div class="imp-alert-list" id="impAlertsList"></div>
         </article>
 
         <article class="imp-panel">
-          <div class="imp-panel-head"><div class="imp-panel-title"><span>🎨</span><div><h3>Resumo por cor</h3><p>Estado geral do stock por cor.</p></div></div><a class="imp-btn small" href="stock.html">Ver stock →</a></div>
-          <div class="imp-bars">
-            <div class="imp-bar"><span>Preto</span><span class="imp-bar-line"><span class="imp-bar-fill black" style="width:58%"></span></span><strong>58%</strong><small>128 un.</small></div>
-            <div class="imp-bar"><span>Ciano</span><span class="imp-bar-line"><span class="imp-bar-fill cyan" style="width:64%"></span></span><strong>64%</strong><small>96 un.</small></div>
-            <div class="imp-bar"><span>Magenta</span><span class="imp-bar-line"><span class="imp-bar-fill magenta" style="width:52%"></span></span><strong>52%</strong><small>78 un.</small></div>
-            <div class="imp-bar"><span>Amarelo</span><span class="imp-bar-line"><span class="imp-bar-fill yellow" style="width:47%"></span></span><strong>47%</strong><small>70 un.</small></div>
-          </div>
+          <div class="imp-panel-head"><div class="imp-panel-title-main"><span class="imp-panel-glyph">◔</span><div><h3>Resumo por cor</h3><p>Quantidade disponível por cor.</p></div></div><a class="imp-link-action" href="stock.html">Ver stock <span>→</span></a></div>
+          <div class="imp-stock-summary" id="impStockSummary"></div>
         </article>
 
         <article class="imp-panel">
-          <div class="imp-panel-head"><div class="imp-panel-title"><span>📄</span><div><h3>Etiquetas Word</h3><p>Últimos documentos gerados.</p></div></div><a class="imp-btn small" href="etiquetas-word.html">Ver todas →</a></div>
-          <div class="imp-mini-table" id="impWordList"></div>
+          <div class="imp-panel-head"><div class="imp-panel-title-main"><span class="imp-panel-glyph">📄</span><div><h3>Etiquetas Word</h3></div></div><a class="imp-link-action" href="etiquetas-word.html">Ver todas <span>→</span></a></div>
+          <div class="imp-word-list" id="impWordList"></div>
         </article>
       </aside>
     </section>
 
-    <section class="imp-bottom-grid">
-      <article class="imp-panel">
-        <div class="imp-panel-head"><div class="imp-panel-title"><span>🕘</span><div><h3>Histórico recente</h3><p>Eventos mais recentes da área.</p></div></div><a class="imp-btn small" href="historico.html">Ver tudo</a></div>
-        <div class="imp-mini-table" id="impHistoryList"></div>
-      </article>
-      <article class="imp-panel">
-        <div class="imp-panel-head"><div class="imp-panel-title"><span>🔧</span><div><h3>Manutenção</h3><p>Intervenções previstas.</p></div></div><a class="imp-btn small" href="manutencao-impressoras.html">Ver todas</a></div>
-        <div class="imp-mini-table" id="impMaintenanceList"></div>
-      </article>
-      <article class="imp-panel">
-        <div class="imp-panel-head"><div class="imp-panel-title"><span>🩺</span><div><h3>Diagnóstico</h3><p>Teste de leituras e ligação.</p></div></div><button class="imp-btn small" type="button" onclick="window.testarSistemaToner && window.testarSistemaToner()">Testar</button></div>
-        <div class="imp-mini-table">
-          <div class="imp-mini-row"><span>Estado</span><strong id="tonerDiagStatus">Sem teste</strong><span class="tag">Pronto</span></div>
-          <div class="imp-mini-row"><span>Última</span><strong id="tonerDiagLastRun">—</strong><span class="tag">Info</span></div>
-          <div class="imp-mini-row"><span>Resumo</span><strong id="tonerDiagSummary">A aguardar teste</strong><span class="tag warn">Teste</span></div>
-        </div>
-      </article>
-    </section>
-
-    <span id="countImpressoras" hidden>0</span>
-    <span id="countImpressorasOk" hidden>0</span>
-    <span id="countImpressorasProblema" hidden>0</span>
-    <span id="countImpressorasResolvidas" hidden>0</span>
-    <span id="tonerDiagDot" hidden></span>
-    <span id="tonerDiagSource" hidden></span>
-    <div id="tonerDiagLogWrap" hidden><div id="tonerDiagLog"></div></div>
-
-    <a class="imp-back" href="index.html">← Portal</a>
-  </div>
-
-  <div id="modalAdicionarImpressora" class="imp-modal modal-overlay" style="display:none;">
-    <div class="modal-card">
-      <div class="imp-panel-head" style="padding:0 0 14px;border-bottom:0;">
-        <div><h3>Adicionar Impressora</h3><p>Criar uma nova impressora na lista.</p></div>
-      </div>
-      <div class="form-grid">
-        <label><span>Modelo</span><input id="addImp_modelo" type="text"></label>
-        <label><span>Série</span><input id="addImp_serie" type="text"></label>
-        <label><span>Armazém</span><input id="addImp_armazem" type="text"></label>
-        <label><span>Localização</span><input id="addImp_localizacao" type="text"></label>
-        <label><span>IP</span><input id="addImp_ip" type="text"></label>
-      </div>
-      <div class="card-actions" style="margin-top:14px;">
-        <button class="imp-btn primary" type="button" onclick="guardarNovaImpressora()">Guardar</button>
-        <button class="imp-btn" type="button" onclick="fecharAdicionarImpressora()">Cancelar</button>
-      </div>
-    </div>
+    <a class="imp-back-link" href="index.html">← Portal</a>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.34"></script>
-  <script src="../js/helpers.js?v=1.58.34"></script>
-  <script src="../js/impressoras-futurista.js?v=1.58.34"></script>
+  <script src="../js/app.js?v=1.58.35"></script>
+  <script src="../js/helpers.js?v=1.58.35"></script>
+  <script src="../js/impressoras-futurista.js?v=1.58.35"></script>
 </body>
 </html>
