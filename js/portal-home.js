@@ -29,6 +29,14 @@
 
   cards.forEach(card => {
     card.addEventListener('click', (event) => {
+      const direct = card.getAttribute('data-direct');
+      if(direct){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location.href = direct;
+        return;
+      }
+
       const link = event.target.closest('a');
 
       // Primeiro clique num card, numa seta ou numa opção interna: apenas seleciona.
@@ -48,6 +56,8 @@
     card.addEventListener('keydown', (event) => {
       if(event.key === 'Enter' || event.key === ' '){
         event.preventDefault();
+        const direct = card.getAttribute('data-direct');
+        if(direct){ window.location.href = direct; return; }
         setSelected(card);
       }
     });

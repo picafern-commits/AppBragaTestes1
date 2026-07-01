@@ -107,7 +107,7 @@ body.portal-home{
 .portal-brand:visited{color:#fff;}
 
 
-/* v1.58.28 — navegação por seleção: primeiro clique só seleciona o card.
+/* v1.58.29 — navegação por seleção: primeiro clique só seleciona o card.
    As opções internas só ficam clicáveis no card ativo. */
 .portal-card:not(.is-selected) .portal-links a,
 .portal-card:not(.is-selected) .portal-action{
@@ -162,3 +162,8 @@ body.portal-home{
   .portal-card:not(.is-selected)::after,
   .portal-card.is-selected::after{position:static;margin-left:auto;margin-bottom:8px;}
 }
+/* v1.58.29 — o card Impressoras abre diretamente a nova central da área. */
+.portal-card-direct{cursor:pointer;}
+.portal-card-direct:not(.is-selected) .portal-action{opacity:1;pointer-events:none;}
+.portal-card-direct:not(.is-selected)::after{content:"Abrir";}
+.portal-card-direct:hover .portal-action{border-color:rgba(71,166,255,.72);box-shadow:0 0 24px rgba(47,140,255,.20);}
