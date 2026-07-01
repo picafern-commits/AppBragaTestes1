@@ -30,10 +30,24 @@
     });
   }
   function cleanupInjectedDashboardChrome(){
-    document.querySelectorAll('.app-pro-commandbar,.app-mobile-action-dock,.pro-commandbar,.mockup-topbar').forEach((node)=>node.remove());
+    const selectors = [
+      '.app-pro-commandbar', '.app-mobile-action-dock', '.pro-commandbar', '.mockup-topbar',
+      '.page-shell-header', '.dashboard-header', '.sidebar', 'aside.sidebar-pro-groups',
+      '#personalToolsDashboard', '#personalDashboardOverview', '#personalInternalAlerts',
+      '.personal-dashboard:not(.dash-allow-personal)', '.personal-alert-strip', '.personal-task-metrics',
+      '.personal-task-layout', '.personal-dashboard-actions', '.personal-priority-panel', '.dashboard-task-panel',
+      '#dashboardWidgetGrid', '.dashboard-widget-grid', '.dashboard-widget', '.enterprise-metrics',
+      '.enterprise-header', '.dashboard-personalize-card', '.app-pro-header', '.app-pro-dashboard-tabs'
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach((node)=>{
+      if (node.closest('.dashboard-futurista')) return;
+      node.remove();
+    });
     document.documentElement.style.overflowY = 'auto';
+    document.documentElement.style.height = 'auto';
     document.body.style.overflowY = 'auto';
     document.body.style.height = 'auto';
+    document.body.style.minHeight = '100%';
   }
 
   function updateDerived(){
