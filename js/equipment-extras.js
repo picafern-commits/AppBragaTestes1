@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const VERSION = '1.58.22';
+  const VERSION = '1.58.24';
   const PAGE_MAP = {
     'impressoras.html': { type:'impressora', title:'Impressoras', icon:'🖨️', source:'#impressorasTableBody tr' },
     'computadores.html': { type:'computador', title:'Computadores', icon:'💻', source:'#listaPC .pc-card' },

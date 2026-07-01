@@ -1,8 +1,9 @@
-const APP_BRAGA_SW = "app-braga-runtime-v117";
+const APP_BRAGA_SW = "app-braga-runtime-v118";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./html/index.html",
+  "./html/dashboard.html",
   "./html/notificacoes.html",
   "./html/computadores.html",
   "./html/impressoras.html",
@@ -12,6 +13,7 @@ const APP_SHELL = [
   "./html/stock.html",
   "./manifest.json",
   "./css/style.css",
+  "./css/portal-home.css",
   "./css/autozitania-bragalis.css",
   "./css/app-theme-pro.css",
   "./css/enterprise/ops.css",
@@ -24,6 +26,7 @@ const APP_SHELL = [
   "./css/operational-improvements.css",
   "./css/premium-polish.css",
   "./js/app.js",
+  "./js/portal-home.js",
   "./js/sidebar-editor.js",
   "./js/dashboard-widgets.js",
   "./js/operational-improvements.js",

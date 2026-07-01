@@ -1,155 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<script src="../js/app-theme-pro.js?v=theme-pro-7"></script>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Dashboard</title>
-  <meta name="theme-color" content="#101114">
+  <title>Portal AppBraga</title>
+  <meta name="theme-color" content="#020b1c">
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.22">
-  <link rel="stylesheet" href="../css/autozitania-bragalis.css">
-  <link rel="stylesheet" href="../css/app-theme-pro.css?v=theme-pro-7">
-  <link rel="stylesheet" href="../css/enterprise/ops.css?v=ops-13">
-  <link rel="stylesheet" href="../css/systems/personal-tools.css?v=personal-9">
-  <link rel="stylesheet" href="../css/systems/global-search.css?v=global-search-2">
+  <link rel="stylesheet" href="../css/portal-home.css?v=1.58.24">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <link rel="stylesheet" href="../css/iphone-force-final.css?v=1.58.22">
-  <link rel="stylesheet" href="../css/iphone-sidebar-final.css?v=1.58.22">
-  <link rel="stylesheet" href="../css/dashboard-widgets.css?v=1.58.22">
-
-  <link rel="stylesheet" href="../css/operational-improvements.css?v=1.58.22">
-  <link rel="stylesheet" href="../css/premium-polish.css?v=1.58.22">
-  <link rel="stylesheet" href="../css/appbraga-light-redesign.css?v=1.58.22">
-  <link rel="stylesheet" href="../css/appbraga-mockup-pages.css?v=1.58.22">
 </head>
-<body>
-<aside class="sidebar sidebar-pro-groups sidebar-collapsible-pro">
-  <div class="brand premium-brand">
-    <div class="brand-badge">BR</div>
-    <div><h2>App Braga</h2><small class="sidebar-brand-subtitle">Centro operacional</small></div>
-    <button class="sidebar-collapse-toggle" type="button" title="Colapsar/expandir sidebar" aria-label="Colapsar sidebar">‹</button>
+<body class="portal-home">
+  <div class="portal-orb left" aria-hidden="true"></div>
+  <div class="portal-orb right" aria-hidden="true"></div>
+
+  <div class="portal-wrap">
+    <header class="portal-header" aria-label="Cabeçalho AppBraga">
+      <a class="portal-brand" href="index.html" aria-label="Portal AppBraga">
+        <span class="portal-logo" aria-hidden="true">A</span>
+        <span>AppBraga</span>
+      </a>
+      <div class="portal-user" aria-label="Perfil do utilizador">
+        <span class="portal-user-avatar" aria-hidden="true">A</span>
+        <span><strong>Administrador</strong><span>App Braga</span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </div>
+    </header>
+
+    <section class="portal-hero" aria-labelledby="portalTitle">
+      <div>
+        <div class="portal-hero-logo" aria-hidden="true">A</div>
+        <h1 id="portalTitle">Portal AppBraga</h1>
+        <p>Acede rapidamente às áreas principais da operação.</p>
+      </div>
+    </section>
+
+    <nav class="portal-grid" aria-label="Áreas principais da aplicação">
+      <article class="portal-card is-selected" data-tone="blue" tabindex="0" aria-selected="true">
+        <div class="portal-card-icon" aria-hidden="true">▦</div>
+        <h2>Dashboard</h2>
+        <div class="portal-card-divider"></div>
+        <p>Visão geral da operação e indicadores principais.</p>
+        <a class="portal-action" href="dashboard.html" aria-label="Abrir Dashboard">→</a>
+      </article>
+
+      <article class="portal-card" data-tone="blue" tabindex="0" aria-selected="false">
+        <div class="portal-card-icon" aria-hidden="true">🖨️</div>
+        <h2>Impressoras</h2>
+        <div class="portal-card-divider"></div>
+        <ul class="portal-links">
+          <li><a href="impressoras.html"><span class="portal-dot"></span>Impressoras</a></li>
+          <li><a href="add-toner.html"><span class="portal-dot"></span>Adicionar Toner</a></li>
+          <li><a href="stock.html"><span class="portal-dot"></span>Stock</a></li>
+          <li><a href="historico.html"><span class="portal-dot"></span>Histórico</a></li>
+          <li><a href="etiquetas-word.html"><span class="portal-dot"></span>Etiquetas Word</a></li>
+          <li><a href="manutencao-impressoras.html"><span class="portal-dot"></span>Manutenção Impressoras</a></li>
+        </ul>
+        <a class="portal-action" href="impressoras.html" aria-label="Abrir Impressoras">→</a>
+      </article>
+
+      <article class="portal-card" data-tone="green" tabindex="0" aria-selected="false">
+        <div class="portal-card-icon" aria-hidden="true">📱</div>
+        <h2>Equipamentos</h2>
+        <div class="portal-card-divider"></div>
+        <ul class="portal-links">
+          <li><a href="pistolas.html"><span class="portal-dot"></span>Pistolas CK65</a></li>
+          <li><a href="radios.html"><span class="portal-dot"></span>Rádios</a></li>
+          <li><a href="computadores.html"><span class="portal-dot"></span>Computadores</a></li>
+        </ul>
+        <a class="portal-action" href="pistolas.html" aria-label="Abrir Equipamentos">→</a>
+      </article>
+
+      <article class="portal-card" data-tone="purple" tabindex="0" aria-selected="false">
+        <div class="portal-card-icon" aria-hidden="true">⌘</div>
+        <h2>Infraestrutura</h2>
+        <div class="portal-card-divider"></div>
+        <ul class="portal-links">
+          <li><a href="tarefas.html"><span class="portal-dot"></span>Tarefas</a></li>
+          <li><a href="informacoes.html"><span class="portal-dot"></span>Informações</a></li>
+          <li><a href="portas.html"><span class="portal-dot"></span>Portas Rede</a></li>
+        </ul>
+        <a class="portal-action" href="tarefas.html" aria-label="Abrir Infraestrutura">→</a>
+      </article>
+
+      <article class="portal-card" data-tone="gold" tabindex="0" aria-selected="false">
+        <div class="portal-card-icon" aria-hidden="true">👥</div>
+        <h2>Administração</h2>
+        <div class="portal-card-divider"></div>
+        <ul class="portal-links">
+          <li><a href="users.html"><span class="portal-dot"></span>Users</a></li>
+          <li><a href="diretorio.html"><span class="portal-dot"></span>Diretório</a></li>
+          <li><a href="equipas-semanais.html"><span class="portal-dot"></span>Equipas Semanais</a></li>
+          <li><a href="scanner-ia.html"><span class="portal-dot"></span>Scanner IA</a></li>
+        </ul>
+        <a class="portal-action" href="users.html" aria-label="Abrir Administração">→</a>
+      </article>
+
+      <article class="portal-card" data-tone="cyan" tabindex="0" aria-selected="false">
+        <div class="portal-card-icon" aria-hidden="true">⚙️</div>
+        <h2>Configurações</h2>
+        <div class="portal-card-divider"></div>
+        <ul class="portal-links">
+          <li><a href="diagnostico.html"><span class="portal-dot"></span>Diagnóstico</a></li>
+          <li><a href="notificacoes.html"><span class="portal-dot"></span>Notificações</a></li>
+          <li><a href="config.html"><span class="portal-dot"></span>Configurações</a></li>
+        </ul>
+        <a class="portal-action" href="config.html" aria-label="Abrir Configurações">→</a>
+      </article>
+    </nav>
+
+    <footer class="portal-foot">
+      <strong>🛡️ Seguro • Confiável • Eficiente</strong>
+      <p>Plataforma centralizada para uma gestão inteligente dos recursos.</p>
+    </footer>
   </div>
-  <nav class="sidebar-nav-pro" aria-label="Navegação principal">
-    <section class="sidebar-favorites" data-sidebar-section="favorites">
-      <div class="sidebar-section-title"><span>⭐</span><strong>Favoritos</strong></div>
-      <a href="index.html" data-icon="🏠" class="active"><span class="sidebar-link-text">Dashboard</span></a>
-      <a href="stock.html" data-icon="📦"><span class="sidebar-link-text">Stock</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-    </section>
-    <div class="sidebar-divider"></div>
-    <section class="sidebar-group" data-sidebar-group="operacao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚡</span><span>Operação</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="add-toner.html" data-icon="➕"><span class="sidebar-link-text">Adicionar Toner</span></a>
-      <a href="historico.html" data-icon="🧾"><span class="sidebar-link-text">Histórico</span></a>
-      <a href="tarefas.html" data-icon="✅"><span class="sidebar-link-text">Tarefas</span></a>
-      <a href="equipas-semanais.html" data-icon="👥"><span class="sidebar-link-text">Equipas Semanais</span></a>
-      <a href="scanner-ia.html" data-icon="📷"><span class="sidebar-link-text">Scanner IA</span></a>
-      <a href="etiquetas-word.html" data-icon="🏷️"><span class="sidebar-link-text">Etiquetas Word</span></a>
-      </div>
-    </section>
-    <section class="sidebar-group" data-sidebar-group="equipamentos">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🧰</span><span>Equipamentos</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-      <a href="manutencao-impressoras.html" data-icon="🛠️"><span class="sidebar-link-text">Manutenção Impressoras</span></a>
-      <a href="computadores.html" data-icon="💻"><span class="sidebar-link-text">Computadores</span></a>
-      <a href="pistolas.html" data-icon="📟"><span class="sidebar-link-text">Pistolas CK65</span></a>
-      <a href="radios.html" data-icon="📡"><span class="sidebar-link-text">Rádios</span></a>
-      </div>
-    </section>
-    <section class="sidebar-group" data-sidebar-group="infraestrutura">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🌐</span><span>Infraestrutura</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="portas.html" data-icon="🔌"><span class="sidebar-link-text">Portas Rede</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="informacoes.html" data-icon="ℹ️"><span class="sidebar-link-text">Informações</span></a>
-      </div>
-    </section>
-    <section class="sidebar-group" data-sidebar-group="administracao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚙️</span><span>Administração</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="users.html" data-icon="👥"><span class="sidebar-link-text">Users</span></a>
-      <a href="diagnostico.html" data-icon="🩺"><span class="sidebar-link-text">Diagnóstico</span></a>
-      <a href="notificacoes.html" data-icon="🔔"><span class="sidebar-link-text">Notificações</span></a>
-      <a href="config.html" data-icon="⚙️"><span class="sidebar-link-text">Configurações</span></a>
-      </div>
-    </section>
-  </nav>
-</aside>
 
-<main class="main dashboard-shell">
-  <div class="page-hero">
-    <div class="page-hero-title">Dashboard</div>
-	<span class="status-pill">Sistema Online</span>
-  </div>
+  <div class="portal-toast" role="status" aria-live="polite"></div>
 
-  <section class="dashboard-widget-toolbar">
-    <div>
-      <h2>Dashboard personalizável</h2>
-      <p>Ativa o modo editar, escolhe templates rápidos e ajusta os widgets como num telemóvel.</p>
-    </div>
-    <div class="dashboard-widget-actions">
-      <button type="button" id="dashboardEditModeBtn">⚙️ Editar Dashboard</button>
-    </div>
-  </section>
-
-  <section id="dashboardWidgetGrid" class="dashboard-widget-grid" aria-label="Widgets do Dashboard"></section>
-</main>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script src="../js/dashboard-widgets.js?v=1.58.22"></script>
-<script src="../js/app.js?v=1.58.22"></script>
-<script src="../js/sidebar-editor.js?v=1.58.22"></script>
-<script src="../js/systems/global-search/global-search.js?v=global-search-2"></script>
-
-<!-- FIREBASE -->
-
-  <script src="../js/core/helpers.js"></script>
-  <script src="../js/iphone-force-final.js?v=1.58.22"></script>
-<script src="../js/enterprise/ops.js?v=ops-13"></script>
-<script src="../js/systems/backup/local-backup.js?v=backup-2"></script>
-<script src="../js/systems/personal-tools.js?v=personal-9"></script>
-
-<script src="../js/iphone-sidebar-final.js?v=1.58.22"></script>
-<script src="../js/operational-improvements.js?v=1.58.22"></script>
-<script src="../js/appbraga-mockup-pages.js?v=1.58.22"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="../js/app.js?v=1.58.24"></script>
+  <script src="../js/portal-home.js?v=1.58.24"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

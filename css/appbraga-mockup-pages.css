@@ -1,4 +1,4 @@
-/* AppBraga v1.58.22 — Redesign estrutural inspirado nos mockups claros.
+/* AppBraga v1.58.24 — Redesign estrutural inspirado nos mockups claros.
    Camada visual/DOM-safe: mantém IDs, handlers JS e Firebase existentes. */
 :root{
   --ab-bg:#f6f9fe;
@@ -158,3 +158,283 @@ tbody tr:last-child td{border-bottom:0!important;}
   .toolbar,.diretorio-filtros{display:grid!important;grid-template-columns:1fr!important;}
   .primary-btn,.secondary-btn,.action-btn{width:100%!important;}
 }
+
+/* AppBraga v1.58.24 — Dark mode correction
+   Reverte o redesign claro para um painel dark premium, mantendo a estrutura/JS. */
+:root,
+html,
+body,
+html.dark,
+body.dark{
+  --ab-bg:#070b14 !important;
+  --ab-bg-soft:#0b1220 !important;
+  --ab-surface:#111827 !important;
+  --ab-surface-2:#151f31 !important;
+  --ab-line:rgba(148,163,184,.18) !important;
+  --ab-line-2:rgba(148,163,184,.12) !important;
+  --ab-text:#f8fafc !important;
+  --ab-muted:#94a3b8 !important;
+  --ab-primary:#3b82f6 !important;
+  --ab-primary-2:#06b6d4 !important;
+  --ab-success:#22c55e !important;
+  --ab-warning:#f59e0b !important;
+  --ab-danger:#ef4444 !important;
+  --ab-shadow:0 22px 60px rgba(0,0,0,.42) !important;
+  --ab-shadow-soft:0 14px 35px rgba(0,0,0,.30) !important;
+  --bg:#070b14 !important;
+  --app-bg:#070b14 !important;
+  --app-bg-2:#0b1220 !important;
+  --card:#111827 !important;
+  --app-surface:#111827 !important;
+  --app-surface-2:#151f31 !important;
+  --nav:#0b1220 !important;
+  --sidebar:#0b1220 !important;
+  --sidebar-hover:#172033 !important;
+  --border:rgba(148,163,184,.18) !important;
+  --app-border:rgba(148,163,184,.18) !important;
+  --text:#f8fafc !important;
+  --app-text:#f8fafc !important;
+  --muted:#94a3b8 !important;
+  --app-muted:#94a3b8 !important;
+  --primary:#3b82f6 !important;
+  --app-primary:#3b82f6 !important;
+  --shadow:0 22px 60px rgba(0,0,0,.42) !important;
+  --soft-shadow:0 14px 35px rgba(0,0,0,.30) !important;
+  color-scheme:dark !important;
+}
+
+html,body{
+  background:
+    radial-gradient(circle at 12% 0%, rgba(59,130,246,.18), transparent 34rem),
+    radial-gradient(circle at 95% 8%, rgba(6,182,212,.13), transparent 32rem),
+    radial-gradient(circle at 70% 95%, rgba(168,85,247,.10), transparent 34rem),
+    linear-gradient(180deg,#070b14 0%,#0b1220 48%,#070b14 100%) !important;
+  color:#f8fafc !important;
+}
+body::before{
+  background:
+    linear-gradient(90deg, rgba(6,10,20,.82), transparent 30rem),
+    radial-gradient(circle at 50% 0%, rgba(59,130,246,.08), transparent 44rem) !important;
+}
+
+/* Sidebar dark */
+.sidebar,
+.sidebar.sidebar-pro-groups{
+  background:rgba(8,13,25,.92) !important;
+  border-right:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:24px 0 70px rgba(0,0,0,.38) !important;
+  color:#e5edf9 !important;
+}
+.sidebar .brand,
+.sidebar .premium-brand{background:transparent !important;border:0 !important;box-shadow:none !important;}
+.sidebar .brand-badge{
+  background:linear-gradient(135deg,#2563eb,#06b6d4) !important;
+  box-shadow:0 16px 35px rgba(37,99,235,.35) !important;
+}
+.sidebar .brand h2{color:#f8fafc !important;}
+.sidebar .brand h2::first-letter{color:#60a5fa !important;}
+.sidebar .sidebar-collapse-toggle,
+.appbraga-menu-dot,
+.appbraga-icon-btn{
+  background:rgba(15,23,42,.88) !important;
+  border:1px solid rgba(148,163,184,.18) !important;
+  color:#dbeafe !important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22) !important;
+}
+.sidebar .sidebar-section-title,
+.sidebar .sidebar-group-toggle{color:#64748b !important;}
+.sidebar a,
+.sidebar .menu-btn,
+.sidebar .sidebar-group-links a,
+.sidebar .sidebar-favorites a{
+  color:#cbd5e1 !important;
+  background:transparent !important;
+}
+.sidebar a::before{
+  background:rgba(15,23,42,.9) !important;
+  border-color:rgba(148,163,184,.18) !important;
+  color:#bfdbfe !important;
+}
+.sidebar a:hover{
+  background:rgba(59,130,246,.12) !important;
+  border-color:rgba(96,165,250,.22) !important;
+  color:#f8fafc !important;
+}
+.sidebar a.active,
+.sidebar a[aria-current="page"]{
+  background:linear-gradient(90deg,rgba(37,99,235,.28),rgba(6,182,212,.10)) !important;
+  color:#ffffff !important;
+  border-color:rgba(96,165,250,.30) !important;
+  box-shadow:inset 4px 0 0 #3b82f6, 0 16px 34px rgba(37,99,235,.20) !important;
+}
+.sidebar a.active::before,
+.sidebar a[aria-current="page"]::before{
+  background:linear-gradient(135deg,#2563eb,#06b6d4) !important;
+  color:#fff !important;
+  border-color:rgba(147,197,253,.42) !important;
+}
+
+/* Shell/topbar */
+.main,.main-content,.page-content,.content-area{background:transparent !important;color:#f8fafc !important;}
+.main::before{display:none !important;}
+.appbraga-modern-topbar{
+  background:rgba(8,13,25,.72) !important;
+  border-bottom:1px solid rgba(148,163,184,.14) !important;
+  backdrop-filter:blur(18px) saturate(150%) !important;
+  box-shadow:0 18px 40px rgba(0,0,0,.24) !important;
+}
+.appbraga-search{
+  background:rgba(15,23,42,.86) !important;
+  border:1px solid rgba(148,163,184,.18) !important;
+  color:#cbd5e1 !important;
+  box-shadow:0 12px 32px rgba(0,0,0,.20) !important;
+}
+.appbraga-search span{color:#94a3b8 !important;}
+.appbraga-profile strong{color:#f8fafc !important;}
+.appbraga-profile span{color:#94a3b8 !important;}
+.appbraga-avatar{background:linear-gradient(135deg,#1d4ed8,#06b6d4) !important;color:#fff !important;}
+
+/* Page titles */
+.page-hero,.topbar,.premium-topbar,.diretorio-hero,.computadores-hero{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+.page-hero-title,.topbar h1,.main h1{
+  color:#f8fafc !important;
+  text-shadow:0 12px 30px rgba(0,0,0,.45) !important;
+}
+.page-hero-title::before{
+  background:linear-gradient(135deg,rgba(37,99,235,.95),rgba(6,182,212,.92)) !important;
+  color:#ffffff !important;
+  box-shadow:0 18px 38px rgba(37,99,235,.30) !important;
+}
+.appbraga-page-subtitle,.page-hero p,.topbar p{color:#94a3b8 !important;}
+.status-pill{background:rgba(34,197,94,.12) !important;color:#86efac !important;border:1px solid rgba(34,197,94,.20) !important;}
+
+/* Cards/panels/forms */
+.panel,.card,.config-section,.diretorio-actions,.diretorio-filtros,.modal-card,.modal-content,
+.dashboard-widget-toolbar,.dashboard-widget-grid > *, .widget-card,
+.section-card,.glass-card,.quick-card,.page-card,.device-card,
+.appbraga-settings-card{
+  background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(15,23,42,.88)) !important;
+  border:1px solid rgba(148,163,184,.16) !important;
+  color:#e5edf9 !important;
+  box-shadow:0 20px 55px rgba(0,0,0,.34) !important;
+  backdrop-filter:blur(14px) saturate(150%) !important;
+}
+.panel h2,.panel h3,.card h2,.card h3,.section-header h3,.dashboard-widget-toolbar h2,
+.appbraga-settings-card strong{color:#f8fafc !important;}
+.panel p,.card p,.dashboard-widget-toolbar p,.appbraga-settings-card span{color:#94a3b8 !important;}
+
+.toolbar,.printers-toolbar,.diretorio-actions,.diretorio-filtros,.etiquetas-bulk-toolbar,.radio-toolbar{
+  background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(15,23,42,.88)) !important;
+  border:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:0 18px 45px rgba(0,0,0,.32) !important;
+}
+input,select,textarea{
+  background:rgba(8,13,25,.86) !important;
+  border:1px solid rgba(148,163,184,.20) !important;
+  color:#f8fafc !important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22) !important;
+}
+input::placeholder,textarea::placeholder{color:#64748b !important;}
+input:focus,select:focus,textarea:focus{
+  border-color:#60a5fa !important;
+  box-shadow:0 0 0 4px rgba(59,130,246,.18),0 12px 30px rgba(0,0,0,.26) !important;
+}
+label{color:#cbd5e1 !important;}
+
+button,.primary-btn,.secondary-btn,.action-btn,.btn{color:#e5edf9 !important;}
+.primary-btn,.btn-primary,button.primary{
+  background:linear-gradient(135deg,#2563eb,#0891b2) !important;
+  color:#ffffff !important;
+  box-shadow:0 16px 35px rgba(37,99,235,.32) !important;
+}
+.secondary-btn,.action-btn,.btn-secondary{
+  background:rgba(15,23,42,.88) !important;
+  color:#dbeafe !important;
+  border:1px solid rgba(148,163,184,.18) !important;
+  box-shadow:0 12px 26px rgba(0,0,0,.24) !important;
+}
+
+/* Stats */
+.stats-grid,.computadores-stats,.diretorio-stats{gap:18px !important;}
+.stat-card{
+  background:linear-gradient(180deg,rgba(17,24,39,.94),rgba(15,23,42,.88)) !important;
+  border:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:0 18px 46px rgba(0,0,0,.32) !important;
+  color:#e5edf9 !important;
+}
+.stat-card::before{
+  background:rgba(59,130,246,.16) !important;
+  color:#93c5fd !important;
+  border:1px solid rgba(96,165,250,.20) !important;
+}
+.stat-card span{color:#94a3b8 !important;}
+.stat-card strong,.stat-card .stat-value{color:#f8fafc !important;}
+.stat-card small{color:#94a3b8 !important;}
+
+/* Tables */
+.table-scroll,.table-wrap,.printers-table-wrap,.reference-table-wrap{
+  background:linear-gradient(180deg,rgba(17,24,39,.95),rgba(15,23,42,.90)) !important;
+  border:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:0 20px 55px rgba(0,0,0,.34) !important;
+}
+table,.pro-table,.reference-table{background:transparent !important;color:#e5edf9 !important;}
+thead th{
+  background:rgba(15,23,42,.96) !important;
+  border-bottom:1px solid rgba(148,163,184,.16) !important;
+  color:#cbd5e1 !important;
+}
+tbody td{
+  background:rgba(17,24,39,.72) !important;
+  border-bottom:1px solid rgba(148,163,184,.10) !important;
+  color:#dbeafe !important;
+}
+tbody tr:hover td{background:rgba(30,41,59,.92) !important;}
+.pro-table td button,.reference-table td button,td .action-btn{
+  background:rgba(8,13,25,.82) !important;
+  border:1px solid rgba(148,163,184,.18) !important;
+  color:#cbd5e1 !important;
+}
+
+/* Badges/status */
+.badge,.pill,.status-badge,[class*="badge"],[class*="status"]{
+  border:1px solid rgba(148,163,184,.14) !important;
+}
+.status-online,.badge-online,.online,.ok,.success{background:rgba(34,197,94,.14) !important;color:#86efac !important;}
+.status-offline,.badge-offline,.offline,.danger,.critical{background:rgba(239,68,68,.14) !important;color:#fca5a5 !important;}
+.warning,.low,.baixo,.alerta{background:rgba(245,158,11,.14) !important;color:#fcd34d !important;}
+
+/* Dashboard widgets/cards with printer photos */
+.dashboard-widget-grid,
+#dashboardWidgetGrid{gap:18px !important;}
+#dashboardWidgetGrid .widget-card,
+.dashboard-widget-grid .widget-card,
+.dashboard-widget-grid > section{
+  background:linear-gradient(180deg,rgba(17,24,39,.94),rgba(15,23,42,.88)) !important;
+  border:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:0 20px 55px rgba(0,0,0,.34) !important;
+}
+#dashboardWidgetGrid img,.dashboard-widget-grid img{
+  background:linear-gradient(135deg,#111827,#030712) !important;
+  border-radius:16px !important;
+}
+
+/* Settings cards */
+.appbraga-settings-icon{
+  background:rgba(59,130,246,.16) !important;
+  color:#93c5fd !important;
+  border:1px solid rgba(96,165,250,.18) !important;
+}
+.appbraga-settings-card:nth-child(2) .appbraga-settings-icon{background:rgba(245,158,11,.15)!important;color:#fcd34d!important;}
+.appbraga-settings-card:nth-child(3) .appbraga-settings-icon{background:rgba(16,185,129,.14)!important;color:#6ee7b7!important;}
+.appbraga-settings-card:nth-child(4) .appbraga-settings-icon{background:rgba(124,58,237,.16)!important;color:#c4b5fd!important;}
+.appbraga-settings-card:nth-child(6) .appbraga-settings-icon{background:rgba(20,184,166,.14)!important;color:#5eead4!important;}
+
+/* Remove leftovers from the light mockup */
+footer, .footer{color:#64748b !important;border-color:rgba(148,163,184,.12) !important;}
+hr{border-color:rgba(148,163,184,.14) !important;}
+*{scrollbar-color:#334155 transparent !important;}
+*::-webkit-scrollbar-thumb{background:#334155 !important;border-color:transparent !important;}
