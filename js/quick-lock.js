@@ -1,6 +1,6 @@
 (function(){
   "use strict";
-  const VERSION = "1.58.29";
+  const VERSION = "1.58.30";
   const STORAGE_KEY = "appBraga.quickLock.enabled";
   const PIN_KEY = "appBraga.quickLock.pin";
   const LOGIN_PAGES = new Set(["index.html", "login.html", ""]);

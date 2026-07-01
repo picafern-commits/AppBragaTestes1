@@ -74,7 +74,7 @@ body.dashboard-futurista-body:after{right:-8rem;top:18rem;width:38rem;height:25r
 @media(max-width:1300px){.dash-kpis{grid-template-columns:repeat(3,1fr)}.dash-main-grid{grid-template-columns:1fr 1fr}.dash-printers{grid-column:span 2}.dash-bottom-grid{grid-template-columns:1fr}.dashboard-futurista{width:min(1180px,calc(100vw - 36px));}.dash-hero h1{font-size:42px}}
 @media(max-width:820px){.dash-top{padding:18px}.dash-brand{font-size:22px}.dash-logo{width:44px;height:44px}.dash-user-main{display:none}.dashboard-futurista{margin-top:18px;width:calc(100vw - 24px)}.dash-hero{padding:24px 18px}.dash-hero h1{font-size:36px}.dash-kpis,.dash-main-grid,.dash-bottom-grid,#listaDashboardStock{grid-template-columns:1fr}.dash-printers{grid-column:auto}.dash-toner-grid,.dash-health{grid-template-columns:1fr}.dash-progress-row{grid-template-columns:1fr;gap:7px}}
 
-/* v1.58.29 — ajustes do Dashboard futurista
+/* v1.58.30 — ajustes do Dashboard futurista
    - remove a barra App Braga Pro desta página
    - corrige scroll
    - ocupa melhor o ecrã
@@ -155,7 +155,7 @@ body.dashboard-futurista-body{
 }
 
 
-/* v1.58.29 — limpeza real do Dashboard novo
+/* v1.58.30 — limpeza real do Dashboard novo
    Impede que os widgets/dashboard antigo sejam injectados por scripts globais. */
 body.dashboard-futurista-body #personalToolsDashboard,
 body.dashboard-futurista-body #personalDashboardOverview,

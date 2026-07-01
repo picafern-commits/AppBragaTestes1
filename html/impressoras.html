@@ -11,8 +11,8 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.29">
-  <link rel="stylesheet" href="../css/impressoras-futurista.css?v=1.58.29">
+  <link rel="stylesheet" href="../css/style.css?v=1.58.30">
+  <link rel="stylesheet" href="../css/impressoras-futurista.css?v=1.58.30">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -69,11 +69,12 @@
               <tr>
                 <th>Modelo</th>
                 <th>Série</th>
-                <th>Armazém</th>
-                <th>Localização</th>
+                <th>Local</th>
                 <th>IP</th>
+                <th>Toner</th>
                 <th>Estado</th>
-                <th>Toner / Ações</th>
+                <th>Última leitura</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody id="impressorasTableBody"></tbody>
@@ -85,7 +86,7 @@
         <article class="imp-panel">
           <div class="imp-panel-head"><div class="imp-panel-title"><span>⚡</span><div><h3>Ações rápidas</h3><p>Atalhos da área Impressoras.</p></div></div></div>
           <div class="imp-quick-grid">
-            <button class="imp-btn primary" type="button" onclick="abrirAdicionarImpressora()">➕ Adicionar Toner</button>
+            <button class="imp-btn primary" type="button" data-go="add-toner.html">➕ Adicionar Toner</button>
             <button class="imp-btn" type="button" data-go="stock.html">📦 Stock</button>
             <button class="imp-btn" type="button" data-go="historico.html">↩ Histórico</button>
             <button class="imp-btn" type="button" data-go="etiquetas-word.html">🏷️ Etiquetas Word</button>
@@ -105,10 +106,10 @@
         <article class="imp-panel">
           <div class="imp-panel-head"><div class="imp-panel-title"><span>🎨</span><div><h3>Resumo por cor</h3><p>Estado geral do stock por cor.</p></div></div><a class="imp-btn small" href="stock.html">Ver stock →</a></div>
           <div class="imp-bars">
-            <div class="imp-bar"><span>Preto</span><span class="imp-bar-line"><span class="imp-bar-fill black" style="width:58%"></span></span><strong>58%</strong></div>
-            <div class="imp-bar"><span>Ciano</span><span class="imp-bar-line"><span class="imp-bar-fill cyan" style="width:64%"></span></span><strong>64%</strong></div>
-            <div class="imp-bar"><span>Magenta</span><span class="imp-bar-line"><span class="imp-bar-fill magenta" style="width:52%"></span></span><strong>52%</strong></div>
-            <div class="imp-bar"><span>Amarelo</span><span class="imp-bar-line"><span class="imp-bar-fill yellow" style="width:47%"></span></span><strong>47%</strong></div>
+            <div class="imp-bar"><span>Preto</span><span class="imp-bar-line"><span class="imp-bar-fill black" style="width:58%"></span></span><strong>58%</strong><small>128 un.</small></div>
+            <div class="imp-bar"><span>Ciano</span><span class="imp-bar-line"><span class="imp-bar-fill cyan" style="width:64%"></span></span><strong>64%</strong><small>96 un.</small></div>
+            <div class="imp-bar"><span>Magenta</span><span class="imp-bar-line"><span class="imp-bar-fill magenta" style="width:52%"></span></span><strong>52%</strong><small>78 un.</small></div>
+            <div class="imp-bar"><span>Amarelo</span><span class="imp-bar-line"><span class="imp-bar-fill yellow" style="width:47%"></span></span><strong>47%</strong><small>70 un.</small></div>
           </div>
         </article>
 
@@ -183,8 +184,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.29"></script>
-  <script src="../js/core/helpers.js?v=1.58.29"></script>
-  <script src="../js/impressoras-futurista.js?v=1.58.29"></script>
+  <script src="../js/app.js?v=1.58.30"></script>
+  <script src="../js/core/helpers.js?v=1.58.30"></script>
+  <script src="../js/impressoras-futurista.js?v=1.58.30"></script>
 </body>
 </html>
