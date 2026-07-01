@@ -476,3 +476,77 @@ body.impressoras-futurista .imp-page,
 body.impressoras-futurista .imp-shell {
   padding-bottom: 96px !important;
 }
+
+
+/* v1.58.37 — ajustes cirúrgicos página Impressoras */
+body.impressoras-futurista .imp-top,
+body.impressoras-futurista .imp-back {
+  display: none !important;
+}
+
+body.impressoras-futurista .imp-page {
+  padding-top: 28px !important;
+  padding-bottom: 42px !important;
+}
+
+body.impressoras-futurista .imp-hero {
+  margin-top: 0 !important;
+}
+
+body.impressoras-futurista .imp-side {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: start !important;
+}
+
+body.impressoras-futurista .imp-bottom-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 14px !important;
+  align-items: stretch !important;
+  margin-top: 14px !important;
+  padding-bottom: 0 !important;
+}
+
+body.impressoras-futurista .imp-bottom-grid > .imp-panel {
+  min-height: 176px !important;
+}
+
+body.impressoras-futurista .imp-panel {
+  overflow: hidden !important;
+}
+
+body.impressoras-futurista .imp-word-print {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(65, 220, 116, .35) !important;
+  background: rgba(38, 168, 91, .28) !important;
+  color: #79f49a !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  cursor: pointer !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 12px rgba(46, 220, 112, .16) !important;
+}
+
+body.impressoras-futurista .imp-word-print:hover {
+  background: rgba(38, 200, 105, .38) !important;
+}
+
+body.impressoras-futurista .imp-mini-row {
+  grid-template-columns: 64px 1fr auto !important;
+}
+
+body.impressoras-futurista .imp-bar {
+  grid-template-columns: 76px 1fr 58px !important;
+}
+
+body.impressoras-futurista .imp-bar small {
+  display: none !important;
+}
+
+body.impressoras-futurista .imp-bar strong {
+  min-width: 54px !important;
+  text-align: right !important;
+}

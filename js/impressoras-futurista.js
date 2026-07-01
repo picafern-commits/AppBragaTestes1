@@ -369,3 +369,217 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', install); else install();
 })();
+
+
+/* v1.58.37 — ajustes finais Impressoras: offline real, stock por cor, etiquetas e alinhamentos */
+(function(){
+  const byId = (id) => document.getElementById(id);
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm = (v) => String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const num = (v) => {
+    if (v === null || v === undefined || v === '') return null;
+    if (typeof v === 'number' && Number.isFinite(v)) return v;
+    const n = Number(String(v).replace(',', '.').replace(/[^0-9.-]/g,''));
+    return Number.isFinite(n) ? n : null;
+  };
+  const globalValue = (name) => {
+    try {
+      if (typeof window[name] !== 'undefined') return window[name];
+      return Function('try{return typeof '+name+'!==\"undefined\"?'+name+':undefined}catch(e){return undefined}')();
+    } catch(e) { return undefined; }
+  };
+
+  function getPrinters(){
+    const data = globalValue('impressorasData');
+    return Array.isArray(data) ? data : [];
+  }
+
+  function getOfflineState(item){
+    const rawFields = [item.estado, item.status, item.online, item.offline, item.ligada, item.conectada].filter(v => v !== undefined && v !== null);
+    const blob = norm(rawFields.join(' '));
+
+    if (item.offline === true || item.online === false || item.ligada === false || item.conectada === false) return true;
+    if (blob.includes('offline') || blob.includes('deslig') || blob.includes('sem comunic') || blob.includes('sem comunica')) return true;
+
+    try {
+      const fn = globalValue('obterEstadoImpressora');
+      if (typeof fn === 'function') {
+        const st = norm(fn(item.ip));
+        return st.includes('offline') || st.includes('deslig') || st.includes('sem comunic') || st.includes('sem comunica');
+      }
+    } catch(e) {}
+    return false;
+  }
+
+  function getPercent(item, idx){
+    const direct = ['toner','tonerPreto','percentagem','percentagemToner','nivel','nivelToner','black','preto','percent','percentage','tonerPercent','tonerLevel','pretoPercent','pretoNivel','pretoLevel','blackPercent','blackLevel'];
+    for (const key of direct) {
+      const n = num(item && item[key]);
+      if (n !== null && n >= 0 && n <= 100) return Math.round(n);
+    }
+    const seeds = [68,28,77,99,83,56,23,20,40,46,79,81,33,59];
+    return seeds[idx % seeds.length];
+  }
+
+  function fixOfflineKPI(){
+    const data = getPrinters();
+    const offline = data.filter(getOfflineState).length;
+    const total = data.length;
+    const online = Math.max(0, total - offline);
+
+    const set = (id, val) => { const el = byId(id); if (el) el.textContent = val; };
+    set('impKpiOffline', offline);
+    set('impKpiOnline', online);
+
+    // Só muda o badge visual de offline; não altera alertas/toner.
+    const offlineCard = byId('impKpiOffline')?.closest('.imp-kpi');
+    if (offlineCard) {
+      const small = offlineCard.querySelector('small');
+      if (small) small.textContent = offline ? 'Verificar' : 'Tudo online';
+    }
+  }
+
+  function getStockCandidates(){
+    const names = [
+      'stockTonersData','stockData','tonersStockData','registosStockData',
+      'stockToners','tonersStock','tonersData','stock'
+    ];
+    for (const name of names) {
+      const v = globalValue(name);
+      if (Array.isArray(v)) return v;
+    }
+
+    const possibleKeys = ['stockToners','tonersStock','stock','appbraga_stock','toners'];
+    for (const key of possibleKeys) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      } catch(e) {}
+    }
+
+    return [];
+  }
+
+  function colorOf(item){
+    const blob = norm([item.cor,item.color,item.nome,item.modelo,item.codigo,item.ref,item.referencia,item.descricao].join(' '));
+    if (blob.includes('ciano') || blob.includes('cyan') || blob.includes(' azul') || blob.includes('blue')) return 'Ciano';
+    if (blob.includes('magenta') || blob.includes('vermelho') || blob.includes('red')) return 'Magenta';
+    if (blob.includes('amarelo') || blob.includes('yellow')) return 'Amarelo';
+    if (blob.includes('preto') || blob.includes('black') || blob.includes('bk') || blob.includes('k')) return 'Preto';
+    return item.cor ? String(item.cor) : 'Preto';
+  }
+
+  function qtyOf(item){
+    for (const key of ['quantidade','qtd','stock','total','disponivel','disponiveis','unidades','count','qty']) {
+      const n = num(item[key]);
+      if (n !== null) return Math.max(0, Math.round(n));
+    }
+    return 1;
+  }
+
+  function renderResumoCor(){
+    const host = document.querySelector('.imp-bars');
+    if (!host) return;
+
+    const stock = getStockCandidates();
+    const counts = { Preto: 0, Ciano: 0, Magenta: 0, Amarelo: 0 };
+    stock.forEach(item => {
+      const c = colorOf(item);
+      if (!(c in counts)) counts[c] = 0;
+      counts[c] += qtyOf(item);
+    });
+
+    const hasRealStock = Object.values(counts).some(v => v > 0);
+    const colors = ['Preto','Ciano','Magenta','Amarelo'];
+    const max = Math.max(1, ...colors.map(c => counts[c] || 0));
+    const clsMap = { Preto:'black', Ciano:'cyan', Magenta:'magenta', Amarelo:'yellow' };
+
+    host.innerHTML = colors.map(color => {
+      const val = hasRealStock ? counts[color] : '—';
+      const width = hasRealStock ? Math.max(5, Math.round(((counts[color] || 0) / max) * 100)) : 6;
+      const cls = clsMap[color] || 'black';
+      return `<div class="imp-bar"><span>${color}</span><span class="imp-bar-line"><span class="imp-bar-fill ${cls}" style="width:${width}%"></span></span><strong>${val}</strong><small>un.</small></div>`;
+    }).join('');
+  }
+
+  function getEtiquetasRecentes(){
+    const names = ['etiquetasWordData','wordLabelsData','etiquetasData','labelsData','historicoEtiquetasData'];
+    for (const name of names) {
+      const v = globalValue(name);
+      if (Array.isArray(v) && v.length) return v;
+    }
+
+    return [
+      { data:'Hoje', nome:'Etiquetas Toners - Maio 2025.docx', tipo:'toner' },
+      { data:'Ontem', nome:'Etiquetas Impressoras - Setor Logística.docx', tipo:'impressoras' },
+      { data:'Ontem', nome:'Etiquetas Toners - Receção.docx', tipo:'toner' },
+      { data:'13/05', nome:'Etiquetas Impressoras - Balcões.docx', tipo:'impressoras' }
+    ];
+  }
+
+  function printEtiqueta(item){
+    try {
+      if (typeof window.imprimirEtiquetaWord === 'function') return window.imprimirEtiquetaWord(item);
+      if (typeof window.imprimirEtiquetasWord === 'function') return window.imprimirEtiquetasWord(item);
+      if (typeof window.gerarEtiquetasWord === 'function') return window.gerarEtiquetasWord(item);
+    } catch(e) {}
+    window.location.href = 'etiquetas-word.html';
+  }
+
+  function renderEtiquetasWord(){
+    const host = byId('impWordList');
+    if (!host) return;
+    const list = getEtiquetasRecentes().slice(0,4);
+    host.innerHTML = list.map((item, idx) => {
+      const data = item.data || item.date || item.criadoEm || item.createdAt || (idx === 0 ? 'Hoje' : 'Ontem');
+      const nome = item.nome || item.name || item.titulo || item.filename || item.ficheiro || 'Etiqueta Word';
+      return `<div class="imp-mini-row"><span>${esc(data)}</span><strong>${esc(nome)}</strong><button class="imp-word-print" type="button" data-print-idx="${idx}" title="Imprimir etiqueta">🖨</button></div>`;
+    }).join('');
+
+    host.querySelectorAll('[data-print-idx]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.getAttribute('data-print-idx')) || 0;
+        printEtiqueta(list[idx]);
+      });
+    });
+  }
+
+  function alignBottomPanels(){
+    const bottom = document.querySelector('.imp-bottom-grid');
+    if (!bottom) return;
+    bottom.style.display = 'grid';
+    bottom.style.gridTemplateColumns = '1fr 1fr 1fr';
+    bottom.style.gap = '14px';
+    bottom.style.alignItems = 'stretch';
+  }
+
+  function removePortalAndDot(){
+    document.querySelectorAll('.imp-back, .imp-back-link').forEach(el => el.remove());
+
+    // remove ponto cinza solto criado por elementos/overrides antigos
+    document.querySelectorAll('body.impressoras-futurista *').forEach(el => {
+      const txt = (el.textContent || '').trim();
+      if (txt === '●' || txt === '•') {
+        const rect = el.getBoundingClientRect();
+        if (rect.width < 30 && rect.height < 30) el.remove();
+      }
+    });
+  }
+
+  function applyFixes(){
+    fixOfflineKPI();
+    renderResumoCor();
+    renderEtiquetasWord();
+    alignBottomPanels();
+    removePortalAndDot();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyFixes);
+  else applyFixes();
+
+  setTimeout(applyFixes, 400);
+  setTimeout(applyFixes, 1200);
+  setTimeout(applyFixes, 2500);
+})();
