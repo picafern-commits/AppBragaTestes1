@@ -316,7 +316,9 @@
       try { return await window.regerarEtiquetaWordPartilhada(idOf(item)); } catch(e) { console.warn(e); }
     }
     if (typeof window.gerarWordEtiquetaPartilhada === "function") {
-      return window.gerarWordEtiquetaPartilhada(item, { saveRecord: options.saveRecord !== false, silent: false });
+      const res = await window.gerarWordEtiquetaPartilhada(item, { saveRecord: options.saveRecord !== false, silent: false });
+      try { if (window.registarEtiquetaGeradaAppBraga) await window.registarEtiquetaGeradaAppBraga(item); } catch(e) {}
+      return res;
     }
     alert("Sistema Word indisponível nesta página.");
     return false;
@@ -443,6 +445,16 @@
     if (latest) return generateFromItem(latest, { preferExisting:false, saveRecord:true });
     window.location.href = "add-toner.html";
   };
+
+
+  window.addEventListener("appbraga:systems:update", function(ev){
+    try {
+      if (ev.detail && Array.isArray(ev.detail.etiquetasWord) && ev.detail.etiquetasWord.length) {
+        window.__etiquetasFuturista = ev.detail.etiquetasWord;
+        renderAll();
+      }
+    } catch(e) {}
+  });
 
   function init(){
     overrideLegacy();

@@ -1,6 +1,16 @@
 {
-  "version": "1.58.69",
-  "build": "manutencao-impressoras-futurista-sistemas",
+  "version": "1.58.70",
+  "build": "appbraga-systems-global-movimentos-alertas-logs",
   "updatedAt": "2026-07-01T18:10:00+01:00",
-  "cache": "1.58.69"
+  "cache": "1.58.70",
+  "systems": {
+    "movimentos": "movimentos",
+    "alertas": "alertasTecnicos",
+    "notificacoes": "notificacoes",
+    "logs": "activityLog",
+    "stock": "stock",
+    "impressoras": "impressoras",
+    "manutencoes": "manutencoes",
+    "etiquetasWord": "etiquetasWord"
+  }
 }

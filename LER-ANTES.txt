@@ -1,15 +1,37 @@
-AppBraga v1.58.69 — Página Manutenção Impressoras futurista com sistemas ligados.
+AppBraga v1.58.70 — Camada global de sistemas.
 
-Alterações:
-- Nova página html/manutencao-impressoras.html no visual aprovado;
-- Sem barra antiga/sidebar;
-- Hero com logotipo no círculo como botão para Portal;
-- KPIs funcionais;
-- Lista de intervenções ligada às coleções manutencoes/manutencao;
-- Filtros por pesquisa, local, prioridade e estado;
-- Formulário Nova intervenção ligado ao Firebase;
-- Ver/editar/concluir intervenção;
-- Alertas técnicos, agenda, timeline e peças relacionadas;
-- IDs antigos principais preservados para compatibilidade.
+O que foi criado:
+- js/appbraga-systems.js
+- Sistema global de movimentos: coleção movimentos
+- Sistema global de alertas técnicos: coleção alertasTecnicos
+- Sistema global de notificações: coleção notificacoes
+- Sistema global de logs/auditoria: coleção activityLog
+- Resumos comuns de stock, manutenção e etiquetas
+- Diagnóstico comum com estado das coleções principais
 
-Depois do deploy abre /html/manutencao-impressoras.html?v=1.58.69 e Ctrl+F5.
+Páginas ligadas à camada comum:
+- Dashboard
+- Impressoras
+- Stock
+- Adicionar Toner
+- Histórico
+- Etiquetas Word
+- Manutenção Impressoras
+- Diagnóstico
+- Notificações
+- Configurações
+- Portal/index
+
+Sistemas automáticos:
+- alerta stock sem unidades
+- alerta toner a 25%
+- alerta toner a 0%
+- alerta toner reposto de 0 para 99/100%
+- manutenção atrasada/crítica
+- movimento quando gera/reimprime etiqueta
+- movimento quando guarda intervenção
+- movimento quando guarda toner
+
+Nota:
+Esta versão não muda o visual das páginas. Só adiciona a base comum para os cards novos começarem a ter sistema real.
+Depois do deploy: abrir com ?v=1.58.70 e Ctrl+F5.

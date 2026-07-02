@@ -250,7 +250,7 @@
   function renderAlerts(items){
     const host = byId("stockAlertsList");
     if (!host) return;
-    // v1.58.61: alertas de stock só aparecem quando a quantidade é 0.
+    // v1.58.70: alertas de stock só aparecem quando a quantidade é 0.
     // Stock baixo continua visível no KPI/estado da tabela, mas não entra neste card.
     const alerts = getStock().filter(i => qty(i) <= 0).sort((a,b)=>qty(a)-qty(b)).slice(0, 5);
     if (!alerts.length) {
@@ -663,3 +663,13 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind);
   else bind();
 })();
+
+
+// v1.58.70 — ouvir resumo global de stock/alertas
+window.addEventListener("appbraga:systems:update", function(ev){
+  try {
+    if (!ev.detail) return;
+    window.__appbragaResumoStock = ev.detail.resumoStock || {};
+    window.__appbragaAlertasStock = (ev.detail.alertas || []).filter(function(a){ return String(a.tipo||"").includes("stock"); });
+  } catch(e) {}
+});

@@ -109,3 +109,28 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+
+// v1.58.70 — integração com AppBragaSystems para movimentos de toner
+(function(){
+  function collectTonerPayload(){
+    return {
+      equipamento: document.querySelector("#equipamento,#tonerEquipamento,#addTonerEquipamento")?.value || "",
+      localizacao: document.querySelector("#localizacao,#tonerLocalizacao,#addTonerLocalizacao")?.value || "",
+      cor: document.querySelector("#cor,#tonerCor,#addTonerCor")?.value || "",
+      quantidade: document.querySelector("#quantidade,#tonerQuantidade,#addTonerQuantidade")?.value || 1,
+      referencia: document.querySelector("#codigoEtiqueta,#sdsRef,#sdsReferencia")?.value || "",
+      area: "Adicionar Toner"
+    };
+  }
+  document.addEventListener("click", function(ev){
+    const btn = ev.target.closest("button");
+    if (!btn) return;
+    const text = (btn.textContent || "").toLowerCase();
+    if (text.includes("guardar") && text.includes("registo")) {
+      setTimeout(function(){
+        try { if (window.registarTonerAdicionadoAppBraga) window.registarTonerAdicionadoAppBraga(collectTonerPayload()); } catch(e) {}
+      }, 800);
+    }
+  }, true);
+})();

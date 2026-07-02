@@ -95,3 +95,9 @@
     setInterval(()=>{ cleanupInjectedDashboardChrome(); bindNavigation(); tick(); },1800);
   });
 })();
+
+
+// v1.58.70 — estado global para dashboard
+window.addEventListener("appbraga:systems:update", function(ev){
+  try { window.__appbragaSystemsDashboard = ev.detail || {}; } catch(e) {}
+});
