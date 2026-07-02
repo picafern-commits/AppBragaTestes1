@@ -1,0 +1,66 @@
+﻿{
+  "name": "app-braga",
+  "version": "1.58.14",
+  "description": "App Braga - gestao de toners e computadores",
+  "main": "js/main.js",
+  "author": "Ricardo Fernandes",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "electron:dev": "electron .",
+    "pack": "electron-builder --dir",
+    "setup": "electron-builder --win nsis",
+    "dist": "electron-builder --win nsis",
+    "functions:lint": "npm --prefix functions run lint",
+    "functions:deploy": "firebase deploy --only functions --project toner-manager-756c4"
+  },
+  "devDependencies": {
+    "electron": "41.2.0",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "com.appbraga.desktop",
+    "productName": "App Braga",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "html/**/*",
+      "css/**/*",
+      "js/**/*",
+      "img/**/*",
+      "assets/**/*",
+      "manifest.json",
+      "ELECTRON_SETUP.md",
+      "sw.js",
+      "icon.ico",
+      "icon-192.png",
+      "icon-512.png",
+      "assets/icon-192.png",
+      "assets/icon-512.png"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico",
+      "signAndEditExecutable": false,
+      "artifactName": "App-Braga-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "App Braga",
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "installerHeaderIcon": "icon.ico"
+    },
+    "icon": "icon.ico"
+  },
+  "dependencies": {
+    "net-snmp": "^3.26.0"
+  }
+}
