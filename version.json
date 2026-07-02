@@ -1,8 +1,8 @@
 {
-  "version": "1.58.73",
-  "build": "clean-layout-full-screen-pages",
+  "version": "1.58.74",
+  "build": "deploy-clean-timeout-fix",
   "updatedAt": "2026-07-01T18:10:00+01:00",
-  "cache": "1.58.73",
+  "cache": "1.58.74",
   "systems": {
     "movimentos": "movimentos",
     "alertas": "alertasTecnicos",
