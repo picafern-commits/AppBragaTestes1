@@ -1,4 +1,4 @@
-const APP_BRAGA_SW = "app-braga-runtime-v15870";
+const APP_BRAGA_SW = "app-braga-runtime-v15871";
 const APP_SHELL = [
   "./",
   "./index.html",

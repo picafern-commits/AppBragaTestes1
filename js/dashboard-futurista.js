@@ -97,7 +97,7 @@
 })();
 
 
-// v1.58.70 — estado global para dashboard
+// v1.58.71 — estado global para dashboard
 window.addEventListener("appbraga:systems:update", function(ev){
   try { window.__appbragaSystemsDashboard = ev.detail || {}; } catch(e) {}
 });

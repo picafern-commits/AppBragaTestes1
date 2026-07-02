@@ -1,37 +1,14 @@
-AppBraga v1.58.70 — Camada global de sistemas.
+AppBraga v1.58.71 — Dashboard limpo e redimensionado.
 
-O que foi criado:
-- js/appbraga-systems.js
-- Sistema global de movimentos: coleção movimentos
-- Sistema global de alertas técnicos: coleção alertasTecnicos
-- Sistema global de notificações: coleção notificacoes
-- Sistema global de logs/auditoria: coleção activityLog
-- Resumos comuns de stock, manutenção e etiquetas
-- Diagnóstico comum com estado das coleções principais
+Alterações:
+- Mexido só na página Dashboard e respetivo CSS/JS;
+- Cards KPI mais baixos e alinhados;
+- Hero mais compacto e encaixado;
+- Grelha principal limpa: Impressoras + Equipamentos + Infraestrutura + Administração + Configurações;
+- Cards internos reduzidos para caberem melhor no ecrã;
+- Bottom cards alinhados e compactos;
+- Removido botão flutuante Portal da página Dashboard;
+- Mantido AppBraga Systems v1.58.70 ligado;
+- Versão/cache v1.58.71.
 
-Páginas ligadas à camada comum:
-- Dashboard
-- Impressoras
-- Stock
-- Adicionar Toner
-- Histórico
-- Etiquetas Word
-- Manutenção Impressoras
-- Diagnóstico
-- Notificações
-- Configurações
-- Portal/index
-
-Sistemas automáticos:
-- alerta stock sem unidades
-- alerta toner a 25%
-- alerta toner a 0%
-- alerta toner reposto de 0 para 99/100%
-- manutenção atrasada/crítica
-- movimento quando gera/reimprime etiqueta
-- movimento quando guarda intervenção
-- movimento quando guarda toner
-
-Nota:
-Esta versão não muda o visual das páginas. Só adiciona a base comum para os cards novos começarem a ter sistema real.
-Depois do deploy: abrir com ?v=1.58.70 e Ctrl+F5.
+Depois do deploy abre /html/dashboard.html?v=1.58.71 e faz Ctrl+F5.

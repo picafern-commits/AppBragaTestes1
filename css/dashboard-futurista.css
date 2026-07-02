@@ -74,7 +74,7 @@ body.dashboard-futurista-body:after{right:-8rem;top:18rem;width:38rem;height:25r
 @media(max-width:1300px){.dash-kpis{grid-template-columns:repeat(3,1fr)}.dash-main-grid{grid-template-columns:1fr 1fr}.dash-printers{grid-column:span 2}.dash-bottom-grid{grid-template-columns:1fr}.dashboard-futurista{width:min(1180px,calc(100vw - 36px));}.dash-hero h1{font-size:42px}}
 @media(max-width:820px){.dash-top{padding:18px}.dash-brand{font-size:22px}.dash-logo{width:44px;height:44px}.dash-user-main{display:none}.dashboard-futurista{margin-top:18px;width:calc(100vw - 24px)}.dash-hero{padding:24px 18px}.dash-hero h1{font-size:36px}.dash-kpis,.dash-main-grid,.dash-bottom-grid,#listaDashboardStock{grid-template-columns:1fr}.dash-printers{grid-column:auto}.dash-toner-grid,.dash-health{grid-template-columns:1fr}.dash-progress-row{grid-template-columns:1fr;gap:7px}}
 
-/* v1.58.61 — ajustes do Dashboard futurista
+/* v1.58.71 — ajustes do Dashboard futurista
    - remove a barra App Braga Pro desta página
    - corrige scroll
    - ocupa melhor o ecrã
@@ -155,7 +155,7 @@ body.dashboard-futurista-body{
 }
 
 
-/* v1.58.61 — limpeza real do Dashboard novo
+/* v1.58.71 — limpeza real do Dashboard novo
    Impede que os widgets/dashboard antigo sejam injectados por scripts globais. */
 body.dashboard-futurista-body #personalToolsDashboard,
 body.dashboard-futurista-body #personalDashboardOverview,
@@ -220,7 +220,7 @@ body.dashboard-futurista-body .dash-kpi-sub{
 }
 
 
-/* v1.58.61 — dashboard alinhado visualmente com Impressoras / Stock / Adicionar Toner */
+/* v1.58.71 — dashboard alinhado visualmente com Impressoras / Stock / Adicionar Toner */
 body.dashboard-futurista-body .dash-top{
   position:relative !important;
   z-index:2 !important;
@@ -363,7 +363,7 @@ body.dashboard-futurista-body .dash-hero p{
 }
 
 
-/* v1.58.61 — sem barra superior interna nas páginas futuristas
+/* v1.58.71 — sem barra superior interna nas páginas futuristas
    Regra para páginas atuais e futuras: usar apenas o hero/bloco principal. */
 body.dashboard-futurista-body .dash-top,
 body.impressoras-futurista .imp-topbar,
@@ -399,7 +399,7 @@ body.stock-futurista .stock-hero {
 }
 
 
-/* v1.58.61 — remove definitivamente a barra superior interna */
+/* v1.58.71 — remove definitivamente a barra superior interna */
 body.impressoras-futurista .imp-top,
 body.impressoras-futurista .imp-brand,
 body.impressoras-futurista .imp-top-actions,
@@ -433,4 +433,421 @@ body.dashboard-futurista-body .dashboard-shell {
 body.impressoras-futurista .imp-hero,
 body.dashboard-futurista-body .dash-hero {
   margin-top: 10px !important;
+}
+
+
+/* v1.58.71 — Dashboard clean/encaixado */
+body.dashboard-clean-v15871{
+  overflow-x:hidden !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(28,110,255,.20), transparent 26rem),
+    radial-gradient(circle at 0% 42%, rgba(0,160,255,.12), transparent 28rem),
+    radial-gradient(circle at 100% 48%, rgba(0,220,255,.10), transparent 28rem),
+    linear-gradient(135deg,#020811 0%,#03162e 52%,#020b19 100%) !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-futurista{
+  width:calc(100vw - 42px) !important;
+  max-width:1840px !important;
+  margin:18px auto 34px !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero{
+  width:min(820px,58vw) !important;
+  min-width:620px !important;
+  margin:2px auto 16px !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  text-align:left !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero::after{
+  display:none !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero-inner{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:22px !important;
+  min-height:104px !important;
+  padding:20px 34px 20px 190px !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(72,143,255,.46) !important;
+  background:linear-gradient(90deg,rgba(8,31,66,.98),rgba(8,24,49,.92)) !important;
+  box-shadow:0 0 0 1px rgba(14,61,139,.35) inset,0 0 24px rgba(36,120,255,.22) !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero-inner::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(90deg,transparent 0,rgba(42,146,255,.08) 30%,rgba(42,146,255,.03) 60%,transparent 100%),
+    radial-gradient(circle at 82% 28%,rgba(26,151,255,.12),transparent 22%) !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero-inner::after{
+  content:"" !important;
+  position:absolute !important;
+  left:50% !important;
+  bottom:0 !important;
+  transform:translateX(-50%) !important;
+  width:240px !important;
+  height:3px !important;
+  background:radial-gradient(circle,rgba(69,181,255,.95),rgba(69,181,255,.15) 70%,transparent 100%) !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero-orbit{
+  position:absolute !important;
+  left:92px !important;
+  top:50% !important;
+  transform:translate(-50%,-50%) !important;
+  width:134px !important;
+  height:134px !important;
+  border-radius:50% !important;
+  display:grid !important;
+  place-items:center !important;
+  z-index:8 !important;
+  box-shadow:0 0 0 16px rgba(17,47,97,.18),0 0 0 32px rgba(17,47,97,.08) !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero-orbit img{
+  width:92% !important;
+  height:92% !important;
+  object-fit:contain !important;
+  border-radius:50% !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero-icon{
+  position:relative !important;
+  z-index:2 !important;
+  width:72px !important;
+  height:72px !important;
+  min-width:72px !important;
+  margin:0 !important;
+  border-radius:50% !important;
+  display:grid !important;
+  place-items:center !important;
+  background:radial-gradient(circle at 30% 30%,#24c7ff,#1746ff 70%) !important;
+  box-shadow:0 0 26px rgba(34,159,255,.34) !important;
+  font-size:2.08rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero h1{
+  position:relative !important;
+  z-index:2 !important;
+  margin:0 0 6px !important;
+  font-size:2.55rem !important;
+  line-height:1 !important;
+  letter-spacing:-.04em !important;
+}
+
+body.dashboard-clean-v15871 .dash-hero p{
+  position:relative !important;
+  z-index:2 !important;
+  margin:0 !important;
+  font-size:1.04rem !important;
+  color:#d2def2 !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpis{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:12px !important;
+  margin:14px 0 12px !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpi{
+  min-height:88px !important;
+  padding:14px 16px !important;
+  gap:12px !important;
+  border-radius:16px !important;
+  background:linear-gradient(180deg,rgba(7,25,54,.97),rgba(5,18,37,.96)) !important;
+  border-color:rgba(78,146,255,.34) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 10px 22px rgba(0,0,0,.22) !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpi:after{
+  right:12px !important;
+  bottom:12px !important;
+  width:50px !important;
+  height:20px !important;
+  opacity:.58 !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpi-icon{
+  flex:0 0 44px !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  border-radius:14px !important;
+  font-size:1.35rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpi-title{
+  font-size:.83rem !important;
+  line-height:1.05 !important;
+  color:#d8e8ff !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpi-value{
+  font-size:2rem !important;
+  line-height:1 !important;
+  margin-top:2px !important;
+}
+
+body.dashboard-clean-v15871 .dash-kpi-sub{
+  font-size:.76rem !important;
+  line-height:1.1 !important;
+  margin-top:2px !important;
+}
+
+body.dashboard-clean-v15871 .dash-main-grid{
+  display:grid !important;
+  grid-template-columns:2fr 1fr 1fr 1fr 1fr !important;
+  gap:12px !important;
+  margin-top:12px !important;
+  align-items:stretch !important;
+}
+
+body.dashboard-clean-v15871 .dash-panel{
+  min-height:0 !important;
+  padding:14px !important;
+  border-radius:16px !important;
+  background:linear-gradient(180deg,rgba(7,25,54,.97),rgba(5,18,37,.96)) !important;
+  border-color:rgba(78,146,255,.30) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 10px 22px rgba(0,0,0,.22) !important;
+}
+
+body.dashboard-clean-v15871 .dash-printers{
+  grid-column:span 1 !important;
+}
+
+body.dashboard-clean-v15871 .dash-panel h2{
+  font-size:1rem !important;
+  line-height:1.15 !important;
+  margin:0 !important;
+}
+
+body.dashboard-clean-v15871 .dash-panel small{
+  margin-top:3px !important;
+  font-size:.73rem !important;
+  line-height:1.15 !important;
+}
+
+body.dashboard-clean-v15871 .dash-toner-grid{
+  grid-template-columns:1fr 1fr !important;
+  gap:10px !important;
+  margin-top:12px !important;
+}
+
+body.dashboard-clean-v15871 .dash-toner-alerts,
+body.dashboard-clean-v15871 .dash-stock-mini{
+  padding:10px !important;
+  border-radius:13px !important;
+}
+
+body.dashboard-clean-v15871 .dash-toner-alerts h3,
+body.dashboard-clean-v15871 .dash-stock-mini h3{
+  font-size:.8rem !important;
+  margin:0 0 8px !important;
+}
+
+body.dashboard-clean-v15871 #listaDashboardStock{
+  margin-top:8px !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:8px !important;
+  max-height:190px !important;
+  overflow:hidden !important;
+}
+
+body.dashboard-clean-v15871 #listaDashboardStock .dashboard-card:nth-child(n+3){
+  display:none !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-card.dashboard-critical-card{
+  padding:8px !important;
+  border-radius:12px !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-card .equipment-art{
+  height:48px !important;
+  border-radius:10px !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-card .equipment-real-image{
+  max-height:42px !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-card .stock-id{
+  font-size:.72rem !important;
+  margin-top:6px !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-card .meta-line,
+body.dashboard-clean-v15871 .dashboard-card .toner-row,
+body.dashboard-clean-v15871 .dashboard-card .toner-line{
+  font-size:.65rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-stock-line{
+  grid-template-columns:60px 1fr 22px !important;
+  gap:8px !important;
+  margin:7px 0 !important;
+  font-size:.74rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-bar{
+  height:7px !important;
+}
+
+body.dashboard-clean-v15871 .dash-list,
+body.dashboard-clean-v15871 .dash-system-list{
+  margin-top:10px !important;
+  gap:7px !important;
+}
+
+body.dashboard-clean-v15871 .dash-mini-row{
+  padding:9px 10px !important;
+  border-radius:12px !important;
+  gap:8px !important;
+}
+
+body.dashboard-clean-v15871 .dash-mini-row strong{
+  font-size:.78rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-mini-row span{
+  font-size:.68rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-badge{
+  padding:4px 7px !important;
+  font-size:.68rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-panel-footer{
+  margin-top:10px !important;
+  padding-top:10px !important;
+  gap:6px !important;
+}
+
+body.dashboard-clean-v15871 .dash-link{
+  padding:7px 9px !important;
+  border-radius:10px !important;
+  font-size:.72rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-bottom-grid{
+  display:grid !important;
+  grid-template-columns:1fr 1.5fr 1.05fr !important;
+  gap:12px !important;
+  margin-top:12px !important;
+}
+
+body.dashboard-clean-v15871 .dash-bottom-grid .dash-panel{
+  min-height:210px !important;
+}
+
+body.dashboard-clean-v15871 .dash-activity-item,
+body.dashboard-clean-v15871 .activity-item{
+  padding:8px 0 !important;
+  font-size:.76rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-progress-row{
+  grid-template-columns:minmax(0,1fr) auto 90px 34px !important;
+  gap:8px !important;
+  padding:8px 0 !important;
+  font-size:.74rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-progress{
+  height:7px !important;
+}
+
+body.dashboard-clean-v15871 .dash-health{
+  display:grid !important;
+  grid-template-columns:1fr 96px !important;
+  gap:10px !important;
+  align-items:center !important;
+}
+
+body.dashboard-clean-v15871 .dash-health-ring{
+  width:92px !important;
+  height:92px !important;
+  margin:0 auto !important;
+}
+
+body.dashboard-clean-v15871 .dash-health-ring div{
+  width:92px !important;
+  height:92px !important;
+}
+
+body.dashboard-clean-v15871 .dash-health-ring div span{
+  font-size:.68rem !important;
+}
+
+body.dashboard-clean-v15871 .dash-health-ring strong{
+  font-size:1.1rem !important;
+}
+
+body.dashboard-clean-v15871 .dashboard-back{
+  display:none !important;
+}
+
+@media (max-width:1500px){
+  body.dashboard-clean-v15871 .dashboard-futurista{
+    width:calc(100vw - 28px) !important;
+  }
+  body.dashboard-clean-v15871 .dash-hero{
+    width:min(820px,80vw) !important;
+    min-width:0 !important;
+  }
+  body.dashboard-clean-v15871 .dash-kpis{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+  body.dashboard-clean-v15871 .dash-main-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+  body.dashboard-clean-v15871 .dash-printers{
+    grid-column:span 2 !important;
+  }
+  body.dashboard-clean-v15871 .dash-bottom-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media (max-width:900px){
+  body.dashboard-clean-v15871 .dash-hero{
+    width:100% !important;
+  }
+  body.dashboard-clean-v15871 .dash-hero-inner{
+    display:grid !important;
+    justify-items:center !important;
+    text-align:center !important;
+    padding:20px !important;
+    gap:14px !important;
+  }
+  body.dashboard-clean-v15871 .dash-hero-orbit{
+    display:none !important;
+  }
+  body.dashboard-clean-v15871 .dash-hero h1{
+    font-size:2.15rem !important;
+  }
+  body.dashboard-clean-v15871 .dash-kpis,
+  body.dashboard-clean-v15871 .dash-main-grid,
+  body.dashboard-clean-v15871 .dash-bottom-grid,
+  body.dashboard-clean-v15871 .dash-toner-grid{
+    grid-template-columns:1fr !important;
+  }
+  body.dashboard-clean-v15871 .dash-printers{
+    grid-column:span 1 !important;
+  }
 }

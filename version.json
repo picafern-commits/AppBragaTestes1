@@ -1,8 +1,8 @@
 {
-  "version": "1.58.70",
-  "build": "appbraga-systems-global-movimentos-alertas-logs",
+  "version": "1.58.71",
+  "build": "dashboard-clean-redimensionado",
   "updatedAt": "2026-07-01T18:10:00+01:00",
-  "cache": "1.58.70",
+  "cache": "1.58.71",
   "systems": {
     "movimentos": "movimentos",
     "alertas": "alertasTecnicos",
