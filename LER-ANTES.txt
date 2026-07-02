@@ -1,12 +1,19 @@
-AppBraga v1.58.62 — Página Histórico futurista com sistemas funcionais.
+AppBraga v1.58.64 — Correção: agora também foram convertidas as páginas que tinham ficado antigas.
 
-Alterações:
-- página Histórico redesenhada no esquema das páginas novas;
-- sem barra superior interna;
-- hero com logotipo no círculo grande e botão para o Portal;
-- ligada aos dados reais de historico, stock, etiquetasWord, manutencoes e activityLog;
-- override do renderHistoricoCards antigo para alimentar a tabela nova;
-- filtros, KPIs, movimentos recentes, etiquetas, atividade e exportações funcionais;
-- mantém modal antigo de editar histórico e funções antigas.
+Páginas adicionais convertidas:
+- Pistolas CK65
+- Computadores
+- Informações
+- Portas Rede
+- Users
+- Zonas
+- Assistente
+- Ficha de Equipamento
 
-Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
+Também mantém as páginas já feitas anteriormente.
+
+Importante:
+- Fazer deploy do ZIP completo.
+- Abrir em janela anónima ou fazer Ctrl+F5.
+- Se estiver instalado como PWA/Edge App, fechar totalmente a app e abrir outra vez.
+- O service worker foi alterado para limpar caches antigos.

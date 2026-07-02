@@ -1,4 +1,4 @@
-const APP_BRAGA_SW = "app-braga-runtime-v15863";
+const APP_BRAGA_SW = "app-braga-runtime-v15864";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -139,3 +139,11 @@ self.addEventListener("notificationclick", (event) => {
 });
 
 // APP BRAGA V1.51.0 iphone-fit-update
+
+// v15864-force-clear: limpar caches antigos após instalar
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(k => !String(k).includes("v15864")).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
