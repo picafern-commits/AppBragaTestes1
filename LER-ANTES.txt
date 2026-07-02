@@ -1,14 +1,16 @@
-AppBraga v1.58.71 — Dashboard limpo e redimensionado.
+AppBraga v1.58.72 — Portal: card Impressoras com páginas internas.
 
 Alterações:
-- Mexido só na página Dashboard e respetivo CSS/JS;
-- Cards KPI mais baixos e alinhados;
-- Hero mais compacto e encaixado;
-- Grelha principal limpa: Impressoras + Equipamentos + Infraestrutura + Administração + Configurações;
-- Cards internos reduzidos para caberem melhor no ecrã;
-- Bottom cards alinhados e compactos;
-- Removido botão flutuante Portal da página Dashboard;
-- Mantido AppBraga Systems v1.58.70 ligado;
-- Versão/cache v1.58.71.
+- Na página inicial/Portal, o card Impressoras deixou de abrir direto;
+- Agora funciona como os outros cards: primeiro seleciona, depois escolhes a página;
+- Links adicionados no card Impressoras:
+  • Impressoras
+  • Adicionar Toner
+  • Stock
+  • Histórico
+  • Etiquetas Word
+  • Manutenção
+  • Diagnóstico
+- CSS ajustado para caberem os 7 links no card.
 
-Depois do deploy abre /html/dashboard.html?v=1.58.71 e faz Ctrl+F5.
+Depois do deploy abre /html/index.html?v=1.58.72 e faz Ctrl+F5.

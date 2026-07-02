@@ -11,7 +11,7 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/portal-home.css?v=1.58.70">
+  <link rel="stylesheet" href="../css/portal-home.css?v=1.58.72">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -52,12 +52,20 @@
         <a class="portal-action" href="dashboard.html" aria-label="Abrir Dashboard">→</a>
       </article>
 
-      <article class="portal-card portal-card-direct" data-tone="blue" data-direct="impressoras.html" tabindex="0" aria-selected="false">
+      <article class="portal-card portal-card-impressoras" data-tone="blue" tabindex="0" aria-selected="false">
         <div class="portal-card-icon" aria-hidden="true">🖨️</div>
         <h2>Impressoras</h2>
         <div class="portal-card-divider"></div>
-        <p>Central de impressoras, toners, stock, histórico, etiquetas e manutenção.</p>
-        <span class="portal-action" aria-label="Abrir Impressoras">→</span>
+        <ul class="portal-links portal-links-impressoras">
+          <li><a href="impressoras.html"><span class="portal-dot"></span>Impressoras</a></li>
+          <li><a href="add-toner.html"><span class="portal-dot"></span>Adicionar Toner</a></li>
+          <li><a href="stock.html"><span class="portal-dot"></span>Stock</a></li>
+          <li><a href="historico.html"><span class="portal-dot"></span>Histórico</a></li>
+          <li><a href="etiquetas-word.html"><span class="portal-dot"></span>Etiquetas Word</a></li>
+          <li><a href="manutencao-impressoras.html"><span class="portal-dot"></span>Manutenção</a></li>
+          <li><a href="diagnostico.html"><span class="portal-dot"></span>Diagnóstico</a></li>
+        </ul>
+        <a class="portal-action" href="impressoras.html" aria-label="Abrir Impressoras">→</a>
       </article>
 
       <article class="portal-card" data-tone="green" tabindex="0" aria-selected="false">
@@ -121,8 +129,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.70"></script>
-  <script src="../js/appbraga-systems.js?v=1.58.70"></script>
-  <script src="../js/portal-home.js?v=1.58.70"></script>
+  <script src="../js/app.js?v=1.58.72"></script>
+  <script src="../js/appbraga-systems.js?v=1.58.72"></script>
+  <script src="../js/portal-home.js?v=1.58.72"></script>
 </body>
 </html>
