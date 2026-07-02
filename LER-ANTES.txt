@@ -1,9 +1,12 @@
-AppBraga v1.58.61 — Barra superior removida definitivamente.
+AppBraga v1.58.62 — Página Histórico futurista com sistemas funcionais.
 
-Correção:
-- removido o header real da Impressoras: <header class="imp-top">;
-- removido/garantido o header do Dashboard: <header class="dash-top">;
-- CSS bloqueia imp-top/dash-top e variantes futuras;
-- regra mantida: páginas futuristas novas não devem ter barra superior interna.
+Alterações:
+- página Histórico redesenhada no esquema das páginas novas;
+- sem barra superior interna;
+- hero com logotipo no círculo grande e botão para o Portal;
+- ligada aos dados reais de historico, stock, etiquetasWord, manutencoes e activityLog;
+- override do renderHistoricoCards antigo para alimentar a tabela nova;
+- filtros, KPIs, movimentos recentes, etiquetas, atividade e exportações funcionais;
+- mantém modal antigo de editar histórico e funções antigas.
 
 Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.

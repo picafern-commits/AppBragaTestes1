@@ -1,4 +1,4 @@
-const APP_BRAGA_SW = "app-braga-runtime-v15861";
+const APP_BRAGA_SW = "app-braga-runtime-v15862";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -27,6 +27,7 @@ const APP_SHELL = [
   "./css/iphone-sidebar-final.css",
   "./css/dashboard-widgets.css",
   "./css/app-clean-pages.css",
+  "./css/historico-futurista.css",
   "./css/stock-futurista.css",
   "./css/operational-improvements.css",
   "./css/premium-polish.css",
@@ -36,6 +37,7 @@ const APP_SHELL = [
   "./js/sidebar-editor.js",
   "./js/dashboard-widgets.js",
   "./js/operational-improvements.js",
+  "./js/historico-futurista.js",
   "./js/stock-futurista.js",
   "./js/equipas-semanais.js",
   "./js/app-theme-pro.js",
