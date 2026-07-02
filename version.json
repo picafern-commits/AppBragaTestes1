@@ -1,8 +1,8 @@
 {
-  "version": "1.58.76",
-  "build": "clean-layout-all-pages-netlify",
+  "version": "1.58.73",
+  "build": "clean-layout-full-screen-pages",
   "updatedAt": "2026-07-01T18:10:00+01:00",
-  "cache": "1.58.76",
+  "cache": "1.58.73",
   "systems": {
     "movimentos": "movimentos",
     "alertas": "alertasTecnicos",
@@ -13,5 +13,5 @@
     "manutencoes": "manutencoes",
     "etiquetasWord": "etiquetasWord"
   },
-  "layout_rule": "Todas as páginas futuras devem incluir css/appbraga-clean-layout.css depois do CSS da página."
+  "layout_rule": "Todas as páginas novas devem usar appbraga-clean-layout.css para ocupar o ecrã e ter cards compactos."
 }

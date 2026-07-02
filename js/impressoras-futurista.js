@@ -171,7 +171,7 @@
 })();
 
 
-/* v1.58.76 — override: scroll livre, toner % real e stock por quantidade */
+/* v1.58.70 — override: scroll livre, toner % real e stock por quantidade */
 (function(){
   const byId = (id) => document.getElementById(id);
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -371,7 +371,7 @@
 })();
 
 
-/* v1.58.76 — filtro persistente na página Impressoras
+/* v1.58.70 — filtro persistente na página Impressoras
    Corrige o problema em que a lista voltava a mostrar todas as impressoras
    alguns segundos depois de escolher Braga/Vila Real. */
 (function(){
@@ -420,7 +420,7 @@
 })();
 
 
-// v1.58.76 — ouvir alertas globais de toner/manutenção
+// v1.58.70 — ouvir alertas globais de toner/manutenção
 window.addEventListener("appbraga:systems:update", function(ev){
   try {
     if (!ev.detail) return;

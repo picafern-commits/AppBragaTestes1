@@ -1,4 +1,4 @@
-/* APP BRAGA v1.58.76 - SIDEBAR EMOJI FINAL GUARD */
+/* APP BRAGA v1.58.70 - SIDEBAR EMOJI FINAL GUARD */
 (function(){
   const ICONS={"index.html":"🏠","add-toner.html":"➕","stock.html":"📦","historico.html":"🕒","tarefas.html":"✅","scanner-ia.html":"📄","etiquetas-word.html":"🏷️","impressoras.html":"🖨️","manutencao-impressoras.html":"🛠️","computadores.html":"💻","pistolas.html":"📱","radios.html":"📡","portas.html":"🌐","diretorio.html":"📇","informacoes.html":"ℹ️","users.html":"👥","diagnostico.html":"🩺","config.html":"⚙️","notificacoes.html":"🔔","equipas-semanais.html":"👥","equipamento.html":"🧾","zonas.html":"🗺️"};
   const GROUPS={"opera-o":"🧰","operacao":"🧰","operação":"🧰","equipamentos":"🖨️","infraestrutura":"🌐","administra-o":"⚙️","administracao":"⚙️","administração":"⚙️"};
