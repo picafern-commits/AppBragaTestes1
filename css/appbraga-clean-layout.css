@@ -1,0 +1,406 @@
+
+/*
+  AppBraga Clean Layout v1.58.73
+  Regra comum:
+  - páginas sem barra antiga
+  - conteúdo ocupa o ecrã completo
+  - cards compactos, alinhados e sem espaço morto exagerado
+  - hero consistente
+*/
+:root{
+  --ab-clean-page-x:clamp(18px,1.45vw,30px);
+  --ab-clean-page-y:clamp(16px,1.1vw,24px);
+  --ab-clean-gap:12px;
+  --ab-clean-card-radius:16px;
+  --ab-clean-border:rgba(78,146,255,.34);
+  --ab-clean-panel:linear-gradient(180deg,rgba(7,25,54,.97),rgba(5,18,37,.96));
+}
+
+/* Base full screen */
+body.dashboard-futurista-body,
+body.etiquetas-futurista,
+body.manutencao-futurista,
+body.impressoras-page,
+body.stock-page,
+body.add-toner-page,
+body.historico-page,
+body.futurista-page,
+body.portal-home{
+  min-height:100vh!important;
+  overflow-x:hidden!important;
+  background-attachment:fixed!important;
+}
+
+/* Remove botões flutuantes antigos de portal quando aparecem em páginas novas */
+.dashboard-back,
+a.dashboard-back,
+.back-portal,
+.portal-back,
+.btn-portal-floating{
+  display:none!important;
+}
+
+/* Páginas internas já criadas */
+.etq-page,
+.mnt-page,
+.f-page,
+.impressoras-shell,
+.stock-shell,
+.add-toner-shell,
+.historico-shell,
+.page-shell,
+.app-page-shell{
+  width:100vw!important;
+  max-width:none!important;
+  min-height:100vh!important;
+  margin:0!important;
+  padding:var(--ab-clean-page-y) var(--ab-clean-page-x) 30px!important;
+}
+
+/* Heroes internos */
+.etq-hero,
+.mnt-hero,
+.f-hero,
+.page-hero,
+.impressoras-hero,
+.stock-hero,
+.add-toner-hero,
+.historico-hero{
+  margin:4px auto 14px!important;
+}
+
+.etq-hero-card,
+.mnt-hero-card,
+.f-hero-card,
+.page-hero-card,
+.impressoras-hero-card,
+.stock-hero-card,
+.add-toner-hero-card,
+.historico-hero-card{
+  width:min(900px,58vw)!important;
+  min-width:650px!important;
+  min-height:102px!important;
+  padding:20px 34px!important;
+  border-radius:20px!important;
+}
+
+.etq-hero-orbit,
+.mnt-hero-orbit,
+.f-hero-orbit,
+.appbraga-home-orbit-btn{
+  width:132px!important;
+  height:132px!important;
+  left:94px!important;
+  box-shadow:0 0 0 15px rgba(17,47,97,.18),0 0 0 31px rgba(17,47,97,.08)!important;
+}
+
+.etq-hero-icon,
+.mnt-hero-icon,
+.f-hero-icon,
+.page-hero-icon,
+.impressoras-hero-icon,
+.stock-hero-icon,
+.add-toner-hero-icon,
+.historico-hero-icon{
+  width:72px!important;
+  min-width:72px!important;
+  height:72px!important;
+  font-size:2rem!important;
+}
+
+.etq-hero h1,
+.mnt-hero h1,
+.f-hero h1,
+.page-hero h1,
+.impressoras-hero h1,
+.stock-hero h1,
+.add-toner-hero h1,
+.historico-hero h1{
+  font-size:2.45rem!important;
+  line-height:1!important;
+}
+
+.etq-hero p,
+.mnt-hero p,
+.f-hero p,
+.page-hero p,
+.impressoras-hero p,
+.stock-hero p,
+.add-toner-hero p,
+.historico-hero p{
+  font-size:1.02rem!important;
+}
+
+/* KPIs compactos */
+.etq-kpis,
+.mnt-kpis,
+.f-kpis,
+.stats-grid,
+.kpi-grid,
+.metrics-grid,
+.impressoras-stats,
+.stock-stats,
+.add-toner-stats,
+.historico-stats{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:var(--ab-clean-gap)!important;
+  margin:0 0 var(--ab-clean-gap)!important;
+}
+
+.etq-kpi,
+.mnt-kpi,
+.f-kpi,
+.stat-card,
+.kpi-card,
+.metric-card{
+  min-height:86px!important;
+  padding:13px 15px!important;
+  border-radius:var(--ab-clean-card-radius)!important;
+}
+
+.etq-kpi .kpi-icon,
+.mnt-kpi .kpi-icon,
+.f-kpi .f-kpi-ico,
+.stat-icon,
+.kpi-icon{
+  width:46px!important;
+  min-width:46px!important;
+  height:46px!important;
+  min-height:46px!important;
+  border-radius:14px!important;
+  font-size:1.35rem!important;
+}
+
+.etq-kpi strong,
+.mnt-kpi strong,
+.f-kpi strong,
+.stat-card strong,
+.kpi-card strong,
+.metric-card strong{
+  font-size:1.95rem!important;
+  line-height:1!important;
+}
+
+.etq-kpi span,
+.mnt-kpi span,
+.f-kpi span,
+.stat-card span,
+.kpi-card span{
+  font-size:.84rem!important;
+  line-height:1.08!important;
+}
+
+.etq-kpi small,
+.mnt-kpi small,
+.f-kpi small,
+.stat-card small,
+.kpi-card small{
+  font-size:.72rem!important;
+}
+
+/* Grelhas principais */
+.etq-main-grid,
+.mnt-main-grid,
+.f-main,
+.main-grid,
+.content-grid,
+.impressoras-main-grid,
+.stock-main-grid,
+.add-toner-main-grid,
+.historico-main-grid{
+  gap:var(--ab-clean-gap)!important;
+  align-items:start!important;
+}
+
+.etq-main-grid,
+.mnt-main-grid,
+.f-main{
+  grid-template-columns:minmax(0,2.15fr) minmax(360px,.85fr)!important;
+}
+
+/* Painéis/cards */
+.etq-panel,
+.mnt-panel,
+.f-panel,
+.panel,
+.card,
+.glass-card,
+.dashboard-card{
+  border-radius:var(--ab-clean-card-radius)!important;
+}
+
+.etq-panel-head,
+.mnt-panel-head,
+.f-panel-head,
+.panel-header,
+.card-header{
+  padding:13px 16px 10px!important;
+}
+
+.etq-panel h2,
+.mnt-panel h2,
+.f-panel h2,
+.panel h2,
+.card h2{
+  font-size:1rem!important;
+  line-height:1.12!important;
+}
+
+.etq-panel p,
+.mnt-panel p,
+.f-panel p,
+.panel p,
+.card p{
+  font-size:.76rem!important;
+  line-height:1.18!important;
+}
+
+/* Tabelas */
+.etq-table th,
+.etq-table td,
+.mnt-table th,
+.mnt-table td,
+.f-table th,
+.f-table td,
+.table th,
+.table td{
+  padding:11px 13px!important;
+  font-size:.82rem!important;
+}
+
+.etq-table-footer,
+.f-table-footer,
+.table-footer{
+  padding:11px 14px!important;
+}
+
+/* Listas laterais */
+.etq-list,
+.etq-models,
+.mnt-list,
+.mnt-bars,
+.f-list,
+.side-list{
+  padding:11px 14px 14px!important;
+  gap:6px!important;
+}
+
+.etq-doc-row,
+.etq-model-row,
+.mnt-list-row{
+  padding:6px 0!important;
+}
+
+/* Timeline manutenção mais clean */
+.mnt-timeline{
+  grid-template-columns:repeat(5,minmax(130px,1fr))!important;
+  gap:28px!important;
+  padding:16px 32px 14px!important;
+}
+.mnt-time-card{
+  min-height:112px!important;
+  padding:13px!important;
+}
+.mnt-time-card strong{
+  font-size:1.55rem!important;
+}
+
+/* Forms */
+.mnt-form,
+.f-form{
+  gap:10px!important;
+  padding:13px 15px 15px!important;
+}
+.mnt-form input,
+.mnt-form select,
+.mnt-form textarea,
+.f-form input,
+.f-form select,
+.f-form textarea{
+  height:38px!important;
+}
+.mnt-form textarea,
+.f-form textarea{
+  min-height:70px!important;
+}
+
+/* Responsivo */
+@media(max-width:1500px){
+  .etq-hero-card,
+  .mnt-hero-card,
+  .f-hero-card,
+  .page-hero-card,
+  .impressoras-hero-card,
+  .stock-hero-card,
+  .add-toner-hero-card,
+  .historico-hero-card{
+    width:min(920px,78vw)!important;
+    min-width:0!important;
+  }
+  .etq-kpis,
+  .mnt-kpis,
+  .f-kpis,
+  .stats-grid,
+  .kpi-grid,
+  .metrics-grid,
+  .impressoras-stats,
+  .stock-stats,
+  .add-toner-stats,
+  .historico-stats{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  .etq-main-grid,
+  .mnt-main-grid,
+  .f-main{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:900px){
+  .etq-page,
+  .mnt-page,
+  .f-page,
+  .impressoras-shell,
+  .stock-shell,
+  .add-toner-shell,
+  .historico-shell,
+  .page-shell,
+  .app-page-shell{
+    padding:14px!important;
+  }
+  .etq-hero-card,
+  .mnt-hero-card,
+  .f-hero-card,
+  .page-hero-card,
+  .impressoras-hero-card,
+  .stock-hero-card,
+  .add-toner-hero-card,
+  .historico-hero-card{
+    width:100%!important;
+    display:grid!important;
+    justify-items:center!important;
+    text-align:center!important;
+    padding:18px!important;
+    gap:12px!important;
+  }
+  .etq-hero-orbit,
+  .mnt-hero-orbit,
+  .f-hero-orbit,
+  .appbraga-home-orbit-btn{
+    display:none!important;
+  }
+  .etq-kpis,
+  .mnt-kpis,
+  .f-kpis,
+  .stats-grid,
+  .kpi-grid,
+  .metrics-grid,
+  .impressoras-stats,
+  .stock-stats,
+  .add-toner-stats,
+  .historico-stats,
+  .mnt-timeline{
+    grid-template-columns:1fr!important;
+  }
+}

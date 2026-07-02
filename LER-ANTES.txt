@@ -1,16 +1,28 @@
-AppBraga v1.58.72 — Portal: card Impressoras com páginas internas.
+AppBraga v1.58.73 — Regra clean layout + ecrã completo.
 
-Alterações:
-- Na página inicial/Portal, o card Impressoras deixou de abrir direto;
-- Agora funciona como os outros cards: primeiro seleciona, depois escolhes a página;
-- Links adicionados no card Impressoras:
+Alterações principais:
+- Criado css/appbraga-clean-layout.css como regra comum para páginas atuais e futuras;
+- Página inicial/Portal agora ocupa melhor o ecrã completo;
+- Cards do Portal redimensionados para caberem limpos no ecrã;
+- Hero do Portal mais compacto;
+- Aplicada regra clean às páginas já feitas:
+  • Dashboard
   • Impressoras
-  • Adicionar Toner
   • Stock
+  • Adicionar Toner
   • Histórico
   • Etiquetas Word
-  • Manutenção
+  • Manutenção Impressoras
   • Diagnóstico
-- CSS ajustado para caberem os 7 links no card.
+  • Notificações
+  • Configurações
+  • páginas futuristas auxiliares já convertidas
 
-Depois do deploy abre /html/index.html?v=1.58.72 e faz Ctrl+F5.
+Regra para páginas futuras:
+- sempre incluir css/appbraga-clean-layout.css;
+- layout a ocupar 100vw/100vh quando fizer sentido;
+- hero compacto;
+- KPIs/cards com altura menor e alinhados;
+- nada de espaço morto gigante.
+
+Depois do deploy abre /html/index.html?v=1.58.73 e faz Ctrl+F5.

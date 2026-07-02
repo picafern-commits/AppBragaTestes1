@@ -1,13 +1,13 @@
 
 /*
-  AppBraga Systems v1.58.70
+  AppBraga Systems v1.58.73
   Camada comum para movimentos, alertas, notificações, logs,
   resumo de stock, manutenção, etiquetas e diagnóstico.
 */
 (function(){
-  if (window.AppBragaSystems && window.AppBragaSystems.version === "1.58.70") return;
+  if (window.AppBragaSystems && window.AppBragaSystems.version === "1.58.73") return;
 
-  const VERSION = "1.58.70";
+  const VERSION = "1.58.73";
   const CACHE_KEY = "appbraga-systems-cache-v1";
   const ALERT_KEYS_KEY = "appbraga-alert-keys-v1";
 
