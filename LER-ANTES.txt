@@ -1,12 +1,8 @@
-AppBraga v1.58.58 — Stock com sistemas funcionais.
+AppBraga v1.58.59 — Stock: alertas só sem stock e botões Etiquetas Word corrigidos.
 
 Correções:
-- página Stock ligada aos dados reais de stock;
-- renderer antigo renderStockCards passa a alimentar a tabela futurista;
-- fallback realtime para stock, historico e etiquetasWord;
-- filtros atualizam a tabela real;
-- botões Ver/Usar/Editar/Apagar ligados aos sistemas antigos/fallback Firebase;
-- movimentos recentes puxam entradas de stock e saídas do historico;
-- Etiquetas Word mostra registos reais quando existirem e botão de imprimir tenta usar o sistema antigo.
-
-Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
+- Card Alertas de stock só mostra artigos com quantidade 0 / sem stock.
+- Stock baixo deixa de aparecer no card de alertas.
+- Botão de imprimir no card Etiquetas Word tem fallback próprio e já funciona na página Stock.
+- Botão abrir no card Etiquetas Word leva para etiquetas-word.html.
+- Mantida a ligação aos dados reais de stock/histórico/etiquetas.

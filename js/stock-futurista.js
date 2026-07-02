@@ -250,20 +250,18 @@
   function renderAlerts(items){
     const host = byId("stockAlertsList");
     if (!host) return;
-    const alerts = getStock().filter(i => qty(i) <= 5).sort((a,b)=>qty(a)-qty(b)).slice(0, 5);
+    // v1.58.59: alertas de stock só aparecem quando a quantidade é 0.
+    // Stock baixo continua visível no KPI/estado da tabela, mas não entra neste card.
+    const alerts = getStock().filter(i => qty(i) <= 0).sort((a,b)=>qty(a)-qty(b)).slice(0, 5);
     if (!alerts.length) {
-      host.innerHTML = '<div class="stock-alert"><span class="stock-alert-dot"></span><span>Sem alertas de stock neste momento</span><small>OK</small></div>';
+      host.innerHTML = '<div class="stock-alert"><span class="stock-alert-dot"></span><span>Sem artigos sem stock neste momento</span><small>OK</small></div>';
       return;
     }
-    host.innerHTML = alerts.map(item => {
-      const q = qty(item);
-      const crit = q <= 0;
-      return `<div class="stock-alert ${crit ? "crit" : ""}">
-        <span class="stock-alert-dot"></span>
-        <span>${esc(colorName(item))} — ${esc(equipOf(item))} — ${esc(localOf(item))}</span>
-        <small>${crit ? "Sem stock" : "Baixo"}</small>
-      </div>`;
-    }).join("");
+    host.innerHTML = alerts.map(item => `<div class="stock-alert crit">
+      <span class="stock-alert-dot"></span>
+      <span>${esc(colorName(item))} — ${esc(equipOf(item))} — ${esc(localOf(item))}</span>
+      <small>Sem stock</small>
+    </div>`).join("");
   }
 
   function renderColorBars(items){
@@ -352,8 +350,8 @@
         <span>${esc(code)}</span>
         <span>${esc(date)}</span>
         <span class="stock-label-actions">
-          <button type="button" data-label-action="print" data-id="${esc(id)}" title="Imprimir">🖨</button>
-          <button type="button" data-label-action="open" data-id="${esc(id)}" title="Abrir etiquetas">↗</button>
+          <button type="button" data-label-action="print" data-id="${esc(id)}" onclick="window.stockFuturistaImprimirEtiqueta && window.stockFuturistaImprimirEtiqueta('${esc(id)}')" title="Imprimir">🖨</button>
+          <button type="button" data-label-action="open" data-id="${esc(id)}" onclick="window.stockFuturistaAbrirEtiquetas && window.stockFuturistaAbrirEtiquetas()" title="Abrir etiquetas">↗</button>
         </span>
       </div>`;
     }).join("");
@@ -438,17 +436,96 @@
     fallbackEdit(id);
   }
 
+  function findLabelOrStock(id){
+    const label = getLabels().find(x => getItemId(x) === id || x?.codigoEtiqueta === id || x?.codigoScan === id);
+    if (label) return { item: label, source: "label" };
+    const stock = getStock().find(x => getItemId(x) === id || x?.codigoEtiqueta === id || x?.codigoScan === id || refOf(x) === id);
+    if (stock) return { item: buildLabelFromStock(stock), source: "stock" };
+    return { item: null, source: "none" };
+  }
+
+  function labelRowsHtml(item){
+    const rows = [
+      ["Local", item?.localCurto || item?.localizacao],
+      ["Série", item?.serie],
+      ["Armazém", item?.armazem],
+      ["Equipamento", item?.equipamento],
+      ["Cor", item?.cor],
+      ["Lote", item?.lote],
+      ["SDS Ref", item?.sdsRef],
+      ["Data", item?.dataScan || item?.dataEtiqueta || item?.data || item?.dataFolha],
+      ["Origem", item?.origem || "Stock"]
+    ].filter(([,v]) => String(v || "").trim());
+    return rows.map(([k,v]) => `<div class="stock-print-label-row"><strong>${esc(k)}</strong><span>${esc(v)}</span></div>`).join("");
+  }
+
+  function printLabelLocal(item){
+    const old = document.getElementById("stockFuturistaPrintOverlay");
+    if (old) old.remove();
+
+    const code = item?.codigoScan || item?.codigoEtiqueta || item?.sdsRef || item?.lote || item?.idDoc || "";
+    const title = item?.titulo || item?.nome || item?.localCurto || item?.localizacao || "Etiqueta Toner";
+    const overlay = document.createElement("div");
+    overlay.id = "stockFuturistaPrintOverlay";
+    overlay.innerHTML = `
+      <style>
+        #stockFuturistaPrintOverlay{position:fixed;inset:0;background:#fff;z-index:999999;display:flex;align-items:center;justify-content:center;color:#111;font-family:Arial,sans-serif;}
+        #stockFuturistaPrintOverlay .stock-print-label{width:100mm;min-height:70mm;border:2px solid #111;border-radius:5mm;padding:8mm;position:relative;background:#fff;}
+        #stockFuturistaPrintOverlay .stock-print-title{font-size:20px;font-weight:900;margin-bottom:5mm;}
+        #stockFuturistaPrintOverlay .stock-print-label-row{display:grid;grid-template-columns:28mm 1fr;gap:4mm;border-bottom:1px solid #ddd;padding:2mm 0;font-size:13px;}
+        #stockFuturistaPrintOverlay .stock-print-code{margin-top:5mm;font-size:11px;font-weight:900;word-break:break-all;}
+        #stockFuturistaPrintOverlay .stock-print-close{position:fixed;right:18px;top:18px;border:0;border-radius:10px;background:#111;color:#fff;padding:10px 14px;font-weight:900;cursor:pointer;}
+        @media print{
+          @page{size:100mm 150mm;margin:0;}
+          body>*:not(#stockFuturistaPrintOverlay){display:none!important;}
+          #stockFuturistaPrintOverlay{position:fixed!important;inset:0!important;display:block!important;background:#fff!important;}
+          #stockFuturistaPrintOverlay .stock-print-close{display:none!important;}
+          #stockFuturistaPrintOverlay .stock-print-label{width:100mm;min-height:70mm;border:0;border-radius:0;margin:0;padding:8mm;box-sizing:border-box;}
+        }
+      </style>
+      <button class="stock-print-close" type="button">Fechar</button>
+      <div class="stock-print-label">
+        <div class="stock-print-title">${esc(title)}</div>
+        ${labelRowsHtml(item)}
+        ${code ? `<div class="stock-print-code">${esc(code)}</div>` : ""}
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.querySelector(".stock-print-close")?.addEventListener("click", () => overlay.remove());
+
+    setTimeout(() => {
+      try { window.print(); }
+      catch(e) { console.error(e); showMsg("Erro ao abrir impressão da etiqueta.", "erro"); }
+      setTimeout(() => { try { overlay.remove(); } catch(e) {} }, 900);
+    }, 150);
+  }
+
   async function printLabel(id){
-    const label = getLabels().find(x => getItemId(x) === id);
-    if (label && typeof window.regerarEtiquetaWordPartilhada === "function") {
-      return window.regerarEtiquetaWordPartilhada(id);
+    const found = findLabelOrStock(id);
+    if (!found.item) {
+      showMsg("Etiqueta não encontrada. Vou abrir a página Etiquetas Word.", "erro");
+      window.location.href = "etiquetas-word.html";
+      return;
     }
-    const item = getStock().find(x => getItemId(x) === id);
-    if (item && typeof window.gerarWordEtiquetaPartilhada === "function") {
-      return window.gerarWordEtiquetaPartilhada(buildLabelFromStock(item), { saveRecord:false, silent:false });
-    }
+
+    // Se o sistema antigo estiver pronto e a etiqueta estiver na lista antiga, usa-o.
+    try {
+      const oldLabels = globalValue("etiquetasWordGlobal");
+      const existsInOld = Array.isArray(oldLabels) && oldLabels.some(x => getItemId(x) === id);
+      if (existsInOld && typeof window.regerarEtiquetaWordPartilhada === "function") {
+        return window.regerarEtiquetaWordPartilhada(id);
+      }
+    } catch(e) {}
+
+    // Fallback próprio da página Stock: funciona mesmo sem abrir etiquetas-word.html.
+    printLabelLocal(found.item);
+  }
+
+  function openLabelsPage(){
     window.location.href = "etiquetas-word.html";
   }
+
+  window.stockFuturistaImprimirEtiqueta = printLabel;
+  window.stockFuturistaAbrirEtiquetas = openLabelsPage;
 
   function bindActions(){
     document.addEventListener("click", async (ev) => {
@@ -484,7 +561,7 @@
         ev.stopPropagation();
         const id = labelBtn.dataset.id || "";
         if (labelBtn.dataset.labelAction === "print") return printLabel(id);
-        window.location.href = "etiquetas-word.html";
+        return openLabelsPage();
       }
     }, true);
   }
