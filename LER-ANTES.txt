@@ -1,10 +1,9 @@
-AppBraga v1.58.55 — Logo original no círculo grande e botão funcional.
+AppBraga v1.58.56 — Botão do logotipo do hero corrigido.
 
 Correção:
-- usa o logotipo original enviado, sem redesenhar/alterar o B;
-- remove apenas o fundo externo/checker quando possível;
-- o círculo grande do hero é link para index.html;
-- z-index e pointer-events corrigidos para o clique funcionar;
-- ícone pequeno volta a ser apenas o ícone da página.
+- CSS específico para o círculo grande receber clique;
+- z-index aumentado;
+- pointer-events corrigido;
+- fallback JS: clicar no logotipo/círculo manda para index.html.
 
 Aplicado a: Impressoras, Adicionar Toner e Stock.

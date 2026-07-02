@@ -771,7 +771,7 @@ body.add-toner-futurista::after {
 }
 
 
-/* v1.58.55 layout hardening */
+/* v1.58.56 layout hardening */
 body.add-toner-futurista {
   min-width: 1280px;
 }
@@ -871,7 +871,7 @@ body.add-toner-futurista {
 }
 
 
-/* v1.58.55 — fullscreen + sem barra superior */
+/* v1.58.56 — fullscreen + sem barra superior */
 body.add-toner-futurista {
   min-width: 0 !important;
   width: 100% !important;
@@ -941,7 +941,7 @@ body.add-toner-futurista .toner-form-body {
 }
 
 
-/* v1.58.55 — ajustes Adicionar Toner */
+/* v1.58.56 — ajustes Adicionar Toner */
 body.add-toner-futurista .toner-inline-scan {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -1052,7 +1052,7 @@ body.add-toner-futurista .warning-list div {
 }
 
 
-/* v1.58.55 — barra superior + fundo igual à página Impressoras */
+/* v1.58.56 — barra superior + fundo igual à página Impressoras */
 html,
 body.add-toner-futurista {
   background:
@@ -1226,7 +1226,7 @@ body.add-toner-futurista .toner-main-grid {
 }
 
 
-/* v1.58.55 — sem barra superior; hero igual ao bloco Impressoras */
+/* v1.58.56 — sem barra superior; hero igual ao bloco Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1352,7 +1352,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.55 — hero Adicionar Toner com proporções iguais ao hero Impressoras */
+/* v1.58.56 — hero Adicionar Toner com proporções iguais ao hero Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1480,7 +1480,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.55 — fundo do hero igual ao da página Impressoras */
+/* v1.58.56 — fundo do hero igual ao da página Impressoras */
 body.add-toner-futurista .toner-hero-card {
   width: 760px !important;
   max-width: calc(100vw - 48px) !important;
@@ -1540,7 +1540,7 @@ body.add-toner-futurista .toner-hero-icon {
 }
 
 
-/* v1.58.55 — hero com tamanho igual ao da página Impressoras */
+/* v1.58.56 — hero com tamanho igual ao da página Impressoras */
 body.add-toner-futurista .toner-hero {
   margin: 0 0 18px !important;
 }
@@ -1587,7 +1587,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.55 — alinhar o design de Adicionar Toner com Impressoras */
+/* v1.58.56 — alinhar o design de Adicionar Toner com Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1887,7 +1887,7 @@ body.add-toner-futurista .toner-preview {
 }
 
 
-/* v1.58.55 — logotipo no círculo do hero como botão para o Portal */
+/* v1.58.56 — logotipo no círculo do hero como botão para o Portal */
 .appbraga-home-hero-btn {
   text-decoration: none !important;
   cursor: pointer !important;
@@ -1927,7 +1927,7 @@ body.add-toner-futurista .toner-preview {
 }
 
 
-/* v1.58.55 — logotipo no círculo grande lateral do hero */
+/* v1.58.56 — logotipo no círculo grande lateral do hero */
 .appbraga-home-hero-btn {
   cursor: default !important;
   pointer-events: none !important;
@@ -1980,7 +1980,7 @@ body.add-toner-futurista .toner-preview {
 }
 
 
-/* v1.58.55 — logo original no círculo grande + clique funcional */
+/* v1.58.56 — logo original no círculo grande + clique funcional */
 .appbraga-home-orbit-btn {
   position: absolute !important;
   z-index: 8 !important;
@@ -2041,5 +2041,49 @@ body.add-toner-futurista .toner-preview {
 .toner-hero-icon,
 .stock-hero-icon {
   z-index: 4 !important;
+  pointer-events: none !important;
+}
+
+
+/* v1.58.56 — força clique no logotipo do círculo grande */
+body .imp-hero-orbit.appbraga-home-orbit-btn,
+body .toner-hero-orbit.appbraga-home-orbit-btn,
+body .stock-hero-orbit.appbraga-home-orbit-btn,
+body.stock-futurista .stock-hero-orbit.appbraga-home-orbit-btn,
+body.add-toner-futurista .toner-hero-orbit.appbraga-home-orbit-btn,
+body.impressoras-futurista .imp-hero-orbit.appbraga-home-orbit-btn {
+  pointer-events: auto !important;
+  z-index: 999 !important;
+  cursor: pointer !important;
+  position: absolute !important;
+}
+
+body .imp-hero-orbit.appbraga-home-orbit-btn *,
+body .toner-hero-orbit.appbraga-home-orbit-btn *,
+body .stock-hero-orbit.appbraga-home-orbit-btn * {
+  pointer-events: none !important;
+}
+
+body .imp-hero-card,
+body .toner-hero-card,
+body .stock-hero-card {
+  position: relative !important;
+}
+
+body .imp-hero-card::before,
+body .imp-hero-card::after,
+body .toner-hero-card::before,
+body .toner-hero-card::after,
+body .stock-hero-card::before,
+body .stock-hero-card::after {
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+body .imp-hero-icon,
+body .toner-hero-icon,
+body .stock-hero-icon {
+  position: relative !important;
+  z-index: 3 !important;
   pointer-events: none !important;
 }
