@@ -2,6 +2,7 @@
 (function(){
   const CACHE_KEY = "appBragaEtiquetasFuturista";
   const byId = (id) => document.getElementById(id);
+  let etqCurrentPage = 1;
   const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const norm = (v) => String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 
@@ -155,16 +156,59 @@
     set("etqKpiUltimoLoteSub", latest ? fmtDate(dateOf(latest), true) : "Sem dados");
   }
 
+
+  function renderPagination(totalItems, perPage){
+    const host = byId("etqPagination");
+    if (!host) return;
+    const totalPages = Math.max(1, Math.ceil(totalItems / perPage));
+    if (etqCurrentPage > totalPages) etqCurrentPage = totalPages;
+    if (etqCurrentPage < 1) etqCurrentPage = 1;
+
+    const pages = [];
+    const add = (p) => {
+      if (p >= 1 && p <= totalPages && !pages.includes(p)) pages.push(p);
+    };
+
+    add(1);
+    add(etqCurrentPage - 2);
+    add(etqCurrentPage - 1);
+    add(etqCurrentPage);
+    add(etqCurrentPage + 1);
+    add(etqCurrentPage + 2);
+    add(totalPages);
+    pages.sort((a,b)=>a-b);
+
+    let html = `<button type="button" data-etq-page="first" ${etqCurrentPage === 1 ? "disabled" : ""}>‹‹</button>`;
+    html += `<button type="button" data-etq-page="prev" ${etqCurrentPage === 1 ? "disabled" : ""}>‹</button>`;
+
+    let last = 0;
+    pages.forEach((p) => {
+      if (last && p - last > 1) html += `<button type="button" class="dots" disabled>…</button>`;
+      html += `<button type="button" data-etq-page="${p}" class="${p === etqCurrentPage ? "active" : ""}">${p}</button>`;
+      last = p;
+    });
+
+    html += `<button type="button" data-etq-page="next" ${etqCurrentPage === totalPages ? "disabled" : ""}>›</button>`;
+    html += `<button type="button" data-etq-page="last" ${etqCurrentPage === totalPages ? "disabled" : ""}>››</button>`;
+    host.innerHTML = html;
+  }
+
   function renderTable(items){
     const tbody = byId("etqTableBody");
     if (!tbody) return;
-    const per = Number(byId("etqPerPage")?.value || 10);
-    const rows = items.slice(0, per);
+    const per = Number(byId("etqPerPage")?.value || 23);
+    const totalPages = Math.max(1, Math.ceil(items.length / per));
+    if (etqCurrentPage > totalPages) etqCurrentPage = totalPages;
+    if (etqCurrentPage < 1) etqCurrentPage = 1;
+
+    const start = (etqCurrentPage - 1) * per;
+    const rows = items.slice(start, start + per);
 
     if (!rows.length) {
       tbody.innerHTML = '<tr><td colspan="7" class="etq-empty-row">Sem etiquetas para mostrar.</td></tr>';
       const info = byId("etqTableInfo");
       if (info) info.textContent = "Total 0 etiquetas";
+      renderPagination(0, per);
       return;
     }
 
@@ -190,8 +234,14 @@
     }).join("");
 
     const info = byId("etqTableInfo");
-    if (info) info.textContent = `Total ${items.length} etiquetas`;
+    if (info) {
+      const from = items.length ? start + 1 : 0;
+      const to = Math.min(start + rows.length, items.length);
+      info.textContent = `A mostrar ${from} a ${to} de ${items.length} etiquetas`;
+    }
+    renderPagination(items.length, per);
   }
+
 
   function renderRecent(items){
     const host = byId("etqRecentDocs");
@@ -303,6 +353,23 @@
 
   function bindActions(){
     document.addEventListener("click", async (ev) => {
+      const pageBtn = ev.target.closest("[data-etq-page]");
+      if (pageBtn) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const action = pageBtn.dataset.etqPage;
+        const per = Number(byId("etqPerPage")?.value || 23);
+        const total = filtered().length;
+        const totalPages = Math.max(1, Math.ceil(total / per));
+        if (action === "first") etqCurrentPage = 1;
+        else if (action === "prev") etqCurrentPage = Math.max(1, etqCurrentPage - 1);
+        else if (action === "next") etqCurrentPage = Math.min(totalPages, etqCurrentPage + 1);
+        else if (action === "last") etqCurrentPage = totalPages;
+        else etqCurrentPage = Number(action) || 1;
+        renderAll();
+        return;
+      }
+
       const btn = ev.target.closest("[data-etq-action]");
       if (!btn) return;
       ev.preventDefault();
@@ -321,8 +388,8 @@
       const el = byId(id);
       if (!el || el.dataset.etqBound === "1") return;
       el.dataset.etqBound = "1";
-      el.addEventListener("input", renderAll);
-      el.addEventListener("change", renderAll);
+      el.addEventListener("input", () => { etqCurrentPage = 1; renderAll(); });
+      el.addEventListener("change", () => { etqCurrentPage = 1; renderAll(); });
     });
   }
 
@@ -367,6 +434,7 @@
       const el = byId(id);
       if (el) el.value = "";
     });
+    etqCurrentPage = 1;
     renderAll();
   };
 

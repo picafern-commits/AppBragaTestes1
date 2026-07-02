@@ -1,4 +1,4 @@
-const APP_BRAGA_SW = "app-braga-runtime-v15865";
+const APP_BRAGA_SW = "app-braga-runtime-v15867";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -139,3 +139,22 @@ self.addEventListener("notificationclick", (event) => {
 });
 
 // APP BRAGA V1.51.0 iphone-fit-update
+
+
+// v15866-html-network-first
+self.addEventListener("fetch", function(event) {
+  try {
+    var req = event.request;
+    var url = new URL(req.url);
+    if (req.mode === "navigate" || url.pathname.endsWith(".html")) {
+      event.respondWith(fetch(req, { cache: "no-store" }).catch(function() { return caches.match(req); }));
+    }
+  } catch(e) {}
+});
+self.addEventListener("activate", function(event) {
+  event.waitUntil(
+    caches.keys().then(function(keys) {
+      return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+    }).then(function() { return self.clients.claim(); })
+  );
+});

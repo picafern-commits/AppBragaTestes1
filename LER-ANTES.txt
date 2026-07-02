@@ -1,0 +1,10 @@
+AppBraga v1.58.67 — Etiquetas Word: paginação funcional e 23 por página.
+
+Alterações:
+- Paginação da Lista de etiquetas agora funciona;
+- Botões primeira/anterior/número/seguinte/última funcionais;
+- Valor inicial passou para 23 por página;
+- Pesquisa/filtros/alterar por página reiniciam para página 1;
+- Informação inferior mostra 'A mostrar X a Y de Z etiquetas'.
+
+Depois do deploy: abrir /html/etiquetas-word.html?v=1.58.67 e Ctrl+F5.

@@ -543,3 +543,13 @@ body.etiquetas-futurista::after{
   .etq-doc-row,
   .etq-model-row{grid-template-columns:1fr auto}
 }
+
+
+.etq-pagination button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+.etq-pagination button.dots{
+  pointer-events:none;
+  opacity:.7;
+}
