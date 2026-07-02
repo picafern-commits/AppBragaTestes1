@@ -1,8 +1,9 @@
-AppBraga v1.58.59 — Stock: alertas só sem stock e botões Etiquetas Word corrigidos.
+AppBraga v1.58.60 — Sem barra superior nas páginas futuristas.
 
-Correções:
-- Card Alertas de stock só mostra artigos com quantidade 0 / sem stock.
-- Stock baixo deixa de aparecer no card de alertas.
-- Botão de imprimir no card Etiquetas Word tem fallback próprio e já funciona na página Stock.
-- Botão abrir no card Etiquetas Word leva para etiquetas-word.html.
-- Mantida a ligação aos dados reais de stock/histórico/etiquetas.
+Alterações:
+- removida a barra superior da página Dashboard;
+- removida/ocultada a barra superior da página Impressoras;
+- adicionada regra CSS global para páginas futuristas futuras não terem barra de topo interna;
+- páginas futuras devem usar só o hero/bloco principal no topo.
+
+Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.

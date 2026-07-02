@@ -250,7 +250,7 @@
   function renderAlerts(items){
     const host = byId("stockAlertsList");
     if (!host) return;
-    // v1.58.59: alertas de stock só aparecem quando a quantidade é 0.
+    // v1.58.60: alertas de stock só aparecem quando a quantidade é 0.
     // Stock baixo continua visível no KPI/estado da tabela, mas não entra neste card.
     const alerts = getStock().filter(i => qty(i) <= 0).sort((a,b)=>qty(a)-qty(b)).slice(0, 5);
     if (!alerts.length) {

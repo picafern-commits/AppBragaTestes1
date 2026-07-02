@@ -32,7 +32,7 @@ if (typeof firebase !== "undefined") {
   }
 }
 
-const APP_VERSION = "1.58.59";
+const APP_VERSION = "1.58.60";
 const APP_NOTIFICATIONS_REBUILD_MODE = true;
 const APP_BRAGA_DEFAULT_VAPID_PUBLIC_KEY = "";
 const APP_BRAGA_NOTIFICATION_CLOUD_DOC = "";
@@ -872,7 +872,7 @@ async function disponivel() {
 
     const ref = await database.collection("stock").add(payload);
 
-    // v1.58.59: a etiqueta da página Etiquetas deve ficar guardada
+    // v1.58.60: a etiqueta da página Etiquetas deve ficar guardada
     // sempre que o toner é adicionado ao stock. Não depende da geração/download
     // do Word, porque o browser pode bloquear ou falhar essa parte.
     const etiquetaPayload = {
@@ -1956,7 +1956,7 @@ function gerarHTMLToners(info) {
 }
 
 function maybeNotifyCriticalSupply(ip, info, previousInfo = null) {
-  // v1.58.59: nao enviar notificacoes cloud/local a partir das paginas.
+  // v1.58.60: nao enviar notificacoes cloud/local a partir das paginas.
   // As notificacoes de toner passam a ser decididas uma unica vez nas Cloud Functions,
   // para evitar loops quando o Dashboard ou outra pagina faz leituras repetidas.
   return;
@@ -2064,7 +2064,7 @@ function resolveVapidPublicKeyApp(value) {
 }
 
 async function maybeNotifyTonerReplacement(ip, previousInfo, nextInfo) {
-  // v1.58.59: reposicao de toner tambem fica centralizada nas Cloud Functions.
+  // v1.58.60: reposicao de toner tambem fica centralizada nas Cloud Functions.
   return;
   if (!appNotificationState.tonerChange) return;
   const events = getTonerReplacementEventsApp(previousInfo, nextInfo);
@@ -2319,7 +2319,7 @@ function buildAlertasNotificacoesApp() {
 }
 
 async function verificarAlertasNotificacoesApp(force = false) {
-  // v1.58.59: alertas automáticos deixaram de correr no cliente.
+  // v1.58.60: alertas automáticos deixaram de correr no cliente.
   // A origem única é Cloud Functions para enviar uma só vez a todos os dispositivos.
   if (!force) return;
   const alerts = buildAlertasNotificacoesApp();
@@ -2363,7 +2363,7 @@ function canNotifyRealtimeCollectionApp(collectionKey) {
 }
 
 async function notificarAlteracaoRealtimeApp(collectionKey, snapshot) {
-  // v1.58.59: não criar notificações automáticas a partir de listeners de página.
+  // v1.58.60: não criar notificações automáticas a partir de listeners de página.
   // Listeners servem apenas para atualizar UI; notificações globais vêm das Functions.
   return;
   if (!snapshot || typeof snapshot.docChanges !== "function") return;
@@ -2410,7 +2410,7 @@ async function notificarAlteracaoRealtimeApp(collectionKey, snapshot) {
 
 function iniciarMonitorNotificacoesApp() {
   clearInterval(appNotificationTimer);
-  // v1.58.59: sem monitor automático no cliente para evitar loops no Dashboard.
+  // v1.58.60: sem monitor automático no cliente para evitar loops no Dashboard.
   // Os testes manuais continuam a funcionar; automáticas ficam nas Cloud Functions.
 }
 
@@ -6558,7 +6558,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const estaNoDashboard = !!el("listaDashboardStock") || !!el("searchDashboard");
   const podeLerTonerElectron = !!(window.electronAPI && window.electronAPI.getTonerSNMP);
 
-  // v1.58.59: no Electron/GitHub a leitura SNMP tem de correr como serviço global,
+  // v1.58.60: no Electron/GitHub a leitura SNMP tem de correr como serviço global,
   // independentemente da página aberta. A escrita na Firebase continua protegida por
   // syncPrinterInfoToFirebase(), que só grava quando o valor mudou mesmo.
   if (estaNaPaginaImpressoras || estaNoDashboard || podeLerTonerElectron) {
@@ -6650,7 +6650,7 @@ async function syncPrinterInfoToFirebase(ip, info) {
   const payload = buildPrinterFirebasePayload(cleanIp, info);
   const compareKey = appBragaPrinterCompareKeyFromPayload(payload);
 
-  // v1.58.59: o Dashboard/Electron estava a escrever novamente os mesmos valores
+  // v1.58.60: o Dashboard/Electron estava a escrever novamente os mesmos valores
   // em cada leitura. Mesmo sem mudança real, isso podia acordar as Functions e repetir
   // notificações nos outros dispositivos. Agora só escreve na Firebase quando toner/
   // resíduo/percentagem mudam mesmo.
@@ -6778,7 +6778,7 @@ function mapFirebasePrinterInfo(printerDoc) {
 
 function bindPrintersFirebaseRealtime() {
   if (!db || !db.collection) return;
-  // v1.58.59: a leitura Firebase das impressoras tem de estar ativa em todas as páginas.
+  // v1.58.60: a leitura Firebase das impressoras tem de estar ativa em todas as páginas.
   // Antes só corria no Dashboard/Impressoras; por isso iPhone/tablet só viam toners atualizados
   // quando alguém abria a página Impressoras. Este listener apenas lê e atualiza UI/estado local.
   appBragaBindFirestoreListener("printers-realtime", true, () => db.collection("printers").onSnapshot((snap) => {
@@ -8076,7 +8076,7 @@ async function atualizarAppObrigatorio(novaVersao = "") {
 
 window.addEventListener("load", () => {
   atualizarVersaoUI(APP_VERSION);
-  // v1.58.59: não verificar/forçar atualização automaticamente.
+  // v1.58.60: não verificar/forçar atualização automaticamente.
   // Evita refresh/navegação quando o utilizador está a editar ou guardar dados.
 });
 
@@ -10060,7 +10060,7 @@ async function guardarEtiquetaPartilhada(extra = {}) {
     const payload = sanitizeFirestorePayloadAppBraga(montarPayloadEtiquetaPartilhada(extra));
     const codigo = String(payload.codigoEtiqueta || extra.codigoEtiqueta || "").trim().toUpperCase();
 
-    // v1.58.59: evitar duplicados. Ao adicionar toner, a etiqueta é guardada
+    // v1.58.60: evitar duplicados. Ao adicionar toner, a etiqueta é guardada
     // logo na coleção etiquetasWord; se o Word também for gerado a seguir,
     // atualiza a mesma etiqueta em vez de criar outra.
     if (codigo) {
@@ -13401,7 +13401,7 @@ async function carregarHistoricoNotificacoesCloudApp(showMessage = false) {
 /* ===== END APP BRAGA v1.56.1 - SIDEBAR OPERACIONAL FINAL ===== */
 
 
-/* v1.58.59 — proteção contra refresh automático durante edição/guardar */
+/* v1.58.60 — proteção contra refresh automático durante edição/guardar */
 window.__APP_BRAGA_DISABLE_AUTO_UPDATE_REFRESH__ = true;
 
 (function protegerContraRefreshAutomaticoAppBraga() {
@@ -13438,7 +13438,7 @@ window.__APP_BRAGA_DISABLE_AUTO_UPDATE_REFRESH__ = true;
 })();
 
 
-/* v1.58.59 — clique do logotipo do hero para voltar ao Portal */
+/* v1.58.60 — clique do logotipo do hero para voltar ao Portal */
 (function ativarBotaoLogoHeroPortal(){
   if (window.__appBragaHeroLogoButtonBound) return;
   window.__appBragaHeroLogoButtonBound = true;
