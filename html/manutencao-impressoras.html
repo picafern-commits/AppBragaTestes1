@@ -1,169 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<script src="../js/app-theme-pro.js?v=theme-pro-6"></script>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
   <title>Manutenção Impressoras</title>
-  <meta name="theme-color" content="#101114">
+  <meta name="theme-color" content="#020817">
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/style.css?v=1.58.62">
-  <link rel="stylesheet" href="../css/autozitania-bragalis.css">
-  <link rel="stylesheet" href="../css/app-theme-pro.css?v=theme-pro-6">
-  <link rel="stylesheet" href="../css/enterprise/ops.css?v=ops-13">
-  <link rel="stylesheet" href="../css/systems/personal-tools.css?v=personal-6">
-  <link rel="stylesheet" href="../css/systems/global-search.css?v=global-search-2">
-    <link rel="stylesheet" href="../css/app-clean-pages.css?v=1.58.62">
-<meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="../css/manutencao-futurista.css?v=1.58.69">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="App Braga">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <link rel="stylesheet" href="../css/iphone-force-final.css?v=1.58.62">
-  <link rel="stylesheet" href="../css/iphone-sidebar-final.css?v=1.58.62">
-
-  <link rel="stylesheet" href="../css/operational-improvements.css?v=1.58.62">
-  <link rel="stylesheet" href="../css/premium-polish.css?v=1.58.62">
-  <link rel="stylesheet" href="../css/appbraga-light-redesign.css?v=1.58.62">
-  <link rel="stylesheet" href="../css/appbraga-mockup-pages.css?v=1.58.62">
 </head>
-<body>
-<aside class="sidebar sidebar-pro-groups sidebar-collapsible-pro">
-  <div class="brand premium-brand">
-    <div class="brand-badge">BR</div>
-    <div><h2>App Braga</h2><small class="sidebar-brand-subtitle">Centro operacional</small></div>
-    <button class="sidebar-collapse-toggle" type="button" title="Colapsar/expandir sidebar" aria-label="Colapsar sidebar">‹</button>
-  </div>
-  <nav class="sidebar-nav-pro" aria-label="Navegação principal">
-    <section class="sidebar-favorites" data-sidebar-section="favorites">
-      <div class="sidebar-section-title"><span>⭐</span><strong>Favoritos</strong></div>
-      <a href="dashboard.html" data-icon="🏠"><span class="sidebar-link-text">Dashboard</span></a>
-      <a href="stock.html" data-icon="📦"><span class="sidebar-link-text">Stock</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-    </section>
-    <div class="sidebar-divider"></div>
-    <section class="sidebar-group" data-sidebar-group="operacao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚡</span><span>Operação</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="add-toner.html" data-icon="➕"><span class="sidebar-link-text">Adicionar Toner</span></a>
-      <a href="historico.html" data-icon="🧾"><span class="sidebar-link-text">Histórico</span></a>
-      <a href="tarefas.html" data-icon="✅"><span class="sidebar-link-text">Tarefas</span></a>
-      <a href="equipas-semanais.html" data-icon="👥"><span class="sidebar-link-text">Equipas Semanais</span></a>
-      <a href="scanner-ia.html" data-icon="📷"><span class="sidebar-link-text">Scanner IA</span></a>
-      <a href="etiquetas-word.html" data-icon="🏷️"><span class="sidebar-link-text">Etiquetas Word</span></a>
+<body class="manutencao-futurista" data-forced-version="1.58.69">
+  <div class="mnt-page">
+    <section class="mnt-hero" aria-labelledby="mntTitle">
+      <div class="mnt-hero-card">
+        <a class="mnt-hero-orbit appbraga-home-orbit-btn" href="index.html" aria-label="Voltar ao Portal AppBraga" title="Voltar ao Portal">
+          <img src="../assets/bragalis-home-logo-original.png?v=1.58.69" alt="AppBraga">
+        </a>
+        <div class="mnt-hero-icon" aria-hidden="true">🛠️</div>
+        <div>
+          <h1 id="mntTitle">Manutenção Impressoras</h1>
+          <p>Planeamento, intervenções e estado técnico dos equipamentos.</p>
+        </div>
       </div>
     </section>
-    <section class="sidebar-group" data-sidebar-group="equipamentos">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🧰</span><span>Equipamentos</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="impressoras.html" data-icon="🖨️"><span class="sidebar-link-text">Impressoras</span></a>
-      <a href="manutencao-impressoras.html" data-icon="🛠️" class="active"><span class="sidebar-link-text">Manutenção Impressoras</span></a>
-      <a href="computadores.html" data-icon="💻"><span class="sidebar-link-text">Computadores</span></a>
-      <a href="pistolas.html" data-icon="📟"><span class="sidebar-link-text">Pistolas CK65</span></a>
-      <a href="radios.html" data-icon="📡"><span class="sidebar-link-text">Rádios</span></a>
-      </div>
+
+    <section class="mnt-kpis" aria-label="Resumo de manutenção">
+      <article class="mnt-kpi"><span class="kpi-icon purple"><span>🛠️</span></span><div><span>Intervenções abertas</span><strong id="countManutPendentes">0</strong><small>Total em curso</small></div><b class="spark blue">⌁⌁⌁</b></article>
+      <article class="mnt-kpi"><span class="kpi-icon green"><span>🗓️</span></span><div><span>Hoje</span><strong id="mntKpiHoje">0</strong><small>Agendadas</small></div><b class="spark green">⌁⌁⌁</b></article>
+      <article class="mnt-kpi"><span class="kpi-icon cyan"><span>✅</span></span><div><span>Concluídas</span><strong id="mntKpiConcluidas">0</strong><small>Últimos 7 dias</small></div><b class="spark green">⌁⌁⌁</b></article>
+      <article class="mnt-kpi"><span class="kpi-icon amber"><span>⚠️</span></span><div><span>Atrasadas</span><strong id="mntKpiAtrasadas">0</strong><small>Requer atenção</small></div><b class="spark red">⌁⌁⌁</b></article>
+      <article class="mnt-kpi"><span class="kpi-icon blue"><span>👥</span></span><div><span>Técnicos</span><strong id="mntKpiTecnicos">0</strong><small>Ativos</small></div><b class="spark blue">⌁⌁⌁</b></article>
+      <article class="mnt-kpi"><span class="kpi-icon red"><span>❗</span></span><div><span>Impressoras críticas</span><strong id="mntKpiCriticas">0</strong><small>Necessitam atenção</small></div><b class="spark orange">⌁⌁⌁</b></article>
     </section>
-    <section class="sidebar-group" data-sidebar-group="infraestrutura">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">🌐</span><span>Infraestrutura</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="portas.html" data-icon="🔌"><span class="sidebar-link-text">Portas Rede</span></a>
-      <a href="diretorio.html" data-icon="☎️"><span class="sidebar-link-text">Diretório</span></a>
-      <a href="informacoes.html" data-icon="ℹ️"><span class="sidebar-link-text">Informações</span></a>
-      </div>
+
+    <section class="mnt-main-grid">
+      <main class="mnt-left">
+        <article class="mnt-panel mnt-table-panel">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>🖨️</span><div><h2>Intervenções de manutenção</h2><p>Acompanhe e gerencie as intervenções técnicas.</p></div></div>
+            <div class="mnt-filters">
+              <input id="searchManutencoes" type="text" placeholder="Pesquisar intervenção...">
+              <select id="filterLocalManutencao"><option value="">Todos os locais</option></select>
+              <select id="filterPrioridadeManutencao"><option value="">Todas prioridades</option><option>Alta</option><option>Média</option><option>Baixa</option></select>
+              <select id="filterEstadoManutencao"><option value="">Todos estados</option><option>Aberta</option><option>Em curso</option><option>Agendada</option><option>Concluída</option></select>
+              <button type="button" class="mnt-btn" onclick="limparFiltrosManutencaoFuturista()">☰ Limpar</button>
+            </div>
+          </div>
+          <div class="mnt-table-wrap">
+            <table class="mnt-table">
+              <thead><tr><th>Equipamento</th><th>Local</th><th>Tipo de intervenção</th><th>Prioridade</th><th>Técnico</th><th>Data</th><th>Estado</th><th>Ações</th></tr></thead>
+              <tbody id="mntTableBody"><tr><td colspan="8" class="mnt-empty-row">A carregar intervenções...</td></tr></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="mnt-panel">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>🗓️</span><div><h2>Próximas intervenções</h2><p>Timeline das próximas intervenções agendadas.</p></div></div>
+          </div>
+          <div class="mnt-timeline" id="mntTimeline"></div>
+          <div class="mnt-timeline-footer"><button type="button" class="mnt-btn" onclick="filtrarAgendaManutencaoFuturista()">Ver agenda completa →</button></div>
+        </article>
+
+        <article class="mnt-panel mnt-form-panel" id="mntFormPanel" style="display:none;">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>➕</span><div><h2>Nova intervenção</h2><p>Adicionar intervenção técnica.</p></div></div>
+            <button type="button" onclick="fecharFormManutencaoFuturista()">×</button>
+          </div>
+          <div class="mnt-form">
+            <label>Equipamento<input id="manutencaoModelo" placeholder="Ex.: Kyocera P3155dn"></label>
+            <label>Série<input id="manutencaoSerie" placeholder="N.º série"></label>
+            <label>Localização<input id="manutencaoLocalizacao" placeholder="Ilha 01"></label>
+            <label>IP<input id="manutencaoIP" placeholder="192.168..."></label>
+            <label>Prioridade<select id="manutencaoPrioridade"><option>Alta</option><option>Média</option><option>Baixa</option></select></label>
+            <label>Técnico<input id="manutencaoTecnico" placeholder="Nome do técnico"></label>
+            <label>Estado<select id="manutencaoEstado"><option>Aberta</option><option>Em curso</option><option>Agendada</option><option>Concluída</option></select></label>
+            <label>Data<input id="manutencaoData" type="datetime-local"></label>
+            <label class="wide">Tipo / Pedido<textarea id="manutencaoPedido" placeholder="Descrição da intervenção"></textarea></label>
+            <label class="wide">Resolução<textarea id="manutencaoResolucao" placeholder="Resolução aplicada"></textarea></label>
+            <label class="wide">Motivo<textarea id="manutencaoMotivo" placeholder="Motivo / observações"></textarea></label>
+            <button class="wide primary" type="button" onclick="guardarManutencaoFuturista()">💾 Guardar intervenção</button>
+          </div>
+        </article>
+
+        <section class="mnt-hidden-legacy" aria-hidden="true">
+          <div id="countManutTotal">0</div>
+          <div id="countManutReparacao">0</div>
+          <select id="manutencaoArmazem"><option></option></select>
+          <div id="listaManutencoes"></div>
+        </section>
+      </main>
+
+      <aside class="mnt-right">
+        <article class="mnt-panel">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>⚡</span><div><h2>Ações rápidas</h2><p>Atalhos para manutenção.</p></div></div>
+          </div>
+          <div class="mnt-quick-actions">
+            <button type="button" class="primary" onclick="abrirFormManutencaoFuturista()">＋ Nova intervenção</button>
+            <button type="button" onclick="location.href='impressoras.html'">⟳ Impressoras</button>
+            <button type="button" onclick="location.href='historico.html'">↩ Histórico</button>
+            <button type="button" onclick="location.href='diagnostico.html'">🧪 Diagnóstico</button>
+            <button type="button" onclick="location.href='etiquetas-word.html'">📄 Etiquetas Word</button>
+          </div>
+        </article>
+
+        <article class="mnt-panel">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>⚠️</span><div><h2>Alertas técnicos</h2><p>Situações que requerem ação imediata.</p></div></div>
+            <button type="button" onclick="filtrarAlertasManutencaoFuturista()">Ver todos →</button>
+          </div>
+          <div class="mnt-list" id="mntAlertas"></div>
+        </article>
+
+        <article class="mnt-panel">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>🗓️</span><div><h2>Agenda de manutenção</h2><p>Próximos eventos agendados.</p></div></div>
+            <button type="button" onclick="filtrarAgendaManutencaoFuturista()">Ver todos →</button>
+          </div>
+          <div class="mnt-list" id="mntAgenda"></div>
+        </article>
+
+        <article class="mnt-panel">
+          <div class="mnt-panel-head">
+            <div class="panel-title"><span>🧰</span><div><h2>Peças / consumíveis relacionados</h2><p>Itens associados às intervenções abertas.</p></div></div>
+            <button type="button" onclick="location.href='stock.html'">Ver stock →</button>
+          </div>
+          <div class="mnt-bars" id="mntPecas"></div>
+        </article>
+      </aside>
     </section>
-    <section class="sidebar-group" data-sidebar-group="administracao">
-      <button class="sidebar-group-toggle" type="button" aria-expanded="false">
-        <span class="sidebar-group-left"><span class="sidebar-group-icon">⚙️</span><span>Administração</span></span>
-        <span class="sidebar-group-chevron">›</span>
-      </button>
-      <div class="sidebar-group-links">
-      <a href="users.html" data-icon="👥"><span class="sidebar-link-text">Users</span></a>
-      <a href="diagnostico.html" data-icon="🩺"><span class="sidebar-link-text">Diagnóstico</span></a>
-      <a href="notificacoes.html" data-icon="🔔"><span class="sidebar-link-text">Notificações</span></a>
-      <a href="config.html" data-icon="⚙️"><span class="sidebar-link-text">Configurações</span></a>
-      </div>
-    </section>
-  </nav>
-</aside>
-<main class="main">
-  <div class="page-hero">
-    <div class="page-hero-title">Manutenção Impressoras</div>
-	<span class="status-pill">Sistema Online</span>
-  </div>
-  <div class="page-hero">
-    <div class="page-hero-title">Manutenção Impressoras</div>
-	<span class="status-pill">Sistema Online</span>
   </div>
 
-  <div class="stats-grid">
-    <div class="stat-card"><span>Total</span><strong id="countManutTotal">0</strong></div>
-    <div class="stat-card"><span>Pendentes</span><strong id="countManutPendentes">0</strong></div>
-    <div class="stat-card"><span>Em reparação</span><strong id="countManutReparacao">0</strong></div>
-  </div>
-  
-  <div class="panel form-grid">
-    <label><span>User</span><input id="manutencaoTecnico" type="text"></label>
-    <label><span>Estado</span><select id="manutencaoEstado"><option>Pendente</option><option>Em reparação</option><option>Resolvido</option></select></label>
-    <label><span>Armazém</span><select id="manutencaoArmazem"><option value="">Selecionar armazem</option><option value="Braga">Braga</option><option value="Vila Real">Vila Real</option></select></label>
-    <label><span>Localização</span><select id="manutencaoLocalizacao"></select></label>
-    <label><span>Modelo</span><select id="manutencaoModelo"><option value="">Selecionar modelo</option><option value="P3155DN">P3155DN</option><option value="TASKalfa_255ci">TASKalfa_255ci</option><option value="PA5500x">PA5500x</option></select></label>
-    <label><span>Numero Serie</span><select id="manutencaoSerie"></select></label>
-    <label><span>IP</span><select id="manutencaoIP"></select></label>
-    <label><span>Data Pedido</span><input id="manutencaoPedido" type="date"></label>
-    <label><span>Data Resolução</span><input id="manutencaoResolucao" type="date"></label>
-    <label class="full"><span>Motivo</span><textarea id="manutencaoMotivo" rows="3"></textarea></label>
-    <button class="primary-btn" onclick="guardarManutencao()">Guardar manutenção</button>
-  </div>
-  <div class="panel">
-    <div class="toolbar printers-toolbar">
-      <input id="searchManutencoes" type="text" placeholder="Pesquisar..." oninput="filtrarManutencoes()">
-      <select id="filterEstadoManutencao" onchange="filtrarManutencoes()"><option value="">Todos os estados</option><option value="Pendente">Pendente</option><option value="Em reparação">Em reparação</option><option value="Resolvido">Resolvido</option></select>
-      <select id="filterArmazemManutencao" onchange="filtrarManutencoes()"><option value="">Todos os armazens</option><option value="Braga">Braga</option><option value="Vila Real">Vila Real</option></select>
-    </div>
-    <div id="listaManutencoes" class="cards-list"></div>
-  </div>
-
-</main>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script src="../js/app.js?v=1.58.62"></script>
-<script src="../js/sidebar-editor.js?v=1.58.62"></script>
-<script src="../js/systems/global-search/global-search.js?v=global-search-2"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="../js/app.js?v=1.58.69"></script>
+  <script src="../js/sidebar-editor.js?v=1.58.69"></script>
   <script src="../js/core/helpers.js"></script>
-  <script src="../js/iphone-force-final.js?v=1.58.62"></script>
-<script src="../js/enterprise/ops.js?v=ops-13"></script>
-<script src="../js/systems/backup/local-backup.js?v=backup-2"></script>
-<script src="../js/systems/personal-tools.js?v=personal-4"></script>
-
-<script src="../js/iphone-sidebar-final.js?v=1.58.62"></script>
-<script src="../js/operational-improvements.js?v=1.58.62"></script>
-<script src="../js/appbraga-mockup-pages.js?v=1.58.62"></script>
+  <script src="../js/manutencao-futurista.js?v=1.58.69"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

@@ -1,10 +1,15 @@
-AppBraga v1.58.68 — Etiquetas Word: correção dos ícones dos cards KPI.
+AppBraga v1.58.69 — Página Manutenção Impressoras futurista com sistemas ligados.
 
 Alterações:
-- Ícones dos 6 cards KPI corrigidos;
-- Ícones centrados dentro do quadrado;
-- Tamanho aumentado e fixo;
-- CSS com override forte para impedir interferência de estilos antigos;
-- Mantida a paginação de 23 por página da v1.58.67.
+- Nova página html/manutencao-impressoras.html no visual aprovado;
+- Sem barra antiga/sidebar;
+- Hero com logotipo no círculo como botão para Portal;
+- KPIs funcionais;
+- Lista de intervenções ligada às coleções manutencoes/manutencao;
+- Filtros por pesquisa, local, prioridade e estado;
+- Formulário Nova intervenção ligado ao Firebase;
+- Ver/editar/concluir intervenção;
+- Alertas técnicos, agenda, timeline e peças relacionadas;
+- IDs antigos principais preservados para compatibilidade.
 
-Depois do deploy: abrir /html/etiquetas-word.html?v=1.58.68 e Ctrl+F5.
+Depois do deploy abre /html/manutencao-impressoras.html?v=1.58.69 e Ctrl+F5.
