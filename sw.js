@@ -1,4 +1,4 @@
-const APP_BRAGA_SW = "app-braga-runtime-v15853";
+const APP_BRAGA_SW = "app-braga-runtime-v15854";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -12,6 +12,7 @@ const APP_SHELL = [
   "./html/equipas-semanais.html",
   "./html/stock.html",
   "./manifest.json",
+  "./assets/bragalis-home-logo-clean.png",
   "./assets/bragalis-home-logo.png",
   "./css/style.css",
   "./css/portal-home.css",

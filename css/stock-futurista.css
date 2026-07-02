@@ -683,7 +683,7 @@ body.stock-futurista::after {
 }
 
 
-/* v1.58.53 — alinhar Etiquetas Word com Movimentos recentes */
+/* v1.58.54 — alinhar Etiquetas Word com Movimentos recentes */
 body.stock-futurista .stock-right {
   display: grid !important;
   grid-template-rows: auto auto auto auto !important;
@@ -743,7 +743,7 @@ body.stock-futurista .stock-labels-list {
 }
 
 
-/* v1.58.53 — alinhamento correto: Etiquetas Word com Movimentos recentes
+/* v1.58.54 — alinhamento correto: Etiquetas Word com Movimentos recentes
    Sem margens negativas fixas. O offset é calculado em JS conforme o ecrã. */
 
 /* Neutraliza o remendo anterior */
@@ -781,7 +781,7 @@ body.stock-futurista .stock-color-panel .stock-bars {
 }
 
 
-/* v1.58.53 — logotipo no círculo do hero como botão para o Portal */
+/* v1.58.54 — logotipo no círculo do hero como botão para o Portal */
 .appbraga-home-hero-btn {
   text-decoration: none !important;
   cursor: pointer !important;
@@ -818,4 +818,57 @@ body.stock-futurista .stock-color-panel .stock-bars {
   box-shadow:
     0 0 30px rgba(34,159,255,.38),
     inset 0 0 18px rgba(255,255,255,.08) !important;
+}
+
+
+/* v1.58.54 — logotipo no círculo grande lateral do hero */
+.appbraga-home-hero-btn {
+  cursor: default !important;
+  pointer-events: none !important;
+}
+
+.imp-hero-icon.appbraga-home-hero-btn img,
+.toner-hero-icon.appbraga-home-hero-btn img,
+.stock-hero-icon.appbraga-home-hero-btn img {
+  display: none !important;
+}
+
+.appbraga-home-orbit-btn {
+  display: grid !important;
+  place-items: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(16,58,124,.55), rgba(8,27,61,.22) 60%, transparent 72%) !important;
+  transition: transform .16s ease, filter .16s ease, box-shadow .16s ease !important;
+}
+
+.appbraga-home-orbit-btn:hover {
+  transform: translate(-50%, -50%) scale(1.035) !important;
+  filter: brightness(1.08) saturate(1.08) !important;
+}
+
+.appbraga-home-orbit-btn:active {
+  transform: translate(-50%, -50%) scale(.985) !important;
+}
+
+.appbraga-home-orbit-btn img {
+  width: 78% !important;
+  height: 78% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter:
+    drop-shadow(0 8px 12px rgba(0,0,0,.28))
+    drop-shadow(0 0 10px rgba(40,145,255,.18)) !important;
+}
+
+/* Mantém o ícone pequeno da página normal */
+.imp-hero-icon,
+.toner-hero-icon,
+.stock-hero-icon {
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
 }

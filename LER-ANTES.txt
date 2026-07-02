@@ -1,12 +1,9 @@
-AppBraga v1.58.53 — Logotipo no círculo do hero como botão para o Portal.
+AppBraga v1.58.54 — Logotipo no círculo correto do hero.
 
-Aplicado às páginas já redesenhadas:
-- Impressoras
-- Adicionar Toner
-- Stock
+Correção:
+- o logotipo passa para o círculo grande lateral/vazio do hero;
+- esse círculo é botão para voltar ao Portal;
+- o ícone pequeno volta a ser o ícone normal da página;
+- criado asset limpo sem o detalhe azul em cima do B.
 
-O círculo/ícone do hero agora contém a imagem enviada e é um link para html/index.html/index.html conforme a página atual.
-Ficheiro novo:
-- assets/bragalis-home-logo.png
-
-Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
+Páginas aplicadas: Impressoras, Adicionar Toner, Stock.
