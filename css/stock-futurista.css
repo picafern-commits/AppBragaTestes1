@@ -683,7 +683,7 @@ body.stock-futurista::after {
 }
 
 
-/* v1.58.52 — alinhar Etiquetas Word com Movimentos recentes */
+/* v1.58.53 — alinhar Etiquetas Word com Movimentos recentes */
 body.stock-futurista .stock-right {
   display: grid !important;
   grid-template-rows: auto auto auto auto !important;
@@ -743,7 +743,7 @@ body.stock-futurista .stock-labels-list {
 }
 
 
-/* v1.58.52 — alinhamento correto: Etiquetas Word com Movimentos recentes
+/* v1.58.53 — alinhamento correto: Etiquetas Word com Movimentos recentes
    Sem margens negativas fixas. O offset é calculado em JS conforme o ecrã. */
 
 /* Neutraliza o remendo anterior */
@@ -778,4 +778,44 @@ body.stock-futurista .stock-color-panel .stock-bars {
   body.stock-futurista .stock-labels-panel {
     margin-top: 0 !important;
   }
+}
+
+
+/* v1.58.53 — logotipo no círculo do hero como botão para o Portal */
+.appbraga-home-hero-btn {
+  text-decoration: none !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease !important;
+}
+
+.appbraga-home-hero-btn:hover {
+  transform: translateY(-1px) scale(1.035) !important;
+  filter: brightness(1.08) saturate(1.08) !important;
+}
+
+.appbraga-home-hero-btn:active {
+  transform: scale(.985) !important;
+}
+
+.appbraga-home-hero-btn img {
+  width: 74% !important;
+  height: 74% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)) !important;
+}
+
+/* Garante que o botão mantém exatamente o círculo visual das páginas */
+.imp-hero-icon.appbraga-home-hero-btn,
+.toner-hero-icon.appbraga-home-hero-btn,
+.stock-hero-icon.appbraga-home-hero-btn {
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 30% 30%, #24c7ff, #1746ff 70%) !important;
+  box-shadow:
+    0 0 30px rgba(34,159,255,.38),
+    inset 0 0 18px rgba(255,255,255,.08) !important;
 }

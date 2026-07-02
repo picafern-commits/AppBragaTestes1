@@ -136,7 +136,7 @@ body.impressoras-futurista::after{background:
 @media (max-width:760px){.imp-page{padding:14px}.imp-top{gap:12px;flex-wrap:wrap}.imp-kpis{grid-template-columns:1fr}.imp-kpi strong{font-size:2.4rem}.imp-search-row{grid-template-columns:1fr}.imp-table-wrap{overflow:auto}.imp-quick-grid{grid-template-columns:1fr}.imp-hero-inner{display:grid;gap:16px;justify-items:center;text-align:center}.imp-brand span:last-child{font-size:1rem}.imp-bottom-grid,.imp-main-grid{gap:12px}}
 
 
-/* v1.58.32 — fullscreen real + scroll na página Impressoras */
+/* v1.58.53 — fullscreen real + scroll na página Impressoras */
 html,
 body {
   height: auto !important;
@@ -267,7 +267,7 @@ body.impressoras-futurista .imp-back {
 }
 
 
-/* v1.58.33 — percentagem visível nas barras de toner */
+/* v1.58.53 — percentagem visível nas barras de toner */
 body.impressoras-futurista .imp-toner-cell {
   min-width: 170px !important;
   display: grid !important;
@@ -330,7 +330,7 @@ body.impressoras-futurista .imp-toner-fill.critical {
 }
 
 
-/* v1.58.34 — scroll corrigido + toner % real + stock por quantidade */
+/* v1.58.53 — scroll corrigido + toner % real + stock por quantidade */
 html,
 body.impressoras-futurista {
   overflow-y: auto !important;
@@ -417,7 +417,7 @@ body.impressoras-futurista .imp-toner-fill.unknown {
 }
 
 
-/* v1.58.36 — FIX CIRÚRGICO: scroll vertical página Impressoras */
+/* v1.58.53 — FIX CIRÚRGICO: scroll vertical página Impressoras */
 html {
   height: auto !important;
   min-height: 100% !important;
@@ -478,75 +478,41 @@ body.impressoras-futurista .imp-shell {
 }
 
 
-/* v1.58.37 — ajustes cirúrgicos página Impressoras */
-body.impressoras-futurista .imp-top,
-body.impressoras-futurista .imp-back {
-  display: none !important;
-}
-
-body.impressoras-futurista .imp-page {
-  padding-top: 28px !important;
-  padding-bottom: 42px !important;
-}
-
-body.impressoras-futurista .imp-hero {
-  margin-top: 0 !important;
-}
-
-body.impressoras-futurista .imp-side {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  align-content: start !important;
-}
-
-body.impressoras-futurista .imp-bottom-grid {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr !important;
-  gap: 14px !important;
-  align-items: stretch !important;
-  margin-top: 14px !important;
-  padding-bottom: 0 !important;
-}
-
-body.impressoras-futurista .imp-bottom-grid > .imp-panel {
-  min-height: 176px !important;
-}
-
-body.impressoras-futurista .imp-panel {
-  overflow: hidden !important;
-}
-
-body.impressoras-futurista .imp-word-print {
-  width: 28px !important;
-  height: 28px !important;
-  border-radius: 999px !important;
-  border: 1px solid rgba(65, 220, 116, .35) !important;
-  background: rgba(38, 168, 91, .28) !important;
-  color: #79f49a !important;
-  display: inline-grid !important;
-  place-items: center !important;
+/* v1.58.53 — logotipo no círculo do hero como botão para o Portal */
+.appbraga-home-hero-btn {
+  text-decoration: none !important;
   cursor: pointer !important;
-  font-weight: 900 !important;
-  box-shadow: 0 0 12px rgba(46, 220, 112, .16) !important;
+  overflow: hidden !important;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease !important;
 }
 
-body.impressoras-futurista .imp-word-print:hover {
-  background: rgba(38, 200, 105, .38) !important;
+.appbraga-home-hero-btn:hover {
+  transform: translateY(-1px) scale(1.035) !important;
+  filter: brightness(1.08) saturate(1.08) !important;
 }
 
-body.impressoras-futurista .imp-mini-row {
-  grid-template-columns: 64px 1fr auto !important;
+.appbraga-home-hero-btn:active {
+  transform: scale(.985) !important;
 }
 
-body.impressoras-futurista .imp-bar {
-  grid-template-columns: 76px 1fr 58px !important;
+.appbraga-home-hero-btn img {
+  width: 74% !important;
+  height: 74% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)) !important;
 }
 
-body.impressoras-futurista .imp-bar small {
-  display: none !important;
-}
-
-body.impressoras-futurista .imp-bar strong {
-  min-width: 54px !important;
-  text-align: right !important;
+/* Garante que o botão mantém exatamente o círculo visual das páginas */
+.imp-hero-icon.appbraga-home-hero-btn,
+.toner-hero-icon.appbraga-home-hero-btn,
+.stock-hero-icon.appbraga-home-hero-btn {
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 30% 30%, #24c7ff, #1746ff 70%) !important;
+  box-shadow:
+    0 0 30px rgba(34,159,255,.38),
+    inset 0 0 18px rgba(255,255,255,.08) !important;
 }

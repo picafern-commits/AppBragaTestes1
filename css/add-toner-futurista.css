@@ -771,7 +771,7 @@ body.add-toner-futurista::after {
 }
 
 
-/* v1.58.48 layout hardening */
+/* v1.58.53 layout hardening */
 body.add-toner-futurista {
   min-width: 1280px;
 }
@@ -871,7 +871,7 @@ body.add-toner-futurista {
 }
 
 
-/* v1.58.48 — fullscreen + sem barra superior */
+/* v1.58.53 — fullscreen + sem barra superior */
 body.add-toner-futurista {
   min-width: 0 !important;
   width: 100% !important;
@@ -941,7 +941,7 @@ body.add-toner-futurista .toner-form-body {
 }
 
 
-/* v1.58.48 — ajustes Adicionar Toner */
+/* v1.58.53 — ajustes Adicionar Toner */
 body.add-toner-futurista .toner-inline-scan {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -1052,7 +1052,7 @@ body.add-toner-futurista .warning-list div {
 }
 
 
-/* v1.58.48 — barra superior + fundo igual à página Impressoras */
+/* v1.58.53 — barra superior + fundo igual à página Impressoras */
 html,
 body.add-toner-futurista {
   background:
@@ -1226,7 +1226,7 @@ body.add-toner-futurista .toner-main-grid {
 }
 
 
-/* v1.58.48 — sem barra superior; hero igual ao bloco Impressoras */
+/* v1.58.53 — sem barra superior; hero igual ao bloco Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1352,7 +1352,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.48 — hero Adicionar Toner com proporções iguais ao hero Impressoras */
+/* v1.58.53 — hero Adicionar Toner com proporções iguais ao hero Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1480,7 +1480,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.48 — fundo do hero igual ao da página Impressoras */
+/* v1.58.53 — fundo do hero igual ao da página Impressoras */
 body.add-toner-futurista .toner-hero-card {
   width: 760px !important;
   max-width: calc(100vw - 48px) !important;
@@ -1540,7 +1540,7 @@ body.add-toner-futurista .toner-hero-icon {
 }
 
 
-/* v1.58.48 — hero com tamanho igual ao da página Impressoras */
+/* v1.58.53 — hero com tamanho igual ao da página Impressoras */
 body.add-toner-futurista .toner-hero {
   margin: 0 0 18px !important;
 }
@@ -1587,7 +1587,7 @@ body.add-toner-futurista .toner-hero p {
 }
 
 
-/* v1.58.48 — alinhar o design de Adicionar Toner com Impressoras */
+/* v1.58.53 — alinhar o design de Adicionar Toner com Impressoras */
 body.add-toner-futurista .toner-topbar {
   display: none !important;
 }
@@ -1884,4 +1884,44 @@ body.add-toner-futurista .toner-preview {
   body.add-toner-futurista .toner-form-body {
     grid-template-columns: 1fr !important;
   }
+}
+
+
+/* v1.58.53 — logotipo no círculo do hero como botão para o Portal */
+.appbraga-home-hero-btn {
+  text-decoration: none !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease !important;
+}
+
+.appbraga-home-hero-btn:hover {
+  transform: translateY(-1px) scale(1.035) !important;
+  filter: brightness(1.08) saturate(1.08) !important;
+}
+
+.appbraga-home-hero-btn:active {
+  transform: scale(.985) !important;
+}
+
+.appbraga-home-hero-btn img {
+  width: 74% !important;
+  height: 74% !important;
+  object-fit: contain !important;
+  display: block !important;
+  pointer-events: none !important;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)) !important;
+}
+
+/* Garante que o botão mantém exatamente o círculo visual das páginas */
+.imp-hero-icon.appbraga-home-hero-btn,
+.toner-hero-icon.appbraga-home-hero-btn,
+.stock-hero-icon.appbraga-home-hero-btn {
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 30% 30%, #24c7ff, #1746ff 70%) !important;
+  box-shadow:
+    0 0 30px rgba(34,159,255,.38),
+    inset 0 0 18px rgba(255,255,255,.08) !important;
 }

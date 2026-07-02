@@ -1,10 +1,12 @@
-AppBraga v1.58.52 — Stock: alinhamento correto do card Etiquetas Word.
+AppBraga v1.58.53 — Logotipo no círculo do hero como botão para o Portal.
 
-Correção:
-- remove o remendo de margem negativa;
-- adiciona classe própria ao card Etiquetas Word;
-- calcula em JavaScript a posição do card Movimentos recentes;
-- desce Etiquetas Word para começar exatamente ao mesmo nível;
-- recalcula no resize e após render dos dados.
+Aplicado às páginas já redesenhadas:
+- Impressoras
+- Adicionar Toner
+- Stock
+
+O círculo/ícone do hero agora contém a imagem enviada e é um link para html/index.html/index.html conforme a página atual.
+Ficheiro novo:
+- assets/bragalis-home-logo.png
 
 Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
