@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Etiquetas Word</title>
+  <meta name="theme-color" content="#020817">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <link rel="stylesheet" href="../css/etiquetas-futurista.css?v=1.58.65">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="App Braga">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+</head>
+
+<body class="etiquetas-futurista">
+  <div class="etq-page">
+    <section class="etq-hero" aria-labelledby="etqTitle">
+      <div class="etq-hero-card">
+        <a class="etq-hero-orbit appbraga-home-orbit-btn" href="index.html" aria-label="Voltar ao Portal AppBraga" title="Voltar ao Portal">
+          <img src="../assets/bragalis-home-logo-original.png?v=1.58.65" alt="AppBraga">
+        </a>
+        <div class="etq-hero-icon" aria-hidden="true">📄</div>
+        <div>
+          <h1 id="etqTitle">Etiquetas Word</h1>
+          <p>Gestão, geração e histórico de etiquetas e documentos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="etq-kpis" aria-label="Resumo de etiquetas">
+      <article class="etq-kpi">
+        <span class="kpi-icon">🧮</span>
+        <div><span>Etiquetas hoje</span><strong id="etqKpiHoje">0</strong><small>vs. ontem</small></div>
+        <b class="trend up">↗ +20%</b>
+      </article>
+      <article class="etq-kpi">
+        <span class="kpi-icon purple">📄</span>
+        <div><span>Documentos gerados</span><strong id="countEtiquetasTotal">0</strong><small>Total guardado</small></div>
+        <b class="trend up">↗ +23%</b>
+      </article>
+      <article class="etq-kpi">
+        <span class="kpi-icon amber">⏳</span>
+        <div><span>Pendentes</span><strong id="etqKpiPendentes">0</strong><small>Aguardando geração</small></div>
+        <b class="trend warn">↗ +2</b>
+      </article>
+      <article class="etq-kpi">
+        <span class="kpi-icon cyan">🔄</span>
+        <div><span>Reimpressões</span><strong id="etqKpiReimpressoes">0</strong><small>Regeradas</small></div>
+        <b class="trend up">↗ +33%</b>
+      </article>
+      <article class="etq-kpi">
+        <span class="kpi-icon blue">📅</span>
+        <div><span>Último lote</span><strong id="etqKpiUltimoLote">—</strong><small id="etqKpiUltimoLoteSub">Sem dados</small></div>
+      </article>
+      <article class="etq-kpi">
+        <span class="kpi-icon violet">🖨️</span>
+        <div><span>Equipamentos com etiquetas</span><strong id="countEtiquetasHistorico">0</strong><small>Com etiquetas ativas</small></div>
+        <b class="trend up">↗ +7%</b>
+      </article>
+    </section>
+
+    <section class="etq-main-grid">
+      <main class="etq-left">
+        <article class="etq-panel etq-table-panel">
+          <div class="etq-panel-head">
+            <div class="panel-title">
+              <span>📋</span>
+              <div>
+                <h2>Lista de etiquetas</h2>
+                <p>Histórico de etiquetas geradas e documentos associados.</p>
+              </div>
+            </div>
+
+            <div class="etq-filters">
+              <input id="searchEtiquetasWord" type="text" placeholder="Pesquisar etiquetas...">
+              <select id="filterEtiquetasArmazem">
+                <option value="">Todos os armazéns</option>
+              </select>
+              <select id="filterEtiquetasTipo">
+                <option value="">Todos os tipos</option>
+                <option value="Etiqueta">Etiqueta</option>
+                <option value="Toner">Toner</option>
+                <option value="Impressora">Impressora</option>
+              </select>
+              <select id="filterEtiquetasOrigem">
+                <option value="">Todos os estados</option>
+                <option value="gerado">Gerado</option>
+                <option value="pendente">Pendente</option>
+                <option value="falha">Falha</option>
+                <option value="reimpresso">Reimpresso</option>
+              </select>
+              <button type="button" class="etq-btn" onclick="limparFiltrosEtiquetasFuturista()">☰ Limpar</button>
+            </div>
+          </div>
+
+          <div class="etq-table-wrap">
+            <table class="etq-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Documento</th>
+                  <th>Referência</th>
+                  <th>Equipamento</th>
+                  <th>Local</th>
+                  <th>Estado</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="etqTableBody">
+                <tr><td colspan="7" class="etq-empty-row">A carregar etiquetas...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="etq-table-footer">
+            <span id="etqTableInfo">Total 0 etiquetas</span>
+            <div class="etq-pagination">
+              <button type="button">‹‹</button>
+              <button type="button">‹</button>
+              <button type="button" class="active">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button">5</button>
+              <button type="button">…</button>
+              <button type="button">›</button>
+              <button type="button">››</button>
+            </div>
+            <label class="etq-per-page">Mostrar
+              <select id="etqPerPage">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+              </select>
+              por página
+            </label>
+          </div>
+        </article>
+
+        <section class="etq-hidden-legacy">
+          <div id="countEtiquetasStock">0</div>
+          <div id="etiquetasSelecionadasCount">0</div>
+          <div id="listaEtiquetasWord"></div>
+        </section>
+      </main>
+
+      <aside class="etq-right">
+        <article class="etq-panel">
+          <div class="etq-panel-head">
+            <div class="panel-title"><span>⚡</span><div><h2>Ações rápidas</h2><p>Atalhos para gestão de etiquetas e documentos.</p></div></div>
+          </div>
+          <div class="etq-quick-actions">
+            <button type="button" class="primary" onclick="gerarEtiquetaRapidaFuturista()">＋ Gerar Etiqueta</button>
+            <button type="button" onclick="reimprimirUltimaEtiquetaWord()">⟳ Reimprimir</button>
+            <button type="button" onclick="location.href='historico.html'">↩ Histórico</button>
+            <button type="button" onclick="location.href='stock.html'">📦 Stock</button>
+            <button type="button" onclick="location.href='impressoras.html'">🖨️ Impressoras</button>
+          </div>
+        </article>
+
+        <article class="etq-panel">
+          <div class="etq-panel-head">
+            <div class="panel-title"><span>📄</span><div><h2>Documentos recentes</h2><p>Últimos documentos gerados.</p></div></div>
+            <button type="button" onclick="limparFiltrosEtiquetasFuturista()">Ver todos →</button>
+          </div>
+          <div class="etq-list" id="etqRecentDocs"></div>
+        </article>
+
+        <article class="etq-panel">
+          <div class="etq-panel-head">
+            <div class="panel-title"><span>🎨</span><div><h2>Estado de geração</h2><p>Visão geral do estado atual das gerações.</p></div></div>
+          </div>
+          <div class="etq-generation">
+            <div class="etq-donut" id="etqDonut" aria-hidden="true"></div>
+            <div class="etq-generation-list" id="etqGenerationList"></div>
+          </div>
+        </article>
+
+        <article class="etq-panel">
+          <div class="etq-panel-head">
+            <div class="panel-title"><span>🧾</span><div><h2>Modelos Word</h2><p>Modelos disponíveis para impressão.</p></div></div>
+            <button type="button" onclick="location.href='config.html'">Ver todos →</button>
+          </div>
+          <div class="etq-models" id="etqModelosWord">
+            <div class="etq-model-row"><strong>Modelo Etiqueta Toner.docx</strong><span>Hoje, 09:12</span><button type="button" onclick="reimprimirUltimaEtiquetaWord()">↓</button></div>
+            <div class="etq-model-row"><strong>Modelo Etiqueta Impressora.docx</strong><span>Hoje, 08:58</span><button type="button" onclick="location.href='impressoras.html'">↓</button></div>
+            <div class="etq-model-row"><strong>Modelo Etiqueta A4.docx</strong><span>Ontem, 17:25</span><button type="button" onclick="location.href='historico.html'">↓</button></div>
+          </div>
+        </article>
+      </aside>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="../js/app.js?v=1.58.65"></script>
+  <script src="../js/sidebar-editor.js?v=1.58.65"></script>
+  <script src="../js/core/helpers.js"></script>
+  <script src="../js/etiquetas-futurista.js?v=1.58.65"></script>
+</body>
+</html>

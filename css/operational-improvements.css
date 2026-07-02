@@ -1,0 +1,86 @@
+/* App Braga v1.58.30 - melhorias operacionais: iPhone, notificações, tarefas e equipas */
+
+/* Notificações rápidas */
+.notification-quick-actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.notification-quick-action{
+  border:1px solid color-mix(in srgb,var(--theme-primary,#f15a24) 26%,rgba(255,255,255,.14));
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
+  color:var(--text,#f8fafc);
+  border-radius:18px;
+  padding:14px 15px;
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  text-align:left;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease;
+}
+.notification-quick-action:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--theme-primary,#f15a24) 54%,white 0%);background:linear-gradient(145deg,color-mix(in srgb,var(--theme-primary,#f15a24) 14%,transparent),rgba(255,255,255,.06));}
+.notification-quick-action strong{display:block;font-size:14px;font-weight:900;margin-bottom:3px;}
+.notification-quick-action small{display:block;color:var(--muted,#94a3b8);font-size:12px;line-height:1.25;}
+.notification-quick-action .quick-emoji{font-size:25px;display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.08);}
+
+/* Tarefas mais claras */
+.personal-task-row{position:relative;border-radius:16px!important;}
+.personal-task-row.is-overdue{border-color:rgba(239,68,68,.45)!important;background:linear-gradient(145deg,rgba(239,68,68,.12),rgba(255,255,255,.04))!important;}
+.personal-task-row.is-overdue::before{content:'ATRASADA';position:absolute;right:12px;top:-10px;border-radius:999px;padding:3px 8px;background:#ef4444;color:white;font-size:10px;font-weight:950;letter-spacing:.04em;}
+.personal-task-row.is-done{opacity:.62;}
+.personal-task-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.personal-task-actions .danger-btn{border-color:rgba(239,68,68,.42);color:#fecaca;background:rgba(239,68,68,.12);}
+.personal-task-priority.urgent{background:rgba(239,68,68,.16);color:#fecaca;border-color:rgba(239,68,68,.34);}
+.personal-task-priority.high{background:rgba(249,115,22,.15);color:#fed7aa;border-color:rgba(249,115,22,.34);}
+.personal-task-priority.low{background:rgba(34,197,94,.12);color:#bbf7d0;border-color:rgba(34,197,94,.28);}
+
+/* Calendário de equipas */
+.equipas-calendar-panel{margin-top:18px;}
+.equipas-calendar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px;}
+.equipas-week-card{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px;background:rgba(255,255,255,.055);box-shadow:0 14px 34px rgba(0,0,0,.18);}
+.equipas-week-card.is-current{border-color:color-mix(in srgb,var(--theme-primary,#f15a24) 70%,white 0%);background:linear-gradient(145deg,color-mix(in srgb,var(--theme-primary,#f15a24) 18%,transparent),rgba(255,255,255,.06));}
+.equipas-week-card .week-label{font-size:12px;font-weight:900;color:var(--muted,#94a3b8);text-transform:uppercase;letter-spacing:.05em;}
+.equipas-week-card strong{display:block;margin-top:8px;font-size:18px;}
+.equipas-week-card small{display:block;color:var(--muted,#94a3b8);margin-top:6px;}
+.equipas-week-card .week-status{display:inline-flex;margin-top:10px;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:900;background:rgba(255,255,255,.08);}
+.equipas-week-card.is-current .week-status{background:color-mix(in srgb,var(--theme-primary,#f15a24) 72%,#111);color:#fff;}
+
+/* iPhone 16 Pro Max / landscape PWA */
+@supports (padding:max(0px)){
+  body{padding-top:0!important;}
+  .main, main{padding-left:max(var(--page-pad,18px),env(safe-area-inset-left,0px))!important;padding-right:max(var(--page-pad,18px),env(safe-area-inset-right,0px))!important;}
+}
+@media screen and (max-height: 540px) and (orientation: landscape){
+  body.device-phone .sidebar,
+  body.device-phone aside.sidebar,
+  body.device-phone #sidebar,
+  body.device-phone .enterprise-sidebar,
+  aside.sidebar,
+  .sidebar{
+    width:min(330px,72vw)!important;
+    max-width:min(330px,72vw)!important;
+    min-width:280px!important;
+    padding-top:calc(58px + env(safe-area-inset-top,0px))!important;
+  }
+  body:not(.sidebar-open) aside.sidebar,
+  body:not(.sidebar-open) .sidebar{transform:translate3d(-112%,0,0)!important;visibility:hidden!important;pointer-events:none!important;}
+  .app-menu-toggle{top:max(8px,env(safe-area-inset-top,0px))!important;left:max(10px,env(safe-area-inset-left,0px))!important;width:44px!important;height:44px!important;border-radius:14px!important;}
+  .main, main, .main-content, .page-content, .dashboard-shell{
+    margin-left:0!important;
+    width:100vw!important;
+    max-width:100vw!important;
+    min-height:100svh!important;
+    padding-top:max(58px,calc(16px + env(safe-area-inset-top,0px)))!important;
+    padding-left:max(64px,calc(18px + env(safe-area-inset-left,0px)))!important;
+    padding-right:max(18px,env(safe-area-inset-right,0px))!important;
+    padding-bottom:max(14px,env(safe-area-inset-bottom,0px))!important;
+  }
+  .page-hero{min-height:auto!important;padding:14px 16px!important;margin-bottom:12px!important;}
+  .page-hero-title{font-size:clamp(22px,4.4vw,34px)!important;}
+  .panel,.card,.dashboard-widget,.personal-panel{border-radius:18px!important;}
+  .dashboard-widget-grid,.dashboard-grid,.equipas-overview-grid,.personal-task-layout{gap:12px!important;}
+}

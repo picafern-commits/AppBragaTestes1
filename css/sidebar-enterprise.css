@@ -1,0 +1,341 @@
+
+/* =========================
+   ENTERPRISE SIDEBAR
+========================= */
+
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:250px;
+  height:100vh;
+  background:linear-gradient(180deg,#050816 0%,#081224 100%);
+  border-right:1px solid rgba(255,255,255,.05);
+  overflow-y:auto;
+  z-index:9999;
+}
+
+.main-content,
+.main,
+.page-content,
+.dashboard-container{
+  margin-left:250px;
+  width:calc(100% - 250px);
+  min-height:100vh;
+  padding:24px;
+  box-sizing:border-box;
+}
+
+/* Remove sidebar antiga */
+.old-sidebar,
+.legacy-sidebar{
+  display:none !important;
+}
+
+@media(max-width:1100px){
+
+  .sidebar{
+    width:90px;
+  }
+
+  .main-content,
+  .main,
+  .page-content,
+  .dashboard-container{
+    margin-left:90px;
+    width:calc(100% - 90px);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.3s;
+  }
+
+  .sidebar.active{
+    transform:translateX(0);
+  }
+
+  .main-content,
+  .main,
+  .page-content,
+  .dashboard-container{
+    margin-left:0;
+    width:100%;
+    padding:16px;
+  }
+
+}
+
+
+/* SIDEBAR DASHBOARD FIX */
+
+.main,
+.main-content,
+.page-content,
+.dashboard-container,
+.content-area{
+    margin-left: 250px !important;
+    width: calc(100% - 250px) !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+.dashboard-grid,
+.impressoras-grid,
+.cards-grid,
+.equipamentos-grid{
+    display:grid !important;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr)) !important;
+    gap:18px !important;
+    width:100% !important;
+}
+
+.card,
+.panel,
+.widget{
+    width:100% !important;
+}
+
+@media(max-width:900px){
+    .main,
+    .main-content,
+    .page-content,
+    .dashboard-container,
+    .content-area{
+        margin-left:0 !important;
+        width:100% !important;
+    }
+}
+
+
+/* ===== IPHONE REAL FINAL FIX - FULLSCREEN + SIDEBAR TEXT ===== */
+
+/* base PWA/Safari iPhone */
+html {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  background: var(--bg, #020617) !important;
+}
+
+body {
+  width: 100% !important;
+  min-width: 100% !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  background: var(--bg, #020617) !important;
+}
+
+/* iPhone: conteúdo sempre largura toda quando menu está fechado */
+@media screen and (max-width: 768px) {
+
+  body {
+    display: block !important;
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    padding-left: env(safe-area-inset-left, 0px) !important;
+    padding-right: env(safe-area-inset-right, 0px) !important;
+  }
+
+  .main,
+  main,
+  .main-content,
+  .page-content,
+  .dashboard-container,
+  .content-area,
+  .content,
+  .dashboard-shell {
+    margin-left: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    min-height: 100dvh !important;
+    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
+    padding-left: max(12px, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(12px, env(safe-area-inset-right, 0px)) !important;
+    padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .page-hero,
+  .dashboard-header,
+  .reference-header,
+  .panel,
+  .card,
+  .dashboard-card,
+  .stat-card,
+  .metric-card,
+  .stock-card,
+  .history-card,
+  .printer-card,
+  .user-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* sidebar mobile real */
+  aside.sidebar,
+  .sidebar,
+  #sidebar,
+  .enterprise-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100dvh !important;
+    width: min(86vw, 330px) !important;
+    min-width: min(86vw, 330px) !important;
+    max-width: min(86vw, 330px) !important;
+    padding: calc(72px + env(safe-area-inset-top, 0px)) 14px calc(18px + env(safe-area-inset-bottom, 0px)) 14px !important;
+    margin: 0 !important;
+    transform: translateX(-110%) !important;
+    transition: transform .24s ease !important;
+    z-index: 9999 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+  }
+
+  aside.sidebar.app-open,
+  .sidebar.app-open,
+  #sidebar.app-open,
+  .enterprise-sidebar.app-open,
+  body.sidebar-open aside.sidebar,
+  body.sidebar-open .sidebar,
+  .sidebar.open,
+  .sidebar.active {
+    transform: translateX(0) !important;
+  }
+
+  /* forçar texto completo nos links da sidebar */
+  aside.sidebar a,
+  .sidebar a,
+  #sidebar a,
+  .enterprise-sidebar a,
+  aside.sidebar button,
+  .sidebar button,
+  #sidebar button,
+  .enterprise-sidebar button,
+  .sidebar .menu-btn,
+  .sidebar .nav-link,
+  .sidebar .menu-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+    height: auto !important;
+    padding: 11px 12px !important;
+    margin: 0 0 8px 0 !important;
+    gap: 10px !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+    text-indent: 0 !important;
+    letter-spacing: normal !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: normal !important;
+    box-sizing: border-box !important;
+  }
+
+  aside.sidebar a::before,
+  .sidebar a::before {
+    flex: 0 0 22px !important;
+    width: 22px !important;
+    min-width: 22px !important;
+    text-align: center !important;
+  }
+
+  aside.sidebar a span,
+  .sidebar a span,
+  #sidebar a span,
+  .enterprise-sidebar a span,
+  .sidebar span,
+  .sidebar .label,
+  .sidebar .nav-text,
+  .sidebar .menu-text {
+    display: inline !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: auto !important;
+    max-width: calc(100% - 34px) !important;
+    height: auto !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+
+  .brand,
+  .premium-brand {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .brand h2,
+  .premium-brand h2 {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-size: 20px !important;
+    white-space: normal !important;
+  }
+
+  .app-menu-toggle {
+    display: grid !important;
+    place-items: center !important;
+    position: fixed !important;
+    top: calc(12px + env(safe-area-inset-top, 0px)) !important;
+    left: calc(12px + env(safe-area-inset-left, 0px)) !important;
+    z-index: 10000 !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .app-sidebar-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9998 !important;
+  }
+}
+
+/* iPhone estreito: ainda com texto, mas mais compacto */
+@media screen and (max-width: 430px) {
+  aside.sidebar,
+  .sidebar,
+  #sidebar,
+  .enterprise-sidebar {
+    width: 82vw !important;
+    min-width: 82vw !important;
+    max-width: 82vw !important;
+  }
+
+  aside.sidebar a,
+  .sidebar a,
+  #sidebar a,
+  .enterprise-sidebar a,
+  .sidebar .menu-btn,
+  .sidebar .nav-link,
+  .sidebar .menu-item {
+    font-size: 13px !important;
+    padding: 10px 10px !important;
+  }
+}
+/* ===== END IPHONE REAL FINAL FIX ===== */

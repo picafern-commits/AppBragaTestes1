@@ -1,0 +1,19 @@
+{
+  "name": "app-braga-functions",
+  "version": "1.58.14",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "lint": "node --check index.js",
+    "deploy": "firebase deploy --only functions --project toner-manager-756c4",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.4.0",
+    "web-push": "^3.6.7"
+  }
+}

@@ -1,0 +1,436 @@
+:root{
+  --dash-bg:#020914;
+  --dash-bg2:#061a34;
+  --dash-card:rgba(12,34,62,.72);
+  --dash-card2:rgba(7,24,47,.88);
+  --dash-line:rgba(120,180,255,.22);
+  --dash-line2:rgba(52,144,255,.55);
+  --dash-text:#f4f8ff;
+  --dash-muted:#9db2ce;
+  --dash-blue:#3d9bff;
+  --dash-cyan:#28d8ff;
+  --dash-green:#43df86;
+  --dash-orange:#ffad32;
+  --dash-red:#ff5d64;
+  --dash-purple:#a66cff;
+  --dash-radius:22px;
+  --dash-shadow:0 22px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06);
+}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0;background:var(--dash-bg);color:var(--dash-text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+body.dashboard-futurista-body{overflow-x:hidden;background:
+  radial-gradient(circle at 50% 0%, rgba(28,110,255,.35), transparent 30rem),
+  radial-gradient(circle at 0% 42%, rgba(0,160,255,.18), transparent 34rem),
+  radial-gradient(circle at 100% 48%, rgba(0,220,255,.14), transparent 34rem),
+  linear-gradient(135deg,#020811 0%,#03162e 52%,#020b19 100%);
+}
+body.dashboard-futurista-body:before,
+body.dashboard-futurista-body:after{content:"";position:fixed;inset:auto;z-index:0;pointer-events:none;opacity:.9;filter:drop-shadow(0 0 18px rgba(43,154,255,.22));}
+body.dashboard-futurista-body:before{left:-9rem;top:16rem;width:34rem;height:34rem;border-radius:50%;background:repeating-radial-gradient(circle,rgba(42,162,255,.35) 0 1px,transparent 2px 9px);mask-image:radial-gradient(circle,black 0 54%,transparent 66%);}
+body.dashboard-futurista-body:after{right:-8rem;top:18rem;width:38rem;height:25rem;border-radius:50%;background:repeating-radial-gradient(ellipse at center,rgba(36,158,255,.26) 0 1px,transparent 2px 10px);mask-image:radial-gradient(ellipse,black 0 52%,transparent 68%);}
+.dash-net{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:
+  linear-gradient(rgba(77,153,255,.045) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(77,153,255,.045) 1px,transparent 1px),
+  radial-gradient(circle at 12% 19%,rgba(88,180,255,.55) 0 2px,transparent 3px),
+  radial-gradient(circle at 18% 34%,rgba(88,180,255,.44) 0 2px,transparent 3px),
+  radial-gradient(circle at 88% 22%,rgba(88,180,255,.48) 0 2px,transparent 3px),
+  radial-gradient(circle at 94% 36%,rgba(88,180,255,.50) 0 2px,transparent 3px);
+  background-size:64px 64px,64px 64px,100% 100%,100% 100%,100% 100%,100% 100%;opacity:.7;}
+.dash-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:26px 34px 10px;}
+.dash-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--dash-text);font-weight:900;font-size:28px;letter-spacing:-.04em;}
+.dash-logo{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#004cff,#2fd8ff);box-shadow:0 0 30px rgba(49,151,255,.36);clip-path:polygon(50% 0,100% 82%,76% 82%,65% 62%,35% 62%,24% 82%,0 82%);}
+.dash-logo:after{content:"";width:22px;height:22px;border:7px solid rgba(255,255,255,.88);border-top-color:transparent;border-radius:5px;transform:rotate(45deg);}
+.dash-user{display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border:1px solid rgba(132,180,255,.22);background:rgba(7,22,44,.62);border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
+.dash-user-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1a5ee8,#83bdff);font-weight:900;color:white;}
+.dash-user-main{font-weight:800;line-height:1.05}.dash-user-sub{font-size:12px;color:var(--dash-muted);margin-top:3px}.dash-user-chevron{color:#b8c8e2;font-size:18px}
+.dashboard-futurista{position:relative;z-index:1;width:min(1740px,calc(100vw - 64px));margin:35px auto 42px;}
+.dash-hero{width:min(870px,90vw);margin:0 auto 26px;padding:28px 36px 34px;text-align:center;border-radius:24px;border:1px solid rgba(110,168,255,.35);background:linear-gradient(180deg,rgba(16,56,103,.72),rgba(4,24,52,.72));box-shadow:var(--dash-shadow);position:relative;overflow:hidden;}
+.dash-hero:after{content:"";position:absolute;left:50%;bottom:-2px;width:230px;height:3px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--dash-cyan),transparent);box-shadow:0 0 28px 8px rgba(40,216,255,.5);}
+.dash-hero-logo{width:72px;height:72px;margin:0 auto 10px;display:grid;place-items:center;filter:drop-shadow(0 0 22px rgba(51,154,255,.6));}
+.dash-hero-logo span{display:block;width:58px;height:58px;background:linear-gradient(135deg,#006aff,#37d6ff);clip-path:polygon(50% 0,100% 82%,76% 82%,65% 62%,35% 62%,24% 82%,0 82%);}
+.dash-hero h1{margin:0;font-size:48px;line-height:1.02;letter-spacing:-.05em;text-shadow:0 12px 30px rgba(0,0,0,.35)}
+.dash-hero p{margin:12px 0 0;color:#d2deef;font-size:17px;}
+.dash-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin:22px 0 18px;}
+.dash-kpi,.dash-panel{border:1px solid var(--dash-line);background:linear-gradient(180deg,rgba(19,47,82,.76),rgba(8,25,48,.82));border-radius:var(--dash-radius);box-shadow:var(--dash-shadow);}
+.dash-kpi{min-height:128px;padding:20px;display:flex;align-items:center;gap:18px;position:relative;overflow:hidden;}
+.dash-kpi:after{content:"";position:absolute;right:18px;bottom:18px;width:62px;height:28px;opacity:.75;background:linear-gradient(135deg,transparent 18%,currentColor 19% 22%,transparent 23% 37%,currentColor 38% 42%,transparent 43% 58%,currentColor 59% 62%,transparent 63%);color:rgba(61,155,255,.8);}
+.dash-kpi-icon{flex:0 0 58px;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;background:rgba(61,155,255,.16);box-shadow:inset 0 0 0 1px rgba(61,155,255,.25),0 0 30px rgba(61,155,255,.14);}
+.dash-kpi.green .dash-kpi-icon{background:rgba(67,223,134,.16);box-shadow:inset 0 0 0 1px rgba(67,223,134,.25),0 0 30px rgba(67,223,134,.14)}
+.dash-kpi.orange .dash-kpi-icon{background:rgba(255,173,50,.16);box-shadow:inset 0 0 0 1px rgba(255,173,50,.25),0 0 30px rgba(255,173,50,.14)}
+.dash-kpi.red .dash-kpi-icon{background:rgba(255,93,100,.16);box-shadow:inset 0 0 0 1px rgba(255,93,100,.25),0 0 30px rgba(255,93,100,.14)}
+.dash-kpi.purple .dash-kpi-icon{background:rgba(166,108,255,.16);box-shadow:inset 0 0 0 1px rgba(166,108,255,.25),0 0 30px rgba(166,108,255,.14)}
+.dash-kpi.cyan .dash-kpi-icon{background:rgba(40,216,255,.15);box-shadow:inset 0 0 0 1px rgba(40,216,255,.25),0 0 30px rgba(40,216,255,.14)}
+.dash-kpi-title{color:#cad7eb;font-size:14px;font-weight:700}.dash-kpi-value{font-size:36px;font-weight:950;letter-spacing:-.05em;margin-top:2px}.dash-kpi-sub{font-size:13px;color:var(--dash-green);font-weight:800}.dash-kpi.orange .dash-kpi-sub{color:var(--dash-orange)}.dash-kpi.red .dash-kpi-sub{color:var(--dash-red)}.dash-kpi.cyan .dash-kpi-sub{color:var(--dash-cyan)}
+.dash-main-grid{display:grid;grid-template-columns:1.45fr .75fr .75fr .75fr .85fr;gap:16px;margin-top:18px;}
+.dash-panel{padding:18px;min-height:262px;position:relative;overflow:hidden;}
+.dash-panel h2{margin:0;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}.dash-panel small{display:block;color:var(--dash-muted);margin-top:6px}.dash-panel-footer{margin-top:14px;border-top:1px solid rgba(132,180,255,.14);padding-top:14px;display:flex;gap:8px;flex-wrap:wrap}.dash-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#dce9ff;border:1px solid rgba(132,180,255,.24);background:rgba(5,18,36,.55);border-radius:12px;padding:10px 12px;font-weight:800;font-size:13px}.dash-link:hover{border-color:rgba(61,155,255,.7);box-shadow:0 0 18px rgba(61,155,255,.22)}
+.dash-printers{grid-column:span 2}.dash-list{margin-top:16px;display:grid;gap:10px}.dash-mini-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 12px;border-radius:15px;background:rgba(2,12,26,.38);border:1px solid rgba(132,180,255,.12)}.dash-mini-row strong{font-size:14px}.dash-mini-row span{font-size:12px;color:var(--dash-muted)}.dash-badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:900;background:rgba(67,223,134,.14);color:var(--dash-green);border:1px solid rgba(67,223,134,.2)}.dash-badge.warn{background:rgba(255,173,50,.14);color:var(--dash-orange);border-color:rgba(255,173,50,.25)}.dash-badge.danger{background:rgba(255,93,100,.14);color:var(--dash-red);border-color:rgba(255,93,100,.25)}.dash-badge.info{background:rgba(61,155,255,.14);color:#75b8ff;border-color:rgba(61,155,255,.25)}
+.dash-toner-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.dash-toner-alerts,.dash-stock-mini{padding:14px;border-radius:16px;background:rgba(2,12,26,.35);border:1px solid rgba(132,180,255,.12)}.dash-toner-alerts h3,.dash-stock-mini h3{margin:0 0 12px;font-size:14px}.dash-alert-line{display:flex;gap:10px;margin:10px 0}.dash-dot{width:9px;height:9px;border-radius:50%;margin-top:5px;background:var(--dash-orange);box-shadow:0 0 14px rgba(255,173,50,.5)}.dash-dot.red{background:var(--dash-red);box-shadow:0 0 14px rgba(255,93,100,.5)}.dash-alert-line strong{font-size:13px}.dash-alert-line p{font-size:12px;color:var(--dash-muted);margin:2px 0 0}.dash-stock-line{display:grid;grid-template-columns:70px 1fr 24px;align-items:center;gap:10px;margin:10px 0;font-size:13px}.dash-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.dash-bar span{display:block;height:100%;border-radius:inherit;background:var(--dash-blue);box-shadow:0 0 16px rgba(61,155,255,.4)}.dash-bar.cyan span{background:var(--dash-cyan)}.dash-bar.purple span{background:var(--dash-purple)}.dash-bar.orange span{background:var(--dash-orange)}
+.dash-system-list{margin-top:16px;border-radius:16px;overflow:hidden;border:1px solid rgba(132,180,255,.12)}.dash-system-list .dash-mini-row{border-radius:0;border-width:0 0 1px;background:rgba(2,12,26,.22)}.dash-system-list .dash-mini-row:last-child{border-bottom:0}
+.dash-bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}.dash-bottom-grid .dash-panel{min-height:245px}.dash-activity-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(132,180,255,.12);font-size:13px}.dash-activity-item:last-child{border-bottom:0}.dash-activity-item strong{display:block}.dash-activity-item span{color:var(--dash-muted)}.activity-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(132,180,255,.12)}.activity-item:last-child{border-bottom:0}.activity-item strong{display:block;font-size:13px}.activity-item span,.activity-item small{color:var(--dash-muted);font-size:12px}
+#listaDashboardStock{margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.dashboard-card.dashboard-critical-card{padding:12px;border-radius:17px;border:1px solid rgba(132,180,255,.16);background:rgba(4,16,33,.44);box-shadow:none;color:var(--dash-text);min-height:0}.dashboard-card .equipment-art{height:78px;border-radius:13px;background:radial-gradient(circle,rgba(255,255,255,.18),rgba(0,0,0,.18));display:grid;place-items:center}.dashboard-card .equipment-real-image{max-height:66px;max-width:90%;object-fit:contain}.dashboard-card .stock-id{font-weight:900;color:#57a9ff;margin-top:9px;font-size:13px}.dashboard-card .meta-line{font-size:11px;color:#a7b6cc}.dashboard-card .meta-value{color:#d8e6fa}.dashboard-card .card-actions{display:none}.printer-toners-grid{display:grid;gap:5px}.toner-row,.toner-line{font-size:11px}.empty-state{color:var(--dash-muted);padding:18px}.panel.empty-state{background:rgba(4,16,33,.44);border:1px solid rgba(132,180,255,.16);border-radius:16px;color:var(--dash-muted)}
+.dash-progress-row{display:grid;grid-template-columns:1fr auto 130px 44px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(132,180,255,.12);font-size:13px}.dash-progress-row:last-child{border-bottom:0}.dash-progress{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.dash-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--dash-blue),var(--dash-cyan));border-radius:inherit}.dash-health{display:grid;grid-template-columns:1fr 170px;gap:18px;margin-top:14px}.dash-health-ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(var(--dash-green) 0 99%,rgba(255,255,255,.08) 99% 100%);box-shadow:0 0 35px rgba(67,223,134,.18)}.dash-health-ring div{width:112px;height:112px;border-radius:50%;background:rgba(8,25,48,.95);display:grid;place-items:center;text-align:center}.dash-health-ring strong{font-size:30px}.dash-health-ring small{font-size:10px;color:var(--dash-muted)}
+.dashboard-back{position:fixed;left:24px;bottom:20px;z-index:4;text-decoration:none;color:#dce9ff;border:1px solid rgba(132,180,255,.22);background:rgba(7,22,44,.78);border-radius:16px;padding:12px 14px;font-weight:900;box-shadow:var(--dash-shadow)}
+@media(max-width:1300px){.dash-kpis{grid-template-columns:repeat(3,1fr)}.dash-main-grid{grid-template-columns:1fr 1fr}.dash-printers{grid-column:span 2}.dash-bottom-grid{grid-template-columns:1fr}.dashboard-futurista{width:min(1180px,calc(100vw - 36px));}.dash-hero h1{font-size:42px}}
+@media(max-width:820px){.dash-top{padding:18px}.dash-brand{font-size:22px}.dash-logo{width:44px;height:44px}.dash-user-main{display:none}.dashboard-futurista{margin-top:18px;width:calc(100vw - 24px)}.dash-hero{padding:24px 18px}.dash-hero h1{font-size:36px}.dash-kpis,.dash-main-grid,.dash-bottom-grid,#listaDashboardStock{grid-template-columns:1fr}.dash-printers{grid-column:auto}.dash-toner-grid,.dash-health{grid-template-columns:1fr}.dash-progress-row{grid-template-columns:1fr;gap:7px}}
+
+/* v1.58.61 — ajustes do Dashboard futurista
+   - remove a barra App Braga Pro desta página
+   - corrige scroll
+   - ocupa melhor o ecrã
+   - torna cards com estado clicável mais claro */
+body.dashboard-futurista-body .app-pro-commandbar,
+body.dashboard-futurista-body .app-mobile-action-dock,
+body.dashboard-futurista-body .pro-commandbar,
+body.dashboard-futurista-body .page-shell-header,
+body.dashboard-futurista-body .dashboard-header,
+body.dashboard-futurista-body .mockup-topbar,
+body.dashboard-futurista-body .sidebar,
+body.dashboard-futurista-body aside,
+body.dashboard-futurista-body .sidebar-pro-groups{
+  display:none !important;
+}
+html,
+body.dashboard-futurista-body{
+  width:100% !important;
+  min-height:100% !important;
+  height:auto !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  overscroll-behavior:auto !important;
+}
+body.dashboard-futurista-body{
+  position:relative !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+.dashboard-futurista{
+  width:calc(100vw - 44px) !important;
+  max-width:1880px !important;
+  margin:16px auto 86px !important;
+  overflow:visible !important;
+}
+.dash-top{
+  padding:24px 28px 4px !important;
+}
+.dash-hero{
+  margin-top:4px !important;
+  margin-bottom:22px !important;
+}
+.dash-main-grid,
+.dash-bottom-grid,
+.dash-kpis{
+  width:100% !important;
+}
+.dash-panel,
+.dash-kpi{
+  overflow:hidden;
+}
+.dash-clickable,
+.dash-link,
+.dash-mini-row.dash-clickable{
+  cursor:pointer;
+}
+.dash-clickable:focus-visible,
+.dash-mini-row.dash-clickable:focus-visible,
+.dash-link:focus-visible{
+  outline:2px solid rgba(40,216,255,.9);
+  outline-offset:3px;
+}
+.dash-clickable:hover,
+.dash-mini-row.dash-clickable:hover{
+  border-color:rgba(61,155,255,.72) !important;
+  transform:translateY(-1px);
+  box-shadow:0 24px 72px rgba(0,0,0,.48), 0 0 28px rgba(61,155,255,.16), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.dash-clickable-panel:hover{
+  border-color:rgba(61,155,255,.48);
+}
+@media (min-width:1500px){
+  .dash-main-grid{grid-template-columns:1.5fr .8fr .8fr .8fr .9fr !important;}
+  .dash-kpi{min-height:118px;}
+}
+@media (max-width:1100px){
+  .dashboard-futurista{width:calc(100vw - 24px) !important;}
+}
+
+
+/* v1.58.61 — limpeza real do Dashboard novo
+   Impede que os widgets/dashboard antigo sejam injectados por scripts globais. */
+body.dashboard-futurista-body #personalToolsDashboard,
+body.dashboard-futurista-body #personalDashboardOverview,
+body.dashboard-futurista-body #personalInternalAlerts,
+body.dashboard-futurista-body .personal-dashboard:not(.dash-allow-personal),
+body.dashboard-futurista-body .personal-alert-strip,
+body.dashboard-futurista-body .personal-task-metrics,
+body.dashboard-futurista-body .personal-task-layout,
+body.dashboard-futurista-body .personal-dashboard-actions,
+body.dashboard-futurista-body .personal-priority-panel,
+body.dashboard-futurista-body .dashboard-task-panel,
+body.dashboard-futurista-body .dashboard-widget-grid,
+body.dashboard-futurista-body #dashboardWidgetGrid,
+body.dashboard-futurista-body .dashboard-widget,
+body.dashboard-futurista-body .enterprise-metrics,
+body.dashboard-futurista-body .enterprise-header,
+body.dashboard-futurista-body .enterprise-shell,
+body.dashboard-futurista-body .dashboard-personalize-card,
+body.dashboard-futurista-body .dashboard-priority-panel,
+body.dashboard-futurista-body .dashboard-old-section,
+body.dashboard-futurista-body .page-hero,
+body.dashboard-futurista-body .page-actions,
+body.dashboard-futurista-body .app-pro-header,
+body.dashboard-futurista-body .app-pro-dashboard-tabs,
+body.dashboard-futurista-body [data-dashboard-widget],
+body.dashboard-futurista-body [data-widget-id]{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+body.dashboard-futurista-body .dash-bottom-grid .dash-panel,
+body.dashboard-futurista-body .dash-main-grid .dash-panel,
+body.dashboard-futurista-body .dash-kpis .dash-kpi{
+  display:block !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+body.dashboard-futurista-body .dash-bottom-grid .dash-panel{display:block !important;}
+body.dashboard-futurista-body .dash-list,
+body.dashboard-futurista-body .dash-system-list,
+body.dashboard-futurista-body .dash-toner-grid,
+body.dashboard-futurista-body .dash-health{
+  display:grid !important;
+  visibility:visible !important;
+}
+body.dashboard-futurista-body .dash-panel-footer{display:flex !important;visibility:visible !important;}
+body.dashboard-futurista-body .dashboard-futurista{
+  min-height:calc(100vh - 120px);
+  padding-bottom:42px;
+}
+body.dashboard-futurista-body #listaDashboardStock{
+  max-height:248px;
+  overflow:hidden;
+}
+body.dashboard-futurista-body #listaDashboardStock .dashboard-card:nth-child(n+4){display:none !important;}
+body.dashboard-futurista-body .dash-panel h2,
+body.dashboard-futurista-body .dash-panel h3,
+body.dashboard-futurista-body .dash-kpi-title,
+body.dashboard-futurista-body .dash-kpi-value,
+body.dashboard-futurista-body .dash-kpi-sub{
+  color:inherit;
+}
+
+
+/* v1.58.61 — dashboard alinhado visualmente com Impressoras / Stock / Adicionar Toner */
+body.dashboard-futurista-body .dash-top{
+  position:relative !important;
+  z-index:2 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:16px !important;
+  margin:0 0 10px !important;
+  padding:0 !important;
+}
+body.dashboard-futurista-body .dash-brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  text-decoration:none !important;
+  color:#f6fbff !important;
+  font-weight:900 !important;
+  font-size:1.08rem !important;
+  letter-spacing:0 !important;
+}
+body.dashboard-futurista-body .dash-logo{
+  width:40px !important;
+  height:40px !important;
+  border-radius:12px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:linear-gradient(180deg,#27a7ff,#235dff) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04) inset, 0 10px 28px rgba(28,133,255,.28) !important;
+  clip-path:none !important;
+  color:#fff !important;
+  font-weight:900 !important;
+  font-size:1.1rem !important;
+}
+body.dashboard-futurista-body .dash-logo:after{content:none !important;}
+body.dashboard-futurista-body .dash-top-actions{display:flex !important; align-items:center !important; gap:10px !important;}
+body.dashboard-futurista-body .dash-round{
+  width:40px !important;height:40px !important;border-radius:50% !important;display:grid !important;place-items:center !important;
+  text-decoration:none !important;color:#eff7ff !important;background:rgba(6,18,38,.8) !important;border:1px solid rgba(86,143,217,.24) !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05) !important;
+  font-weight:900 !important;
+}
+body.dashboard-futurista-body .dash-round:hover{background:rgba(17,41,77,.95) !important;}
+body.dashboard-futurista-body .dash-profile{
+  display:flex !important; align-items:center !important; gap:10px !important; min-height:44px !important; padding:6px 14px 6px 10px !important;
+  border-radius:999px !important; background:rgba(6,18,38,.84) !important; border:1px solid rgba(86,143,217,.24) !important;
+  color:#f5faff !important; font-weight:800 !important; box-shadow:0 10px 24px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+body.dashboard-futurista-body .dash-avatar{
+  width:28px !important;height:28px !important;border-radius:50% !important;display:grid !important;place-items:center !important;
+  background:linear-gradient(180deg,#1c74ff,#7ab2ff) !important;color:#fff !important;font-size:.9rem !important;font-weight:900 !important;
+}
+body.dashboard-futurista-body .dash-hero{
+  width:100% !important;
+  display:flex !important;
+  justify-content:center !important;
+  margin:10px 0 18px !important;
+  padding:0 !important;
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+body.dashboard-futurista-body .dash-hero:after{content:none !important;}
+body.dashboard-futurista-body .dash-hero-inner{
+  position:relative !important;
+  width:min(100%,1120px) !important;
+  min-height:96px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:18px !important;
+  padding:20px 28px 20px 146px !important;
+  border-radius:22px !important;
+  border:1px solid rgba(86,143,217,.34) !important;
+  background:linear-gradient(180deg,rgba(19,47,82,.78),rgba(8,25,48,.86)) !important;
+  box-shadow:0 18px 48px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05) !important;
+  overflow:hidden !important;
+}
+body.dashboard-futurista-body .dash-hero-inner::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 22% 50%, rgba(111,170,255,.10), transparent 0 94px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:auto, 12px 12px, 12px 12px;
+  mask-image:linear-gradient(90deg, rgba(0,0,0,.95), rgba(0,0,0,.45));
+}
+body.dashboard-futurista-body .dash-hero-inner::after{
+  content:""; position:absolute; left:50%; bottom:-1px; transform:translateX(-50%);
+  width:220px; height:3px; border-radius:999px;
+  background:linear-gradient(90deg, transparent, #34c5ff, transparent);
+  box-shadow:0 0 18px rgba(52,197,255,.35);
+}
+body.dashboard-futurista-body .dash-hero-orbit{
+  position:absolute !important;
+  left:28px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:104px !important;
+  height:104px !important;
+  border-radius:50% !important;
+  display:grid !important;
+  place-items:center !important;
+  text-decoration:none !important;
+  border:1px solid rgba(86,143,217,.20) !important;
+  background:radial-gradient(circle at 50% 50%, rgba(31,62,113,.38), rgba(8,26,54,.08)) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04) !important;
+  z-index:4 !important;
+  cursor:pointer !important;
+  pointer-events:auto !important;
+}
+body.dashboard-futurista-body .dash-hero-orbit img{
+  width:78px !important; height:78px !important; object-fit:contain !important;
+  filter:drop-shadow(0 10px 18px rgba(25,112,255,.35)) !important;
+}
+body.dashboard-futurista-body .dash-hero-orbit *{pointer-events:none !important;}
+body.dashboard-futurista-body .dash-hero-icon{
+  position:relative !important; z-index:2 !important;
+  width:68px !important; height:68px !important; border-radius:50% !important; flex:0 0 68px !important;
+  display:grid !important; place-items:center !important; font-size:1.9rem !important;
+  background:linear-gradient(180deg,#34b7ff,#2b6fff) !important; color:#fff !important;
+  box-shadow:0 12px 26px rgba(27,102,255,.32) !important;
+}
+body.dashboard-futurista-body .dash-hero h1{
+  margin:0 !important; font-size:3rem !important; line-height:1.02 !important; letter-spacing:-.04em !important; text-align:left !important;
+}
+body.dashboard-futurista-body .dash-hero p{
+  margin:6px 0 0 !important; color:#d7e5f8 !important; font-size:1.05rem !important; text-align:left !important;
+}
+@media (max-width:1100px){
+  body.dashboard-futurista-body .dash-hero-inner{padding:22px 20px !important;}
+  body.dashboard-futurista-body .dash-hero-orbit{display:none !important;}
+  body.dashboard-futurista-body .dash-hero h1{font-size:2.3rem !important;}
+}
+@media (max-width:760px){
+  body.dashboard-futurista-body .dash-top{flex-wrap:wrap !important;}
+  body.dashboard-futurista-body .dash-profile{font-size:.92rem !important;}
+  body.dashboard-futurista-body .dash-hero-inner{display:grid !important; justify-items:center !important; text-align:center !important; gap:14px !important;}
+  body.dashboard-futurista-body .dash-hero h1, body.dashboard-futurista-body .dash-hero p{text-align:center !important;}
+}
+
+
+/* v1.58.61 — sem barra superior interna nas páginas futuristas
+   Regra para páginas atuais e futuras: usar apenas o hero/bloco principal. */
+body.dashboard-futurista-body .dash-top,
+body.impressoras-futurista .imp-topbar,
+body.impressoras-futurista .impressoras-topbar,
+body.impressoras-futurista .toner-topbar,
+body.add-toner-futurista .toner-topbar,
+body.stock-futurista .stock-topbar,
+body[class*="futurista"] .page-topbar,
+body[class*="futurista"] .app-page-topbar,
+body[class*="futurista"] .internal-topbar,
+body[class*="futurista"] .futurista-topbar {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.dashboard-futurista-body .dashboard-shell,
+body.impressoras-futurista .imp-page,
+body.add-toner-futurista .toner-page,
+body.stock-futurista .stock-page {
+  padding-top: 22px !important;
+}
+
+body.dashboard-futurista-body .dash-hero,
+body.impressoras-futurista .imp-hero,
+body.add-toner-futurista .toner-hero,
+body.stock-futurista .stock-hero {
+  margin-top: 10px !important;
+}
+
+
+/* v1.58.61 — remove definitivamente a barra superior interna */
+body.impressoras-futurista .imp-top,
+body.impressoras-futurista .imp-brand,
+body.impressoras-futurista .imp-top-actions,
+body.impressoras-futurista .imp-profile,
+body.dashboard-futurista-body .dash-top,
+body.dashboard-futurista-body .dash-brand,
+body.dashboard-futurista-body .dash-top-actions,
+body.dashboard-futurista-body .dash-profile,
+body[class*="futurista"] .imp-top,
+body[class*="futurista"] .dash-top,
+body[class*="futurista"] .page-topbar,
+body[class*="futurista"] .app-page-topbar,
+body[class*="futurista"] .internal-topbar,
+body[class*="futurista"] .futurista-topbar {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body.impressoras-futurista .imp-page,
+body.dashboard-futurista-body .dashboard-shell {
+  padding-top: 22px !important;
+}
+
+body.impressoras-futurista .imp-hero,
+body.dashboard-futurista-body .dash-hero {
+  margin-top: 10px !important;
+}

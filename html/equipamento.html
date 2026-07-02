@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<script src="../js/app-theme-pro.js?v=theme-pro-1"></script>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Ficha de Equipamento</title>
+  <meta name="theme-color" content="#101114">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <link rel="stylesheet" href="../css/style.css?v=1.24.7">
+  <link rel="stylesheet" href="../css/autozitania-bragalis.css">
+  <link rel="stylesheet" href="../css/app-theme-pro.css?v=theme-pro-1">
+  <link rel="stylesheet" href="../css/enterprise/ops.css?v=ops-8">
+  <link rel="stylesheet" href="../css/systems/personal-tools.css?v=personal-1">
+  <link rel="stylesheet" href="../css/systems/global-search.css?v=global-search-1">
+  <link rel="stylesheet" href="../css/systems/equipment.css?v=equipment-1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="App Braga">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="stylesheet" href="../css/iphone-force-final.css?v=iphone-sidebar-slide-1">
+  <link rel="stylesheet" href="../css/iphone-sidebar-final.css?v=iphone-sidebar-final-1">
+  <link rel="stylesheet" href="../css/appbraga-light-redesign.css?v=1.58.62">
+  <link rel="stylesheet" href="../css/appbraga-mockup-pages.css?v=1.58.62">
+</head>
+<body class="equipment-page" data-equipment-mode="chooser">
+<aside class="sidebar">
+  <div class="brand premium-brand">
+    <div class="brand-badge">BR</div>
+    <div>
+      <h2>App Braga</h2>
+    </div>
+  </div>
+	<a href="index.html">Dashboard</a>
+	<a href="equipamento.html" class="active">Ficha Equipamento</a>
+	<a href="add-toner.html">Adicionar Toner</a>
+	<a href="stock.html">Stock</a>
+	<a href="historico.html">Historico</a>
+	<a href="etiquetas-word.html">Etiquetas Word</a>
+	<a href="impressoras.html">Impressoras</a>
+	<a href="manutencao-impressoras.html">Manutencao Impressoras</a>
+	<a href="computadores.html">Computadores</a>
+	<a href="users.html">Users</a>
+	<a href="pistolas.html">Pistolas CK65</a>
+	<a href="portas.html">Portas Rede</a>
+	<a href="radios.html">Radios</a>
+	<a href="informacoes.html">Informacoes</a>
+	<a href="config.html">Configuracoes</a>
+</aside>
+
+<main class="main">
+  <div class="page-hero">
+    <div class="page-hero-title">Ficha de Equipamento</div>
+    <span class="status-pill" id="equipmentStatus">A iniciar</span>
+  </div>
+
+  <section class="panel equipment-only-chooser">
+    <div class="section-header">
+      <div>
+        <h3>Escolher tipo</h3>
+        <p class="section-subtitle">Abre uma lista e escolhe o registo para ver a ficha completa.</p>
+      </div>
+    </div>
+    <div id="equipmentChooser" class="equipment-chooser-grid"></div>
+  </section>
+
+  <section class="panel equipment-search-panel equipment-only-list">
+    <div class="section-header">
+      <div>
+        <h3 id="equipmentListTitle">Equipamentos</h3>
+        <p class="section-subtitle">Pesquisa e abre a ficha do registo.</p>
+      </div>
+    </div>
+    <input id="equipmentSearch" type="text" placeholder="Pesquisar nesta lista...">
+    <div id="equipmentSearchResults" class="equipment-results-grid"></div>
+  </section>
+
+  <section class="panel equipment-only-missing">
+    <div class="section-header">
+      <div>
+        <h3>Ficha nao encontrada</h3>
+        <p id="equipmentMissingText" class="section-subtitle">Nao encontrei esse registo.</p>
+      </div>
+    </div>
+    <a class="secondary-btn equipment-action-link" href="equipamento.html">Voltar aos tipos</a>
+  </section>
+
+  <section class="panel equipment-hero-panel equipment-only-detail">
+    <div class="equipment-identity">
+      <div class="equipment-avatar" id="equipmentBadge">EQ</div>
+      <div class="equipment-title-block">
+        <div class="equipment-title-row">
+          <h1 id="equipmentTitle">Ficha</h1>
+          <span class="equipment-type-pill" id="equipmentType">Equipamento</span>
+        </div>
+        <p class="equipment-subtitle" id="equipmentSubtitle">Detalhes do registo</p>
+        <div class="equipment-meta-strip">
+          <span>Colecao <strong id="equipmentCollection">-</strong></span>
+          <span>ID <strong id="equipmentId">-</strong></span>
+        </div>
+      </div>
+    </div>
+    <div class="equipment-qr-card">
+      <img id="equipmentQr" alt="QR da ficha">
+      <span>QR para abrir esta ficha</span>
+    </div>
+  </section>
+
+  <section class="equipment-layout equipment-only-detail">
+    <div class="panel">
+      <div class="section-header">
+        <div>
+          <h3>Dados principais</h3>
+          <p class="section-subtitle">Campos mais importantes deste registo.</p>
+        </div>
+      </div>
+      <div id="equipmentFields" class="equipment-fields-grid"></div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <div>
+          <h3>Acoes</h3>
+          <p class="section-subtitle">Atalhos rapidos para trabalhar nesta ficha.</p>
+        </div>
+      </div>
+      <div id="equipmentActions" class="equipment-actions"></div>
+    </div>
+  </section>
+
+  <section class="panel equipment-only-detail" style="margin-top:18px;">
+    <div class="section-header">
+      <div>
+        <h3>Historico relacionado</h3>
+        <p class="section-subtitle">Registos ligados por IP, serie, user, equipamento ou identificadores conhecidos.</p>
+      </div>
+    </div>
+    <div id="equipmentHistory" class="equipment-history"></div>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="../js/app.js?v=1.25.1"></script>
+<script src="../js/systems/equipment/equipment-models.js?v=equipment-1"></script>
+<script src="../js/systems/global-search/global-search.js?v=global-search-1"></script>
+<script src="../js/systems/equipment/equipment-detail.js?v=equipment-1"></script>
+<script src="../js/core/helpers.js"></script>
+<script src="../js/iphone-force-final.js?v=iphone-sidebar-slide-1"></script>
+<script src="../js/enterprise/ops.js?v=ops-10"></script>
+<script src="../js/systems/backup/local-backup.js?v=backup-2"></script>
+<script src="../js/systems/personal-tools.js?v=personal-2"></script>
+<script src="../js/iphone-sidebar-final.js?v=iphone-sidebar-final-1"></script>
+<script src="../js/appbraga-mockup-pages.js?v=1.58.62"></script>
+</body>
+</html>
