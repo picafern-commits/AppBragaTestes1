@@ -681,3 +681,63 @@ body.stock-futurista::after {
     grid-template-columns:1fr;
   }
 }
+
+
+/* v1.58.51 — alinhar Etiquetas Word com Movimentos recentes */
+body.stock-futurista .stock-right {
+  display: grid !important;
+  grid-template-rows: auto auto auto auto !important;
+  gap: 14px !important;
+  align-content: start !important;
+}
+
+/* Compacta ligeiramente os dois cards intermédios da coluna direita */
+body.stock-futurista .stock-right > .stock-panel:nth-child(2) .stock-panel-head,
+body.stock-futurista .stock-right > .stock-panel:nth-child(3) .stock-panel-head {
+  padding-top: 12px !important;
+  padding-bottom: 8px !important;
+}
+
+body.stock-futurista .stock-right > .stock-panel:nth-child(2) .stock-alert-list {
+  gap: 6px !important;
+  padding: 10px 16px 12px !important;
+}
+
+body.stock-futurista .stock-right > .stock-panel:nth-child(2) .stock-alert {
+  padding: 3px 0 !important;
+  line-height: 1.18 !important;
+}
+
+body.stock-futurista .stock-right > .stock-panel:nth-child(2) .stock-alert:nth-child(n+4) {
+  display: none !important;
+}
+
+body.stock-futurista .stock-right > .stock-panel:nth-child(3) .stock-bars {
+  gap: 7px !important;
+  padding: 10px 16px 12px !important;
+}
+
+body.stock-futurista .stock-right > .stock-panel:nth-child(3) .stock-bar {
+  grid-template-columns: 62px minmax(0,1fr) 62px !important;
+  gap: 9px !important;
+}
+
+body.stock-futurista .stock-right > .stock-panel:nth-child(3) .stock-bar-line {
+  height: 7px !important;
+}
+
+/* Sobe o card Etiquetas Word para ficar visualmente alinhado com Movimentos recentes */
+body.stock-futurista .stock-right > .stock-panel:nth-child(4) {
+  margin-top: -76px !important;
+}
+
+/* Garante que o card de etiquetas continua legível e não encosta demasiado */
+body.stock-futurista .stock-labels-list {
+  padding-top: 10px !important;
+}
+
+@media (max-width: 1500px) {
+  body.stock-futurista .stock-right > .stock-panel:nth-child(4) {
+    margin-top: 0 !important;
+  }
+}

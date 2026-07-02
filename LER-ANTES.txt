@@ -1,9 +1,8 @@
-AppBraga v1.58.50 — Página Stock futurista.
+AppBraga v1.58.51 — Stock: alinhar Etiquetas Word com Movimentos recentes.
 
-Alterações:
-- redesenho da página Stock no esquema das páginas Impressoras/Adicionar Toner;
-- sem card 'Últimas entradas';
-- card 'Movimentos recentes' ocupa a largura da zona inferior esquerda;
-- mantém ids/funções antigas principais: listaStock, countStock, search, filtrar, usar, apagarStockItem, editar modal.
+Alteração principal:
+- card Etiquetas Word puxado para cima;
+- Alertas de stock e Resumo por cor ligeiramente compactados;
+- Movimentos recentes mantém o espaço largo no lado esquerdo.
 
 Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
