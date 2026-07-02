@@ -1,8 +1,12 @@
-AppBraga v1.58.57 — Dashboard alinhado com as outras páginas.
+AppBraga v1.58.58 — Stock com sistemas funcionais.
 
-Feito:
-- header do Dashboard no mesmo estilo das páginas Impressoras / Stock / Adicionar Toner;
-- hero horizontal com o mesmo esquema visual;
-- círculo grande à esquerda com o logotipo AppBraga;
-- o logotipo do círculo funciona como botão para voltar ao Portal;
-- mantido o resto do conteúdo do Dashboard.
+Correções:
+- página Stock ligada aos dados reais de stock;
+- renderer antigo renderStockCards passa a alimentar a tabela futurista;
+- fallback realtime para stock, historico e etiquetasWord;
+- filtros atualizam a tabela real;
+- botões Ver/Usar/Editar/Apagar ligados aos sistemas antigos/fallback Firebase;
+- movimentos recentes puxam entradas de stock e saídas do historico;
+- Etiquetas Word mostra registos reais quando existirem e botão de imprimir tenta usar o sistema antigo.
+
+Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
