@@ -1,6 +1,6 @@
 {
-  "version": "1.58.51",
-  "build": "stock-etiquetas-alinhadas",
+  "version": "1.58.52",
+  "build": "stock-alinhamento-etiquetas-js",
   "updatedAt": "2026-07-01T18:10:00+01:00",
-  "cache": "1.58.51"
+  "cache": "1.58.52"
 }

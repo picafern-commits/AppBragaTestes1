@@ -213,6 +213,34 @@
     </div>`).join('');
   }
 
+
+  function alinharEtiquetasComMovimentos(){
+    const movements = document.querySelector('.stock-movements-wide');
+    const labels = document.querySelector('.stock-labels-panel');
+    const mainGrid = document.querySelector('.stock-main-grid');
+
+    if (!movements || !labels || !mainGrid) return;
+
+    const isStacked = window.matchMedia('(max-width: 1500px)').matches;
+    if (isStacked) {
+      labels.style.setProperty('--stock-labels-align-offset', '0px');
+      return;
+    }
+
+    // Primeiro limpa para medir a posição natural.
+    labels.style.setProperty('--stock-labels-align-offset', '0px');
+
+    requestAnimationFrame(() => {
+      const movementTop = movements.getBoundingClientRect().top;
+      const labelTop = labels.getBoundingClientRect().top;
+      const delta = Math.round(movementTop - labelTop);
+
+      // Só desce o card de etiquetas. Não sobe por cima dos cards anteriores.
+      const offset = Math.max(0, delta);
+      labels.style.setProperty('--stock-labels-align-offset', offset + 'px');
+    });
+  }
+
   function renderAll(){
     renderArmazens();
     const items = filteredStock();
@@ -222,6 +250,7 @@
     renderColorBars(items);
     renderMovements(items);
     renderLabels(items);
+    alinharEtiquetasComMovimentos();
   }
 
   window.filtrarStockFuturista = renderAll;
@@ -254,6 +283,12 @@
     setTimeout(renderAll, 1500);
     setInterval(renderAll, 5000);
   }
+
+
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__stockAlignResizeTimer);
+    window.__stockAlignResizeTimer = setTimeout(alinharEtiquetasComMovimentos, 120);
+  });
 
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
   else bind();

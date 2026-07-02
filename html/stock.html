@@ -11,7 +11,7 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/stock-futurista.css?v=1.58.51">
+  <link rel="stylesheet" href="../css/stock-futurista.css?v=1.58.52">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -158,7 +158,7 @@
       </main>
 
       <aside class="stock-right">
-        <article class="stock-panel">
+        <article class="stock-panel stock-quick-panel">
           <div class="stock-panel-head">
             <div class="panel-title"><span>⚡</span><div><h2>Ações rápidas</h2><p>Atalhos de gestão de stock.</p></div></div>
           </div>
@@ -171,7 +171,7 @@
           </div>
         </article>
 
-        <article class="stock-panel">
+        <article class="stock-panel stock-alerts-panel">
           <div class="stock-panel-head">
             <div class="panel-title"><span>⚠️</span><div><h2>Alertas de stock</h2><p>Prioridades que requerem atenção.</p></div></div>
             <a href="notificacoes.html">Ver todos →</a>
@@ -179,7 +179,7 @@
           <div class="stock-alert-list" id="stockAlertsList"></div>
         </article>
 
-        <article class="stock-panel">
+        <article class="stock-panel stock-color-panel">
           <div class="stock-panel-head">
             <div class="panel-title"><span>🎨</span><div><h2>Resumo por cor</h2><p>Total de unidades por cor.</p></div></div>
             <button type="button" onclick="exportarExcelStock()">Ver detalhes →</button>
@@ -187,7 +187,7 @@
           <div class="stock-bars" id="stockColorBars"></div>
         </article>
 
-        <article class="stock-panel">
+        <article class="stock-panel stock-labels-panel">
           <div class="stock-panel-head">
             <div class="panel-title"><span>📄</span><div><h2>Etiquetas Word</h2><p>Últimos documentos de etiquetas gerados.</p></div></div>
             <a href="etiquetas-word.html">Ver todas →</a>
@@ -224,9 +224,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.51"></script>
-  <script src="../js/sidebar-editor.js?v=1.58.51"></script>
+  <script src="../js/app.js?v=1.58.52"></script>
+  <script src="../js/sidebar-editor.js?v=1.58.52"></script>
   <script src="../js/core/helpers.js"></script>
-  <script src="../js/stock-futurista.js?v=1.58.51"></script>
+  <script src="../js/stock-futurista.js?v=1.58.52"></script>
 </body>
 </html>

@@ -683,7 +683,7 @@ body.stock-futurista::after {
 }
 
 
-/* v1.58.51 — alinhar Etiquetas Word com Movimentos recentes */
+/* v1.58.52 — alinhar Etiquetas Word com Movimentos recentes */
 body.stock-futurista .stock-right {
   display: grid !important;
   grid-template-rows: auto auto auto auto !important;
@@ -738,6 +738,44 @@ body.stock-futurista .stock-labels-list {
 
 @media (max-width: 1500px) {
   body.stock-futurista .stock-right > .stock-panel:nth-child(4) {
+    margin-top: 0 !important;
+  }
+}
+
+
+/* v1.58.52 — alinhamento correto: Etiquetas Word com Movimentos recentes
+   Sem margens negativas fixas. O offset é calculado em JS conforme o ecrã. */
+
+/* Neutraliza o remendo anterior */
+body.stock-futurista .stock-right > .stock-panel:nth-child(4) {
+  margin-top: 0 !important;
+}
+
+body.stock-futurista .stock-labels-panel {
+  margin-top: var(--stock-labels-align-offset, 0px) !important;
+  transition: margin-top .12s ease-out !important;
+}
+
+body.stock-futurista .stock-movements-wide,
+body.stock-futurista .stock-labels-panel {
+  scroll-margin-top: 18px !important;
+}
+
+/* Mantém a coluna direita estável */
+body.stock-futurista .stock-right {
+  display: grid !important;
+  grid-template-rows: auto auto auto auto !important;
+  gap: 14px !important;
+  align-content: start !important;
+}
+
+body.stock-futurista .stock-color-panel .stock-bars {
+  padding-bottom: 12px !important;
+}
+
+/* Em ecrãs estreitos, tudo fica em coluna normal, sem alinhamento artificial */
+@media (max-width: 1500px) {
+  body.stock-futurista .stock-labels-panel {
     margin-top: 0 !important;
   }
 }

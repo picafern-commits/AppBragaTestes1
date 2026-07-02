@@ -1,8 +1,10 @@
-AppBraga v1.58.51 — Stock: alinhar Etiquetas Word com Movimentos recentes.
+AppBraga v1.58.52 — Stock: alinhamento correto do card Etiquetas Word.
 
-Alteração principal:
-- card Etiquetas Word puxado para cima;
-- Alertas de stock e Resumo por cor ligeiramente compactados;
-- Movimentos recentes mantém o espaço largo no lado esquerdo.
+Correção:
+- remove o remendo de margem negativa;
+- adiciona classe própria ao card Etiquetas Word;
+- calcula em JavaScript a posição do card Movimentos recentes;
+- desce Etiquetas Word para começar exatamente ao mesmo nível;
+- recalcula no resize e após render dos dados.
 
 Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
