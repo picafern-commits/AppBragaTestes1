@@ -1,28 +1,13 @@
-AppBraga v1.58.73 — Regra clean layout + ecrã completo.
+AppBraga v1.58.76 — Arrumação geral das páginas já feitas + regra futura.
 
-Alterações principais:
-- Criado css/appbraga-clean-layout.css como regra comum para páginas atuais e futuras;
-- Página inicial/Portal agora ocupa melhor o ecrã completo;
-- Cards do Portal redimensionados para caberem limpos no ecrã;
-- Hero do Portal mais compacto;
-- Aplicada regra clean às páginas já feitas:
-  • Dashboard
-  • Impressoras
-  • Stock
-  • Adicionar Toner
-  • Histórico
-  • Etiquetas Word
-  • Manutenção Impressoras
-  • Diagnóstico
-  • Notificações
-  • Configurações
-  • páginas futuristas auxiliares já convertidas
+Alterações:
+- appbraga-clean-layout.css refeito e mais forte;
+- Portal passa a ocupar melhor o ecrã completo;
+- Dashboard, Impressoras, Stock, Adicionar Toner, Histórico, Etiquetas Word e Manutenção redimensionadas;
+- KPIs mais baixos;
+- Cards/painéis mais compactos;
+- Tabelas com menos altura e melhor encaixe;
+- Sidebars/listas mais limpas;
+- Regra deixada para páginas futuras: incluir css/appbraga-clean-layout.css depois do CSS da página.
 
-Regra para páginas futuras:
-- sempre incluir css/appbraga-clean-layout.css;
-- layout a ocupar 100vw/100vh quando fizer sentido;
-- hero compacto;
-- KPIs/cards com altura menor e alinhados;
-- nada de espaço morto gigante.
-
-Depois do deploy abre /html/index.html?v=1.58.73 e faz Ctrl+F5.
+Para Netlify usa o ZIP AppBraga-Netlify-Deploy-v1.58.76.zip.

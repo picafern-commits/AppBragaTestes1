@@ -111,7 +111,7 @@
 })();
 
 
-// v1.58.70 — integração com AppBragaSystems para movimentos de toner
+// v1.58.76 — integração com AppBragaSystems para movimentos de toner
 (function(){
   function collectTonerPayload(){
     return {
