@@ -1,9 +1,9 @@
-AppBraga v1.58.60 — Sem barra superior nas páginas futuristas.
+AppBraga v1.58.61 — Barra superior removida definitivamente.
 
-Alterações:
-- removida a barra superior da página Dashboard;
-- removida/ocultada a barra superior da página Impressoras;
-- adicionada regra CSS global para páginas futuristas futuras não terem barra de topo interna;
-- páginas futuras devem usar só o hero/bloco principal no topo.
+Correção:
+- removido o header real da Impressoras: <header class="imp-top">;
+- removido/garantido o header do Dashboard: <header class="dash-top">;
+- CSS bloqueia imp-top/dash-top e variantes futuras;
+- regra mantida: páginas futuristas novas não devem ter barra superior interna.
 
 Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
