@@ -1,9 +1,9 @@
-AppBraga v1.58.49 — filtro persistente na página Impressoras.
+AppBraga v1.58.50 — Página Stock futurista.
 
-Correção:
-- ao escolher Braga/Vila Real/outro armazém, os renders automáticos já respeitam o filtro;
-- a lista não deve voltar para todas as impressoras passado alguns segundos;
-- atualiza APP_VERSION, version.json e cache busters.
+Alterações:
+- redesenho da página Stock no esquema das páginas Impressoras/Adicionar Toner;
+- sem card 'Últimas entradas';
+- card 'Movimentos recentes' ocupa a largura da zona inferior esquerda;
+- mantém ids/funções antigas principais: listaStock, countStock, search, filtrar, usar, apagarStockItem, editar modal.
 
-Substituir os ficheiros completos nas mesmas pastas.
-Depois fazer commit/deploy e Ctrl+F5.
+Substituir ficheiros completos nas mesmas pastas, fazer deploy e Ctrl+F5.
