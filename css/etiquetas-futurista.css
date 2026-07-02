@@ -553,3 +553,90 @@ body.etiquetas-futurista::after{
   pointer-events:none;
   opacity:.7;
 }
+
+
+/* v1.58.68 — correção definitiva dos ícones dos KPI */
+.etiquetas-futurista .etq-kpi{
+  align-items:center !important;
+}
+
+.etiquetas-futurista .etq-kpi .kpi-icon{
+  width:58px !important;
+  min-width:58px !important;
+  height:58px !important;
+  min-height:58px !important;
+  padding:0 !important;
+  margin:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  line-height:1 !important;
+  text-align:center !important;
+  overflow:hidden !important;
+  position:relative !important;
+  border-radius:18px !important;
+  font-size:0 !important;
+  flex:0 0 58px !important;
+}
+
+.etiquetas-futurista .etq-kpi .kpi-icon::before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border-radius:14px;
+  background:radial-gradient(circle at 30% 22%, rgba(255,255,255,.12), rgba(255,255,255,0) 58%);
+  pointer-events:none;
+}
+
+.etiquetas-futurista .etq-kpi .kpi-emoji{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  line-height:1 !important;
+  font-size:1.95rem !important;
+  transform:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  position:relative !important;
+  z-index:2 !important;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",Inter,Segoe UI,Arial,sans-serif !important;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.24));
+}
+
+.etiquetas-futurista .etq-kpi:nth-child(1) .kpi-icon{
+  color:#30b9ff !important;
+  background:linear-gradient(145deg, rgba(24,112,255,.20), rgba(5,20,42,.82)) !important;
+  box-shadow:0 0 0 1px rgba(48,185,255,.34) inset, 0 0 22px rgba(48,185,255,.18) !important;
+}
+
+.etiquetas-futurista .etq-kpi:nth-child(2) .kpi-icon{
+  color:#b486ff !important;
+  background:linear-gradient(145deg, rgba(180,134,255,.20), rgba(5,20,42,.82)) !important;
+  box-shadow:0 0 0 1px rgba(180,134,255,.34) inset, 0 0 22px rgba(180,134,255,.18) !important;
+}
+
+.etiquetas-futurista .etq-kpi:nth-child(3) .kpi-icon{
+  color:#ffbd59 !important;
+  background:linear-gradient(145deg, rgba(255,174,47,.20), rgba(5,20,42,.82)) !important;
+  box-shadow:0 0 0 1px rgba(255,174,47,.34) inset, 0 0 22px rgba(255,174,47,.18) !important;
+}
+
+.etiquetas-futurista .etq-kpi:nth-child(4) .kpi-icon{
+  color:#22d3ff !important;
+  background:linear-gradient(145deg, rgba(34,211,255,.20), rgba(5,20,42,.82)) !important;
+  box-shadow:0 0 0 1px rgba(34,211,255,.34) inset, 0 0 22px rgba(34,211,255,.18) !important;
+}
+
+.etiquetas-futurista .etq-kpi:nth-child(5) .kpi-icon{
+  color:#30b9ff !important;
+  background:linear-gradient(145deg, rgba(24,112,255,.20), rgba(5,20,42,.82)) !important;
+  box-shadow:0 0 0 1px rgba(48,185,255,.34) inset, 0 0 22px rgba(48,185,255,.18) !important;
+}
+
+.etiquetas-futurista .etq-kpi:nth-child(6) .kpi-icon{
+  color:#c49aff !important;
+  background:linear-gradient(145deg, rgba(196,154,255,.20), rgba(5,20,42,.82)) !important;
+  box-shadow:0 0 0 1px rgba(196,154,255,.34) inset, 0 0 22px rgba(196,154,255,.18) !important;
+}

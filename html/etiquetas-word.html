@@ -4,7 +4,7 @@
 
 <script>
 (function(){
-  var v = "1.58.67";
+  var v = "1.58.68";
   var key = "appbraga-cache-reset-etiquetas-" + v;
   try {
     if (!sessionStorage.getItem(key) && "serviceWorker" in navigator) {
@@ -37,7 +37,7 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../icon-192.png">
-  <link rel="stylesheet" href="../css/etiquetas-futurista.css?v=1.58.67">
+  <link rel="stylesheet" href="../css/etiquetas-futurista.css?v=1.58.68">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="App Braga">
@@ -45,12 +45,12 @@
   <meta name="format-detection" content="telephone=no">
 </head>
 
-<body class="etiquetas-futurista" data-forced-version="1.58.67">
+<body class="etiquetas-futurista" data-forced-version="1.58.68">
   <div class="etq-page">
     <section class="etq-hero" aria-labelledby="etqTitle">
       <div class="etq-hero-card">
         <a class="etq-hero-orbit appbraga-home-orbit-btn" href="index.html" aria-label="Voltar ao Portal AppBraga" title="Voltar ao Portal">
-          <img src="../assets/bragalis-home-logo-original.png?v=1.58.67" alt="AppBraga">
+          <img src="../assets/bragalis-home-logo-original.png?v=1.58.68" alt="AppBraga">
         </a>
         <div class="etq-hero-icon" aria-hidden="true">📄</div>
         <div>
@@ -62,31 +62,31 @@
 
     <section class="etq-kpis" aria-label="Resumo de etiquetas">
       <article class="etq-kpi">
-        <span class="kpi-icon">🧮</span>
+        <span class="kpi-icon"><span class="kpi-emoji">🧾</span></span>
         <div><span>Etiquetas hoje</span><strong id="etqKpiHoje">0</strong><small>vs. ontem</small></div>
         <b class="trend up">↗ +20%</b>
       </article>
       <article class="etq-kpi">
-        <span class="kpi-icon purple">📄</span>
+        <span class="kpi-icon purple"><span class="kpi-emoji">📄</span></span>
         <div><span>Documentos gerados</span><strong id="countEtiquetasTotal">0</strong><small>Total guardado</small></div>
         <b class="trend up">↗ +23%</b>
       </article>
       <article class="etq-kpi">
-        <span class="kpi-icon amber">⏳</span>
+        <span class="kpi-icon amber"><span class="kpi-emoji">⏳</span></span>
         <div><span>Pendentes</span><strong id="etqKpiPendentes">0</strong><small>Aguardando geração</small></div>
         <b class="trend warn">↗ +2</b>
       </article>
       <article class="etq-kpi">
-        <span class="kpi-icon cyan">🔄</span>
+        <span class="kpi-icon cyan"><span class="kpi-emoji">🔄</span></span>
         <div><span>Reimpressões</span><strong id="etqKpiReimpressoes">0</strong><small>Regeradas</small></div>
         <b class="trend up">↗ +33%</b>
       </article>
       <article class="etq-kpi">
-        <span class="kpi-icon blue">📅</span>
+        <span class="kpi-icon blue"><span class="kpi-emoji">📅</span></span>
         <div><span>Último lote</span><strong id="etqKpiUltimoLote">—</strong><small id="etqKpiUltimoLoteSub">Sem dados</small></div>
       </article>
       <article class="etq-kpi">
-        <span class="kpi-icon violet">🖨️</span>
+        <span class="kpi-icon violet"><span class="kpi-emoji">🖨️</span></span>
         <div><span>Equipamentos com etiquetas</span><strong id="countEtiquetasHistorico">0</strong><small>Com etiquetas ativas</small></div>
         <b class="trend up">↗ +7%</b>
       </article>
@@ -223,9 +223,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="../js/app.js?v=1.58.67"></script>
-  <script src="../js/sidebar-editor.js?v=1.58.67"></script>
+  <script src="../js/app.js?v=1.58.68"></script>
+  <script src="../js/sidebar-editor.js?v=1.58.68"></script>
   <script src="../js/core/helpers.js"></script>
-  <script src="../js/etiquetas-futurista.js?v=1.58.67"></script>
+  <script src="../js/etiquetas-futurista.js?v=1.58.68"></script>
 </body>
 </html>
