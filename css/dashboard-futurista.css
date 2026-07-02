@@ -74,7 +74,7 @@ body.dashboard-futurista-body:after{right:-8rem;top:18rem;width:38rem;height:25r
 @media(max-width:1300px){.dash-kpis{grid-template-columns:repeat(3,1fr)}.dash-main-grid{grid-template-columns:1fr 1fr}.dash-printers{grid-column:span 2}.dash-bottom-grid{grid-template-columns:1fr}.dashboard-futurista{width:min(1180px,calc(100vw - 36px));}.dash-hero h1{font-size:42px}}
 @media(max-width:820px){.dash-top{padding:18px}.dash-brand{font-size:22px}.dash-logo{width:44px;height:44px}.dash-user-main{display:none}.dashboard-futurista{margin-top:18px;width:calc(100vw - 24px)}.dash-hero{padding:24px 18px}.dash-hero h1{font-size:36px}.dash-kpis,.dash-main-grid,.dash-bottom-grid,#listaDashboardStock{grid-template-columns:1fr}.dash-printers{grid-column:auto}.dash-toner-grid,.dash-health{grid-template-columns:1fr}.dash-progress-row{grid-template-columns:1fr;gap:7px}}
 
-/* v1.58.76 — ajustes do Dashboard futurista
+/* v1.58.73 — ajustes do Dashboard futurista
    - remove a barra App Braga Pro desta página
    - corrige scroll
    - ocupa melhor o ecrã
@@ -155,7 +155,7 @@ body.dashboard-futurista-body{
 }
 
 
-/* v1.58.76 — limpeza real do Dashboard novo
+/* v1.58.73 — limpeza real do Dashboard novo
    Impede que os widgets/dashboard antigo sejam injectados por scripts globais. */
 body.dashboard-futurista-body #personalToolsDashboard,
 body.dashboard-futurista-body #personalDashboardOverview,
@@ -220,7 +220,7 @@ body.dashboard-futurista-body .dash-kpi-sub{
 }
 
 
-/* v1.58.76 — dashboard alinhado visualmente com Impressoras / Stock / Adicionar Toner */
+/* v1.58.73 — dashboard alinhado visualmente com Impressoras / Stock / Adicionar Toner */
 body.dashboard-futurista-body .dash-top{
   position:relative !important;
   z-index:2 !important;
@@ -363,7 +363,7 @@ body.dashboard-futurista-body .dash-hero p{
 }
 
 
-/* v1.58.76 — sem barra superior interna nas páginas futuristas
+/* v1.58.73 — sem barra superior interna nas páginas futuristas
    Regra para páginas atuais e futuras: usar apenas o hero/bloco principal. */
 body.dashboard-futurista-body .dash-top,
 body.impressoras-futurista .imp-topbar,
@@ -399,7 +399,7 @@ body.stock-futurista .stock-hero {
 }
 
 
-/* v1.58.76 — remove definitivamente a barra superior interna */
+/* v1.58.73 — remove definitivamente a barra superior interna */
 body.impressoras-futurista .imp-top,
 body.impressoras-futurista .imp-brand,
 body.impressoras-futurista .imp-top-actions,
@@ -436,7 +436,7 @@ body.dashboard-futurista-body .dash-hero {
 }
 
 
-/* v1.58.76 — Dashboard clean/encaixado */
+/* v1.58.73 — Dashboard clean/encaixado */
 body.dashboard-clean-v15871{
   overflow-x:hidden !important;
   background:

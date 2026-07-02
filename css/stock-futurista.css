@@ -683,7 +683,7 @@ body.stock-futurista::after {
 }
 
 
-/* v1.58.76 — alinhar Etiquetas Word com Movimentos recentes */
+/* v1.58.73 — alinhar Etiquetas Word com Movimentos recentes */
 body.stock-futurista .stock-right {
   display: grid !important;
   grid-template-rows: auto auto auto auto !important;
@@ -743,7 +743,7 @@ body.stock-futurista .stock-labels-list {
 }
 
 
-/* v1.58.76 — alinhamento correto: Etiquetas Word com Movimentos recentes
+/* v1.58.73 — alinhamento correto: Etiquetas Word com Movimentos recentes
    Sem margens negativas fixas. O offset é calculado em JS conforme o ecrã. */
 
 /* Neutraliza o remendo anterior */
@@ -781,7 +781,7 @@ body.stock-futurista .stock-color-panel .stock-bars {
 }
 
 
-/* v1.58.76 — logotipo no círculo do hero como botão para o Portal */
+/* v1.58.73 — logotipo no círculo do hero como botão para o Portal */
 .appbraga-home-hero-btn {
   text-decoration: none !important;
   cursor: pointer !important;
@@ -821,7 +821,7 @@ body.stock-futurista .stock-color-panel .stock-bars {
 }
 
 
-/* v1.58.76 — logotipo no círculo grande lateral do hero */
+/* v1.58.73 — logotipo no círculo grande lateral do hero */
 .appbraga-home-hero-btn {
   cursor: default !important;
   pointer-events: none !important;
@@ -874,7 +874,7 @@ body.stock-futurista .stock-color-panel .stock-bars {
 }
 
 
-/* v1.58.76 — logo original no círculo grande + clique funcional */
+/* v1.58.73 — logo original no círculo grande + clique funcional */
 .appbraga-home-orbit-btn {
   position: absolute !important;
   z-index: 8 !important;
@@ -939,7 +939,7 @@ body.stock-futurista .stock-color-panel .stock-bars {
 }
 
 
-/* v1.58.76 — força clique no logotipo do círculo grande */
+/* v1.58.73 — força clique no logotipo do círculo grande */
 body .imp-hero-orbit.appbraga-home-orbit-btn,
 body .toner-hero-orbit.appbraga-home-orbit-btn,
 body .stock-hero-orbit.appbraga-home-orbit-btn,
@@ -983,7 +983,7 @@ body .stock-hero-icon {
 }
 
 
-/* v1.58.76 — Stock funcional ligado aos sistemas antigos */
+/* v1.58.73 — Stock funcional ligado aos sistemas antigos */
 body.stock-futurista .stock-actions {
   display: flex !important;
   gap: 6px !important;
@@ -1018,7 +1018,7 @@ body.stock-futurista .stock-label-actions button {
 }
 
 
-/* v1.58.76 — alertas só sem stock + botões Etiquetas Word funcionais */
+/* v1.58.73 — alertas só sem stock + botões Etiquetas Word funcionais */
 body.stock-futurista .stock-alert-list .stock-alert:not(.crit) small {
   background: rgba(49, 219, 112, .16) !important;
   border-color: rgba(49, 219, 112, .32) !important;
@@ -1032,7 +1032,7 @@ body.stock-futurista .stock-label-actions button {
 }
 
 
-/* v1.58.76 — sem barra superior interna nas páginas futuristas
+/* v1.58.73 — sem barra superior interna nas páginas futuristas
    Regra para páginas atuais e futuras: usar apenas o hero/bloco principal. */
 body.dashboard-futurista-body .dash-top,
 body.impressoras-futurista .imp-topbar,
@@ -1068,7 +1068,7 @@ body.stock-futurista .stock-hero {
 }
 
 
-/* v1.58.76 — remove definitivamente a barra superior interna */
+/* v1.58.73 — remove definitivamente a barra superior interna */
 body.impressoras-futurista .imp-top,
 body.impressoras-futurista .imp-brand,
 body.impressoras-futurista .imp-top-actions,
