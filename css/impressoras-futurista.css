@@ -136,7 +136,7 @@ body.impressoras-futurista::after{background:
 @media (max-width:760px){.imp-page{padding:14px}.imp-top{gap:12px;flex-wrap:wrap}.imp-kpis{grid-template-columns:1fr}.imp-kpi strong{font-size:2.4rem}.imp-search-row{grid-template-columns:1fr}.imp-table-wrap{overflow:auto}.imp-quick-grid{grid-template-columns:1fr}.imp-hero-inner{display:grid;gap:16px;justify-items:center;text-align:center}.imp-brand span:last-child{font-size:1rem}.imp-bottom-grid,.imp-main-grid{gap:12px}}
 
 
-/* v1.58.56 — fullscreen real + scroll na página Impressoras */
+/* v1.58.57 — fullscreen real + scroll na página Impressoras */
 html,
 body {
   height: auto !important;
@@ -267,7 +267,7 @@ body.impressoras-futurista .imp-back {
 }
 
 
-/* v1.58.56 — percentagem visível nas barras de toner */
+/* v1.58.57 — percentagem visível nas barras de toner */
 body.impressoras-futurista .imp-toner-cell {
   min-width: 170px !important;
   display: grid !important;
@@ -330,7 +330,7 @@ body.impressoras-futurista .imp-toner-fill.critical {
 }
 
 
-/* v1.58.56 — scroll corrigido + toner % real + stock por quantidade */
+/* v1.58.57 — scroll corrigido + toner % real + stock por quantidade */
 html,
 body.impressoras-futurista {
   overflow-y: auto !important;
@@ -417,7 +417,7 @@ body.impressoras-futurista .imp-toner-fill.unknown {
 }
 
 
-/* v1.58.56 — FIX CIRÚRGICO: scroll vertical página Impressoras */
+/* v1.58.57 — FIX CIRÚRGICO: scroll vertical página Impressoras */
 html {
   height: auto !important;
   min-height: 100% !important;
@@ -478,7 +478,7 @@ body.impressoras-futurista .imp-shell {
 }
 
 
-/* v1.58.56 — logotipo no círculo do hero como botão para o Portal */
+/* v1.58.57 — logotipo no círculo do hero como botão para o Portal */
 .appbraga-home-hero-btn {
   text-decoration: none !important;
   cursor: pointer !important;
@@ -518,7 +518,7 @@ body.impressoras-futurista .imp-shell {
 }
 
 
-/* v1.58.56 — logotipo no círculo grande lateral do hero */
+/* v1.58.57 — logotipo no círculo grande lateral do hero */
 .appbraga-home-hero-btn {
   cursor: default !important;
   pointer-events: none !important;
@@ -571,7 +571,7 @@ body.impressoras-futurista .imp-shell {
 }
 
 
-/* v1.58.56 — logo original no círculo grande + clique funcional */
+/* v1.58.57 — logo original no círculo grande + clique funcional */
 .appbraga-home-orbit-btn {
   position: absolute !important;
   z-index: 8 !important;
@@ -636,7 +636,7 @@ body.impressoras-futurista .imp-shell {
 }
 
 
-/* v1.58.56 — força clique no logotipo do círculo grande */
+/* v1.58.57 — força clique no logotipo do círculo grande */
 body .imp-hero-orbit.appbraga-home-orbit-btn,
 body .toner-hero-orbit.appbraga-home-orbit-btn,
 body .stock-hero-orbit.appbraga-home-orbit-btn,
